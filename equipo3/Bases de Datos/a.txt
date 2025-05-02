@@ -1,0 +1,217 @@
+-- -----------------------------------------------------
+-- Schema basedatosfinal
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `basedatosfinal` DEFAULT CHARACTER SET utf8mb3 ;
+USE `retodb` ;
+
+-- -----------------------------------------------------
+-- Table `retodb`.`puntos_interes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `retodb`.`puntos_interes` (
+  `nombre` INT NOT NULL,
+  `tipo` VARCHAR(45) NOT NULL,
+  `caracteristicas` VARCHAR(45) NOT NULL,
+  `puntos_id` INT NOT NULL,
+  PRIMARY KEY (`puntos_id`),
+  CONSTRAINT `fk_puntos_interes_puntos1`
+    FOREIGN KEY (`puntos_id`)
+    REFERENCES `retodb`.`puntos` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `retodb`.`puntos_peligro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `retodb`.`puntos_peligro` (
+  `kilometro` INT NOT NULL,
+  `gravedad` VARCHAR(45) NOT NULL,
+  `puntos_id` INT NOT NULL,
+  PRIMARY KEY (`puntos_id`),
+  CONSTRAINT `fk_puntos_peligro_puntos1`
+    FOREIGN KEY (`puntos_id`)
+    REFERENCES `retodb`.`puntos` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `retodb`.`valora`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `retodb`.`valora` (
+  `dificultad` VARCHAR(45) NOT NULL,
+  `belleza` TINYINT NOT NULL,
+  `interesCultural` TINYINT NOT NULL,
+  `fecha` DATE NOT NULL,
+  `valoracionTecnica` VARCHAR(45) NULL DEFAULT NULL,
+  `resena` VARCHAR(45) NULL DEFAULT NULL,
+  `usuarios_id` INT NOT NULL,
+  `rutas_id` INT NOT NULL,
+  PRIMARY KEY (`usuarios_id`, `rutas_id`),
+  INDEX `fk_valora_usuarios1_idx` (`usuarios_id` ASC) VISIBLE,
+  INDEX `fk_valora_rutas1_idx` (`rutas_id` ASC) VISIBLE,
+  CONSTRAINT `fk_valora_rutas1`
+    FOREIGN KEY (`rutas_id`)
+    REFERENCES `retodb`.`rutas` (`id`),
+  CONSTRAINT `fk_valora_usuarios1`
+    FOREIGN KEY (`usuarios_id`)
+    REFERENCES `retodb`.`usuarios` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+USE `basedatosfinal` ;
+
+-- -----------------------------------------------------
+-- Table `basedatosfinal`.`actividad`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `basedatosfinal`.`actividad` (
+  `idActividad` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`idActividad`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `basedatosfinal`.`usuarios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `basedatosfinal`.`usuarios` (
+  `idUsuario` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(20) NOT NULL,
+  `apellido` VARCHAR(25) NOT NULL,
+  `dni` CHAR(9) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `rol` ENUM('administrador', 'profesor', 'disenador', 'alumno') NULL DEFAULT NULL,
+  PRIMARY KEY (`idUsuario`),
+  UNIQUE INDEX `user_UNIQUE` (`dni` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `basedatosfinal`.`rutas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `basedatosfinal`.`rutas` (
+  `idRuta` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(20) NOT NULL,
+  `latitudInicial` DOUBLE NOT NULL,
+  `longitudInicial` DOUBLE NOT NULL,
+  `latitudFinal` DOUBLE NOT NULL,
+  `longitudFinal` DOUBLE NOT NULL,
+  `distancia` DOUBLE NOT NULL,
+  `duracion` TIME NOT NULL,
+  `desnivel` INT NOT NULL,
+  `altitudMax` DOUBLE NOT NULL,
+  `altitudMin` DOUBLE NOT NULL,
+  `clasificacion` ENUM('circular', 'lineal') NOT NULL,
+  `nivelEsfuerzo` TINYINT NOT NULL,
+  `nivelRiesgo` TINYINT NOT NULL,
+  `estadoRuta` TINYINT NOT NULL DEFAULT '0',
+  `tipoTerreno` TINYINT NOT NULL,
+  `indicaciones` TINYINT NOT NULL,
+  `tipoActividad` ENUM('senderismo', 'bicicleta', 'raquetasNieve', 'otro') NOT NULL,
+  `temporada` SET('primavera', 'verano', 'otono', 'invierno') NOT NULL,
+  `accesibilidad` TINYINT NOT NULL,
+  `rutaFamiliar` TINYINT NOT NULL,
+  `archivoGPX` TEXT NULL DEFAULT NULL,
+  `recomendaciones` TEXT NULL DEFAULT NULL,
+  `zonaGeografica` VARCHAR(45) NOT NULL,
+  `mediaEstrellas` DOUBLE NOT NULL DEFAULT '0',
+  `usuCreador_id` INT NOT NULL,
+  PRIMARY KEY (`idRuta`),
+  INDEX `fk_rutas_usuarios_idx` (`usuCreador_id` ASC) VISIBLE,
+  CONSTRAINT `fk_rutas_usuarios`
+    FOREIGN KEY (`usuCreador_id`)
+    REFERENCES `basedatosfinal`.`usuarios` (`idUsuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `basedatosfinal`.`calendario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `basedatosfinal`.`calendario` (
+  `idCalendario` INT NOT NULL AUTO_INCREMENT,
+  `fecha` DATE NOT NULL,
+  `detalles` VARCHAR(45) NOT NULL,
+  `recomendaciones` VARCHAR(45) NOT NULL,
+  `usuarios_id` INT NOT NULL,
+  `rutas_id` INT NOT NULL,
+  PRIMARY KEY (`idCalendario`),
+  INDEX `fk_calendario_usuarios1_idx` (`usuarios_id` ASC) VISIBLE,
+  INDEX `fk_calendario_rutas1_idx` (`rutas_id` ASC) VISIBLE,
+  CONSTRAINT `fk_calendario_rutas1`
+    FOREIGN KEY (`rutas_id`)
+    REFERENCES `basedatosfinal`.`rutas` (`idRuta`),
+  CONSTRAINT `fk_calendario_usuarios1`
+    FOREIGN KEY (`usuarios_id`)
+    REFERENCES `basedatosfinal`.`usuarios` (`idUsuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `basedatosfinal`.`imagenesinteres`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `basedatosfinal`.`imagenesinteres` (
+  `id_ImagenesInteres` INT NOT NULL AUTO_INCREMENT,
+  `url` TEXT NOT NULL,
+  `descripcion` TEXT NULL DEFAULT NULL,
+  `puntos_interes_id` INT NOT NULL,
+  PRIMARY KEY (`id_ImagenesInteres`),
+  INDEX `fk_imagenes_interes_puntos_interes1_idx` (`puntos_interes_id` ASC) VISIBLE,
+  CONSTRAINT `fk_imagenes_interes_puntos_interes1`
+    FOREIGN KEY (`puntos_interes_id`)
+    REFERENCES `basedatosfinal`.`puntosinteres` (`idPuntosinteres`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `basedatosfinal`.`imagenespeligro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `basedatosfinal`.`imagenespeligro` (
+  `id_ImagenesPeligro` INT NOT NULL AUTO_INCREMENT,
+  `url` TEXT NOT NULL,
+  `descripcion` TEXT NULL DEFAULT NULL,
+  `puntos_peligro_id` INT NOT NULL,
+  PRIMARY KEY (`id_ImagenesPeligro`),
+  INDEX `fk_imagenes_peligro_puntos_peligro1_idx` (`puntos_peligro_id` ASC) VISIBLE,
+  CONSTRAINT `fk_imagenes_peligro_puntos_peligro1`
+    FOREIGN KEY (`puntos_peligro_id`)
+    REFERENCES `basedatosfinal`.`puntospeligro` (`idPuntospeligro`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `basedatosfinal`.`valora`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `basedatosfinal`.`valora` (
+  `dificultad` TINYINT NOT NULL,
+  `belleza` TINYINT NOT NULL,
+  `interesCultural` TINYINT NOT NULL,
+  `fecha` DATE NOT NULL,
+  `valoracionTecnica` TEXT NULL DEFAULT NULL,
+  `resena` TEXT NULL DEFAULT NULL,
+  `usuarios_id` INT NOT NULL,
+  `rutas_id` INT NOT NULL,
+  `estrellas` TINYINT NOT NULL,
+  PRIMARY KEY (`usuarios_id`, `rutas_id`),
+  INDEX `fk_valora_usuarios1_idx` (`usuarios_id` ASC) VISIBLE,
+  INDEX `fk_valora_rutas1_idx` (`rutas_id` ASC) VISIBLE,
+  CONSTRAINT `fk_valora_rutas1`
+    FOREIGN KEY (`rutas_id`)
+    REFERENCES `basedatosfinal`.`rutas` (`idRuta`),
+  CONSTRAINT `fk_valora_usuarios1`
+    FOREIGN KEY (`usuarios_id`)
+    REFERENCES `basedatosfinal`.`usuarios` (`idUsuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
