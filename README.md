@@ -8,3 +8,6 @@ Repositorio creado para almacenar el contenido creado en el reto de DAM1
 
 
 [Tareas diarias](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/main/equipo3/Documentos%20generales/tareas%20diarias.pdf)
+
+
+[Plantilla XSLT](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/main/equipo3/Lenguaje%20de%20Marcas/plantilla-xslt-rutas.xslt)
