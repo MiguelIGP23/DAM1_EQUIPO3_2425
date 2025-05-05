@@ -14,6 +14,7 @@ import java.util.Scanner;
  */
 public class TecladoValora {
     // para atributos dificultad,estrellas,interesCultural,belleza
+    
     public static int validadificultad(String texto) {
         boolean valido = false;
         int dificultad = 0;
