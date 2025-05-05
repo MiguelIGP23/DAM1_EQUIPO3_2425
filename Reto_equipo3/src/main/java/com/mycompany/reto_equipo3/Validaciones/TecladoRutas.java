@@ -10,6 +10,9 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.mycompany.reto_equipo3.Enums.Clasificacion;
+import java.awt.BorderLayout;
+
 /**
  *
  * Clase dedicada a realizar las validaciones de la clase Rutas
@@ -135,6 +138,26 @@ public class TecladoRutas {
         return desnivelNegativo;
     }
     
+    //Comprueba que la clasificacion tenga uno de los valores dados en el enum
+    public static Clasificacion validaClasificacion(String texto){
+        boolean valido=false;
+        Clasificacion clasificacion=null;
+        do{
+            System.out.println(texto);
+            String clas=new Scanner(System.in).nextLine().toLowerCase();
+            switch (clas) {
+                case "circular"-> {
+                    clasificacion=Clasificacion.CIRCULAR;
+                }
+                case "lineal"-> {
+                    clasificacion=Clasificacion.LINEAL;
+                }
+                default -> {System.out.println("ERROR: valor no valido, elige circular o lineal");}
+            }
+        }while(!valido);
+        return clasificacion;
+    }
+    
     //Comprueba que el valor introducido este entre 1 y 5
     public static int validaRango(String texto){
         boolean valido=false;
@@ -145,6 +168,8 @@ public class TecladoRutas {
                 valor=new Scanner(System.in).nextInt();
                 if(valor<1 || valor>5){
                     throw new Exception("ERROR: el valor debe estar entre 1 y 5");
+                }else{
+                    valido=true;
                 }
             }catch(InputMismatchException e){
                 System.out.println("ERROR: el valor debe ser numerico");
@@ -154,4 +179,6 @@ public class TecladoRutas {
         }while(!valido);
         return valor;
     }
+    
+    //Buscar como implementar una validacion para la clase Set<String>
 }
