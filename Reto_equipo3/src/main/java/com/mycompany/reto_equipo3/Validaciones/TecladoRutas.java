@@ -4,6 +4,10 @@
  */
 package com.mycompany.reto_equipo3.Validaciones;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -55,12 +59,14 @@ public class TecladoRutas {
     }
     
     //Comprueba que latitud y longitud sean numericos
-    public static double validaCoordenadas(int valor){
+    public static double validaCoordenadas(String texto){
         boolean valido=false;
         double latitud=0;
         do{
             try{
+                System.out.println(texto);
                 latitud= new Scanner(System.in).nextDouble();
+                valido=true;
             }catch (ArithmeticException e){
                 System.out.println("ERROR: el valor introducido debe ser numerico");
             }
@@ -68,5 +74,84 @@ public class TecladoRutas {
         return latitud;
     }
     
-    //
+    //Comrpueba que la duracion siga el patron dado {hh:mm:ss}
+    public static LocalTime validaDuracion(String texto){
+        boolean valido=false;
+        LocalTime duracion=null;
+        do{
+            try{
+                System.out.println(texto);
+                DateTimeFormatter f=DateTimeFormatter.ofPattern("hh:mm:ss");
+                duracion= LocalTime.parse(new Scanner(System.in).nextLine(),f);
+                valido=true;
+            }catch(DateTimeParseException e){
+                System.out.println("ERROR: foramto no valido");
+            }
+        }while(!valido);
+        return duracion;
+    }
+    
+    //Comprueba que el desnivel positivo sea mayor que 0
+    public static int validaDesnivelPositivo(String texto){
+        boolean valido=false;
+        int desnivelPositivo=0;
+        do{
+            try{
+                System.out.println(texto);
+                desnivelPositivo=new Scanner(System.in).nextInt();
+                if(desnivelPositivo<=0){
+                    throw new Exception("ERROR: el numero debe ser positivo");
+                }else{
+                    valido=true;
+                }
+            }catch(InputMismatchException e){
+                System.out.println("ERROR: el valor introducido debe ser numerico y entero");
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }while(!valido);
+        return desnivelPositivo;
+    }
+    
+    //Comprueba que el desnivel positivo sea mayor que 0
+    public static int validaDesnivelNegativo(String texto){
+        boolean valido=false;
+        int desnivelNegativo=0;
+        do{
+            try{
+                System.out.println(texto);
+                desnivelNegativo=new Scanner(System.in).nextInt();
+                if(desnivelNegativo>=0){
+                    throw new Exception("ERROR: el numero debe ser negativo");
+                }else{
+                    valido=true;
+                }
+            }catch(InputMismatchException e){
+                System.out.println("ERROR: el valor introducido debe ser numerico y entero");
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }while(!valido);
+        return desnivelNegativo;
+    }
+    
+    //Comprueba que el valor introducido este entre 1 y 5
+    public static int validaRango(String texto){
+        boolean valido=false;
+        int valor=0;
+        do{
+            try{
+                System.out.println(texto);
+                valor=new Scanner(System.in).nextInt();
+                if(valor<1 || valor>5){
+                    throw new Exception("ERROR: el valor debe estar entre 1 y 5");
+                }
+            }catch(InputMismatchException e){
+                System.out.println("ERROR: el valor debe ser numerico");
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }while(!valido);
+        return valor;
+    }
 }
