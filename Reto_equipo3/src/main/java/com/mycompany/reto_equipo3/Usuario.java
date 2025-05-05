@@ -18,7 +18,7 @@ public class Usuario implements Comparable<Usuario>{
     private String email;
     private String password;
     private Roles rol;
-
+   // Constructor que recibe la id y todos los atributos
     public Usuario(int idUsuario, String nombre, String apellido, String email, String password, Roles rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -27,7 +27,7 @@ public class Usuario implements Comparable<Usuario>{
         this.password = password;
         this.rol = rol;
     }
-    
+    // Constructor que recibe solo los atributos
     public Usuario(String nombre, String apellido, String email, String password, Roles rol) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -66,3 +66,4 @@ public class Usuario implements Comparable<Usuario>{
         return "Usuario: nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", password=" + password + ", rol=" + rol;
     }
 }
+
