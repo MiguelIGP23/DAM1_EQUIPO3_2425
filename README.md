@@ -23,6 +23,18 @@
 
    Scrip de la base de datos
 ````
+##### *[Pagina Web]()*
+````
+
+````
+##### *[Aplicación Java]()*
+````
+
+````
+##### *[Maquinas Virtuales]()*
+````
+
+````
 [Diagrama entidad-relacion](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/30-basedatosfinal/equipo3/Bases%20de%20Datos/ImagenE-R.PNG)
 
 
