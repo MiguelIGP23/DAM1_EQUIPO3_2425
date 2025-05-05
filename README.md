@@ -15,7 +15,7 @@
 
 ### *Trabajo realizado*
 
-##### *[Base datos](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/edit/32-cambios-bd/equipo3/Bases%20de%20Datos/README.md)*
+##### *[Base datos](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/32-cambios-bd/equipo3/Bases%20de%20Datos/README.md)*
 ````
    Diagrama Entidad-Relación
 
