@@ -1,9 +1,28 @@
-# DAM1_EQUIPO3_2425
-Repositorio creado para almacenar el contenido creado en el reto de DAM1
+#  Equipo 3: ***Workers over time*** 
 
-[Base de datos](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/30-basedatosfinal/equipo3/Bases%20de%20Datos/basedatosimagen.PNG)
+![image](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/32-cambios-bd/equipo3/Documentos%20generales/Equipo_1-removebg-preview.png)
 
+## Integrantes: 
+• Miguel Inglés   
 
+• Saúl García  
+
+• Hugo Fernández 
+
+• Diego Berdial 
+
+• Manuel Mediavilla  
+
+### *Trabajo realizado*
+
+##### *[Base datos](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/edit/32-cambios-bd/equipo3/Bases%20de%20Datos/README.md)*
+````
+   Diagrama Entidad-Relación
+
+   Diagrama Relacional
+
+   Scrip de la base de datos
+````
 [Diagrama entidad-relacion](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/30-basedatosfinal/equipo3/Bases%20de%20Datos/ImagenE-R.PNG)
 
 
