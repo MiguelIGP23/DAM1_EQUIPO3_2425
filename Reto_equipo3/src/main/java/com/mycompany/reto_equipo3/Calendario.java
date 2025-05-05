@@ -15,17 +15,22 @@ public class Calendario {
     private LocalDate fecha;
     private String detalles;
     private String recomendaciones;
-
+    //Constructor de calendario para añadirlo con la id
     public Calendario(int idCalendario, LocalDate fecha, String detalles, String recomendaciones) {
         this.idCalendario = idCalendario;
         this.fecha = fecha;
         this.detalles = detalles;
         this.recomendaciones = recomendaciones;
     }
-    public Calendario(LocalDate fecha, String detalles, String recomendaciones) {
+    //constructor de calendario para crearlo sin id
+     public Calendario( LocalDate fecha, String detalles, String recomendaciones) {
         this.fecha = fecha;
         this.detalles = detalles;
         this.recomendaciones = recomendaciones;
+    }
+    // constructor con solo los atributos que no pueden recibir nulos
+    public Calendario(LocalDate fecha) {
+        this.fecha = fecha;   
     }
     
     @Override
