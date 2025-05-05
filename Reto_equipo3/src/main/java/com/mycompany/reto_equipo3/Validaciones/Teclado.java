@@ -5,6 +5,8 @@
 package com.mycompany.reto_equipo3.Validaciones;
 
 import com.mycompany.reto_equipo3.Enums.Roles;
+import com.mycompany.reto_equipo3.Enums.Tipo;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -231,12 +233,8 @@ public class Teclado {
             }
             catch (InputMismatchException e) {
                 System.out.println("Introduce un valor positivo");
-            }
-            
+            }      
         } while (!valido);
         return tiempo;
-     }
-     
-}
-
+     }    
 }
