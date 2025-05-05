@@ -78,8 +78,8 @@ public class Teclado {
 
                 System.out.println(texto);
                 email = new Scanner(System.in).nextLine();
-                if (!email.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ0-9 ]{3,25}@gmail.com")) {
-                    throw new Exception("Introduce un email valido ");
+                if (!email.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ0-9 ]{3,25}")) {
+                    throw new Exception("Introduce una password valida ");
                 }
                 valido = true;
 
