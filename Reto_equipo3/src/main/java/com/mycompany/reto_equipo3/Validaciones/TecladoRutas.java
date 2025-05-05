@@ -11,7 +11,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.mycompany.reto_equipo3.Enums.Clasificacion;
-import java.awt.BorderLayout;
 
 /**
  *
