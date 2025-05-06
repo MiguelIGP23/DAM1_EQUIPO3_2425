@@ -1,6 +1,6 @@
 #  Equipo 3: ***Workers over time*** 
 
-![fotogrupo](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/32-cambios-bd/equipo3/Documentos%20generales/Equipo_1-removebg-preview.png)
+![fotogrupo](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/3f5ea1979c010453d8dcf32c20f4847859d476e7/equipo3/Documentos%20generales/Equipo_1-removebg-preview.png)
 
 ## Integrantes: 
 • Miguel Inglés   
