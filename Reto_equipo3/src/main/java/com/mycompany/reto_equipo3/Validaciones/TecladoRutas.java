@@ -22,27 +22,6 @@ import java.util.Set;
  * @author DAM123
  */
 public class TecladoRutas {
-
-    //Valida que nombre de ruta tenga 20 caracteres y comience por mayuscula
-    public static String validanombre(String texto) {
-        boolean valido = false;
-        String nombre = null;
-        do {
-            try {
-                System.out.println(texto);
-                nombre = new Scanner(System.in).nextLine();
-                if (!nombre.matches("[A-ZÑ][A-Za-zÑñáéíóúÁÉÍÓÚ ]{2,19}")) {
-                    throw new Exception("Introduce un nombre valido de maximo de 20 caracteres");
-                }
-                valido = true;
-
-            } catch (Exception a) {
-                System.out.println(a.getMessage());
-            }
-        } while (!valido);
-        return nombre;
-    }
-
     //Valida que nombre de inicio ruta y final ruta tenga 45 caracteres
     public static String validaInicioFinalRuta(String texto) {
         boolean valido = false;
