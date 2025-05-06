@@ -20,9 +20,9 @@ public class AccesoABaseDatos {
 
     //Definimos las constantes
     private static final String BD = "mydb";
-    private static final String USUARIO = "root";
-    private static final String CLAVE = "mysql";
-    private static final String URL = "jdbc:mysql://localhost:3307/" + BD;
+    private static final String USUARIO = "equipo3";
+    private static final String CLAVE = "Mysql2024!";
+    private static final String URL = "jdbc:mysql://10.0.16.39:3306/" + BD;
 
     public AccesoABaseDatos() {
         try {

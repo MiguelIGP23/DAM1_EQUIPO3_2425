@@ -104,5 +104,114 @@ public class Rutas {
         this.zonaGeografica = zonaGeografica;
         this.mediaEstrellas = mediaEstrellas;
     } 
+
+    public void setIdRuta(int idRuta) {
+        this.idRuta = idRuta;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setNombre_inicioruta(String nombre_inicioruta) {
+        this.nombre_inicioruta = nombre_inicioruta;
+    }
+
+    public void setNombre_finalruta(String nombre_finalruta) {
+        this.nombre_finalruta = nombre_finalruta;
+    }
+
+    public void setLatitudInicial(double latitudInicial) {
+        this.latitudInicial = latitudInicial;
+    }
+
+    public void setLatitudFinal(double latitudFinal) {
+        this.latitudFinal = latitudFinal;
+    }
+
+    public void setLongitudInicial(double longitudInicial) {
+        this.longitudInicial = longitudInicial;
+    }
+
+    public void setLongitudFinal(double longitudFinal) {
+        this.longitudFinal = longitudFinal;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
+    }
+
+    public void setDuracion(LocalTime duracion) {
+        this.duracion = duracion;
+    }
+
+    public void setDesnivelPositivo(int desnivelPositivo) {
+        this.desnivelPositivo = desnivelPositivo;
+    }
+
+    public void setDesnivelNegativo(int desnivelNegativo) {
+        this.desnivelNegativo = desnivelNegativo;
+    }
+
+    public void setAltitudMax(double altitudMax) {
+        this.altitudMax = altitudMax;
+    }
+
+    public void setAltitudMin(double altitudMin) {
+        this.altitudMin = altitudMin;
+    }
+
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
+    }
+
+    public void setNivelEsfuerzo(int nivelEsfuerzo) {
+        this.nivelEsfuerzo = nivelEsfuerzo;
+    }
+
+    public void setNivelriesgo(int nivelriesgo) {
+        this.nivelriesgo = nivelriesgo;
+    }
+
+    public void setEstadoRuta(int estadoRuta) {
+        this.estadoRuta = estadoRuta;
+    }
+
+    public void setTipoterreno(int tipoterreno) {
+        this.tipoterreno = tipoterreno;
+    }
+
+    public void setIndicaciones(int indicaciones) {
+        this.indicaciones = indicaciones;
+    }
+
+    public void setTemporada(Set<String> temporada) {
+        this.temporada = temporada;
+    }
+
+    public void setAccesibilidad(boolean accesibilidad) {
+        this.accesibilidad = accesibilidad;
+    }
+
+    public void setRutaFamiliar(boolean rutaFamiliar) {
+        this.rutaFamiliar = rutaFamiliar;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setRecomendaciones(String recomendaciones) {
+        this.recomendaciones = recomendaciones;
+    }
+
+    public void setZonaGeografica(String zonaGeografica) {
+        this.zonaGeografica = zonaGeografica;
+    }
+
+    public void setMediaEstrellas(double mediaEstrellas) {
+        this.mediaEstrellas = mediaEstrellas;
+    }
+    
     
 }
