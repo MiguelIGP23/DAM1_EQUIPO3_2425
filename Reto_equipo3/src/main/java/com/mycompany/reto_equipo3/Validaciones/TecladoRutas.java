@@ -240,8 +240,10 @@ public class TecladoRutas {
             String opcion=new Scanner(System.in).nextLine();
             if(opcion.equalsIgnoreCase("si")){
                 resultado=true;
+                valido=true;
             }else if(opcion.equalsIgnoreCase("no")){
                 resultado=false;
+                valido=true;
             }else{
                 System.out.println("ERROR: introduce si o no");
             }
