@@ -44,4 +44,3 @@
 [Plantilla XSLT](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/main/equipo3/Lenguaje%20de%20Marcas/plantilla-xslt-rutas.xslt)
 
 
-[Script creacion DB](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/main/equipo3/Bases%20de%20Datos/script_creacion_db.sql)
