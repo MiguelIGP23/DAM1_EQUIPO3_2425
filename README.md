@@ -35,7 +35,6 @@
 ````
 
 ````
-[Diagrama entidad-relacion](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/30-basedatosfinal/equipo3/Bases%20de%20Datos/ImagenE-R.PNG)
 
 
 [Tareas diarias](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/main/equipo3/Documentos%20generales/tareas%20diarias.pdf)
