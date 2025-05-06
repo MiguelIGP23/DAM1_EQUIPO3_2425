@@ -42,6 +42,8 @@ public class Rutas {
     private String recomendaciones;
     private String zonaGeografica;
     private double mediaEstrellas;
+    
+   
 
     //Constructor con id y solo atributos obligatorios
     public Rutas(int idRuta, String nombre, String nombre_inicioruta, String nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, LocalDate duracion) {

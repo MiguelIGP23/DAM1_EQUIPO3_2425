@@ -4,6 +4,8 @@
 
 package com.mycompany.reto_equipo3;
 
+import com.mycompany.reto_equipo3.Validaciones.TecladoRutas;
+
 /**
  *
  * @author DAM123
@@ -11,9 +13,9 @@ package com.mycompany.reto_equipo3;
 public class Reto_equipo3 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println("Prueba union repo");
-        System.out.println("Prueba push 2");
-        System.out.println("wfwefwfewf");
+        
+        
+        TecladoRutas.validaTemporada();
+        
     }
 }

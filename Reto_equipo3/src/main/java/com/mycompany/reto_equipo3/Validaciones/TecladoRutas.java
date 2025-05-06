@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import com.mycompany.reto_equipo3.Enums.Clasificacion;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -185,15 +186,17 @@ public class TecladoRutas {
 
     //Buscar como implementar una validacion para la clase Set<String>
     public static Set<String> validaTemporada() {
-        Set<String> temporadasValidas = Set.of("primavera", "verano", "otoño", "invierno");
+        List<String> temporadasValidas = List.of("primavera","verano","otono","invierno");
         boolean valido = false;
         Set<String> temporadas = new LinkedHashSet<>();
-        System.out.println("Introduce una o mas temporadas separadas por comas (primevera,verano,otoño,invierno)");
+        System.out.println("Introduce una o mas temporadas separadas por comas (primevera,verano,otono,invierno)");
         do {
             String temp = new Scanner(System.in).nextLine();
+            //Vaciamos el Set<String> anterior
+            temporadas.clear();
             //Separamos por las comas
             String[] partes = temp.split(",");
-            //Lo guardamos en el Set<String>
+            //Lo guardamos en el Set<String>, quitando espacios y poniendo en minuscula
             for (String parte : partes) {
                 temporadas.add(parte.trim().toLowerCase());
             }
@@ -202,12 +205,30 @@ public class TecladoRutas {
             noValidas.removeAll(temporadasValidas);
             //Comprobamos si queda alguna temporada en la lista
             if (noValidas.isEmpty()) {
-                valido = true;
+                if(estanOrdenadas(temporadas, temporadasValidas)){
+                    valido=true;
+                }else{
+                    System.out.println("ERROR: debes introducir las temporadas en orden");
+                }
             } else {
-                System.out.println("ERROR: temporada no valida (primavera,verano,otoño,invierno");
+                System.out.println("ERROR: temporada no valida (primavera,verano,otono,invierno)");
             }
         } while (!valido);
         return temporadas;
+    }
+    
+    //Metodo privado que comprueba que la lista de temporadas este en el orden correcto
+     private static boolean estanOrdenadas(Set<String> temporadas, List<String> ordenCorrecto) {
+        int posicionAnterior = -1;
+        boolean ordenado=true;
+        for (String temporada : temporadas) {
+            int posicionActual = ordenCorrecto.indexOf(temporada);
+            if (posicionActual < posicionAnterior) {
+                ordenado= false;
+            }
+            posicionAnterior = posicionActual;
+        }
+        return ordenado;
     }
 
 }
