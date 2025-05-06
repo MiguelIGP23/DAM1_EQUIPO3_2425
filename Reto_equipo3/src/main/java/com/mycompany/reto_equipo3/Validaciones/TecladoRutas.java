@@ -79,6 +79,27 @@ public class TecladoRutas {
         return latitud;
     }
 
+    //Comprueba que la distancia sea un numero positivo
+    public static double validaDistancia(String texto){
+        boolean valido=false;
+        double distacia=0;
+        do{
+            try{
+                distacia=new Scanner(System.in).nextDouble();
+                if(distacia<=0){
+                    throw new Exception("ERROR: la distancia no puede ser negativa");
+                }else{
+                    valido=true;
+                }
+            }catch(InputMismatchException e){
+                System.out.println("ERROR: la distancia debe ser numerica");
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }while(!valido);
+        return distacia;
+    }
+    
     //Comrpueba que la duracion siga el patron dado {hh:mm:ss}
     public static LocalTime validaDuracion(String texto) {
         boolean valido = false;
@@ -86,7 +107,7 @@ public class TecladoRutas {
         do {
             try {
                 System.out.println(texto);
-                DateTimeFormatter f = DateTimeFormatter.ofPattern("hh:mm:ss");
+                DateTimeFormatter f = DateTimeFormatter.ofPattern("HH:mm:ss");
                 duracion = LocalTime.parse(new Scanner(System.in).nextLine(), f);
                 valido = true;
             } catch (DateTimeParseException e) {
@@ -139,6 +160,8 @@ public class TecladoRutas {
         } while (!valido);
         return desnivelNegativo;
     }
+    
+   
 
     //Comprueba que la clasificacion tenga uno de los valores dados en el enum
     public static Clasificacion validaClasificacion(String texto) {
@@ -150,9 +173,11 @@ public class TecladoRutas {
             switch (clas) {
                 case "circular" -> {
                     clasificacion = Clasificacion.CIRCULAR;
+                    valido=true;
                 }
                 case "lineal" -> {
                     clasificacion = Clasificacion.LINEAL;
+                    valido=true;
                 }
                 default -> {
                     System.out.println("ERROR: valor no valido, elige circular o lineal");
@@ -185,11 +210,10 @@ public class TecladoRutas {
     }
 
     //Comprueba que las estaciones introducidas pertenezcan a la lista dada (primavera, verano, otono, invierno)
-    public static Set<String> validaTemporada() {
+    public static Set<String> validaTemporada(String texto) {
         List<String> temporadasValidas = List.of("primavera", "verano", "otoño", "invierno");
         boolean valido = false;
         Set<String> temporadas = new LinkedHashSet<>();
-        System.out.println("Introduce una o mas temporadas separadas por comas (primevera,verano,otoño,invierno)");
         do {
             String temp = new Scanner(System.in).nextLine();
             //Vaciamos el Set<String> anterior, previene fallos recursivos

@@ -15,7 +15,9 @@ public class Reto_equipo3 {
     public static void main(String[] args) {
         
         
-        TecladoRutas.validaTemporada();
-        
+        //System.out.println(TecladoRutas.validaTemporada());
+        //System.out.println(TecladoRutas.validaBoolean("Introduce si o no"));
+        //System.out.println(TecladoRutas.validaDuracion("hh:mm:ss"));
+        //System.out.println(TecladoRutas.validaClasificacion("circular o lineal:"));
     }
 }
