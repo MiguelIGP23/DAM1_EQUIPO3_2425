@@ -4,7 +4,7 @@
 
 package com.mycompany.reto_equipo3;
 
-import com.mycompany.reto_equipo3.Validaciones.TecladoRutas;
+import com.mycompany.reto_equipo3.Validaciones.Teclado;
 import com.mycompany.reto_equipo3.DAOS.AccesoABaseDatos;
 /**
  *
