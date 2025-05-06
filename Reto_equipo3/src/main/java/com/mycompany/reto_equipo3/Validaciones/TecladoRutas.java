@@ -186,7 +186,7 @@ public class TecladoRutas {
 
     //Comprueba que las estaciones introducidas pertenezcan a la lista dada (primavera, verano, otono, invierno)
     public static Set<String> validaTemporada() {
-        List<String> temporadasValidas = List.of("primavera","verano","otoño","invierno");
+        List<String> temporadasValidas = List.of("primavera", "verano", "otoño", "invierno");
         boolean valido = false;
         Set<String> temporadas = new LinkedHashSet<>();
         System.out.println("Introduce una o mas temporadas separadas por comas (primevera,verano,otoño,invierno)");
@@ -205,9 +205,9 @@ public class TecladoRutas {
             noValidas.removeAll(temporadasValidas);
             //Comprobamos si queda alguna temporada en la lista
             if (noValidas.isEmpty()) {
-                if(estanOrdenadas(temporadas, temporadasValidas)){
-                    valido=true;
-                }else{
+                if (estanOrdenadas(temporadas, temporadasValidas)) {
+                    valido = true;
+                } else {
                     System.out.println("ERROR: debes introducir las temporadas en orden");
                 }
             } else {
@@ -216,19 +216,37 @@ public class TecladoRutas {
         } while (!valido);
         return temporadas;
     }
-    
+
     //Metodo privado que comprueba que la lista de temporadas este en el orden correcto
-     private static boolean estanOrdenadas(Set<String> temporadas, List<String> ordenCorrecto) {
+    private static boolean estanOrdenadas(Set<String> temporadas, List<String> ordenCorrecto) {
         int posicionAnterior = -1;
-        boolean ordenado=true;
+        boolean ordenado = true;
         for (String temporada : temporadas) {
             int posicionActual = ordenCorrecto.indexOf(temporada);
             if (posicionActual < posicionAnterior) {
-                ordenado= false;
+                ordenado = false;
             }
             posicionAnterior = posicionActual;
         }
         return ordenado;
     }
 
+    //Metodo que comprueba que el valor de un booleano sea si o no y lo traduce a true o false
+    public static boolean validaBoolean(String texto){
+        boolean valido=false;
+        boolean resultado=false;
+        do{
+            System.out.println(texto);
+            String opcion=new Scanner(System.in).nextLine();
+            if(opcion.equalsIgnoreCase("si")){
+                resultado=true;
+            }else if(opcion.equalsIgnoreCase("no")){
+                resultado=false;
+            }else{
+                System.out.println("ERROR: introduce si o no");
+            }
+        }while(!valido);
+        return resultado;
+    }
+    
 }
