@@ -184,12 +184,12 @@ public class TecladoRutas {
         return valor;
     }
 
-    //Buscar como implementar una validacion para la clase Set<String>
+    //Comprueba que las estaciones introducidas pertenezcan a la lista dada (primavera, verano, otono, invierno)
     public static Set<String> validaTemporada() {
-        List<String> temporadasValidas = List.of("primavera","verano","otono","invierno");
+        List<String> temporadasValidas = List.of("primavera","verano","otoño","invierno");
         boolean valido = false;
         Set<String> temporadas = new LinkedHashSet<>();
-        System.out.println("Introduce una o mas temporadas separadas por comas (primevera,verano,otono,invierno)");
+        System.out.println("Introduce una o mas temporadas separadas por comas (primevera,verano,otoño,invierno)");
         do {
             String temp = new Scanner(System.in).nextLine();
             //Vaciamos el Set<String> anterior
