@@ -5,7 +5,7 @@
 package com.mycompany.reto_equipo3;
 
 import com.mycompany.reto_equipo3.Validaciones.TecladoRutas;
-
+import com.mycompany.reto_equipo3.DAOS.AccesoABaseDatos;
 /**
  *
  * @author DAM123
@@ -19,5 +19,6 @@ public class Reto_equipo3 {
         //System.out.println(TecladoRutas.validaBoolean("Introduce si o no"));
         //System.out.println(TecladoRutas.validaDuracion("hh:mm:ss"));
         //System.out.println(TecladoRutas.validaClasificacion("circular o lineal:"));
+        //System.out.println(AccesoABaseDatos.getInstance().getConnexion());
     }
 }
