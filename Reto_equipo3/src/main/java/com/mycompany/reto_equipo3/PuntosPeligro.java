@@ -13,7 +13,7 @@ public class PuntosPeligro {
     private String nombre;
     private double latitud;
     private double longitud;
-    private double kilometros;
+    private double kilometro;
     private int gravedad;
     private int posicion;
     private String descripcion;
@@ -38,7 +38,7 @@ public class PuntosPeligro {
     }
 
     public void setKilometros(double kilometros) {
-        this.kilometros = kilometros;
+        this.kilometro = kilometros;
     }
 
     public void setGravedad(int gravedad) {
@@ -82,7 +82,7 @@ public class PuntosPeligro {
     }
 
     public double getKilometros() {
-        return kilometros;
+        return kilometro;
     }
 
     public int getGravedad() {
@@ -114,7 +114,7 @@ public class PuntosPeligro {
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.kilometros = kilometros;
+        this.kilometro = kilometros;
         this.gravedad = gravedad;
         this.posicion = posicion;
         this.descripcion = descripcion;
