@@ -192,7 +192,7 @@ public class TecladoRutas {
         System.out.println("Introduce una o mas temporadas separadas por comas (primevera,verano,otoño,invierno)");
         do {
             String temp = new Scanner(System.in).nextLine();
-            //Vaciamos el Set<String> anterior
+            //Vaciamos el Set<String> anterior, previene fallos recursivos
             temporadas.clear();
             //Separamos por las comas
             String[] partes = temp.split(",");
@@ -203,8 +203,9 @@ public class TecladoRutas {
             //Copiamos la lista de temporadas a otro Set<String> y eliminamos las estaciones validas
             Set<String> noValidas = new LinkedHashSet<>(temporadas);
             noValidas.removeAll(temporadasValidas);
-            //Comprobamos si queda alguna temporada en la lista
+            //Comprobamos si queda alguna temporada no valida en la lista
             if (noValidas.isEmpty()) {
+                //Si esta correcto, comprobamos su orden con metodo externo
                 if (estanOrdenadas(temporadas, temporadasValidas)) {
                     valido = true;
                 } else {
