@@ -42,7 +42,7 @@ public class FichaSeguridad {
             //Escribimos fecha y hora de generacion de la ficha
             LocalDateTime ahora = LocalDateTime.now();
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            bf.write(ahora.format(formato));
+            bf.write("-Ficha generada -> "+ahora.format(formato));
             bf.newLine();
             bf.write("-Nombre de la ruta: " + ruta.getNombre());
             bf.newLine();
