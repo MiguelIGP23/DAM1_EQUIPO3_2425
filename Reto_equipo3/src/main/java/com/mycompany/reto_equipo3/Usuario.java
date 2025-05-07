@@ -23,6 +23,12 @@ public class Usuario implements Comparable<Usuario>{
     //Lista de rutas realizadas por el usuario
     ArrayList<Rutas> rutas=new ArrayList<>();
     
+    //Constructor por defecto
+
+    public Usuario() {
+    }
+    
+    
    // Constructor que recibe la id y todos los atributos
     public Usuario(int idUsuario, String nombre, String apellido, String email, String password, Roles rol) {
         this.idUsuario = idUsuario;
@@ -97,6 +103,36 @@ public class Usuario implements Comparable<Usuario>{
 
     public ArrayList<Rutas> getRutas() {
         return rutas;
+    }
+    
+    //Metodos set
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRol(Roles rol) {
+        this.rol = rol;
+    }
+
+    public void setRutas(ArrayList<Rutas> rutas) {
+        this.rutas = rutas;
     }
     
     
