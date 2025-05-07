@@ -23,7 +23,7 @@ import java.util.LinkedHashSet;
 public class FichaSeguridad {
 
     /**
-     * Metodo estatico que genera un archivo llamado ficha-seguridad.txt el cual
+     * Metodo estatico que genera un archivo llamado ficha-seguridad_nombreRuta.txt el cual
      * contiene informacion sobre la dificultad, los puntos de peligro y las
      * recomendaciones de una ruta
      */
@@ -33,7 +33,7 @@ public class FichaSeguridad {
         File carpeta = new File("fichas");
         carpeta.mkdirs();
         //Guarda la ficha en un archivo con el nombre de la ruta
-        File ficha = new File("fichas/ficha-seguridad"+ruta.getNombre()+".txt");
+        File ficha = new File("fichas/ficha-seguridad_"+ruta.getNombre()+".txt");
         //Guardamos los puntos de peligro de la ruta en una lista
         LinkedHashSet<PuntosPeligro> puntosPeligro = ruta.getPuntosPeligro();
         try (BufferedWriter bf = new BufferedWriter(new FileWriter(ficha));) {

@@ -23,7 +23,7 @@ import java.util.Objects;
 public class FichaUsuario {
 
     /**
-     * Metodo estatico que genera un archivo llamado ficha-seguridad.txt el cual
+     * Metodo estatico que genera un archivo llamado ficha-usuario_nombre_apellido.txt el cual
      * contiene informacion sobre la dificultad, los puntos de peligro y las
      * recomendaciones de una ruta
      */
@@ -33,7 +33,7 @@ public class FichaUsuario {
         File carpeta = new File("fichas");
         carpeta.mkdirs();
         //Guarda la ficha en un archivo con el nombre de la ruta
-        File ficha = new File("fichas/ficha-usuario" + usuario.getNombre() + "_" + usuario.getApellido() + ".txt");
+        File ficha = new File("fichas/ficha-usuario_" + usuario.getNombre() + "_" + usuario.getApellido() + ".txt");
         //Guardamos las rutas realizadas por el usuario en una lista
         ArrayList<Rutas> rutas = usuario.getRutas();
         try (BufferedWriter bf = new BufferedWriter(new FileWriter(ficha));) {
