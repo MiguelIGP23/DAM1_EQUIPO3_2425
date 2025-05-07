@@ -45,6 +45,9 @@ public class FichaSeguridad {
             bf.write("-Ficha generada -> "+ahora.format(formato));
             bf.newLine();
             bf.write("-Nombre de la ruta: " + ruta.getNombre());
+            /**
+             * Calcular media de dificultades en tabla valora y añadir al archivo
+             */
             bf.newLine();
             bf.write("-Puntos de peligro:");
             bf.newLine();
@@ -57,7 +60,7 @@ public class FichaSeguridad {
                 bf.newLine();
                 bf.write("\tCoordenadas: " + aux.getLatitud() + ", " + aux.getLongitud());
                 bf.newLine();
-                bf.write("\t-Longitud: " + aux.getKilometros() + " km");
+                bf.write("\t-Kilometro de ruta: " + aux.getKilometros());
                 bf.newLine();
                 bf.write("\tNivel de gravedad [1-5]: " + aux.getGravedad());
                 bf.newLine();

@@ -5,6 +5,7 @@
 package com.mycompany.reto_equipo3;
 
 import com.mycompany.reto_equipo3.Enums.Roles;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -18,6 +19,10 @@ public class Usuario implements Comparable<Usuario>{
     private String email;
     private String password;
     private Roles rol;
+    
+    //Lista de rutas realizadas por el usuario
+    ArrayList<Rutas> rutas=new ArrayList<>();
+    
    // Constructor que recibe la id y todos los atributos
     public Usuario(int idUsuario, String nombre, String apellido, String email, String password, Roles rol) {
         this.idUsuario = idUsuario;
@@ -65,5 +70,35 @@ public class Usuario implements Comparable<Usuario>{
     public String toString() {
         return "Usuario: nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", password=" + password + ", rol=" + rol;
     }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Roles getRol() {
+        return rol;
+    }
+
+    public ArrayList<Rutas> getRutas() {
+        return rutas;
+    }
+    
+    
 }
 
