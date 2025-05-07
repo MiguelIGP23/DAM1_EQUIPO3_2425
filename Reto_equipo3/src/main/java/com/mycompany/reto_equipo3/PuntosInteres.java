@@ -123,4 +123,28 @@ public class PuntosInteres {
     public int getRutas_idRuta() {
         return rutas_idRuta;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + this.idPuntosInteres;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PuntosInteres other = (PuntosInteres) obj;
+        return this.idPuntosInteres == other.idPuntosInteres;
+    }
+    
+    
 }

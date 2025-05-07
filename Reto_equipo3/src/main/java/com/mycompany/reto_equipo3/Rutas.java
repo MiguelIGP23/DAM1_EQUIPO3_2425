@@ -7,7 +7,7 @@ package com.mycompany.reto_equipo3;
 import com.mycompany.reto_equipo3.Enums.Clasificacion;
 import com.mycompany.reto_equipo3.Validaciones.Teclado;
 import java.time.LocalTime;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -45,8 +45,8 @@ public class Rutas {
     private String zonaGeografica;
     private double mediaEstrellas;
     
-    private LinkedHashSet<PuntosPeligro> puntosPeligro;
-    private LinkedHashSet<PuntosInteres> puntosInteres;
+    private ArrayList<PuntosPeligro> puntosPeligro;
+    private ArrayList<PuntosInteres> puntosInteres;
 
     //Constructor con id y solo atributos obligatorios como parametros
     public Rutas(int idRuta, String nombre, String nombre_inicioruta, String nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, LocalTime duracion) {
@@ -60,8 +60,8 @@ public class Rutas {
         this.longitudFinal = longitudFinal;
         this.distancia = distancia;
         this.duracion = duracion;
-        this.puntosPeligro=new LinkedHashSet<>();
-        this.puntosInteres=new LinkedHashSet<>();
+        this.puntosPeligro=new ArrayList<>();
+        this.puntosInteres=new ArrayList<>();
     }
 
     //Constructor sin id y solo con atributos obligatorios como parametros
@@ -75,8 +75,8 @@ public class Rutas {
         this.longitudFinal = longitudFinal;
         this.distancia = distancia;
         this.duracion = duracion;
-        this.puntosPeligro=new LinkedHashSet<>();
-        this.puntosInteres=new LinkedHashSet<>();
+        this.puntosPeligro=new ArrayList<>();
+        this.puntosInteres=new ArrayList<>();
     }
 
     //Constructor completo con recibe datos por teclado y realiza todas las validaciones
@@ -108,8 +108,8 @@ public class Rutas {
         this.recomendaciones = recomendaciones;
         this.zonaGeografica = zonaGeografica;
         this.mediaEstrellas = mediaEstrellas;
-        this.puntosPeligro=new LinkedHashSet<>();
-        this.puntosInteres=new LinkedHashSet<>();
+        this.puntosPeligro=new ArrayList<>();
+        this.puntosInteres=new ArrayList<>();
     }
 
     //Metodos get
@@ -221,11 +221,11 @@ public class Rutas {
         return mediaEstrellas;
     }
 
-    public LinkedHashSet<PuntosPeligro> getPuntosPeligro() {
+    public ArrayList<PuntosPeligro> getPuntosPeligro() {
         return puntosPeligro;
     }
 
-    public LinkedHashSet<PuntosInteres> getPuntosInteres() {
+    public ArrayList<PuntosInteres> getPuntosInteres() {
         return puntosInteres;
     }
     
