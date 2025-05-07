@@ -29,7 +29,9 @@
 ````
 ##### *[Aplicación Java]()*
 ````
+ Diagrama de clases
 
+ Diagrama de casos de uso
 ````
 ##### *[Maquinas Virtuales]()*
 ````
