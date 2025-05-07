@@ -30,13 +30,15 @@ public class DAORutas implements InterfazDAO<Rutas>{
     }
 
     @Override
-    public void eliminar(int id) {
+    public void eliminar(String email) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Rutas porID(int id) {
+    public Rutas buscar(String email) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+   
 
 }

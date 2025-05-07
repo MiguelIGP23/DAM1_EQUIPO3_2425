@@ -26,6 +26,7 @@ public class Usuario implements Comparable<Usuario>{
     //Constructor por defecto
 
     public Usuario() {
+        
     }
     
     
