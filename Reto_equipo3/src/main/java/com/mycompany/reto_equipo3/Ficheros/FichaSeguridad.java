@@ -26,6 +26,8 @@ public class FichaSeguridad {
      * Metodo estatico que genera un archivo llamado ficha-seguridad_nombreRuta.txt el cual
      * contiene informacion sobre la dificultad, los puntos de peligro y las
      * recomendaciones de una ruta
+     * @param ruta
+     * @return 
      */
     public static boolean generarFicha(Rutas ruta) {
         boolean generada = false;

@@ -46,6 +46,7 @@ public class Rutas {
     private double mediaEstrellas;
     
     private LinkedHashSet<PuntosPeligro> puntosPeligro;
+    private LinkedHashSet<PuntosInteres> puntosInteres;
 
     //Constructor con id y solo atributos obligatorios como parametros
     public Rutas(int idRuta, String nombre, String nombre_inicioruta, String nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, LocalTime duracion) {
@@ -60,6 +61,7 @@ public class Rutas {
         this.distancia = distancia;
         this.duracion = duracion;
         this.puntosPeligro=new LinkedHashSet<>();
+        this.puntosInteres=new LinkedHashSet<>();
     }
 
     //Constructor sin id y solo con atributos obligatorios como parametros
@@ -74,6 +76,7 @@ public class Rutas {
         this.distancia = distancia;
         this.duracion = duracion;
         this.puntosPeligro=new LinkedHashSet<>();
+        this.puntosInteres=new LinkedHashSet<>();
     }
 
     //Constructor completo con recibe datos por teclado y realiza todas las validaciones
@@ -106,6 +109,7 @@ public class Rutas {
         this.zonaGeografica = zonaGeografica;
         this.mediaEstrellas = mediaEstrellas;
         this.puntosPeligro=new LinkedHashSet<>();
+        this.puntosInteres=new LinkedHashSet<>();
     }
 
     //Metodos get
@@ -220,6 +224,11 @@ public class Rutas {
     public LinkedHashSet<PuntosPeligro> getPuntosPeligro() {
         return puntosPeligro;
     }
+
+    public LinkedHashSet<PuntosInteres> getPuntosInteres() {
+        return puntosInteres;
+    }
+    
     
     
     //Metodos set
