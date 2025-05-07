@@ -6,12 +6,8 @@ package com.mycompany.reto_equipo3.DAOS;
  */
 
 
-import com.mycompany.reto_equipo3.DAOS.AccesoABaseDatos;
-import com.mycompany.reto_equipo3.DAOS.InterfazDAO;
-import com.mycompany.reto_equipo3.Enums.Roles;
 import com.mycompany.reto_equipo3.PuntosPeligro;
 import com.mycompany.reto_equipo3.Rutas;
-import com.mycompany.reto_equipo3.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

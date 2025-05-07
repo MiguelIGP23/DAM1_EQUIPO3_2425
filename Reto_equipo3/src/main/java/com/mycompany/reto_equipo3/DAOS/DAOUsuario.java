@@ -20,14 +20,12 @@ import java.util.List;
  * @author MiguelIGP-1ºDAM
  */
 public class DAOUsuario implements InterfazDAO<Usuario> {
-
     private Connection conn;
 
     public DAOUsuario() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
 
-    @Override
     public void insertar(Usuario usuario) {
         String sql = "INSERT INTO usuario (nombre, apellido, email, password, rol) VALUES (?, ?, ?, MD5(?), ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -115,9 +113,10 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
         String sql = "SELECT nombre, apellido, email, password, rol FROM usuario WHERE email = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
+            try(ResultSet rs = stmt.executeQuery();){
+               if (rs.next()) {
                 buscado = crearUsuario(rs);
+             } 
             }
         } catch (SQLException e) {
             System.out.println("SQLERROR: no se pudo conectar a la BD");
