@@ -12,8 +12,6 @@ import java.util.List;
  * @param <T>
  */
 public interface InterfazDAO<T> {
-    
-    void insertar(T obj);
     void modificar(T obj);
     List<T> listar();
     void eliminar(String email) ;

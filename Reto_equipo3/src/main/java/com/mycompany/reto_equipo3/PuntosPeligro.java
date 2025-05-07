@@ -21,6 +21,8 @@ public class PuntosPeligro {
     private int timestamp;
     private int rutas_idRuta;
 
+   
+
     public void setIdPuntosinteres(int idPuntosinteres) {
         this.idPuntosinteres = idPuntosinteres;
     }
@@ -121,5 +123,11 @@ public class PuntosPeligro {
         this.elevacion = elevacion;
         this.timestamp = timestamp;
         this.rutas_idRuta = rutas_idRuta;
+    }
+    public PuntosPeligro(String nombre, double latitud, double longitud,  String descripcion) {
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.descripcion = descripcion;
     }
 }
