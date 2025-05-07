@@ -4,18 +4,18 @@
  */
 package com.mycompany.reto_equipo3.DAOS;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  *
  * @author DAM123
+ * @param <T>
  */
 public interface InterfazDAO<T> {
     
-    void insertar(T obj) throws SQLException;
-    void modificar(T obj) throws SQLException;
-    List<T> listar() throws SQLException;
-    void eliminar(int id) throws SQLException;
-    T porID(int id) throws SQLException;
+    void insertar(T obj);
+    void modificar(T obj);
+    List<T> listar();
+    void eliminar(String email) ;
+    T buscar(String email);
 }
