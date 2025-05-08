@@ -33,7 +33,7 @@ public class DAOPuntosinteres {
             stmt.setDouble(3, puntointeres.getLongitud());
             stmt.setDouble(4, puntointeres.getElevacion()); // Elevación ahora en el orden correcto
             stmt.setString(5, puntointeres.getDescripcion());
-            stmt.setInt(6, puntointeres.getRutas_idRuta());
+            stmt.setInt(6, ruta.getIdRuta());
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: No se creo el punto de interes");
             }
@@ -65,11 +65,12 @@ public class DAOPuntosinteres {
         }
     }
 
-    public List<PuntosInteres> listar() {
+    public List<PuntosInteres> listar(Rutas ruta) {
         List<PuntosInteres> lista = new ArrayList<>();
         PuntosInteres P1 = null;
-        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres";
-        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
+        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres where rutas_idRuta=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql);) {
+            stmt.setInt(1, ruta.getIdRuta());
             while (rs.next()) {
                 P1 = crearPuntoInteres(rs);
                 if (!lista.add(P1)) {

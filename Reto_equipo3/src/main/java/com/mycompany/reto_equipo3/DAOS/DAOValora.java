@@ -6,6 +6,7 @@
 package com.mycompany.reto_equipo3.DAOS;
 
 import com.mycompany.reto_equipo3.Enums.Roles;
+import com.mycompany.reto_equipo3.Rutas;
 import com.mycompany.reto_equipo3.Valora;
 import com.mycompany.reto_equipo3.Usuario;
 import java.sql.Connection;
@@ -29,15 +30,17 @@ public class DAOValora implements InterfazDAO<Valora>{
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
 
-    @Override
-    public void insertar(Valora valora) {
-        String sql = "INSERT INTO valora (dificultad, fecha, estrellas, interesCultural, belleza) VALUES (?, ?, ?, ?, ?)";
+    
+    public void insertar(Valora valora, Usuario usu, Rutas ruta) {
+        String sql = "INSERT INTO valora (dificultad, fecha, estrellas, interesCultural, belleza, usuario_idUsuario, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, valora.getDificultad());
             stmt.setString(2, valora.getFecha().toString());
             stmt.setInt(3, valora.getEstrellas());
             stmt.setInt(4, valora.getInteresCultural());
             stmt.setInt(5, valora.getBelleza());
+            stmt.setInt(6, usu.getIdUsuario());
+            stmt.setInt(7, ruta.getIdRuta());
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se creo la valoracion");
             }
@@ -70,12 +73,13 @@ public class DAOValora implements InterfazDAO<Valora>{
         }
     }
 
-    @Override
-    public List<Valora> listar() {
+    
+    public List<Valora> listar(Rutas ruta) {
         List<Valora> lista = new ArrayList<>();
-        Valora v = null;
-        String sql = "SELECT dificultad, fecha, estrellas, interesCultural, belleza FROM valora";
-        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
+        Valora v;
+        String sql = "SELECT dificultad, fecha, estrellas, interesCultural, belleza FROM valora where rutas_idRuta=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql);) {
+            stmt.setInt(1, ruta.getIdRuta());
             while (rs.next()) {
                 v = crearValoracion(rs);
                 if (!lista.add(v)) {
@@ -136,6 +140,8 @@ public class DAOValora implements InterfazDAO<Valora>{
     public Valora buscar(String email) {
         return null;
     }
+
+    
 
     
 }

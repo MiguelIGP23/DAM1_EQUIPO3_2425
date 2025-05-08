@@ -66,10 +66,10 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
         }
     }
 
-    @Override
+    
     public List<Usuario> listar() {
         List<Usuario> lista = new ArrayList<>();
-        Usuario U1 = null;
+        Usuario U1;
         String sql = "SELECT nombre, apellido, email, password, rol FROM usuario";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
             while (rs.next()) {

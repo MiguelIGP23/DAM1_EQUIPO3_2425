@@ -26,10 +26,8 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     public DAOPuntospeligro() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-
-   
-    @Override
-    public void insertar(PuntosPeligro puntopeligro) {
+    
+    public void insertar(PuntosPeligro puntopeligro, Rutas ruta) {
         String sql = "INSERT INTO puntospeligro (nombre, latitud, longitud, elevacion, descripcion, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, puntopeligro.getNombre());
@@ -37,7 +35,7 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
             stmt.setDouble(3, puntopeligro.getLongitud());
             stmt.setDouble(4, puntopeligro.getElevacion());
             stmt.setString(5, puntopeligro.getDescripcion());
-            stmt.setInt(6, puntopeligro.getRutas_idRuta());
+            stmt.setInt(6, ruta.getIdRuta());
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("Se inserto el punto de peligro");
             }
@@ -70,12 +68,13 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
         }
     }
 
-    @Override
-    public List<PuntosPeligro> listar() {
+    
+    public List<PuntosPeligro> listar(Rutas ruta) {
         List<PuntosPeligro> lista = new ArrayList<>();
-        PuntosPeligro P1 = null;
-        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro"; 
-        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+        PuntosPeligro P1;
+        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro where rutas_idRuta=?"; 
+        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
+            stmt.setInt(1, ruta.getIdRuta());
             while (rs.next()) {
                 P1 = crearPuntoPeligro(rs);
                 if (!lista.add(P1)) {
