@@ -40,7 +40,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
             stmt.setTime(9, Time.valueOf(ruta.getDuracion()));
             stmt.setInt(10, usu.getIdUsuario());
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se creo la ruta");
+                throw new Exception("ERROR: no se creo la ruta");
             }
             System.out.println("Se creo correctamente");
         } catch (SQLException e) {
@@ -65,7 +65,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
             stmt.setTime(9, Time.valueOf(ruta.getDuracion()));
             stmt.setInt(10, ruta.getIdRuta());
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se ha modificado el usuario");
+                throw new Exception("ERROR: no se ha modificado el usuario");
             }
             System.out.println("Se modifico el usuario");
         } catch (SQLException e) {
@@ -84,7 +84,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
             while (rs.next()) {
                 R1 = crearRutas(rs);
                 if (!lista.add(R1)) {
-                    throw new Exception("Un usuario no se añadio");
+                    throw new Exception("ERROR: el usuario no se añadio");
                 }
             }
             System.out.println("Se inserto correctamente todos los usuarios");

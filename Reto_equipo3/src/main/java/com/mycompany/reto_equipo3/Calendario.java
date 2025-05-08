@@ -37,4 +37,38 @@ public class Calendario {
     public String toString() {
         return "Calendario: fecha=" + fecha + ", detalles=" + detalles + ", recomendaciones=" + recomendaciones;
     } 
+
+    public int getIdCalendario() {
+        return idCalendario;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public String getDetalles() {
+        return detalles;
+    }
+
+    public String getRecomendaciones() {
+        return recomendaciones;
+    }
+
+    public void setIdCalendario(int idCalendario) {
+        this.idCalendario = idCalendario;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
+    }
+
+    public void setRecomendaciones(String recomendaciones) {
+        this.recomendaciones = recomendaciones;
+    }
+    
+    
 }

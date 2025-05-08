@@ -14,6 +14,31 @@ public class ImagenesPeligro {
     private String descripcion;
     private int puntospeligro_idPuntospeligro;
 
+    public ImagenesPeligro(int idimagenespeligro, String url, String descripcion, int puntospeligro_idPuntospeligro) {
+        this.idimagenespeligro = idimagenespeligro;
+        this.url = url;
+        this.descripcion = descripcion;
+        this.puntospeligro_idPuntospeligro = puntospeligro_idPuntospeligro;
+    }
+
+    //Metodos get
+    public int getIdimagenespeligro() {
+        return idimagenespeligro;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public int getPuntospeligro_idPuntospeligro() {
+        return puntospeligro_idPuntospeligro;
+    }
+    
+    //Metodos set
     public void setIdimagenespeligro(int idimagenespeligro) {
         this.idimagenespeligro = idimagenespeligro;
     }
@@ -29,27 +54,5 @@ public class ImagenesPeligro {
     public void setPuntospeligro_idPuntospeligro(int puntospeligro_idPuntospeligro) {
         this.puntospeligro_idPuntospeligro = puntospeligro_idPuntospeligro;
     }
-
-    public int getIdimagenespeligro() {
-        return idimagenespeligro;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public int getPuntosinteres_idPuntosinteres() {
-        return puntospeligro_idPuntospeligro;
-    }
-
-    public ImagenesPeligro(int idimagenespeligro, String url, String descripcion, int puntospeligro_idPuntospeligro) {
-        this.idimagenespeligro = idimagenespeligro;
-        this.url = url;
-        this.descripcion = descripcion;
-        this.puntospeligro_idPuntospeligro = puntospeligro_idPuntospeligro;
-    }
+    
 }

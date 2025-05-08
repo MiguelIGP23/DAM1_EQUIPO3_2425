@@ -35,7 +35,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
             stmt.setString(4, usuario.getPassword());
             stmt.setString(5, usuario.getRol().toString());
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se creo el usuario");
+                throw new Exception("ERROR: no se creo el usuario");
             }
             System.out.println("Se creo correctamente");
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
 
     @Override
     public void modificar(Usuario usuario) {
-        String sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, password = ?, rol = ? WHERE idUsuario = ?";
+        String sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, password = MD5(?), rol = ? WHERE idUsuario = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNombre());
             stmt.setString(2, usuario.getApellido());
@@ -56,7 +56,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
             stmt.setString(5, usuario.getRol().toString());
             stmt.setInt(6, usuario.getIdUsuario());
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se ha modificado el usuario");
+                throw new Exception("ERROR: no se ha modificado el usuario");
             }
             System.out.println("Se modifico el usuario");
         } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
             while (rs.next()) {
                 U1 = crearUsuario(rs);
                 if (!lista.add(U1)) {
-                    throw new Exception("Un usuario no se añadio");
+                    throw new Exception("ERROR: el usuario no se añadio");
                 }
             }
             System.out.println("Se inserto correctamente todos los usuarios");
@@ -97,7 +97,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se borrado el usuario");
+                throw new Exception("ERROR: no se borrado el usuario");
             }
             System.out.println("Se borro el usuario");
         } catch (SQLException e) {

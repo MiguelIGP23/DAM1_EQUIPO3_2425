@@ -145,6 +145,11 @@ public class PuntosInteres {
         final PuntosInteres other = (PuntosInteres) obj;
         return this.idPuntosInteres == other.idPuntosInteres;
     }
+
+    @Override
+    public String toString() {
+        return "PuntosInteres{" + "idPuntosInteres=" + idPuntosInteres + ", nombre=" + nombre + ", latitud=" + latitud + ", longitud=" + longitud + ", caracteristicas=" + caracteristicas + ", tipo=" + tipo + ", descripcion=" + descripcion + ", elevacion=" + elevacion + ", timestamp=" + timestamp + '}';
+    }
     
     
 }

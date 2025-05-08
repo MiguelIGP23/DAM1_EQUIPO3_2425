@@ -5,7 +5,6 @@
 package com.mycompany.reto_equipo3;
 
 import com.mycompany.reto_equipo3.Enums.Clasificacion;
-import com.mycompany.reto_equipo3.Validaciones.Teclado;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Set;
@@ -44,7 +43,7 @@ public class Rutas {
     private String recomendaciones;
     private String zonaGeografica;
     private double mediaEstrellas;
-    
+
     private ArrayList<PuntosPeligro> puntosPeligro;
     private ArrayList<PuntosInteres> puntosInteres;
 
@@ -60,8 +59,8 @@ public class Rutas {
         this.longitudFinal = longitudFinal;
         this.distancia = distancia;
         this.duracion = duracion;
-        this.puntosPeligro=new ArrayList<>();
-        this.puntosInteres=new ArrayList<>();
+        this.puntosPeligro = new ArrayList<>();
+        this.puntosInteres = new ArrayList<>();
     }
 
     //Constructor sin id y solo con atributos obligatorios como parametros
@@ -75,41 +74,46 @@ public class Rutas {
         this.longitudFinal = longitudFinal;
         this.distancia = distancia;
         this.duracion = duracion;
-        this.puntosPeligro=new ArrayList<>();
-        this.puntosInteres=new ArrayList<>();
+        this.puntosPeligro = new ArrayList<>();
+        this.puntosInteres = new ArrayList<>();
     }
 
-    //Constructor completo con recibe datos por teclado y realiza todas las validaciones
-    public Rutas() {
-        this.idRuta = 0;
-        this.nombre = Teclado.validanombre("Introduce nombre de la ruta:");
-        this.nombre_inicioruta = Teclado.validaInicioFinalRuta("Introduce inicio de ruta:");
-        this.nombre_finalruta = Teclado.validaInicioFinalRuta("Introduce fin de ruta:");
-        this.latitudInicial = Teclado.validaCoordenadas("Introduce latitud inicial:");
-        this.latitudFinal = Teclado.validaCoordenadas("Introduce latitud final:");
-        this.longitudInicial = Teclado.validaCoordenadas("Introduce longitud inicial:");
-        this.longitudFinal = Teclado.validaCoordenadas("Introduce longitud final:");
-        this.distancia = Teclado.validaDistancia("Introduce distancia de la ruta:");
-        this.duracion = Teclado.validaDuracion("Introduce duracion en formato hh:mm:ss");
-        this.desnivelPositivo = Teclado.validaDesnivelPositivo("Introduce desnivel positivo:");
-        this.desnivelNegativo = Teclado.validaDesnivelNegativo("Introduce desnivel negativo:");
-        this.altitudMax = Teclado.validaCoordenadas("Introduce altitud maxima:");
-        this.altitudMin = Teclado.validaCoordenadas("Introduce altitud minima:");
-        this.clasificacion = Teclado.validaClasificacion("Elige entre ruta circular o lineal:");
-        this.nivelEsfuerzo = Teclado.validaRango1a5("Introduce nivel de esfuerzo [1-5]");
-        this.nivelriesgo = Teclado.validaRango1a5("Introduce nivel de riesgo [1-5]");
-        this.estadoRuta = Teclado.validaRango1a5("Introduce estado de ruta [1-5]");
-        this.tipoterreno = Teclado.validaRango1a5("Introduce tipo de terreno [1-5]");
-        this.indicaciones = Teclado.validaRango1a5("Introduce indicaciones[1-5]");
-        this.temporada = Teclado.validaTemporada("Introduce una o mas temporadas separadas por comas (primevera,verano,otoño,invierno)");
-        this.accesibilidad = Teclado.validaBoolean("Ruta accesible? SI/NO");
-        this.rutaFamiliar = Teclado.validaBoolean("Ruta familiar? SI/NO");
-        this.text = text;
-        this.recomendaciones = recomendaciones;
-        this.zonaGeografica = zonaGeografica;
-        this.mediaEstrellas = mediaEstrellas;
-        this.puntosPeligro=new ArrayList<>();
-        this.puntosInteres=new ArrayList<>();
+    /**
+     * Metodo que inserta un punto de peligro en la lista puntosPeligro
+     * 
+     * @param punto Punto de peligro a ingresar
+     * @return true/false si se ingreso el punto a la lista
+     */
+    public boolean nuevoPuntoPeligro(PuntosPeligro punto) {
+        return puntosPeligro.add(punto);
+    }
+    
+    /**
+     * Metodo que elimina un punto de la lista puntosPeligro
+     * @param punto Punto de peligro a eliminar
+     * @return  true/false si se elimino el punto
+     */
+    public boolean eliminaPuntoPeligro(PuntosPeligro punto){
+        return puntosPeligro.remove(punto);
+    }
+    
+    /**
+     * Metodo que inserta un punto de interes en la lista puntosInteres
+     * 
+     * @param punto Punto de interes a ingresar
+     * @return true/false si se ingreso el punto a la lista
+     */
+    public boolean nuevoPuntoInteres(PuntosInteres punto) {
+        return puntosInteres.add(punto);
+    }
+    
+    /**
+     * Metodo que elimina un punto de la lista puntosInteres
+     * @param punto Punto de interes a eliminar
+     * @return  true/false si se elimino el punto
+     */
+    public boolean eliminaPuntoInteres(PuntosInteres punto){
+        return puntosInteres.remove(punto);
     }
 
     //Metodos get
@@ -228,9 +232,7 @@ public class Rutas {
     public ArrayList<PuntosInteres> getPuntosInteres() {
         return puntosInteres;
     }
-    
-    
-    
+
     //Metodos set
     public void setIdRuta(int idRuta) {
         this.idRuta = idRuta;

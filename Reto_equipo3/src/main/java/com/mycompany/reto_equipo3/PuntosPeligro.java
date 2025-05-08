@@ -4,14 +4,13 @@
  */
 package com.mycompany.reto_equipo3;
 
-import java.util.Objects;
 
 /**
  *
  * @author DAM122
  */
 public class PuntosPeligro {
-    private int idPuntosinteres;
+    private int idPuntospeligro;
     private String nombre;
     private double latitud;
     private double longitud;
@@ -23,12 +22,12 @@ public class PuntosPeligro {
     private int timestamp;
     private int rutas_idRuta;
 
-   public PuntosPeligro(int idPuntosinteres, String nombre, double latitud, double longitud, double kilometros, int gravedad, int posicion, String descripcion, double elevacion, int timestamp, int rutas_idRuta) {
-        this.idPuntosinteres = idPuntosinteres;
+   public PuntosPeligro(int idPuntospeligro, String nombre, double latitud, double longitud, double kilometro, int gravedad, int posicion, String descripcion, double elevacion, int timestamp, int rutas_idRuta) {
+        this.idPuntospeligro = idPuntospeligro;
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.kilometro = kilometros;
+        this.kilometro = kilometro;
         this.gravedad = gravedad;
         this.posicion = posicion;
         this.descripcion = descripcion;
@@ -36,15 +35,16 @@ public class PuntosPeligro {
         this.timestamp = timestamp;
         this.rutas_idRuta = rutas_idRuta;
     }
-    public PuntosPeligro(String nombre, double latitud, double longitud,  String descripcion) {
+    public PuntosPeligro(String nombre, double latitud, double longitud, String descripcion) {
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
         this.descripcion = descripcion;
     }
 
+    //Metodos set
     public void setIdPuntosinteres(int idPuntosinteres) {
-        this.idPuntosinteres = idPuntosinteres;
+        this.idPuntospeligro = idPuntosinteres;
     }
 
     public void setNombre(String nombre) {
@@ -59,8 +59,8 @@ public class PuntosPeligro {
         this.longitud = longitud;
     }
 
-    public void setKilometros(double kilometros) {
-        this.kilometro = kilometros;
+    public void setKilometro(double kilometro) {
+        this.kilometro = kilometro;
     }
 
     public void setGravedad(int gravedad) {
@@ -87,10 +87,11 @@ public class PuntosPeligro {
         this.rutas_idRuta = rutas_idRuta;
     }
 
-    public int getIdPuntosinteres() {
-        return idPuntosinteres;
+    public void setIdPuntospeligro(int idPuntospeligro) {
+        this.idPuntospeligro = idPuntospeligro;
     }
 
+    //Metodos get
     public String getNombre() {
         return nombre;
     }
@@ -103,7 +104,7 @@ public class PuntosPeligro {
         return longitud;
     }
 
-    public double getKilometros() {
+    public double getKilometro() {
         return kilometro;
     }
 
@@ -131,20 +132,15 @@ public class PuntosPeligro {
         return rutas_idRuta;
     }
 
+    public int getIdPuntospeligro() {
+        return idPuntospeligro;
+    }
+
+    //Metodos equals y hashcode para el LinkedHashSet<PuntosPeligro>
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + this.idPuntosinteres;
-        hash = 89 * hash + Objects.hashCode(this.nombre);
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.latitud) ^ (Double.doubleToLongBits(this.latitud) >>> 32));
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.longitud) ^ (Double.doubleToLongBits(this.longitud) >>> 32));
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.kilometro) ^ (Double.doubleToLongBits(this.kilometro) >>> 32));
-        hash = 89 * hash + this.gravedad;
-        hash = 89 * hash + this.posicion;
-        hash = 89 * hash + Objects.hashCode(this.descripcion);
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.elevacion) ^ (Double.doubleToLongBits(this.elevacion) >>> 32));
-        hash = 89 * hash + this.timestamp;
-        hash = 89 * hash + this.rutas_idRuta;
+        int hash = 7;
+        hash = 23 * hash + this.idPuntospeligro;
         return hash;
     }
 
@@ -160,39 +156,6 @@ public class PuntosPeligro {
             return false;
         }
         final PuntosPeligro other = (PuntosPeligro) obj;
-        if (this.idPuntosinteres != other.idPuntosinteres) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.latitud) != Double.doubleToLongBits(other.latitud)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.longitud) != Double.doubleToLongBits(other.longitud)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.kilometro) != Double.doubleToLongBits(other.kilometro)) {
-            return false;
-        }
-        if (this.gravedad != other.gravedad) {
-            return false;
-        }
-        if (this.posicion != other.posicion) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.elevacion) != Double.doubleToLongBits(other.elevacion)) {
-            return false;
-        }
-        if (this.timestamp != other.timestamp) {
-            return false;
-        }
-        if (this.rutas_idRuta != other.rutas_idRuta) {
-            return false;
-        }
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        return Objects.equals(this.descripcion, other.descripcion);
+        return this.idPuntospeligro == other.idPuntospeligro;
     }
-
-    
-    
 }

@@ -5,7 +5,6 @@
 package com.mycompany.reto_equipo3.DAOS;
 
 import com.mycompany.reto_equipo3.PuntosInteres;
-import com.mycompany.reto_equipo3.PuntosPeligro;
 import com.mycompany.reto_equipo3.Rutas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,9 +35,9 @@ public class DAOPuntosinteres {
             stmt.setString(5, puntointeres.getDescripcion());
             stmt.setInt(6, puntointeres.getRutas_idRuta());
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se creó el punto de interés");
+                throw new Exception("ERROR: No se creo el punto de interes");
             }
-            System.out.println("Se creó correctamente");
+            System.out.println("El punto se creo correctamente");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -52,13 +51,13 @@ public class DAOPuntosinteres {
             stmt.setString(1, puntointeres.getNombre());
             stmt.setDouble(2, puntointeres.getLatitud());
             stmt.setDouble(3, puntointeres.getLongitud());
-            stmt.setDouble(4, puntointeres.getElevacion()); // Elevación ahora en el orden correcto
+            stmt.setDouble(4, puntointeres.getElevacion());
             stmt.setString(5, puntointeres.getDescripcion());
             stmt.setInt(6, puntointeres.getIdPuntosInteres());
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se ha modificado el punto de interés");
+                throw new Exception("ERROR: No se ha modificado el punto de interes");
             }
-            System.out.println("Se modificó el punto de interés");
+            System.out.println("Se modifico el punto de interes");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -69,15 +68,15 @@ public class DAOPuntosinteres {
     public List<PuntosInteres> listar() {
         List<PuntosInteres> lista = new ArrayList<>();
         PuntosInteres P1 = null;
-        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres"; // Agregada la elevación aquí
+        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
             while (rs.next()) {
-                P1 = crearPuntosInteres(rs);
+                P1 = crearPuntoInteres(rs);
                 if (!lista.add(P1)) {
-                    throw new Exception("Un punto de interés no se añadió");
+                    throw new Exception("ERROR: el punto de interes no se añadio");
                 }
             }
-            System.out.println("Se insertaron correctamente todos los puntos de interés");
+            System.out.println("Se insertaron correctamente todos los puntos de interes");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -86,8 +85,8 @@ public class DAOPuntosinteres {
         return lista;
     }
 
-    public PuntosInteres crearPuntosInteres(final ResultSet rs) throws SQLException {
-        return new PuntosInteres(rs.getString(1), rs.getDouble(2), rs.getDouble(3), rs.getDouble(4), rs.getString(5));
+    public PuntosInteres crearPuntoInteres(final ResultSet rs) throws SQLException {
+        return new PuntosInteres(rs.getString(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4));
     }
 
     public void eliminar(String nombre) {
@@ -112,7 +111,7 @@ public class DAOPuntosinteres {
             stmt.setString(1, nombre);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    buscado = crearPuntosInteres(rs);
+                    buscado = crearPuntoInteres(rs);
                 }
             }
         } catch (SQLException e) {
