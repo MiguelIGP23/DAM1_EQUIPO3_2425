@@ -4,7 +4,7 @@
  */
 package com.mycompany.reto_equipo3;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -12,24 +12,22 @@ import java.time.LocalDate;
  */
 public class Calendario {
     private int idCalendario;
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private String detalles;
     private String recomendaciones;
     //Constructor de calendario para añadirlo con la id
-    public Calendario(int idCalendario, LocalDate fecha, String detalles, String recomendaciones) {
+    public Calendario(int idCalendario, LocalDateTime fecha, String detalles) {
         this.idCalendario = idCalendario;
         this.fecha = fecha;
         this.detalles = detalles;
-        this.recomendaciones = recomendaciones;
     }
     //constructor de calendario para crearlo sin id
-     public Calendario( LocalDate fecha, String detalles, String recomendaciones) {
+     public Calendario( LocalDateTime fecha, String detalles) {
         this.fecha = fecha;
         this.detalles = detalles;
-        this.recomendaciones = recomendaciones;
     }
     // constructor con solo los atributos que no pueden recibir nulos
-    public Calendario(LocalDate fecha) {
+    public Calendario(LocalDateTime fecha) {
         this.fecha = fecha;   
     }
     
@@ -42,7 +40,7 @@ public class Calendario {
         return idCalendario;
     }
 
-    public LocalDate getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
@@ -58,7 +56,7 @@ public class Calendario {
         this.idCalendario = idCalendario;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 

@@ -43,7 +43,7 @@ public class DAOValora implements InterfazDAO<Valora> {
             }
             System.out.println("Se creo correctamente");
         } catch (SQLException e) {
-            System.out.println("SQL ERROR: " + e.getMessage());
+            System.out.println("SQL ERROR: ruta ya valorada por el usuario");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -79,8 +79,6 @@ public class DAOValora implements InterfazDAO<Valora> {
             System.out.println(ruta.getIdRuta());
             try (ResultSet rs = stmt.executeQuery();) {
                 while (rs.next()) {
-                System.out.println("while");
-                    System.out.println("enmtro al while");
                     v = crearValoracion(rs);
                     if (!lista.add(v)) {
                         throw new Exception("ERROR: la valoracion no se añadio");
@@ -89,7 +87,7 @@ public class DAOValora implements InterfazDAO<Valora> {
             }
             System.out.println("Se inserto correctamente todas las valoraciones");
         } catch (SQLException e) {
-            System.out.println("SQL ERROR aaaaaaaaaaaaaaa: " + e.getMessage());
+            System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

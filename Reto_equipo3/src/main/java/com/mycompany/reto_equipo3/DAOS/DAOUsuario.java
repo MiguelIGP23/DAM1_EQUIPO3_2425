@@ -45,32 +45,32 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
         }
     }
 
-    @Override
-    public void modificar(Usuario usuario) {
-        String sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, password = MD5(?), rol = ? WHERE idUsuario = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, usuario.getNombre());
-            stmt.setString(2, usuario.getApellido());
-            stmt.setString(3, usuario.getEmail());
-            stmt.setString(4, usuario.getPassword());
-            stmt.setString(5, usuario.getRol().toString());
-            stmt.setInt(6, usuario.getIdUsuario());
-            if (stmt.executeUpdate() != 1) {
-                throw new Exception("ERROR: no se ha modificado el usuario");
-            }
-            System.out.println("Se modifico el usuario");
-        } catch (SQLException e) {
-            System.out.println("SQL ERROR: " + e.getMessage());
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
+//    @Override
+//    public void modificar(Usuario usuario, int id) {
+//        String sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, password = MD5(?), rol = ? WHERE idUsuario = ?";
+//        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+//            stmt.setString(1, usuario.getNombre());
+//            stmt.setString(2, usuario.getApellido());
+//            stmt.setString(3, usuario.getEmail());
+//            stmt.setString(4, usuario.getPassword());
+//            stmt.setString(5, usuario.getRol().toString());
+//            stmt.setInt(6, id);
+//            if (stmt.executeUpdate() != 1) {
+//                throw new Exception("ERROR: no se ha modificado el usuario");
+//            }
+//            System.out.println("Se modifico el usuario");
+//        } catch (SQLException e) {
+//            System.out.println("SQL ERROR: " + e.getMessage());
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//    }
 
     
     public List<Usuario> listar() {
         List<Usuario> lista = new ArrayList<>();
         Usuario U1;
-        String sql = "SELECT nombre, apellido, email, password, rol FROM usuario";
+        String sql = "SELECT idUsuario,nombre, apellido, email, password, rol FROM usuario";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
             while (rs.next()) {
                 U1 = crearUsuario(rs);
@@ -97,7 +97,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("ERROR: no se borrado el usuario");
+                throw new Exception("ERROR: no se borro el usuario");
             }
             System.out.println("Se borro el usuario");
         } catch (SQLException e) {
@@ -126,10 +126,10 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
 
     public Usuario encontrarUsuario(String email, String password) {
         Usuario usu = null;
-        String sql = "Select nombre, apellido, email, password, rol from usuario where password=MD5(?) and email=?";
+        String sql = "SELECT idUsuario, nombre, apellido, email, password, rol FROM usuario WHERE email=? and password=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, password);
-            stmt.setString(2, email);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
                  if (rs.next()) {
                     usu = crearUsuario(rs);
@@ -139,5 +139,10 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
             System.out.println("SQL ERROR: " + sex.getMessage());
         }
         return usu;
+    }
+
+    @Override
+    public void modificar(Usuario obj) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

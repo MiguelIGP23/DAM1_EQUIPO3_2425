@@ -23,12 +23,7 @@ public class Usuario implements Comparable<Usuario>{
     //Lista de rutas realizadas por el usuario
     ArrayList<Rutas> rutas=new ArrayList<>();
     
-    //Constructor por defecto
-
-    public Usuario() {
-        
-    }
-    
+      
     
    // Constructor que recibe la id y todos los atributos
     public Usuario(int idUsuario, String nombre, String apellido, String email, String password, Roles rol) {

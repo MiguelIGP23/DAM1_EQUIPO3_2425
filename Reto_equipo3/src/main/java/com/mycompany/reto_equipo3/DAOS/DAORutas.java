@@ -76,10 +76,27 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
     }
  
+    public boolean aprobarRuta(Rutas ruta) {
+        boolean aprobado=false;
+        String sql = "UPDATE rutas SET estadoRuta=1 WHERE idRuta=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, ruta.getIdRuta());
+            if (stmt.executeUpdate() != 1) {
+                throw new Exception("ERROR: no se ha modificado el usuario");
+            }
+            aprobado=true;
+        } catch (SQLException e) {
+            System.out.println("SQL ERROR: " + e.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return aprobado;
+    }
+    
     public List<Rutas> listarsinaprobar() {
         List<Rutas> lista = new ArrayList<>();
         Rutas R1 = null;
-        String sql = "Select nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where estadoRuta=false";
+        String sql = "Select idRuta, nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where estadoRuta=0";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
             while (rs.next()) {
                 R1 = crearRutas(rs);
@@ -97,8 +114,8 @@ public class DAORutas implements InterfazDAO<Rutas> {
     }
     public List<Rutas> listaraprobadas() {
         List<Rutas> lista = new ArrayList<>();
-        Rutas R1 = null;
-        String sql = "Select nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where estadoRuta=true";
+        Rutas R1;
+        String sql = "Select idRuta, nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where estadoRuta=1";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
             while (rs.next()) {
                 R1 = crearRutas(rs);

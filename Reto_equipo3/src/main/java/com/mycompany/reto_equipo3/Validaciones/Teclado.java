@@ -66,7 +66,7 @@ public class Teclado {
     public static boolean validarol(String roles) {
         boolean valido = false;
         Roles rol = Roles.valueOf(roles);
-        if (rol == null || rol == Roles.administrador || rol == Roles.disenador || rol == Roles.profesor || rol == Roles.alumno) {
+        if (rol == null || rol == Roles.administrador || rol == Roles.diseñador || rol == Roles.profesor || rol == Roles.alumno) {
             valido = true;
         }
         return valido;
