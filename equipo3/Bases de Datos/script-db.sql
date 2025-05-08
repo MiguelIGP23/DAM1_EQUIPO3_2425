@@ -333,7 +333,7 @@ CREATE TABLE `rutas` (
 
 LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
-INSERT INTO `rutas` VALUES (1,'Paseo por el bosque','Bar manolo','Fuente del rio',0.2345,2.3625,0.2536,2.2345,23,'00:15:00',90,20,1300,1150,NULL,4,3,0,NULL,NULL,'verano,primavera',1,1,NULL,'Lleva cervecitas',NULL,4,1),(2,'Subida al everest','salida del bosque','pico mas alto',4.2356,8.3625,4.2476,9.6345,120,'30:15:00',4532,600,8400,1340,NULL,5,5,0,NULL,NULL,'invierno',1,1,NULL,'Suerte o muerte',NULL,3,1);
+INSERT INTO `rutas` VALUES (1,'Paseo por el bosque','Bar manolo','Fuente del rio',0.2345,2.3625,0.2536,2.2345,23,'00:15:00',90,20,1300,1150,NULL,4,3,0,NULL,NULL,'verano,primavera',1,1,NULL,'Lleva cervecitas',NULL,4,1),(2,'Subida al everest','salida del bosque','pico mas alto',4.2356,8.3625,4.2476,9.6345,120,'23:15:00',4532,600,8400,1340,NULL,5,5,0,NULL,NULL,'invierno',1,1,NULL,'Suerte o muerte',NULL,3,1);
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
