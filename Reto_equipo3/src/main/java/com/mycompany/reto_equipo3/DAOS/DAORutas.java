@@ -1,9 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+* Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+* Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+*/
 package com.mycompany.reto_equipo3.DAOS;
-
+ 
 import com.mycompany.reto_equipo3.Rutas;
 import com.mycompany.reto_equipo3.Usuario;
 import java.sql.Connection;
@@ -14,18 +14,18 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-
+ 
 /**
- *
- * @author MiguelIGP-1ºDAM
- */
+*
+* @author MiguelIGP-1ºDAM
+*/
 public class DAORutas implements InterfazDAO<Rutas> {
     private Connection conn;
-
+ 
     public DAORutas() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-
+ 
     public void insertar(Rutas ruta,Usuario usu) {
         String sql = "INSERT INTO rutas (nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion,usuario_idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -49,10 +49,10 @@ public class DAORutas implements InterfazDAO<Rutas> {
             System.out.println(ex.getMessage());
         }
     }
-
+ 
     @Override
     public void modificar(Rutas ruta) {
-        String sql = "UPDATE rutas set nombre=?, nombre_inicioruta=?,nombre_finalruta=?,latitudInicial=?,latitudFinal=?,longitudInicial=?,longitudFinal=?,distancia=?,duracion=? WHERE idRuta=?";
+        String sql = "UPDATE rutas set nombre=?, nombre_inicioruta=?,nombre_finalruta=?,latitudInicial=?,latitudFinal=?,longitudInicial=?,longitudFinal=?,distancia=?,duracion=?,estadoRuta=? WHERE idRuta=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, ruta.getNombre());
             stmt.setString(2, ruta.getNombre_inicioruta());
@@ -63,7 +63,8 @@ public class DAORutas implements InterfazDAO<Rutas> {
             stmt.setDouble(7, ruta.getLongitudFinal());
             stmt.setDouble(8, ruta.getDistancia());
             stmt.setTime(9, Time.valueOf(ruta.getDuracion()));
-            stmt.setInt(10, ruta.getIdRuta());
+            stmt.setBoolean(10, ruta.getEstadoRuta());
+            stmt.setInt(11, ruta.getIdRuta());
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se ha modificado el usuario");
             }
@@ -74,12 +75,11 @@ public class DAORutas implements InterfazDAO<Rutas> {
             System.out.println(ex.getMessage());
         }
     }
-
-
-    public List<Rutas> listar() {
+ 
+    public List<Rutas> listarsinaprobar() {
         List<Rutas> lista = new ArrayList<>();
         Rutas R1 = null;
-        String sql = "Select nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas";
+        String sql = "Select nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where estadoRuta=false";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
             while (rs.next()) {
                 R1 = crearRutas(rs);
@@ -95,11 +95,29 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return lista;
     }
-
+    public List<Rutas> listaraprobadas() {
+        List<Rutas> lista = new ArrayList<>();
+        Rutas R1 = null;
+        String sql = "Select nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where estadoRuta=true";
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql);) {
+            while (rs.next()) {
+                R1 = crearRutas(rs);
+                if (!lista.add(R1)) {
+                    throw new Exception("ERROR: el usuario no se añadio");
+                }
+            }
+            System.out.println("Se inserto correctamente todos los usuarios");
+        } catch (SQLException e) {
+            System.out.println("SQL ERROR: " + e.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return lista;
+    }
     public Rutas crearRutas(final ResultSet rs) throws SQLException {
         return new Rutas(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getTime(9).toLocalTime());
     }
-
+ 
     @Override
     public void eliminar(String nombre) {
         String sql = "DELETE FROM rutas WHERE nombre=?";
@@ -115,7 +133,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
             System.out.println(ex.getMessage());
         }
     }
-
+ 
     @Override
     public Rutas buscar(String nombre) {
         Rutas buscado = null;
@@ -132,5 +150,4 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return buscado;
     }
-
 }
