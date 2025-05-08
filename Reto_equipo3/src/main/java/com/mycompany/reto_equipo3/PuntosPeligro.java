@@ -4,12 +4,13 @@
  */
 package com.mycompany.reto_equipo3;
 
+
 /**
  *
  * @author DAM122
  */
 public class PuntosPeligro {
-    private int idPuntosinteres;
+    private int idPuntospeligro;
     private String nombre;
     private double latitud;
     private double longitud;
@@ -21,10 +22,29 @@ public class PuntosPeligro {
     private int timestamp;
     private int rutas_idRuta;
 
-   
+   public PuntosPeligro(int idPuntospeligro, String nombre, double latitud, double longitud, double kilometro, int gravedad, int posicion, String descripcion, double elevacion, int timestamp, int rutas_idRuta) {
+        this.idPuntospeligro = idPuntospeligro;
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.kilometro = kilometro;
+        this.gravedad = gravedad;
+        this.posicion = posicion;
+        this.descripcion = descripcion;
+        this.elevacion = elevacion;
+        this.timestamp = timestamp;
+        this.rutas_idRuta = rutas_idRuta;
+    }
+    public PuntosPeligro(String nombre, double latitud, double longitud, String descripcion) {
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.descripcion = descripcion;
+    }
 
+    //Metodos set
     public void setIdPuntosinteres(int idPuntosinteres) {
-        this.idPuntosinteres = idPuntosinteres;
+        this.idPuntospeligro = idPuntosinteres;
     }
 
     public void setNombre(String nombre) {
@@ -39,8 +59,8 @@ public class PuntosPeligro {
         this.longitud = longitud;
     }
 
-    public void setKilometros(double kilometros) {
-        this.kilometro = kilometros;
+    public void setKilometro(double kilometro) {
+        this.kilometro = kilometro;
     }
 
     public void setGravedad(int gravedad) {
@@ -67,10 +87,11 @@ public class PuntosPeligro {
         this.rutas_idRuta = rutas_idRuta;
     }
 
-    public int getIdPuntosinteres() {
-        return idPuntosinteres;
+    public void setIdPuntospeligro(int idPuntospeligro) {
+        this.idPuntospeligro = idPuntospeligro;
     }
 
+    //Metodos get
     public String getNombre() {
         return nombre;
     }
@@ -83,7 +104,7 @@ public class PuntosPeligro {
         return longitud;
     }
 
-    public double getKilometros() {
+    public double getKilometro() {
         return kilometro;
     }
 
@@ -111,23 +132,30 @@ public class PuntosPeligro {
         return rutas_idRuta;
     }
 
-    public PuntosPeligro(int idPuntosinteres, String nombre, double latitud, double longitud, double kilometros, int gravedad, int posicion, String descripcion, double elevacion, int timestamp, int rutas_idRuta) {
-        this.idPuntosinteres = idPuntosinteres;
-        this.nombre = nombre;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.kilometro = kilometros;
-        this.gravedad = gravedad;
-        this.posicion = posicion;
-        this.descripcion = descripcion;
-        this.elevacion = elevacion;
-        this.timestamp = timestamp;
-        this.rutas_idRuta = rutas_idRuta;
+    public int getIdPuntospeligro() {
+        return idPuntospeligro;
     }
-    public PuntosPeligro(String nombre, double latitud, double longitud,  String descripcion) {
-        this.nombre = nombre;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.descripcion = descripcion;
+
+    //Metodos equals y hashcode para el LinkedHashSet<PuntosPeligro>
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + this.idPuntospeligro;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PuntosPeligro other = (PuntosPeligro) obj;
+        return this.idPuntospeligro == other.idPuntospeligro;
     }
 }

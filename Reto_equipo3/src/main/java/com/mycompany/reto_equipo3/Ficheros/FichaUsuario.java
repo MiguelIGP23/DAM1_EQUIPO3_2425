@@ -14,8 +14,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 
 /**
  *
@@ -39,8 +39,8 @@ public class FichaUsuario {
         //Guarda la ficha en un archivo con el nombre de la ruta
         File ficha = new File("fichas/ficha-usuario_" + ruta.getNombre() + ".txt");
         //Guardamos las rutas realizadas por el usuario en una lista
-        LinkedHashSet<PuntosInteres> puntosInteres = ruta.getPuntosInteres();
-        LinkedHashSet<PuntosPeligro> puntosPeligro = ruta.getPuntosPeligro();
+        ArrayList<PuntosInteres> puntosInteres = ruta.getPuntosInteres();
+        ArrayList<PuntosPeligro> puntosPeligro = ruta.getPuntosPeligro();
         try (BufferedWriter bf = new BufferedWriter(new FileWriter(ficha));) {
             bf.write("\t--FICHA DE USUARIO--");
             bf.newLine();
@@ -99,7 +99,7 @@ public class FichaUsuario {
                 bf.newLine();
                 bf.write("\tCoordenadas: " + aux.getLatitud() + ", " + aux.getLongitud());
                 bf.newLine();
-                bf.write("\t-Kilometro de ruta: " + aux.getKilometros());
+                bf.write("\t-Kilometro de ruta: " + aux.getKilometro());
                 bf.newLine();
                 bf.write("\tNivel de gravedad [1-5]: " + aux.getGravedad());
                 bf.newLine();

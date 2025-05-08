@@ -14,22 +14,14 @@ public class ImagenesInteres {
     private String descripcion;
     private int puntosinteres_idPuntosinteres;
 
-    public void setIdimagenesinteres(int idimagenesinteres) {
+    public ImagenesInteres(int idimagenesinteres, String url, String descripcion, int puntosinteres_idPuntosinteres) {
         this.idimagenesinteres = idimagenesinteres;
-    }
-
-    public void setUrl(String url) {
         this.url = url;
-    }
-
-    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public void setPuntosinteres_idPuntosinteres(int puntosinteres_idPuntosinteres) {
         this.puntosinteres_idPuntosinteres = puntosinteres_idPuntosinteres;
     }
-
+    
+    //Metodos get
     public int getIdimagenesinteres() {
         return idimagenesinteres;
     }
@@ -45,11 +37,22 @@ public class ImagenesInteres {
     public int getPuntosinteres_idPuntosinteres() {
         return puntosinteres_idPuntosinteres;
     }
-
-    public ImagenesInteres(int idimagenesinteres, String url, String descripcion, int puntosinteres_idPuntosinteres) {
+    
+    //Metodos set
+    public void setIdimagenesinteres(int idimagenesinteres) {
         this.idimagenesinteres = idimagenesinteres;
+    }
+
+    public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public void setPuntosinteres_idPuntosinteres(int puntosinteres_idPuntosinteres) {
         this.puntosinteres_idPuntosinteres = puntosinteres_idPuntosinteres;
     }
+    
 }
