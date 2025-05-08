@@ -33,7 +33,7 @@ public class Rutas {
     private Clasificacion clasificacion;
     private int nivelEsfuerzo;
     private int nivelriesgo;
-    private int estadoRuta;
+    private boolean estadoRuta;
     private int tipoterreno;
     private int indicaciones;   //indicar valores de 1 a 5
     private Set<String> temporada;
@@ -185,7 +185,7 @@ public class Rutas {
         return nivelriesgo;
     }
 
-    public int getEstadoRuta() {
+    public boolean getEstadoRuta() {
         return estadoRuta;
     }
 
@@ -302,7 +302,7 @@ public class Rutas {
         this.nivelriesgo = nivelriesgo;
     }
 
-    public void setEstadoRuta(int estadoRuta) {
+    public void setEstadoRuta(boolean estadoRuta) {
         this.estadoRuta = estadoRuta;
     }
 
