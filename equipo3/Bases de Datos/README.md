@@ -7,7 +7,7 @@
 
 ###### Diagrama Relacional
 
-![diagramarelacional](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/23fd0c2a01b8f2a9b29ac78e5480493d50d64a5b/equipo3/Bases%20de%20Datos/Diagrama%20relacional.PNG)
+![diagramarelacional](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/422c07123ecd38740a117b397bdb0c7edcba716a/equipo3/Bases%20de%20Datos/entidad-relacion-imagen-final.png)
 
 
 ###### Script de la base de datos
