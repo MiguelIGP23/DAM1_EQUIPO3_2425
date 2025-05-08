@@ -163,7 +163,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
             }
            }
         } catch (SQLException e) {
-            System.out.println("SQLERROR: no se pudo conectar a la BD");
+            System.out.println("SQLERROR: "+e.getMessage());
         }
         return buscado;
     }

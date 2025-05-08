@@ -64,7 +64,7 @@ public class DAOActividad implements InterfazDAO<Actividad> {
 
     public List<Actividad> listar() {
         List<Actividad> actividades = new ArrayList<>();
-        String sql = "select nombre from actividad";
+        String sql = "select idActividad, nombre from actividad";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Actividad actividad = this.crearActividades(rs);

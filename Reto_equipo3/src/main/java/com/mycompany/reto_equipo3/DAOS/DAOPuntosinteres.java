@@ -18,6 +18,7 @@ import java.util.List;
  * @author DAM122
  */
 public class DAOPuntosinteres {
+
     private Connection conn;
 
     public DAOPuntosinteres() {
@@ -25,7 +26,7 @@ public class DAOPuntosinteres {
     }
 
     public void insertar(PuntosInteres puntointeres, Rutas ruta) {
-        String sql = "INSERT INTO puntospeligro (nombre, latitud, longitud, elevacion, descripcion, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO puntosinteres (nombre, latitud, longitud, elevacion, descripcion, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, puntointeres.getNombre());
             stmt.setDouble(2, puntointeres.getLatitud());
@@ -45,7 +46,7 @@ public class DAOPuntosinteres {
     }
 
     public void modificar(PuntosInteres puntointeres) {
-        String sql = "UPDATE puntospeligro SET nombre = ?, latitud = ?, longitud = ?, elevacion = ?, descripcion = ? WHERE idPuntosInteres = ?";
+        String sql = "UPDATE puntosinteres SET nombre = ?, latitud = ?, longitud = ?, elevacion = ?, descripcion = ? WHERE idPuntosInteres = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, puntointeres.getNombre());
             stmt.setDouble(2, puntointeres.getLatitud());
@@ -67,16 +68,18 @@ public class DAOPuntosinteres {
     public List<PuntosInteres> listar(Rutas ruta) {
         List<PuntosInteres> lista = new ArrayList<>();
         PuntosInteres P1 = null;
-        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres where rutas_idRuta=?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql);) {
+        String sql = "SELECT idPuntosinteres, nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres where rutas_idRuta=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setInt(1, ruta.getIdRuta());
-            while (rs.next()) {
-                P1 = crearPuntoInteres(rs);
-                if (!lista.add(P1)) {
-                    throw new Exception("ERROR: el punto de interes no se añadio");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    P1 = crearPuntoInteres(rs);
+                    if (!lista.add(P1)) {
+                        throw new Exception("ERROR: el punto de interes no se anadio");
+                    }
                 }
             }
-            System.out.println("Se insertaron correctamente todos los puntos de interes");
+            System.out.println("Se listaron todos los puntos de interes");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -86,7 +89,7 @@ public class DAOPuntosinteres {
     }
 
     public PuntosInteres crearPuntoInteres(final ResultSet rs) throws SQLException {
-        return new PuntosInteres(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDouble(4),rs.getDouble(5), rs.getString(6));
+        return new PuntosInteres(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6));
     }
 
     public void eliminar(String nombre) {
@@ -94,9 +97,9 @@ public class DAOPuntosinteres {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se borró el punto de interés");
+                throw new Exception("No se borro el punto de interes");
             }
-            System.out.println("Se borró el punto de interés");
+            System.out.println("Se borro el punto de interes");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -106,7 +109,7 @@ public class DAOPuntosinteres {
 
     public PuntosInteres buscar(String nombre) {
         PuntosInteres buscado = null;
-        String sql = "SELECT idPuntosInteres, nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro WHERE nombre = ?"; // Elevación agregada
+        String sql = "SELECT idPuntosinteres, nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres WHERE nombre = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -115,9 +118,8 @@ public class DAOPuntosinteres {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("SQLERROR: no se pudo conectar a la BD");
+            System.out.println("SQLERROR: " + e.getMessage());
         }
         return buscado;
     }
 }
-

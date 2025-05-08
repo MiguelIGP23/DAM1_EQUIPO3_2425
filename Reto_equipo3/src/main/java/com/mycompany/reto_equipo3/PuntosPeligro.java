@@ -4,7 +4,6 @@
  */
 package com.mycompany.reto_equipo3;
 
-
 /**
  *
  * @author DAM122
@@ -169,4 +168,11 @@ public class PuntosPeligro {
         final PuntosPeligro other = (PuntosPeligro) obj;
         return this.idPuntospeligro == other.idPuntospeligro;
     }
+
+    @Override
+    public String toString() {
+        return "PuntosPeligro{" + "nombre=" + nombre + ", latitud=" + latitud + ", longitud=" + longitud + ", kilometro=" + kilometro + ", gravedad=" + gravedad + ", posicion=" + posicion + ", descripcion=" + descripcion + ", elevacion=" + elevacion + ", timestamp=" + timestamp + ", rutas_idRuta=" + rutas_idRuta + "\n";
+    }
+    
+    
 }

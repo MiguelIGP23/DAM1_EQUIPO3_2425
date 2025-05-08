@@ -1,0 +1,48 @@
+	--FICHA DE SEGURIDAD--		09/05/2025 01:39:53
+
+-Nombre de la ruta: Paseo por el bosque
+-Recomendaciones: null
+-Dificultad: 
+	-Nivel de riesgo: 0
+	-Nivel de esfuerzo: 0
+-Puntos de peligro:
+-Punto 1: barranco
+	-Coordenadas: 
+		->Latitud: 0.2345
+		->Longitud: 2.2514
+	-Kilometro de ruta: 0.0
+	-Nivel de gravedad [1-5]: 0
+	-Descripcion: cuidado con las rocas
+	-Duracion estimada: 0 minutos
+-Punto 2: lobos
+	-Coordenadas: 
+		->Latitud: 0.3451
+		->Longitud: 1.0234
+	-Kilometro de ruta: 0.0
+	-Nivel de gravedad [1-5]: 0
+	-Descripcion: hay lobos
+	-Duracion estimada: 0 minutos
+-Punto 3: hielo
+	-Coordenadas: 
+		->Latitud: 3.6543
+		->Longitud: 1.2564
+	-Kilometro de ruta: 0.0
+	-Nivel de gravedad [1-5]: 0
+	-Descripcion: cuidado con resbalones
+	-Duracion estimada: 0 minutos
+-Punto 4: hielo
+	-Coordenadas: 
+		->Latitud: 3.6543
+		->Longitud: 1.2564
+	-Kilometro de ruta: 0.0
+	-Nivel de gravedad [1-5]: 0
+	-Descripcion: cuidado con resbalones
+	-Duracion estimada: 0 minutos
+-Punto 5: hielo
+	-Coordenadas: 
+		->Latitud: 3.6543
+		->Longitud: 1.2564
+	-Kilometro de ruta: 0.0
+	-Nivel de gravedad [1-5]: 0
+	-Descripcion: cuidado con resbalones
+	-Duracion estimada: 0 minutos

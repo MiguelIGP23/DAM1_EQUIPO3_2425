@@ -1,10 +1,8 @@
-package com.mycompany.reto_equipo3.DAOS;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
+package com.mycompany.reto_equipo3.DAOS;
 
 import com.mycompany.reto_equipo3.PuntosPeligro;
 import com.mycompany.reto_equipo3.Rutas;
@@ -20,12 +18,13 @@ import java.util.List;
  * @author DAM122
  */
 public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
+
     private Connection conn;
 
     public DAOPuntospeligro() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-    
+
     public void insertar(PuntosPeligro puntopeligro, Rutas ruta) {
         String sql = "INSERT INTO puntospeligro (nombre, latitud, longitud, elevacion, descripcion, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -36,9 +35,9 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
             stmt.setString(5, puntopeligro.getDescripcion());
             stmt.setInt(6, ruta.getIdRuta());
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("Se inserto el punto de peligro");
+                throw new Exception("ERROR: no se creo el punto de peligro");
             }
-            System.out.println("ERROR: no se inserto el punto de peligro");
+            System.out.println("El punto se ceo correctamente");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -48,12 +47,12 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
 
     @Override
     public void modificar(PuntosPeligro puntopeligro) {
-        String sql = "UPDATE puntospeligro SET nombre = ?, latitud = ?, longitud = ?, elevacion = ?, descripcion = ? WHERE idPuntosInteres = ?";
+        String sql = "UPDATE puntospeligro SET nombre = ?, latitud = ?, longitud = ?, elevacion = ?, descripcion = ? WHERE idPuntospeligro = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, puntopeligro.getNombre());
             stmt.setDouble(2, puntopeligro.getLatitud());
             stmt.setDouble(3, puntopeligro.getLongitud());
-            stmt.setDouble(4, puntopeligro.getElevacion()); 
+            stmt.setDouble(4, puntopeligro.getElevacion());
             stmt.setString(5, puntopeligro.getDescripcion());
             stmt.setInt(6, puntopeligro.getIdPuntospeligro());
             if (stmt.executeUpdate() != 1) {
@@ -67,20 +66,21 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
         }
     }
 
-    
     public List<PuntosPeligro> listar(Rutas ruta) {
         List<PuntosPeligro> lista = new ArrayList<>();
-        PuntosPeligro P1;
-        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro where rutas_idRuta=?"; 
-        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
+        PuntosPeligro P1 = null;
+        String sql = "SELECT idPuntospeligro, nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro where rutas_idRuta=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setInt(1, ruta.getIdRuta());
-            while (rs.next()) {
-                P1 = crearPuntoPeligro(rs);
-                if (!lista.add(P1)) {
-                    throw new Exception("ERROR: el punto de peligro no se agrego");
+            try (ResultSet rs = stmt.executeQuery()){
+                while (rs.next()) {
+                    P1 = crearPuntoPeligro(rs);
+                    if (!lista.add(P1)) {
+                        throw new Exception("ERROR: el punto de peligro no se agrego");
+                    }
                 }
             }
-            System.out.println("Se insertaron correctamente todos los puntos de peligro");
+            System.out.println("Se listaron todos los puntos de peligro");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -90,7 +90,7 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     }
 
     public PuntosPeligro crearPuntoPeligro(final ResultSet rs) throws SQLException {
-        return new PuntosPeligro(rs.getInt(1),rs.getString(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5),rs.getString(6)); 
+        return new PuntosPeligro(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6));
     }
 
     @Override
@@ -99,9 +99,9 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("No se borró el punto de peligro");
+                throw new Exception("No se borro el punto de peligro");
             }
-            System.out.println("Se borró el punto de peligro");
+            System.out.println("Se borro el punto de peligro");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -112,7 +112,7 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     @Override
     public PuntosPeligro buscar(String nombre) {
         PuntosPeligro buscado = null;
-        String sql = "SELECT idPuntosPeligro, nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro WHERE nombre = ?"; 
+        String sql = "SELECT idPuntosPeligro, nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro WHERE nombre = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -121,7 +121,7 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("SQL ERROR: no se pudo conectar a la BD");
+            System.out.println("SQLERROR: "+e.getMessage());
         }
         return buscado;
     }

@@ -7,6 +7,7 @@ package com.mycompany.reto_equipo3;
 import com.mycompany.reto_equipo3.Enums.Clasificacion;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -44,8 +45,8 @@ public class Rutas {
     private String zonaGeografica;
     private double mediaEstrellas;
 
-    private ArrayList<PuntosPeligro> puntosPeligro;
-    private ArrayList<PuntosInteres> puntosInteres;
+    private List<PuntosPeligro> puntosPeligro;
+    private List<PuntosInteres> puntosInteres;
 
     //Constructor con id y solo atributos obligatorios como parametros
     public Rutas(int idRuta, String nombre, String nombre_inicioruta, String nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, LocalTime duracion) {
@@ -225,11 +226,11 @@ public class Rutas {
         return mediaEstrellas;
     }
 
-    public ArrayList<PuntosPeligro> getPuntosPeligro() {
+    public List<PuntosPeligro> getPuntosPeligro() {
         return puntosPeligro;
     }
 
-    public ArrayList<PuntosInteres> getPuntosInteres() {
+    public List<PuntosInteres> getPuntosInteres() {
         return puntosInteres;
     }
 

@@ -6,6 +6,7 @@ package com.mycompany.reto_equipo3.Ficheros;
 
 import com.mycompany.reto_equipo3.PuntosPeligro;
 import com.mycompany.reto_equipo3.Rutas;
+import com.mycompany.reto_equipo3.DAOS.DAOPuntospeligro;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,8 +14,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -23,11 +24,12 @@ import java.util.Iterator;
 public class FichaSeguridad {
 
     /**
-     * Metodo estatico que genera un archivo llamado ficha-seguridad_nombreRuta.txt el cual
-     * contiene informacion sobre la dificultad, los puntos de peligro y las
-     * recomendaciones de una ruta
+     * Metodo estatico que genera un archivo llamado
+     * ficha-seguridad_nombreRuta.txt el cual contiene informacion sobre la
+     * dificultad, los puntos de peligro y las recomendaciones de una ruta
+     *
      * @param ruta
-     * @return 
+     * @return
      */
     public static boolean generarFicha(Rutas ruta) {
         boolean generada = false;
@@ -35,21 +37,23 @@ public class FichaSeguridad {
         File carpeta = new File("fichas");
         carpeta.mkdirs();
         //Guarda la ficha en un archivo con el nombre de la ruta
-        File ficha = new File("fichas/ficha-seguridad_"+ruta.getNombre()+".txt");
+        File ficha = new File("fichas/ficha-seguridad_" + ruta.getNombre() + ".txt");
         //Guardamos los puntos de peligro de la ruta en una lista
-        ArrayList<PuntosPeligro> puntosPeligro = ruta.getPuntosPeligro();
+        DAOPuntospeligro daopp = new DAOPuntospeligro();
+        List<PuntosPeligro> puntosPeligro = daopp.listar(ruta);
         try (BufferedWriter bf = new BufferedWriter(new FileWriter(ficha));) {
             bf.write("\t--FICHA DE SEGURIDAD--");
-            bf.newLine();
             //Escribimos fecha y hora de generacion de la ficha
             LocalDateTime ahora = LocalDateTime.now();
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            bf.write("-Ficha generada -> "+ahora.format(formato));
+            bf.write("\t\t" + ahora.format(formato));
+            bf.newLine();
             bf.newLine();
             bf.write("-Nombre de la ruta: " + ruta.getNombre());
-            /**
-             * Calcular media de dificultades en tabla valora y añadir al archivo
-             */
+            bf.newLine();
+            bf.write("-Recomendaciones: "+ruta.getRecomendaciones());
+            bf.newLine();
+            bf.write("-Dificultad: \n\t-Nivel de riesgo: "+ruta.getNivelriesgo()+"\n\t-Nivel de esfuerzo: "+ruta.getNivelEsfuerzo());
             bf.newLine();
             bf.write("-Puntos de peligro:");
             bf.newLine();
@@ -60,18 +64,18 @@ public class FichaSeguridad {
                 PuntosPeligro aux = it.next();
                 bf.write("-Punto " + (cont++) + ": " + aux.getNombre());
                 bf.newLine();
-                bf.write("\tCoordenadas: " + aux.getLatitud() + ", " + aux.getLongitud());
+                bf.write("\t-Coordenadas: \n\t\t->Latitud: " + aux.getLatitud() + "\n\t\t->Longitud: " + aux.getLongitud());
                 bf.newLine();
                 bf.write("\t-Kilometro de ruta: " + aux.getKilometro());
                 bf.newLine();
-                bf.write("\tNivel de gravedad [1-5]: " + aux.getGravedad());
+                bf.write("\t-Nivel de gravedad [1-5]: " + aux.getGravedad());
                 bf.newLine();
                 bf.write("\t-Descripcion: " + aux.getDescripcion());
                 bf.newLine();
                 bf.write("\t-Duracion estimada: " + aux.getTimestamp() + " minutos");
                 bf.newLine();
-                generada = true;
             }
+            generada = true;
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         }

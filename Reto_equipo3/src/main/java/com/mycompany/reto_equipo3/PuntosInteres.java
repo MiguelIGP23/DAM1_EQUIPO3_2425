@@ -159,7 +159,7 @@ public class PuntosInteres {
 
     @Override
     public String toString() {
-        return "PuntosInteres{" + "idPuntosInteres=" + idPuntosInteres + ", nombre=" + nombre + ", latitud=" + latitud + ", longitud=" + longitud + ", caracteristicas=" + caracteristicas + ", tipo=" + tipo + ", descripcion=" + descripcion + ", elevacion=" + elevacion + ", timestamp=" + timestamp + '}';
+        return "PuntosInteres{" + "nombre=" + nombre + ", latitud=" + latitud + ", longitud=" + longitud + ", caracteristicas=" + caracteristicas + ", tipo=" + tipo + ", descripcion=" + descripcion + ", elevacion=" + elevacion + ", timestamp=" + timestamp + "}\n";
     }
     
     

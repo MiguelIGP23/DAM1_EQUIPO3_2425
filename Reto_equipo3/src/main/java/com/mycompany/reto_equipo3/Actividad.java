@@ -33,6 +33,11 @@ public class Actividad {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    @Override
+    public String toString() {
+        return "Actividad{" + "idActividad=" + idActividad + ", nombre=" + nombre + "}\n";
+    }
     
     
 }

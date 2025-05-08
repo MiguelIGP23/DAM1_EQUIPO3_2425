@@ -41,7 +41,7 @@ public class DAOValora implements InterfazDAO<Valora> {
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se creo la valoracion");
             }
-            System.out.println("Se creo correctamente");
+            System.out.println("Se creo la valoracion");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: ruta ya valorada por el usuario");
         } catch (Exception ex) {
@@ -73,10 +73,9 @@ public class DAOValora implements InterfazDAO<Valora> {
     public List<Valora> listar(Rutas ruta) {
         List<Valora> lista = new ArrayList<>();
         Valora v;
-        String sql = "SELECT dificultad, fecha, estrellas, interesCultural, belleza FROM valora where rutas_idRuta = ?";
+        String sql = "SELECT idValora, dificultad, fecha, estrellas, interesCultural, belleza FROM valora where rutas_idRuta = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setInt(1, ruta.getIdRuta());
-            System.out.println(ruta.getIdRuta());
             try (ResultSet rs = stmt.executeQuery();) {
                 while (rs.next()) {
                     v = crearValoracion(rs);
@@ -85,7 +84,7 @@ public class DAOValora implements InterfazDAO<Valora> {
                     }
                 }
             }
-            System.out.println("Se inserto correctamente todas las valoraciones");
+            System.out.println("Se lleno lista con valoraciones");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -95,15 +94,16 @@ public class DAOValora implements InterfazDAO<Valora> {
     }
 
     public Valora crearValoracion(final ResultSet rs) throws Exception {
-        return new Valora(rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+        return new Valora(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getInt(4), rs.getInt(5), rs.getInt(6));
     }
 
-    public void eliminar(int id) {
-        String sql = "DELETE FROM valora WHERE idValora=?";
+    public void eliminar(Usuario usu, Rutas ruta) {
+        String sql = "DELETE FROM valora WHERE usuario_idUsuario=? and rutas_idRuta=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
+            stmt.setInt(1, usu.getIdUsuario());
+            stmt.setInt(2, ruta.getIdRuta());
             if (stmt.executeUpdate() != 1) {
-                throw new Exception("ERROR: no se elimino la valoracion");
+                throw new Exception("ERROR: la valoracion no existe");
             }
             System.out.println("Se elimino la valoracion");
         } catch (SQLException e) {
@@ -115,7 +115,7 @@ public class DAOValora implements InterfazDAO<Valora> {
 
     public Valora buscar(int id) {
         Valora buscado = null;
-        String sql = "SELECT idValora, dificultad, fecha, estrellas, interesCultural, belleza FROM valora WHERE id = ?";
+        String sql = "SELECT idValora, dificultad, fecha, estrellas, interesCultural, belleza FROM valora WHERE idValora = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery();) {
@@ -124,7 +124,7 @@ public class DAOValora implements InterfazDAO<Valora> {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("SQLERROR: no se pudo conectar a la BD");
+            System.out.println("SQLERROR: "+e.getMessage());
         } catch (Exception e) {
             System.out.println("awefafafawfaw");
         }
