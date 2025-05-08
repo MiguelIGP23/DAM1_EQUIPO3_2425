@@ -481,10 +481,10 @@ CREATE TABLE `usuario` (
   `email` varchar(30) NOT NULL,
   `password` varchar(32) NOT NULL,
   `rol` enum('administrador','diseñador','profesor','alumno') DEFAULT NULL,
-  PRIMARY KEY (`idUsuario`)
+  PRIMARY KEY (`idUsuario`),
+  CONSTRAINT `uq_email_unico` UNIQUE (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `usuario`
 --
