@@ -75,7 +75,7 @@ public class Usuario implements Comparable<Usuario>{
     }
     @Override
     public String toString() {
-        return "Usuario: nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", password=" + password + ", rol=" + rol;
+        return "Usuario: nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", rol=" + rol;
     }
 
     public int getIdUsuario() {

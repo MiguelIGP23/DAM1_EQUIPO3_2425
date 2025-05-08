@@ -10,11 +10,11 @@ import com.mycompany.reto_equipo3.Rutas;
 import com.mycompany.reto_equipo3.Valora;
 import com.mycompany.reto_equipo3.Usuario;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class DAOValora implements InterfazDAO<Valora>{
         String sql = "INSERT INTO valora (dificultad, fecha, estrellas, interesCultural, belleza, usuario_idUsuario, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, valora.getDificultad());
-            stmt.setString(2, valora.getFecha().toString());
+            stmt.setDate(2, Date.valueOf(valora.getFecha()));
             stmt.setInt(3, valora.getEstrellas());
             stmt.setInt(4, valora.getInteresCultural());
             stmt.setInt(5, valora.getBelleza());
@@ -77,7 +77,7 @@ public class DAOValora implements InterfazDAO<Valora>{
     public List<Valora> listar(Rutas ruta) {
         List<Valora> lista = new ArrayList<>();
         Valora v;
-        String sql = "SELECT dificultad, fecha, estrellas, interesCultural, belleza FROM valora where rutas_idRuta=?";
+        String sql = "SELECT dificultad, fecha, estrellas, interesCultural, belleza FROM valora where rutas_idRuta = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql);) {
             stmt.setInt(1, ruta.getIdRuta());
             while (rs.next()) {
@@ -88,7 +88,7 @@ public class DAOValora implements InterfazDAO<Valora>{
             }
             System.out.println("Se inserto correctamente todas las valoraciones");
         } catch (SQLException e) {
-            System.out.println("SQL ERROR: " + e.getMessage());
+            System.out.println("SQL ERROR aaaaaaaaaaaaaaa: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +90,7 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     }
 
     public PuntosPeligro crearPuntoPeligro(final ResultSet rs) throws SQLException {
-        return new PuntosPeligro(rs.getString(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4)); 
+        return new PuntosPeligro(rs.getString(1), rs.getDouble(2), rs.getDouble(3), rs.getDouble(4),rs.getString(5)); 
     }
 
     @Override

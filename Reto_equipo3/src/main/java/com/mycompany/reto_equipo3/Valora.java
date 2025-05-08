@@ -44,7 +44,7 @@ public class Valora {
 
     @Override
     public String toString() {
-        return "Valora{" + "idValora=" + idValora + ", dificultad=" + dificultad + ", fecha=" + fecha + ", estrellas=" + estrellas + ", interesCultural=" + interesCultural + ", belleza=" + belleza + ", valoracionTecnica=" + valoracionTecnica + ", rese\u00f1a=" + reseña + '}';
+        return "Valora {dificultad=" + dificultad + ", fecha=" + fecha + ", estrellas=" + estrellas + ", interesCultural=" + interesCultural + ", belleza=" + belleza+'}';
     }
     
     //Metodos get

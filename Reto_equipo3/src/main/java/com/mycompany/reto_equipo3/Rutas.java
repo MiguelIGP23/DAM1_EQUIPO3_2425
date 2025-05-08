@@ -342,4 +342,10 @@ public class Rutas {
         this.mediaEstrellas = mediaEstrellas;
     }
 
+    @Override
+    public String toString() {
+        return "Rutas{" + "nombre=" + nombre + ", nombre_inicioruta=" + nombre_inicioruta + ", nombre_finalruta=" + nombre_finalruta + ", latitudInicial=" + latitudInicial + ", latitudFinal=" + latitudFinal + ", longitudInicial=" + longitudInicial + ", longitudFinal=" + longitudFinal + ", distancia=" + distancia + ", duracion=" + duracion + "}\n";
+    }
+
+    
 }

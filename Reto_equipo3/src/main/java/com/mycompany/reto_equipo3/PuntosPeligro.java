@@ -22,11 +22,12 @@ public class PuntosPeligro {
     private int timestamp;
     private int rutas_idRuta;
 
-   public PuntosPeligro(int idPuntospeligro, String nombre, double latitud, double longitud, double kilometro, int gravedad, int posicion, String descripcion, double elevacion, int timestamp, int rutas_idRuta) {
+   public PuntosPeligro(int idPuntospeligro, String nombre, double latitud, double longitud, double elevacion, double kilometro, int gravedad, int posicion, String descripcion, int timestamp, int rutas_idRuta) {
         this.idPuntospeligro = idPuntospeligro;
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.elevacion=elevacion;
         this.kilometro = kilometro;
         this.gravedad = gravedad;
         this.posicion = posicion;
@@ -35,10 +36,11 @@ public class PuntosPeligro {
         this.timestamp = timestamp;
         this.rutas_idRuta = rutas_idRuta;
     }
-    public PuntosPeligro(String nombre, double latitud, double longitud, String descripcion) {
+    public PuntosPeligro(String nombre, double latitud, double longitud, double elevacion, String descripcion) {
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.elevacion=elevacion;
         this.descripcion = descripcion;
     }
 

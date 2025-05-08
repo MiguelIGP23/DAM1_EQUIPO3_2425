@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +86,7 @@ public class DAOPuntosinteres {
     }
 
     public PuntosInteres crearPuntoInteres(final ResultSet rs) throws SQLException {
-        return new PuntosInteres(rs.getString(1), rs.getDouble(2), rs.getDouble(3), rs.getString(4));
+        return new PuntosInteres(rs.getString(1), rs.getDouble(2), rs.getDouble(3),rs.getDouble(4), rs.getString(5));
     }
 
     public void eliminar(String nombre) {

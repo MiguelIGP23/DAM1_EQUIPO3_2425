@@ -87,7 +87,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
                     throw new Exception("ERROR: el usuario no se añadio");
                 }
             }
-            System.out.println("Se inserto correctamente todos los usuarios");
+            System.out.println("Se inserto correctamente todoas las rutas no aprobadas");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -106,7 +106,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
                     throw new Exception("ERROR: el usuario no se añadio");
                 }
             }
-            System.out.println("Se inserto correctamente todos los usuarios");
+            System.out.println("Se inserto correctamente todas ls rutas aprobadas");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
