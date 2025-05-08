@@ -7,6 +7,8 @@ package com.mycompany.reto_equipo3;
 import com.mycompany.reto_equipo3.Validaciones.Teclado;
 import com.mycompany.reto_equipo3.DAOS.AccesoABaseDatos;
 import com.mycompany.reto_equipo3.DAOS.*;
+import java.util.Iterator;
+import java.util.List;
 /**
  *
  * @author DAM123
@@ -27,7 +29,11 @@ public class Reto_equipo3 {
         Usuario usu=daousu.buscar("saul@gmail.com");
         System.out.println(daoruta.listaraprobadas());
         System.out.println(daoruta.listarsinaprobar());
-        Rutas ruta = daoruta.buscar("Paseo por el bosque");
-        System.out.println(daovalora.listar(ruta));
+        Rutas ruta = daoruta.buscar("paseo por el bosque");
+        System.out.println(ruta.toString());
+        List<Valora> aaaaaaaaaaaa = daovalora.listar(ruta);
+        for(Valora valoracion:aaaaaaaaaaaa){
+            System.out.println(valoracion.toString());
+        }
     }
 }

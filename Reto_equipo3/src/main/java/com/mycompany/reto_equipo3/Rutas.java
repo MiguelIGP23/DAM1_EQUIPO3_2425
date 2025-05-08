@@ -77,7 +77,7 @@ public class Rutas {
         this.puntosPeligro = new ArrayList<>();
         this.puntosInteres = new ArrayList<>();
     }
-
+    
     /**
      * Metodo que inserta un punto de peligro en la lista puntosPeligro
      * 

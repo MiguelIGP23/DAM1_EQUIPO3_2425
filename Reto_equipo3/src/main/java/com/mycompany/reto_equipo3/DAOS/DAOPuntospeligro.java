@@ -90,7 +90,7 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     }
 
     public PuntosPeligro crearPuntoPeligro(final ResultSet rs) throws SQLException {
-        return new PuntosPeligro(rs.getString(1), rs.getDouble(2), rs.getDouble(3), rs.getDouble(4),rs.getString(5)); 
+        return new PuntosPeligro(rs.getInt(1),rs.getString(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5),rs.getString(6)); 
     }
 
     @Override
@@ -112,7 +112,7 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     @Override
     public PuntosPeligro buscar(String nombre) {
         PuntosPeligro buscado = null;
-        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro WHERE nombre = ?"; 
+        String sql = "SELECT idPuntosPeligro, nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro WHERE nombre = ?"; 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
             try (ResultSet rs = stmt.executeQuery()) {

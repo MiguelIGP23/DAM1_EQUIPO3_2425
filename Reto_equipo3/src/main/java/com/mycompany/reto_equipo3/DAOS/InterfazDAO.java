@@ -4,7 +4,6 @@
  */
 package com.mycompany.reto_equipo3.DAOS;
 
-import java.util.List;
 
 /**
  *
@@ -12,9 +11,7 @@ import java.util.List;
  * @param <T>
  */
 public interface InterfazDAO<T> {
-    //void insertar(T obj);
     void modificar(T obj);
-    //List<T> listar();
     void eliminar(String email) ;
     T buscar(String email);
 }

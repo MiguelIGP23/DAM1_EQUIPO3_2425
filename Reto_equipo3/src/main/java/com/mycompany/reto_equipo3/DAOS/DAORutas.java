@@ -115,7 +115,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
         return lista;
     }
     public Rutas crearRutas(final ResultSet rs) throws SQLException {
-        return new Rutas(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getTime(9).toLocalTime());
+        return new Rutas(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getTime(10).toLocalTime());
     }
  
     @Override
@@ -137,7 +137,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
     @Override
     public Rutas buscar(String nombre) {
         Rutas buscado = null;
-        String sql = "Select nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where nombre=?";
+        String sql = "Select idRuta, nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where nombre=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
             try(ResultSet rs = stmt.executeQuery();){

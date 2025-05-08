@@ -86,7 +86,7 @@ public class DAOPuntosinteres {
     }
 
     public PuntosInteres crearPuntoInteres(final ResultSet rs) throws SQLException {
-        return new PuntosInteres(rs.getString(1), rs.getDouble(2), rs.getDouble(3),rs.getDouble(4), rs.getString(5));
+        return new PuntosInteres(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDouble(4),rs.getDouble(5), rs.getString(6));
     }
 
     public void eliminar(String nombre) {
@@ -106,7 +106,7 @@ public class DAOPuntosinteres {
 
     public PuntosInteres buscar(String nombre) {
         PuntosInteres buscado = null;
-        String sql = "SELECT nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro WHERE nombre = ?"; // Elevación agregada
+        String sql = "SELECT idPuntosInteres, nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro WHERE nombre = ?"; // Elevación agregada
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
             try (ResultSet rs = stmt.executeQuery()) {

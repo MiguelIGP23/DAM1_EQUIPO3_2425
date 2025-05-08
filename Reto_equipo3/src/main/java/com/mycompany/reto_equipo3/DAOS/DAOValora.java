@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package com.mycompany.reto_equipo3.DAOS;
 
 import com.mycompany.reto_equipo3.Enums.Roles;
@@ -14,7 +13,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +20,7 @@ import java.util.List;
  *
  * @author MiguelIGP-1ºDAM
  */
-public class DAOValora implements InterfazDAO<Valora>{
+public class DAOValora implements InterfazDAO<Valora> {
 
     private Connection conn;
 
@@ -30,7 +28,6 @@ public class DAOValora implements InterfazDAO<Valora>{
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
 
-    
     public void insertar(Valora valora, Usuario usu, Rutas ruta) {
         String sql = "INSERT INTO valora (dificultad, fecha, estrellas, interesCultural, belleza, usuario_idUsuario, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -73,17 +70,21 @@ public class DAOValora implements InterfazDAO<Valora>{
         }
     }
 
-    
     public List<Valora> listar(Rutas ruta) {
         List<Valora> lista = new ArrayList<>();
         Valora v;
         String sql = "SELECT dificultad, fecha, estrellas, interesCultural, belleza FROM valora where rutas_idRuta = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql);) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setInt(1, ruta.getIdRuta());
-            while (rs.next()) {
-                v = crearValoracion(rs);
-                if (!lista.add(v)) {
-                    throw new Exception("ERROR: la valoracion no se añadio");
+            System.out.println(ruta.getIdRuta());
+            try (ResultSet rs = stmt.executeQuery();) {
+                while (rs.next()) {
+                System.out.println("while");
+                    System.out.println("enmtro al while");
+                    v = crearValoracion(rs);
+                    if (!lista.add(v)) {
+                        throw new Exception("ERROR: la valoracion no se añadio");
+                    }
                 }
             }
             System.out.println("Se inserto correctamente todas las valoraciones");
@@ -95,11 +96,10 @@ public class DAOValora implements InterfazDAO<Valora>{
         return lista;
     }
 
-    public Valora crearValoracion(final ResultSet rs) throws SQLException {
+    public Valora crearValoracion(final ResultSet rs) throws Exception {
         return new Valora(rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getInt(3), rs.getInt(4), rs.getInt(5));
     }
 
-    
     public void eliminar(int id) {
         String sql = "DELETE FROM valora WHERE idValora=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -115,19 +115,20 @@ public class DAOValora implements InterfazDAO<Valora>{
         }
     }
 
-    
     public Valora buscar(int id) {
         Valora buscado = null;
-        String sql = "SELECT dificultad, fecha, estrellas, interesCultural, belleza FROM valora WHERE id = ?";
+        String sql = "SELECT idValora, dificultad, fecha, estrellas, interesCultural, belleza FROM valora WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
-            try(ResultSet rs = stmt.executeQuery();){
-               if (rs.next()) {
-                buscado = crearValoracion(rs);
-             } 
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    buscado = crearValoracion(rs);
+                }
             }
         } catch (SQLException e) {
             System.out.println("SQLERROR: no se pudo conectar a la BD");
+        } catch (Exception e) {
+            System.out.println("awefafafawfaw");
         }
         return buscado;
     }
@@ -141,7 +142,4 @@ public class DAOValora implements InterfazDAO<Valora>{
         return null;
     }
 
-    
-
-    
 }

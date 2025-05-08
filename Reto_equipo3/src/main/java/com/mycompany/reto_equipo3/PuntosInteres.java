@@ -44,6 +44,15 @@ public class PuntosInteres {
         this.descripcion = descripcion;
     }
     
+    public PuntosInteres(int id, String nombre, double latitud, double longitud, double elevacion, String descripcion) {
+        this.idPuntosInteres=id;
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.elevacion=elevacion;
+        this.descripcion = descripcion;
+    }
+    
    
 
     public void setIdPuntosInteres(int idPuntosInteres) {

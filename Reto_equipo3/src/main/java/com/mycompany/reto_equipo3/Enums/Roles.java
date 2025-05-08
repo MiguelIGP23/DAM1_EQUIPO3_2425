@@ -9,5 +9,5 @@ package com.mycompany.reto_equipo3.Enums;
  * @author DAM121
  */
 public enum Roles {
-    administrador,diseñador,profesor,alumno
+    administrador,disenador,profesor,alumno
 }

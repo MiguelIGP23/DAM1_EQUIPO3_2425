@@ -43,6 +43,15 @@ public class PuntosPeligro {
         this.elevacion=elevacion;
         this.descripcion = descripcion;
     }
+    
+    public PuntosPeligro(int id, String nombre, double latitud, double longitud, double elevacion, String descripcion) {
+        this.idPuntospeligro=id;
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.elevacion=elevacion;
+        this.descripcion = descripcion;
+    }
 
     //Metodos set
     public void setIdPuntosinteres(int idPuntosinteres) {

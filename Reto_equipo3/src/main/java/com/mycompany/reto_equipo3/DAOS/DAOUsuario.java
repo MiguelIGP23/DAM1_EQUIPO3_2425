@@ -88,7 +88,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
     }
 
     public Usuario crearUsuario(final ResultSet rs) throws SQLException {
-        return new Usuario(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), Roles.valueOf(rs.getString(5)));
+        return new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Roles.valueOf(rs.getString(6)));
     }
 
     @Override
@@ -110,7 +110,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
     @Override
     public Usuario buscar(String email) {
         Usuario buscado = null;
-        String sql = "SELECT nombre, apellido, email, password, rol FROM usuario WHERE email = ?";
+        String sql = "SELECT idUsuario, nombre, apellido, email, password, rol FROM usuario WHERE email = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             try(ResultSet rs = stmt.executeQuery();){
