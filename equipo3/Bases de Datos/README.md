@@ -2,12 +2,12 @@
 
 ###### Diagrama entidad-relacion
 
-![diagrama-e/r](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/2ff84c4b6d9851bdd404d5ab7e7a641d1925552e/equipo3/Bases%20de%20Datos/Imagen%20entidad-relacion.PNG)
+![diagrama-e/r](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/9d2f1e65586f43ddc6aee6a9d86ba78bcf3c2349/equipo3/Bases%20de%20Datos/Imagen-diagrama-entidad-relacion-correcto.PNG)
 
 
 ###### Diagrama Relacional
 
-![diagramarelacional](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/23fd0c2a01b8f2a9b29ac78e5480493d50d64a5b/equipo3/Bases%20de%20Datos/Diagrama%20relacional.PNG)
+![diagramarelacional]
 
 
 ###### Script de la base de datos
