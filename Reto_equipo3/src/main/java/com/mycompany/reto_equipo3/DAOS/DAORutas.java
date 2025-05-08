@@ -75,7 +75,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
     }
 
-    @Override
+
     public List<Rutas> listar() {
         List<Rutas> lista = new ArrayList<>();
         Rutas R1 = null;
@@ -133,7 +133,4 @@ public class DAORutas implements InterfazDAO<Rutas> {
         return buscado;
     }
 
-    @Override
-    public void insertar(Rutas obj) {
-    }
 }

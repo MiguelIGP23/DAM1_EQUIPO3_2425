@@ -56,15 +56,16 @@ public class Teclado {
     
      */
     public static boolean validapassword(String password) {
-        return password.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ0-9]{3,29}"); 
+        return password.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ0-9]{3,29}");
     }
 
     /*
      metodo que sirve para 
     Usuario:rol
      */
-    public static boolean validarol(Roles rol) {
+    public static boolean validarol(String roles) {
         boolean valido = false;
+        Roles rol = Roles.valueOf(roles);
         if (rol == null || rol == Roles.administrador || rol == Roles.diseñador || rol == Roles.profesor || rol == Roles.alumno) {
             valido = true;
         }
@@ -105,7 +106,8 @@ public class Teclado {
         try {
             double coor = Double.parseDouble(coordenada);
             valido = true;
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
         return valido;
     }
 
@@ -114,10 +116,15 @@ public class Teclado {
       Rutas:distancia
     PuntosPeligro:kilometros
      */
-    public static boolean validaDistancia(double distancia) {
+    public static boolean validaDistancia(String distancia) {
         boolean valido = false;
-        if (distancia > 0) {
-            valido = true;
+        double dist;
+        try {
+            dist = Double.parseDouble(distancia);
+            if (dist > 0) {
+                valido = true;
+            }
+        } catch (NumberFormatException e) {
         }
         return valido;
     }
@@ -127,12 +134,13 @@ public class Teclado {
      */
     public static boolean validaDuracion(String fecha) {
         boolean valido = false;
-        LocalTime duracion = null;
+        LocalTime duracion;
         try {
             DateTimeFormatter f = DateTimeFormatter.ofPattern("HH:mm:ss");
             duracion = LocalTime.parse(fecha, f);
             valido = true;
-        } catch (DateTimeParseException e) {}
+        } catch (DateTimeParseException e) {
+        }
         return valido;
     }
 
@@ -141,10 +149,15 @@ public class Teclado {
     PuntosInteres:timestamp
     PuntosPeligro:posicion
      */
-    public static boolean validaDesnivel(int desnivel) {
+    public static boolean validaDesnivel(String desnivel) {
         boolean valido = false;
-        if (desnivel >= 0) {
-            valido = true;
+        int desn;
+        try {
+            desn = Integer.parseInt(desnivel);
+            if (desn >= 0) {
+                valido = true;
+            }
+        } catch (NumberFormatException e) {
         }
         return valido;
     }
@@ -153,9 +166,10 @@ public class Teclado {
     /*Comprueba que la clasificacion tenga uno de los valores dados en el enum
       Rutas:Clasificacion
      */
-    public static boolean validaClasificacion(Clasificacion clas) {
+    public static boolean validaClasificacion(String clas) {
         boolean valido = false;
-        if (clas == Clasificacion.LINEAL || clas == Clasificacion.CIRCULAR) {
+        Clasificacion clasif = Clasificacion.valueOf(clas);
+        if (clasif == Clasificacion.LINEAL || clasif == Clasificacion.CIRCULAR) {
             valido = true;
         }
         return valido;
@@ -173,11 +187,15 @@ public class Teclado {
            belleza
     PuntosPeligro:gravedad
      */
-    public static boolean validaRango1a5(int valor) {
+    public static boolean validaRango1a5(String valor) {
         boolean valido = false;
-        if (valor >= 1 && valor <= 5) {
-            valido = true;
-        }
+        int val;
+        try {
+            val=Integer.parseInt(valor);
+            if (val >= 1 && val <= 5) {
+                valido = true;
+            }
+        } catch (NumberFormatException e) {}
         return valido;
     }
 
@@ -187,16 +205,16 @@ public class Teclado {
     public static boolean validaTemporada(Set<String> temporadas) {
         List<String> temporadasValidas = List.of("primavera", "verano", "otoño", "invierno");
         boolean valido = false;
-            //Copiamos la lista de temporadas a otro Set<String> y eliminamos las estaciones validas
-            Set<String> noValidas = new LinkedHashSet<>(temporadas);
-            noValidas.removeAll(temporadasValidas);
-            //Comprobamos si queda alguna temporada no valida en la lista
-            if (noValidas.isEmpty()) {
-                //Si esta correcto, comprobamos su orden con metodo externo
-                if (estanOrdenadas(temporadas, temporadasValidas)) {
-                    valido = true;
-                }
+        //Copiamos la lista de temporadas a otro Set<String> y eliminamos las estaciones validas
+        Set<String> noValidas = new LinkedHashSet<>(temporadas);
+        noValidas.removeAll(temporadasValidas);
+        //Comprobamos si queda alguna temporada no valida en la lista
+        if (noValidas.isEmpty()) {
+            //Si esta correcto, comprobamos su orden con metodo externo
+            if (estanOrdenadas(temporadas, temporadasValidas)) {
+                valido = true;
             }
+        }
         return valido;
     }
 
@@ -220,37 +238,38 @@ public class Teclado {
      */
     public static boolean validaBoolean(String bool) {
         boolean valido = false;
-            if (bool==null || bool.equalsIgnoreCase("si") || bool.equalsIgnoreCase("no")){
-                valido=true;
-            }
+        if (bool == null || bool.equalsIgnoreCase("si") || bool.equalsIgnoreCase("no")) {
+            valido = true;
+        }
         return valido;
     }
 
     //Metodo que convierte la entrada
-   
     /*
     Calendario:fecha
      */
     public static boolean validafechayhora(String fechaHora) {
         boolean valido = false;
-            try {
-                DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                LocalDateTime aux = LocalDateTime.parse(fechaHora, f);
-                valido = true;
-            } catch (java.time.format.DateTimeParseException ex) {}
+        try {
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime aux = LocalDateTime.parse(fechaHora, f);
+            valido = true;
+        } catch (java.time.format.DateTimeParseException ex) {
+        }
         return valido;
     }
-    
+
     /*
     Valora:fecha
      */
     public static boolean validafecha(String fecha) {
         boolean valido = false;
-            try {
-                DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate aux = LocalDate.parse(fecha, f);
-                valido = true;
-            } catch (java.time.format.DateTimeParseException a) {}
+        try {
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate aux = LocalDate.parse(fecha, f);
+            valido = true;
+        } catch (java.time.format.DateTimeParseException a) {
+        }
         return valido;
     }
 
@@ -261,21 +280,22 @@ public class Teclado {
      */
     public static boolean validanombreactividad(String nombre) {
         boolean valido = false;
-                if (nombre.matches("[A-ZÑ][A-Za-zÑñáéíóúÁÉÍÓÚ ]{2,49}")) {
-                valido = true;
-                }
+        if (nombre.matches("[A-ZÑ][A-Za-zÑñáéíóúÁÉÍÓÚ ]{2,49}")) {
+            valido = true;
+        }
         return valido;
     }
 
     /*Enum de tipos clase PuntosInteres
      PuntosInteres:tipo
      */
-    public static boolean validatipo(Tipo tipo) {
+    public static boolean validatipo(String ti) {
         boolean valido = false;
-        if(tipo==Tipo.area_de_descanso || tipo==Tipo.botanico || tipo==Tipo.cultural || tipo==Tipo.fauna_especifica
-                 || tipo==Tipo.geológico || tipo==Tipo.histórico_arqueologico || tipo==Tipo.mirador || tipo==Tipo.naturaleza
-                 || tipo==Tipo.punto_de_agua || tipo==Tipo.refugio_o_alojamiento){
-            valido=true;
+        Tipo tipo=Tipo.valueOf(ti);
+        if (tipo == Tipo.area_de_descanso || tipo == Tipo.botanico || tipo == Tipo.cultural || tipo == Tipo.fauna_especifica
+                || tipo == Tipo.geológico || tipo == Tipo.histórico_arqueologico || tipo == Tipo.mirador || tipo == Tipo.naturaleza
+                || tipo == Tipo.punto_de_agua || tipo == Tipo.refugio_o_alojamiento) {
+            valido = true;
         }
         return valido;
     }
