@@ -132,4 +132,8 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return buscado;
     }
+
+    @Override
+    public void insertar(Rutas obj) {
+    }
 }

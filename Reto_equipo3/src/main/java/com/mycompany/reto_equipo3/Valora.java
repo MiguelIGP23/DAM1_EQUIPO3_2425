@@ -20,25 +20,21 @@ public class Valora {
     private String valoracionTecnica;
     private String reseña;
     // constructor con las valoraciones con la id
-    public Valora(int idValora, int dificultad, LocalDate fecha, int estrellas, int interesCultural, int belleza, String valoracionTecnica, String reseña) {
+    public Valora(int idValora, int dificultad, LocalDate fecha, int estrellas, int interesCultural, int belleza) {
         this.idValora = idValora;
         this.dificultad = dificultad;
         this.fecha = fecha;
         this.estrellas = estrellas;
         this.interesCultural = interesCultural;
         this.belleza = belleza;
-        this.valoracionTecnica = valoracionTecnica;
-        this.reseña = reseña;
     }
     // constructor sin la id
-      public Valora(int dificultad, LocalDate fecha, int estrellas, int interesCultural, int belleza, String valoracionTecnica, String reseña) {
+      public Valora(int dificultad, LocalDate fecha, int estrellas, int interesCultural, int belleza) {
         this.dificultad = dificultad;
         this.fecha = fecha;
         this.estrellas = estrellas;
         this.interesCultural = interesCultural;
         this.belleza = belleza;
-        this.valoracionTecnica = valoracionTecnica;
-        this.reseña = reseña;
     }
       //constructor con los valores que no admiten nulos
     public Valora(int dificultad, LocalDate fecha) {

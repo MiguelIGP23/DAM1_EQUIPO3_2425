@@ -28,7 +28,8 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     }
 
    
-    public void insertar(PuntosPeligro puntopeligro, Rutas ruta) {
+    @Override
+    public void insertar(PuntosPeligro puntopeligro) {
         String sql = "INSERT INTO puntospeligro (nombre, latitud, longitud, elevacion, descripcion, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, puntopeligro.getNombre());
