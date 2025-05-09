@@ -29,9 +29,9 @@ public class Reto_equipo3 {
         System.out.println(AccesoABaseDatos.getInstance().getConnexion() + "\n");
 
         //Prueba swing
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            new VentanaPrincipal().setVisible(true);
-        });
+//        javax.swing.SwingUtilities.invokeLater(() -> {
+//            new VentanaPrincipal().setVisible(true);
+//        });
 
         //Prueba DAO usuario                  ---- FUNCIONA
         DAOUsuario daousu = new DAOUsuario();
@@ -42,8 +42,8 @@ public class Reto_equipo3 {
 //        System.out.println(daousu.listar());
 //        daousu.eliminar("pruebadao@gmail.com");
 //        System.out.println(daousu.listar());
-//        Usuario usu2 = daousu.encontrarUsuario(usu.getEmail(), usu.getPassword());
-//        System.out.println(usu2);
+        Usuario usu3 = daousu.encontrarUsuario("miguel@gmail.com", "abcd1234");
+        System.out.println(usu3);
 
         //Prueba DAO rutas                    ---- FUNCIONA
         DAORutas daoruta = new DAORutas();
@@ -133,19 +133,19 @@ public class Reto_equipo3 {
 //        System.out.println(daopp.listar(ruta2));
 
         //Prueba de creacion de ficha de seguridad    ---- FUNCIONA
-//        if(FichaSeguridad.generarFicha(ruta2)){
+//        if(FichaSeguridad.generarFicha(ruta)){
 //            System.out.println("Ficha creada");
 //        }else{
 //            System.out.println("ERROR: no creada");
 //        }
-        //Prueba de creacion de ficha de usuario        ---- Proceso
-//        if(FichaUsuario.generarFicha(ruta2)){
+//        //Prueba de creacion de ficha de usuario        ---- FUNCIONA
+//        if(FichaUsuario.generarFicha(ruta)){
 //            System.out.println("Ficha creada");
 //        }else{
 //            System.out.println("ERROR: no creada");
 //        }
-        //Prueba de creacion de ficha de organizacion
-//        if (FichaOrganizacion.generarFicha(ruta2)) {
+//        //Prueba de creacion de ficha de organizacion   ----FUNCIONA
+//        if (FichaOrganizacion.generarFicha(ruta)) {
 //            System.out.println("Ficha creada");
 //        } else {
 //            System.out.println("ERROR: no creada");

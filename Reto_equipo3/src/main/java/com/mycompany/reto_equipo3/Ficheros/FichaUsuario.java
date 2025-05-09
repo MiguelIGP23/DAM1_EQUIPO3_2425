@@ -6,6 +6,7 @@ package com.mycompany.reto_equipo3.Ficheros;
 
 import com.mycompany.reto_equipo3.DAOS.DAOPuntosinteres;
 import com.mycompany.reto_equipo3.DAOS.DAOPuntospeligro;
+import com.mycompany.reto_equipo3.Enums.Tipo;
 import com.mycompany.reto_equipo3.PuntosInteres;
 import com.mycompany.reto_equipo3.PuntosPeligro;
 import com.mycompany.reto_equipo3.Rutas;
@@ -36,13 +37,13 @@ public class FichaUsuario {
     public static boolean generarFicha(Rutas ruta) {
         boolean generada = false;
         //Creamos la carpeta de fichas en el proyecto si no existe
-        File carpeta = new File("fichas/fichas_"+ruta.getNombre());
+        File carpeta = new File("fichas/fichas_" + ruta.getNombre());
         carpeta.mkdirs();
         //Guarda la ficha en un archivo con el nombre de la ruta
-        File ficha = new File("fichas/fichas_"+ruta.getNombre()+"/ficha-usuario_" + ruta.getNombre() + ".txt");
+        File ficha = new File("fichas/fichas_" + ruta.getNombre() + "/ficha-usuario_" + ruta.getNombre() + ".txt");
         //Guardamos las rutas realizadas por el usuario en una lista
-        DAOPuntosinteres daopi=new DAOPuntosinteres();
-        DAOPuntospeligro daopp=new DAOPuntospeligro();
+        DAOPuntosinteres daopi = new DAOPuntosinteres();
+        DAOPuntospeligro daopp = new DAOPuntospeligro();
         List<PuntosInteres> puntosInteres = daopi.listar(ruta);
         List<PuntosPeligro> puntosPeligro = daopp.listar(ruta);
         try (BufferedWriter bf = new BufferedWriter(new FileWriter(ficha));) {
@@ -50,7 +51,7 @@ public class FichaUsuario {
             //Escribimos fecha y hora de generacion de la ficha
             LocalDateTime ahora = LocalDateTime.now();
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            bf.write("\t\t"+ahora.format(formato)+"\n");
+            bf.write("\t\t" + ahora.format(formato) + "\n");
             bf.newLine();
             bf.write("-Nombre de ruta: " + ruta.getNombre());
             bf.newLine();
@@ -60,21 +61,30 @@ public class FichaUsuario {
             bf.newLine();
             bf.write("-Coordenadas iniciales: \n\t-Latitud: " + ruta.getLatitudInicial() + "\n\t-Longitud: " + ruta.getLongitudInicial());
             bf.newLine();
-            bf.write("-Coordenadas finales: \n\t-Latitud: " + ruta.getLatitudFinal()+ "\n\t-Longitud: " + ruta.getLongitudFinal());
+            bf.write("-Coordenadas finales: \n\t-Latitud: " + ruta.getLatitudFinal() + "\n\t-Longitud: " + ruta.getLongitudFinal());
             bf.newLine();
             bf.write("-Duracion estimada: " + ruta.getDuracion());
             bf.newLine();
             bf.write("-Distancia : " + ruta.getDistancia());
             bf.newLine();
-            //Pasamos el obejto set<String> a texto con el metodo String.join
-//            String temporadas = String.join(",", ruta.getTemporada());
-//            bf.write("\t-Temporadas recomendadas: " + temporadas);
-//            bf.newLine();
+            //Pasamos el obejto set<String> a un Array que contiene los valores en String
+//            bf.write("-Temporadas: ");
+//            Set<String> temporadas=
+//            String[] temps= ruta.getTemporada().toArray(String[]::new);     //Programacion funcional, crea array de tamaño igual al numero de elementos
+//            for(String t:temps){
+//                bf.write(t+" ");
+//            }
+            bf.newLine();
             bf.write("-Accesible: " + convierteBoolean(ruta.isAccesibilidad()));
             bf.newLine();
             bf.write("-Familiar: " + convierteBoolean(ruta.isRutaFamiliar()));
             bf.newLine();
-            bf.write("-Recomendaciones: " + ruta.getRecomendaciones());
+            String recom = ruta.getRecomendaciones();
+            if (recom == null) {
+                bf.write("-Recomendaciones: ninguna recomendacion");
+            } else {
+                bf.write("-Recomendaciones: " + recom);
+            }
             bf.newLine();
             bf.newLine();
             bf.write("-- PUNTOS DE INTERES --");
@@ -89,15 +99,34 @@ public class FichaUsuario {
                 bf.newLine();
                 bf.write("\t-Coordenadas: \n\t\t-Latitud: " + aux.getLatitud() + "\n\t\t-Longitud: " + aux.getLongitud());
                 bf.newLine();
-                bf.write("\t-Caracteristicas: " + aux.getCaracteristicas());
+                String carac = aux.getCaracteristicas();
+                if (carac == null) {
+                    bf.write("\t-Caracteristicas: ninguna indicada");
+                } else {
+                    bf.write("\t-Caracteristicas: " + carac);
+                }
                 bf.newLine();
-                bf.write("\t-Tipo: " + aux.getTipo());
+                Tipo tipo= aux.getTipo();
+                String tp;
+                if(tipo==null){
+                    tp="\t-Tipo: no indicado";
+                }else{
+                    tp="\t-Tipo: "+String.valueOf(tipo);
+                }
+                bf.write(tp);
                 bf.newLine();
                 bf.write("\t-Descripcion: " + aux.getDescripcion());
                 bf.newLine();
                 bf.write("\t-Elevacion: " + aux.getElevacion());
                 bf.newLine();
-                bf.write("\t-Tiempo de llegada: " + aux.getTimestamp());
+                int timestamp= aux.getTimestamp();
+                String ts=String.valueOf(timestamp);
+                if(timestamp==0){
+                    ts="\t-Tiempo aproximado: no indicado";
+                }else{
+                    ts="\t-Tiempo aproximado: "+ts;
+                }
+                bf.write(ts);
                 bf.newLine();
                 bf.newLine();
             }
@@ -109,18 +138,32 @@ public class FichaUsuario {
             cont = 1;
             while (itPPeligro.hasNext()) {
                 PuntosPeligro aux = itPPeligro.next();
-                bf.write("*Punto " +cont++ + ": " + aux.getNombre());
+                bf.write("-Punto " + (cont++) + ": " + aux.getNombre());
                 bf.newLine();
-                bf.write("\t-Coordenadas: " + aux.getLatitud() + ", " + aux.getLongitud());
+                bf.write("\t-Coordenadas: \n\t\t->Latitud: " + aux.getLatitud() + "\n\t\t->Longitud: " + aux.getLongitud());
                 bf.newLine();
-                bf.write("\t-Kilometro de ruta: " + aux.getKilometro());
+                double km = aux.getKilometro();
                 bf.newLine();
-                bf.write("\t-Nivel de gravedad [1-5]: " + aux.getGravedad());
+                String kilo;
+                if (km == 0) {
+                    kilo = "sin especificar";
+                } else {
+                    kilo = String.valueOf(aux.getKilometro());
+                }
+                bf.write("\t-Kilometro de ruta: " + kilo);
+                bf.newLine();
+                int grav = aux.getGravedad();
+                String gr;
+                if (grav == 0) {
+                    gr = "sin especificar";
+                } else {
+                    gr = String.valueOf(aux.getGravedad());
+                }
+                bf.write("\t-Nivel de gravedad [1-5]: " + gr);
                 bf.newLine();
                 bf.write("\t-Descripcion: " + aux.getDescripcion());
                 bf.newLine();
                 bf.write("\t-Duracion estimada: " + aux.getTimestamp() + " minutos");
-                bf.newLine();
                 bf.newLine();
             }
             generada = true;
@@ -140,6 +183,5 @@ public class FichaUsuario {
         }
         return st;
     }
-    
-    
+
 }

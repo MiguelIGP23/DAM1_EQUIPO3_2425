@@ -32,12 +32,11 @@ public class FichaSeguridad {
      * @return
      */
     public static boolean generarFicha(Rutas ruta) {
-        boolean generada = false;
-        //Creamos la carpeta de fichas en el proyecto si no existe
-        File carpeta = new File("fichas/fichas_"+ruta.getNombre());
+        boolean generada = false; //Creamos la carpeta de fichas en el proyecto si no existe
+        File carpeta = new File("fichas/fichas_" + ruta.getNombre());
         carpeta.mkdirs();
         //Guarda la ficha en un archivo con el nombre de la ruta
-        File ficha = new File("fichas/fichas_"+ruta.getNombre()+"/ficha-seguridad_" + ruta.getNombre() + ".txt");
+        File ficha = new File("fichas/fichas_" + ruta.getNombre() + "/ficha-seguridad_" + ruta.getNombre() + ".txt");
         //Guardamos los puntos de peligro de la ruta en una lista
         DAOPuntospeligro daopp = new DAOPuntospeligro();
         List<PuntosPeligro> puntosPeligro = daopp.listar(ruta);
@@ -51,11 +50,32 @@ public class FichaSeguridad {
             bf.newLine();
             bf.write("-Nombre de la ruta: " + ruta.getNombre());
             bf.newLine();
-            bf.write("-Recomendaciones: "+ruta.getRecomendaciones());
+            String reco = ruta.getRecomendaciones();
+            if (reco == null) {
+                bf.write("-Recomendaciones: ninguna recomendacion");
+            } else {
+                bf.write("-Recomendaciones: " + reco);
+            }
             bf.newLine();
-            bf.write("-Dificultad: \n\t-Nivel de riesgo: "+ruta.getNivelriesgo()+"\n\t-Nivel de esfuerzo: "+ruta.getNivelEsfuerzo());
+            int nRiesgo = ruta.getNivelriesgo();
+            String nr;
+            int nEsf = ruta.getNivelEsfuerzo();
+            String ne;
+            if (nRiesgo == 0) {
+                nr = "sin especificar";
+            } else {
+                nr = String.valueOf(ruta.getNivelriesgo());
+            }
+            if (nEsf == 0) {
+                ne = "sin especificar";
+            } else {
+                ne = String.valueOf(ruta.getNivelEsfuerzo());
+            }
+            bf.write("-Dificultad: \n\t-Nivel de riesgo: " + nr + "\n\t-Nivel de esfuerzo: " + ne);
             bf.newLine();
-            bf.write("-Puntos de peligro:");
+            bf.newLine();
+            bf.write("-- PUNTOS DE PELIGRO --");
+            bf.newLine();
             bf.newLine();
             //Recorremos sus puntos de peligro y obtenemos los datos
             Iterator<PuntosPeligro> it = puntosPeligro.iterator();
@@ -66,13 +86,29 @@ public class FichaSeguridad {
                 bf.newLine();
                 bf.write("\t-Coordenadas: \n\t\t->Latitud: " + aux.getLatitud() + "\n\t\t->Longitud: " + aux.getLongitud());
                 bf.newLine();
-                bf.write("\t-Kilometro de ruta: " + aux.getKilometro());
+                double km = aux.getKilometro();
+                String kilo;
                 bf.newLine();
-                bf.write("\t-Nivel de gravedad [1-5]: " + aux.getGravedad());
+                if (km == 0) {
+                    kilo = "sin especificar";
+                } else {
+                    kilo = String.valueOf(aux.getKilometro());
+                }
+                bf.write("\t-Kilometro de ruta: " + kilo);
+                int grav = aux.getGravedad();
+                bf.newLine();
+                String gr;
+                if (grav == 0) {
+                    gr = "sin especificar";
+                } else {
+                    gr = String.valueOf(aux.getGravedad());
+                }
+                bf.write("\t-Nivel de gravedad [1-5]: " + gr);
                 bf.newLine();
                 bf.write("\t-Descripcion: " + aux.getDescripcion());
                 bf.newLine();
                 bf.write("\t-Duracion estimada: " + aux.getTimestamp() + " minutos");
+                bf.newLine();
                 bf.newLine();
             }
             generada = true;

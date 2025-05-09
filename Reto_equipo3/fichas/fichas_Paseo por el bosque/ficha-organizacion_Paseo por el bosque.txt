@@ -1,4 +1,4 @@
-	--FICHA DE ORGANIZACION--		09/05/2025 02:21:26
+	--FICHA DE ORGANIZACION--		09/05/2025 15:35:34
 
 -Nombre de la ruta: Paseo por el bosque
 -Coordenadas iniciales: 
