@@ -34,10 +34,10 @@ public class FichaSeguridad {
     public static boolean generarFicha(Rutas ruta) {
         boolean generada = false;
         //Creamos la carpeta de fichas en el proyecto si no existe
-        File carpeta = new File("fichas");
+        File carpeta = new File("fichas/fichas_"+ruta.getNombre());
         carpeta.mkdirs();
         //Guarda la ficha en un archivo con el nombre de la ruta
-        File ficha = new File("fichas/ficha-seguridad_" + ruta.getNombre() + ".txt");
+        File ficha = new File("fichas/fichas_"+ruta.getNombre()+"/ficha-seguridad_" + ruta.getNombre() + ".txt");
         //Guardamos los puntos de peligro de la ruta en una lista
         DAOPuntospeligro daopp = new DAOPuntospeligro();
         List<PuntosPeligro> puntosPeligro = daopp.listar(ruta);

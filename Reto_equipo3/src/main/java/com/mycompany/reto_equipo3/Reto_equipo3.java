@@ -6,6 +6,7 @@ package com.mycompany.reto_equipo3;
 import com.mycompany.reto_equipo3.DAOS.AccesoABaseDatos;
 import com.mycompany.reto_equipo3.DAOS.*;
 import com.mycompany.reto_equipo3.Enums.Roles;
+import com.mycompany.reto_equipo3.Ficheros.FichaOrganizacion;
 import com.mycompany.reto_equipo3.Ficheros.FichaSeguridad;
 import com.mycompany.reto_equipo3.Ficheros.FichaUsuario;
 
@@ -23,10 +24,9 @@ public class Reto_equipo3 {
 
     public static void main(String[] args) {
 
-        System.out.println(AccesoABaseDatos.getInstance().getConnexion()+"\n");
-        
-        
-          //Prueba DAO usuario                  ---- FUNCIONA
+        System.out.println(AccesoABaseDatos.getInstance().getConnexion() + "\n");
+
+        //Prueba DAO usuario                  ---- FUNCIONA
         DAOUsuario daousu = new DAOUsuario();
         Usuario usu = daousu.buscar("saul@gmail.com");
         Usuario usu2 = daousu.buscar("miguel@gmail.com");
@@ -38,8 +38,7 @@ public class Reto_equipo3 {
 //        Usuario usu2 = daousu.encontrarUsuario(usu.getEmail(), usu.getPassword());
 //        System.out.println(usu2);
 
-
-          //Prueba DAO rutas                    ---- FUNCIONA
+        //Prueba DAO rutas                    ---- FUNCIONA
         DAORutas daoruta = new DAORutas();
         Rutas ruta = daoruta.buscar("paseo por el bosque");
         Rutas ruta2 = daoruta.buscar("Subida al everest");
@@ -59,7 +58,6 @@ public class Reto_equipo3 {
 //        }
 //        LocalTime hora= LocalTime.parse("00:26:00");
 //        daoruta.insertar(new Rutas("nombreprueba", "inicioRutaPrueba", "finalRutaPrueba", 1.254, 2.365, 20.365, 21.03, 0, hora),usu);
-
 
 //        //Prueba DAO valora                   ---- FUNCIONA
         DAOValora daovalora = new DAOValora();
@@ -85,10 +83,9 @@ public class Reto_equipo3 {
 //            System.out.println("La ruta no existe");
 //        }
 
-
 //          //Prueba DAO actividad              ---- FUNCIONA
-        DAOActividad daoact= new DAOActividad();
-        Actividad act= daoact.buscar(ruta);
+        DAOActividad daoact = new DAOActividad();
+        Actividad act = daoact.buscar(ruta);
 //        System.out.println(act);
 //        System.out.println(daoact.listar());
 //        daoact.insertar(new Actividad("buceo"), ruta);
@@ -96,10 +93,9 @@ public class Reto_equipo3 {
 //        daoact.eliminar("escalada");
 //        System.out.println(daoact.listar());
 
-    
-          //Prueba DAO calendario               ---- FUNCIONA
-        DAOCalendario daocal= new DAOCalendario();
-        LocalDate fech=LocalDate.of(2026, 5, 23);
+        //Prueba DAO calendario               ---- FUNCIONA
+        DAOCalendario daocal = new DAOCalendario();
+        LocalDate fech = LocalDate.of(2026, 5, 23);
 //        Calendario cal= daocal.buscarPorFecha(fech);
 //        System.out.println(cal);
 //        System.out.println(daocal.listar());
@@ -108,10 +104,9 @@ public class Reto_equipo3 {
 //        System.out.println(daocal.listar());
 //        daocal.eliminar(2);
 //        System.out.println(daocal.listar());
-        
 
-          //Prueba DAO puntos interes           ---- FUNCIONA
-        DAOPuntosinteres daopi=new DAOPuntosinteres();
+        //Prueba DAO puntos interes           ---- FUNCIONA
+        DAOPuntosinteres daopi = new DAOPuntosinteres();
         PuntosInteres pi = daopi.buscar("Mirador de patos");
 //        System.out.println(pi);
 //        System.out.println(daopi.listar(ruta));
@@ -119,10 +114,9 @@ public class Reto_equipo3 {
 //        System.out.println(daopi.listar(ruta));
 //        daopi.eliminar("parque");
 //        System.out.println(daopi.listar(ruta));
-        
-        
-          //Prueba DAO puntos peligro           ---- FUNCIONA
-        DAOPuntospeligro daopp=new DAOPuntospeligro();
+
+        //Prueba DAO puntos peligro           ---- FUNCIONA
+        DAOPuntospeligro daopp = new DAOPuntospeligro();
         PuntosPeligro pp = daopp.buscar("barranco");
 //        System.out.println(pp);
 //        System.out.println(daopp.listar(ruta));
@@ -132,19 +126,50 @@ public class Reto_equipo3 {
 //        System.out.println(daopp.listar(ruta2));
 
 
-          //Prueba de creacion de ficha de seguridad    ---- FUNCIONA
-//        if(FichaSeguridad.generarFicha(ruta)){
-//            System.out.println("Ficha creada");
-//        }else{
-//            System.out.println("ERROR: no creada");
-//        }
-
-
+        //Prueba de creacion de ficha de seguridad    ---- FUNCIONA
+        if(FichaSeguridad.generarFicha(ruta2)){
+            System.out.println("Ficha creada");
+        }else{
+            System.out.println("ERROR: no creada");
+        }
+        
+        
         //Prueba de creacion de ficha de usuario        ---- Proceso
-//        if(FichaUsuario.generarFicha(ruta)){
-//            System.out.println("Ficha creada");
-//        }else{
-//            System.out.println("ERROR: no creada");
-//        }
+        if(FichaUsuario.generarFicha(ruta2)){
+            System.out.println("Ficha creada");
+        }else{
+            System.out.println("ERROR: no creada");
+        }
+        
+        
+        //Prueba de creacion de ficha de organizacion
+        if (FichaOrganizacion.generarFicha(ruta2)) {
+            System.out.println("Ficha creada");
+        } else {
+            System.out.println("ERROR: no creada");
+        }
+        
+        
+        
+        
+        
+        if(FichaUsuario.generarFicha(ruta)){
+            System.out.println("Ficha creada");
+        }else{
+            System.out.println("ERROR: no creada");
+        }
+        if(FichaSeguridad.generarFicha(ruta)){
+            System.out.println("Ficha creada");
+        }else{
+            System.out.println("ERROR: no creada");
+        }
+        
+        
+        //Prueba de creacion de ficha de organizacion
+        if (FichaOrganizacion.generarFicha(ruta)) {
+            System.out.println("Ficha creada");
+        } else {
+            System.out.println("ERROR: no creada");
+        }
     }
 }
