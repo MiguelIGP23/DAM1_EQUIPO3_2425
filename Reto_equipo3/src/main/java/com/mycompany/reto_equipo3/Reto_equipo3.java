@@ -9,12 +9,14 @@ import com.mycompany.reto_equipo3.Enums.Roles;
 import com.mycompany.reto_equipo3.Ficheros.FichaOrganizacion;
 import com.mycompany.reto_equipo3.Ficheros.FichaSeguridad;
 import com.mycompany.reto_equipo3.Ficheros.FichaUsuario;
+import swing.VentanaPrincipal;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import java.util.List;
+import swing.VentanaPrincipal;
 
 /**
  *
@@ -25,6 +27,11 @@ public class Reto_equipo3 {
     public static void main(String[] args) {
 
         System.out.println(AccesoABaseDatos.getInstance().getConnexion() + "\n");
+
+        //Prueba swing
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            new VentanaPrincipal().setVisible(true);
+        });
 
         //Prueba DAO usuario                  ---- FUNCIONA
         DAOUsuario daousu = new DAOUsuario();
@@ -42,7 +49,7 @@ public class Reto_equipo3 {
         DAORutas daoruta = new DAORutas();
         Rutas ruta = daoruta.buscar("paseo por el bosque");
         Rutas ruta2 = daoruta.buscar("Subida al everest");
-        System.out.println(ruta);
+//        System.out.println(ruta);
 //        System.out.println(ruta2);
 //        System.out.println(ruta);
 //        List<Rutas> aprobadas= daoruta.listaraprobadas();
@@ -125,51 +132,23 @@ public class Reto_equipo3 {
 //        daopp.eliminar("aaaaaa");
 //        System.out.println(daopp.listar(ruta2));
 
-
         //Prueba de creacion de ficha de seguridad    ---- FUNCIONA
-        if(FichaSeguridad.generarFicha(ruta2)){
-            System.out.println("Ficha creada");
-        }else{
-            System.out.println("ERROR: no creada");
-        }
-        
-        
+//        if(FichaSeguridad.generarFicha(ruta2)){
+//            System.out.println("Ficha creada");
+//        }else{
+//            System.out.println("ERROR: no creada");
+//        }
         //Prueba de creacion de ficha de usuario        ---- Proceso
-        if(FichaUsuario.generarFicha(ruta2)){
-            System.out.println("Ficha creada");
-        }else{
-            System.out.println("ERROR: no creada");
-        }
-        
-        
+//        if(FichaUsuario.generarFicha(ruta2)){
+//            System.out.println("Ficha creada");
+//        }else{
+//            System.out.println("ERROR: no creada");
+//        }
         //Prueba de creacion de ficha de organizacion
-        if (FichaOrganizacion.generarFicha(ruta2)) {
-            System.out.println("Ficha creada");
-        } else {
-            System.out.println("ERROR: no creada");
-        }
-        
-        
-        
-        
-        
-        if(FichaUsuario.generarFicha(ruta)){
-            System.out.println("Ficha creada");
-        }else{
-            System.out.println("ERROR: no creada");
-        }
-        if(FichaSeguridad.generarFicha(ruta)){
-            System.out.println("Ficha creada");
-        }else{
-            System.out.println("ERROR: no creada");
-        }
-        
-        
-        //Prueba de creacion de ficha de organizacion
-        if (FichaOrganizacion.generarFicha(ruta)) {
-            System.out.println("Ficha creada");
-        } else {
-            System.out.println("ERROR: no creada");
-        }
+//        if (FichaOrganizacion.generarFicha(ruta2)) {
+//            System.out.println("Ficha creada");
+//        } else {
+//            System.out.println("ERROR: no creada");
+//        }
     }
 }
