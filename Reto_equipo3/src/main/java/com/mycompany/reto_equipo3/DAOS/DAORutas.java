@@ -134,6 +134,27 @@ public class DAORutas implements InterfazDAO<Rutas> {
     public Rutas crearRutas(final ResultSet rs) throws SQLException {
         return new Rutas(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getTime(10).toLocalTime());
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        //Terminar de codificar esto
+//    public Rutas crearRutasTodaInfo(final ResultSet rs) throws SQLException {
+//        return new Rutas(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getTime(10).toLocalTime(),
+//        rs.getInt(11), rs.getInt(12), rs.getDouble(13),rs.getDouble(14), rs.getString(String.valueOf(15)), rs.getString(16), rs.getInt(17), rs.getInt(18),
+//        );
+//    }
  
     @Override
     public void eliminar(String nombre) {
@@ -160,6 +181,24 @@ public class DAORutas implements InterfazDAO<Rutas> {
             try(ResultSet rs = stmt.executeQuery();){
               if (rs.next()) {
               buscado = crearRutas(rs);
+            }
+           }
+        } catch (SQLException e) {
+            System.out.println("SQLERROR: "+e.getMessage());
+        }
+        return buscado;
+    }
+    
+    public Rutas buscarTodaInfo(String nombre) {
+        Rutas buscado = null;
+        String sql = "Select idRuta, nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion,"
+                + "desnivelPositivo, desnivelNegativo, altitudMax, altitudMin, clasificacion, nivelEsfuerzo, nivelRiesgo, estadoRuta, tipoTerreno, indicaciones"
+                + "temporadas, accesibilidad, rutaFamiliar, recomendacionesEquipo from rutas where nombre=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nombre);
+            try(ResultSet rs = stmt.executeQuery();){
+              if (rs.next()) {
+//              buscado = crearRutasTodaInfo(rs);
             }
            }
         } catch (SQLException e) {

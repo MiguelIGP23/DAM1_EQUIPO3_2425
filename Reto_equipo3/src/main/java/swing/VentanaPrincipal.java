@@ -19,6 +19,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         setSize(600,400);
+        btnruta.setVisible(false);
     }
 
     /**

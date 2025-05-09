@@ -52,13 +52,13 @@ public class Reto_equipo3 {
 //        System.out.println(ruta);
 //        System.out.println(ruta2);
 //        System.out.println(ruta);
-//        List<Rutas> aprobadas= daoruta.listaraprobadas();
+        List<Rutas> aprobadas= daoruta.listaraprobadas();
 //        List<Rutas> noaprobadas= daoruta.listarsinaprobar();
 //        daoruta.aprobarRuta(ruta);
-//        System.out.println("Lista aprobadas:");
-//        for(Rutas rutaaaa:aprobadas){
-//            System.out.println(rutaaaa.toString());
-//        }
+        System.out.println("Lista aprobadas:");
+        for(Rutas rutaaaa:aprobadas){
+            System.out.println(rutaaaa.toString());
+        }
 //        System.out.println("Lista no aprobadas:");
 //        for(Rutas rutbbbb:noaprobadas){
 //            System.out.println(rutbbbb.toString());
@@ -131,20 +131,22 @@ public class Reto_equipo3 {
 //        System.out.println(daopi.listar(ruta));
 //        daopp.eliminar("aaaaaa");
 //        System.out.println(daopp.listar(ruta2));
-
+//
         //Prueba de creacion de ficha de seguridad    ---- FUNCIONA
 //        if(FichaSeguridad.generarFicha(ruta)){
 //            System.out.println("Ficha creada");
 //        }else{
 //            System.out.println("ERROR: no creada");
 //        }
-//        //Prueba de creacion de ficha de usuario        ---- FUNCIONA
+//        
+//        Prueba de creacion de ficha de usuario        ---- FUNCIONA
 //        if(FichaUsuario.generarFicha(ruta)){
 //            System.out.println("Ficha creada");
 //        }else{
 //            System.out.println("ERROR: no creada");
 //        }
-//        //Prueba de creacion de ficha de organizacion   ----FUNCIONA
+//        
+//        Prueba de creacion de ficha de organizacion   ----FUNCIONA
 //        if (FichaOrganizacion.generarFicha(ruta)) {
 //            System.out.println("Ficha creada");
 //        } else {

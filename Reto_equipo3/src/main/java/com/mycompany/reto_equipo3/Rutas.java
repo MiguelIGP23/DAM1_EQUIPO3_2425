@@ -78,44 +78,77 @@ public class Rutas {
         this.puntosPeligro = new ArrayList<>();
         this.puntosInteres = new ArrayList<>();
     }
-    
-    /**
-     * Metodo que inserta un punto de peligro en la lista puntosPeligro
-     * 
-     * @param punto Punto de peligro a ingresar
-     * @return true/false si se ingreso el punto a la lista
-     */
-    public boolean nuevoPuntoPeligro(PuntosPeligro punto) {
-        return puntosPeligro.add(punto);
+
+    //Constructor con todos los parametros
+
+    public Rutas(int idRuta, String nombre, String nombre_inicioruta, String nombre_finalruta, double latitudInicial, double latitudFinal, double longitudInicial, double longitudFinal, double distancia, LocalTime duracion, int desnivelPositivo, int desnivelNegativo, double altitudMax, double altitudMin, Clasificacion clasificacion, boolean estadoRuta, int tipoterreno, int indicaciones, Set<String> temporada, boolean accesibilidad, boolean rutaFamiliar, String text, String recomendaciones, String zonaGeografica) {
+        this.idRuta = idRuta;
+        this.nombre = nombre;
+        this.nombre_inicioruta = nombre_inicioruta;
+        this.nombre_finalruta = nombre_finalruta;
+        this.latitudInicial = latitudInicial;
+        this.latitudFinal = latitudFinal;
+        this.longitudInicial = longitudInicial;
+        this.longitudFinal = longitudFinal;
+        this.distancia = distancia;
+        this.duracion = duracion;
+        this.desnivelPositivo = desnivelPositivo;
+        this.desnivelNegativo = desnivelNegativo;
+        this.altitudMax = altitudMax;
+        this.altitudMin = altitudMin;
+        this.clasificacion = clasificacion;
+        this.estadoRuta = estadoRuta;
+        this.tipoterreno = tipoterreno;
+        this.indicaciones = indicaciones;
+        this.temporada = temporada;
+        this.accesibilidad = accesibilidad;
+        this.rutaFamiliar = rutaFamiliar;
+        this.text = text;
+        this.recomendaciones = recomendaciones;
+        this.zonaGeografica = zonaGeografica;
     }
     
-    /**
-     * Metodo que elimina un punto de la lista puntosPeligro
-     * @param punto Punto de peligro a eliminar
-     * @return  true/false si se elimino el punto
-     */
-    public boolean eliminaPuntoPeligro(PuntosPeligro punto){
-        return puntosPeligro.remove(punto);
-    }
     
-    /**
-     * Metodo que inserta un punto de interes en la lista puntosInteres
-     * 
-     * @param punto Punto de interes a ingresar
-     * @return true/false si se ingreso el punto a la lista
-     */
-    public boolean nuevoPuntoInteres(PuntosInteres punto) {
-        return puntosInteres.add(punto);
-    }
     
-    /**
-     * Metodo que elimina un punto de la lista puntosInteres
-     * @param punto Punto de interes a eliminar
-     * @return  true/false si se elimino el punto
-     */
-    public boolean eliminaPuntoInteres(PuntosInteres punto){
-        return puntosInteres.remove(punto);
-    }
+    
+    
+//    /**
+//     * Metodo que inserta un punto de peligro en la lista puntosPeligro
+//     * 
+//     * @param punto Punto de peligro a ingresar
+//     * @return true/false si se ingreso el punto a la lista
+//     */
+//    public boolean nuevoPuntoPeligro(PuntosPeligro punto) {
+//        return puntosPeligro.add(punto);
+//    }
+//    
+//    /**
+//     * Metodo que elimina un punto de la lista puntosPeligro
+//     * @param punto Punto de peligro a eliminar
+//     * @return  true/false si se elimino el punto
+//     */
+//    public boolean eliminaPuntoPeligro(PuntosPeligro punto){
+//        return puntosPeligro.remove(punto);
+//    }
+//    
+//    /**
+//     * Metodo que inserta un punto de interes en la lista puntosInteres
+//     * 
+//     * @param punto Punto de interes a ingresar
+//     * @return true/false si se ingreso el punto a la lista
+//     */
+//    public boolean nuevoPuntoInteres(PuntosInteres punto) {
+//        return puntosInteres.add(punto);
+//    }
+//    
+//    /**
+//     * Metodo que elimina un punto de la lista puntosInteres
+//     * @param punto Punto de interes a eliminar
+//     * @return  true/false si se elimino el punto
+//     */
+//    public boolean eliminaPuntoInteres(PuntosInteres punto){
+//        return puntosInteres.remove(punto);
+//    }
 
     //Metodos get
     public int getIdRuta() {
