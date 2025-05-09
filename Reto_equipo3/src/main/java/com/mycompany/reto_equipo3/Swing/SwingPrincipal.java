@@ -5,8 +5,11 @@
 package com.mycompany.reto_equipo3.Swing;
 
 import com.mycompany.reto_equipo3.DAOS.DAOUsuario;
+import com.mycompany.reto_equipo3.Enums.Roles;
+import com.mycompany.reto_equipo3.Rutas;
 import com.mycompany.reto_equipo3.Usuario;
 import com.mycompany.reto_equipo3.Validaciones.Teclado;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,6 +23,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form SwingPrincipal
      */
+    Usuario usuario=null;
+    Rutas R1=null;
     public SwingPrincipal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -30,7 +35,17 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+    public void cambiarTexto(){
+        if (usuario.getRol()==Roles.administrador) {
+            Nombrecambia.setText("Opciones de Administrador");
+        } else if(usuario.getRol()==Roles.diseñador){
+            Nombrecambia.setText("Opciones de Diseñador");
+        } else if(usuario.getRol()==Roles.alumno){
+            Nombrecambia.setText("Opciones de Alumno");
+        }else if(usuario.getRol()==Roles.profesor){
+            Nombrecambia.setText("Opciones de Profesor");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,9 +58,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         PanelEntrada = new javax.swing.JPanel();
         CuadroEntrada = new javax.swing.JLabel();
-        Logo = new javax.swing.JLabel();
-        Imagenfondo = new javax.swing.JLabel();
+        Iconoderecha1 = new javax.swing.JLabel();
         BotonEntrada = new javax.swing.JButton();
+        FondoEntrada = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
         TextoInicio = new javax.swing.JLabel();
         Salida = new javax.swing.JButton();
@@ -56,8 +71,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Cuadro1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         Contraseña = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         Seleccion = new javax.swing.JPanel();
+        Cuadroinfo = new javax.swing.JLabel();
+        Nombrecambia = new javax.swing.JLabel();
+        BotonVolver = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -77,9 +95,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         CuadroEntrada.setAlignmentX(200.0F);
         CuadroEntrada.setAlignmentY(200.0F);
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/reto_equipo3/Imagenes/Imagen-logo-equipo5050.png"))); // NOI18N
-
-        Imagenfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/reto_equipo3/Imagenes/ImagenfondoInicio.jpg"))); // NOI18N
+        Iconoderecha1.setIcon(new javax.swing.ImageIcon("D:\\Usuarios\\Dam121\\Desktop\\Proyecto\\DAM1_EQUIPO3_2425\\Reto_equipo3\\src\\Imagenes\\Imagen-logo-equipo5050.png")); // NOI18N
 
         BotonEntrada.setBackground(new java.awt.Color(51, 255, 51));
         BotonEntrada.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -91,36 +107,37 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
+        FondoEntrada.setIcon(new javax.swing.ImageIcon("D:\\Usuarios\\Dam121\\Desktop\\Proyecto\\DAM1_EQUIPO3_2425\\Reto_equipo3\\src\\Imagenes\\ImagenfondoInicio.jpg")); // NOI18N
+
         javax.swing.GroupLayout PanelEntradaLayout = new javax.swing.GroupLayout(PanelEntrada);
         PanelEntrada.setLayout(PanelEntradaLayout);
         PanelEntradaLayout.setHorizontalGroup(
             PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEntradaLayout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(CuadroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Logo))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
-                        .addComponent(Imagenfondo)
-                        .addGap(56, 56, 56))
+                        .addComponent(CuadroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(118, 118, 118)
+                        .addComponent(Iconoderecha1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
                         .addComponent(BotonEntrada)
-                        .addGap(206, 206, 206))))
+                        .addGap(215, 215, 215))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
+                        .addComponent(FondoEntrada)
+                        .addGap(51, 51, 51))))
         );
         PanelEntradaLayout.setVerticalGroup(
             PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEntradaLayout.createSequentialGroup()
                 .addGroup(PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CuadroEntrada)
-                    .addComponent(Logo))
+                    .addComponent(Iconoderecha1)
+                    .addComponent(CuadroEntrada))
                 .addGap(18, 18, 18)
-                .addComponent(Imagenfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(FondoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(BotonEntrada)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         getContentPane().add(PanelEntrada, "card2");
@@ -149,7 +166,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
-        Usuario.setText("Crear Usuario");
+        Usuario.setText("Registro");
         Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsuarioActionPerformed(evt);
@@ -171,7 +188,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/reto_equipo3/Imagenes/Imagen-logo-equipo5050.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Usuarios\\Dam121\\Desktop\\Proyecto\\DAM1_EQUIPO3_2425\\Reto_equipo3\\src\\Imagenes\\Imagen-logo-equipo5050.png")); // NOI18N
 
         javax.swing.GroupLayout PanelInicioLayout = new javax.swing.GroupLayout(PanelInicio);
         PanelInicio.setLayout(PanelInicioLayout);
@@ -180,8 +197,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInicioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TextoInicio)
-                .addGap(120, 120, 120)
-                .addComponent(jLabel1))
+                .addGap(105, 105, 105)
+                .addComponent(jLabel2))
             .addGroup(PanelInicioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -197,9 +214,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(Cuadro1)
                 .addGap(257, 257, 257))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInicioLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(21, 21, 21)
                 .addComponent(Usuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addGroup(PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addGroup(PanelInicioLayout.createSequentialGroup()
@@ -213,9 +230,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
             PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelInicioLayout.createSequentialGroup()
                 .addGroup(PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
                     .addComponent(TextoInicio))
-                .addGap(26, 26, 26)
+                .addGap(49, 49, 49)
                 .addComponent(Cuadro2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,7 +242,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Salida)
                     .addComponent(Rutas)
@@ -233,19 +250,45 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
         );
 
-        jLabel1.getAccessibleContext().setAccessibleName("");
-
         getContentPane().add(PanelInicio, "card3");
+
+        Cuadroinfo.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        Cuadroinfo.setForeground(new java.awt.Color(0, 0, 255));
+        Cuadroinfo.setText("Opciones ");
+
+        Nombrecambia.setIcon(new javax.swing.ImageIcon("D:\\Usuarios\\Dam121\\Desktop\\Proyecto\\DAM1_EQUIPO3_2425\\Reto_equipo3\\src\\Imagenes\\Imagen-logo-equipo5050.png")); // NOI18N
+
+        BotonVolver.setText("Volver");
+        BotonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout SeleccionLayout = new javax.swing.GroupLayout(Seleccion);
         Seleccion.setLayout(SeleccionLayout);
         SeleccionLayout.setHorizontalGroup(
             SeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(SeleccionLayout.createSequentialGroup()
+                .addContainerGap(262, Short.MAX_VALUE)
+                .addGroup(SeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeleccionLayout.createSequentialGroup()
+                        .addComponent(Cuadroinfo)
+                        .addGap(191, 191, 191)
+                        .addComponent(Nombrecambia))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeleccionLayout.createSequentialGroup()
+                        .addComponent(BotonVolver)
+                        .addGap(24, 24, 24))))
         );
         SeleccionLayout.setVerticalGroup(
             SeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(SeleccionLayout.createSequentialGroup()
+                .addGroup(SeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Cuadroinfo)
+                    .addComponent(Nombrecambia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                .addComponent(BotonVolver)
+                .addGap(29, 29, 29))
         );
 
         getContentPane().add(Seleccion, "card4");
@@ -275,28 +318,39 @@ public class SwingPrincipal extends javax.swing.JFrame {
         String password = new String(passwordChars);
         if (Teclado.validaemail(email) && Teclado.validapassword(password)) {
             DAOUsuario d = new DAOUsuario();
-            List<Usuario> usuarios = d.listar();
+            List<Usuario> usuarios =(List<Usuario>) d.listar();
             boolean existe = false;
-            for (int i = 0; i < usuarios.size() && !existe; i++) {
-                Usuario U1 = (Usuario) usuarios;
-                if (U1.getEmail().equalsIgnoreCase(email) && U1.getPassword().equalsIgnoreCase(password)) {
+            Iterator<Usuario> IT=usuarios.iterator();
+            while(IT.hasNext()&&!existe){
+                  Usuario U1 = IT.next();
+                if (d.encontrarUsuario(email, password)!=null) {
+                    existe=true;
                     PanelInicio.setVisible(false);
                     Seleccion.setVisible(true);
-                    existe=true;
+                    usuario=U1;
+                    cambiarTexto();
                 }
             }
             if (!existe) {
-                JOptionPane.showMessageDialog(null, "No se encontro a ningun usuario con ese email o contraseña", "Mal", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se encontro a ningun usuario con ese email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
             }
         } else {
-         JOptionPane.showMessageDialog(null, "Formato mal introducido", "Mal", JOptionPane.PLAIN_MESSAGE);
+         JOptionPane.showMessageDialog(null, "Formato mal introducido el email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UsuarioActionPerformed
+
+    private void BotonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVolverActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a menu de inicio", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+        PanelInicio.setVisible(true);
+        Seleccion.setVisible(false); 
+        }
+        
+    }//GEN-LAST:event_BotonVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,20 +383,22 @@ public class SwingPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SwingPrincipal().setVisible(true);
-
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonEntrada;
+    private javax.swing.JButton BotonVolver;
     private javax.swing.JPasswordField Contraseña;
     private javax.swing.JLabel Cuadro1;
     private javax.swing.JLabel Cuadro2;
     private javax.swing.JLabel CuadroEntrada;
+    private javax.swing.JLabel Cuadroinfo;
     private javax.swing.JTextField Email;
-    private javax.swing.JLabel Imagenfondo;
-    private javax.swing.JLabel Logo;
+    private javax.swing.JLabel FondoEntrada;
+    private javax.swing.JLabel Iconoderecha1;
+    private javax.swing.JLabel Nombrecambia;
     private javax.swing.JPanel PanelEntrada;
     private javax.swing.JPanel PanelInicio;
     private javax.swing.JButton Rutas;
@@ -352,6 +408,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton Usuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

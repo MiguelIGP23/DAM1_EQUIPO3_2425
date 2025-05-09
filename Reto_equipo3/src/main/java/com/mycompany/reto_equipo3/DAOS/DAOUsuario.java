@@ -126,7 +126,7 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
 
     public Usuario encontrarUsuario(String email, String password) {
         Usuario usu = null;
-        String sql = "SELECT idUsuario, nombre, apellido, email, password, rol FROM usuario WHERE email=? and password=?";
+        String sql = "SELECT idUsuario, nombre, apellido, email, password, rol FROM usuario WHERE email=? and password=MD5(?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             stmt.setString(2, password);
