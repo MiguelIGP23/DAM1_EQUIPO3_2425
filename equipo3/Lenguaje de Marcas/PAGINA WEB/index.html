@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌲 Rutas al Aire Libre 🌄</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <header>
+    <h1 class="titulo-principal">🌲 Rutas al Aire Libre 🌄</h1>
+    <button id="modo-toggle">🌙 Modo oscuro</button>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="rutas.html">Rutas</a></li>
+      <li><a href="galeria.html">Galería</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Explora la Naturaleza</h2>
+      <p>Bienvenido a nuestro sitio donde encontrarás las mejores rutas de senderismo, ciclismo y más.</p>
+      <video controls width="100%">
+        <source src="videos/video.mp4" type="video/mp4">
+        Tu navegador no soporta video.
+      </video>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Proyecto de rutas al aire libre Equipo 3</p>
+  </footer>
+  <script>
+    // Modo oscuro
+    const boton = document.getElementById('modo-toggle');
+    const body = document.body;
+
+    boton.addEventListener('click', () => {
+      body.classList.toggle('modo-oscuro');
+      boton.textContent = body.classList.contains('modo-oscuro') ? '☀️ Modo claro' : '🌙 Modo oscuro';
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
