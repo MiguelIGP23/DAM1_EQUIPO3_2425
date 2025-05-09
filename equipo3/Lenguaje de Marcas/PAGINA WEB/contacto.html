@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto - Rutas al Aire Libre</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <header>
+    <h1 class="titulo-principal">🌲 Rutas al Aire Libre 🌄</h1>
+    <button id="modo-toggle">🌙 Modo oscuro</button>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="rutas.html">Rutas</a></li>
+      <li><a href="galeria.html">Galería</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>¿Tienes alguna pregunta o sugerencia? ¡Nos encantaría saber de ti!</p>
+      <form>
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <label for="email">Correo electrónico:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="mensaje">Mensaje:</label><br>
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea><br><br>
+        <button type="submit" class="boton-volver">Enviar</button>
+      </form>
+      <div style="margin-top: 1rem;">
+  <a href="https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425.git" target="_blank" rel="noopener noreferrer" class="boton-volver">
+    📁 Ver repositorio en GitHub
+  </a>
+</div>
+
+    </section>
+
+    <div style="text-align:center;">
+      <a class="boton-volver" href="index.html">⬅️ Volver al inicio</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Proyecto de rutas al aire libre</p>
+  </footer>
+
+  <script>
+    // Modo oscuro
+    const boton = document.getElementById('modo-toggle');
+    const body = document.body;
+
+    boton.addEventListener('click', () => {
+      body.classList.toggle('modo-oscuro');
+      boton.textContent = body.classList.contains('modo-oscuro') ? '☀️ Modo claro' : '🌙 Modo oscuro';
+    });
+  </script>
+</body>
+</html>

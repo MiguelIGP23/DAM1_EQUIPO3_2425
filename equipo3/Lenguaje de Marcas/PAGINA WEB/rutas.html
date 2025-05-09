@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rutas - Rutas al Aire Libre</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <header>
+    <h1 class="titulo-principal">🌲 Rutas al Aire Libre 🌄</h1>
+    <button id="modo-toggle">🌙 Modo oscuro</button>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="rutas.html">Rutas</a></li>
+      <li><a href="galeria.html">Galería</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="rutas">
+      <h2>Nuestras Rutas</h2>
+      <div class="grid-rutas">
+        <article class="ruta">
+          <h3>Ruta Del Monte Dobra</h3>
+          <a href="https://es.wikiloc.com/rutas-senderismo/pico-dobras-604m-desde-viernoles-35295713" target="_blank">
+            <img src="imagenes/bosque.jpg" alt="Ruta por el bosque" />
+          </a>
+          <p>Dificultad: Media | Distancia: 5 km | Duración: 2 horas escasas.</p>
+        </article>
+
+        <article class="ruta">
+          <h3>Ruta del Monte Ibio</h3>
+          <a href="https://es.wikiloc.com/rutas-senderismo/subida-a-monte-ibio-desde-alto-de-san-cipriano-30102499" target="_blank">
+            <img src="imagenes/mirador.jpg" alt="Ruta al mirador con vistas panorámicas" />
+          </a>
+          <p>Dificultad: Alta | Distancia: 10 km | Duración: 3 horas</p>
+        </article>
+      </div>
+    </section>
+
+    <div style="text-align:center;">
+      <a class="boton-volver" href="index.html">⬅️ Volver al inicio</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Proyecto de rutas al aire libre</p>
+  </footer>
+
+  <script>
+    // Modo oscuro
+    const boton = document.getElementById('modo-toggle');
+    const body = document.body;
+
+    boton.addEventListener('click', () => {
+      body.classList.toggle('modo-oscuro');
+      boton.textContent = body.classList.contains('modo-oscuro') ? '☀️ Modo claro' : '🌙 Modo oscuro';
+    });
+  </script>
+</body>
+</html>
