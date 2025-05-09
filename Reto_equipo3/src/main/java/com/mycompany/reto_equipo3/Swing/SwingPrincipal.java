@@ -4,15 +4,24 @@
  */
 package com.mycompany.reto_equipo3.Swing;
 
+import com.mycompany.reto_equipo3.Calendario;
+import com.mycompany.reto_equipo3.DAOS.AccesoABaseDatos;
+import com.mycompany.reto_equipo3.DAOS.DAOCalendario;
 import com.mycompany.reto_equipo3.DAOS.DAOUsuario;
 import com.mycompany.reto_equipo3.Enums.Roles;
 import com.mycompany.reto_equipo3.Rutas;
 import com.mycompany.reto_equipo3.Usuario;
 import com.mycompany.reto_equipo3.Validaciones.Teclado;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,8 +32,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form SwingPrincipal
      */
-    Usuario usuario=null;
-    Rutas R1=null;
+    Usuario usuario = null;
+    Rutas R1 = null;
+
     public SwingPrincipal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -35,17 +45,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    public void cambiarTexto(){
-        if (usuario.getRol()==Roles.administrador) {
+
+    public void cambiarTexto() {
+        if (usuario.getRol() == Roles.administrador) {
             Nombrecambia.setText("Opciones de Administrador");
-        } else if(usuario.getRol()==Roles.diseñador){
+        } else if (usuario.getRol() == Roles.diseñador) {
             Nombrecambia.setText("Opciones de Diseñador");
-        } else if(usuario.getRol()==Roles.alumno){
+        } else if (usuario.getRol() == Roles.alumno) {
             Nombrecambia.setText("Opciones de Alumno");
-        }else if(usuario.getRol()==Roles.profesor){
+        } else if (usuario.getRol() == Roles.profesor) {
             Nombrecambia.setText("Opciones de Profesor");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,6 +88,23 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Cuadroinfo = new javax.swing.JLabel();
         Nombrecambia = new javax.swing.JLabel();
         BotonVolver = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        PanelCalendario = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablacalendario = new javax.swing.JTable();
+        jButton6 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        crearCalendario = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        borrarCalendario = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaBorrar = new javax.swing.JTable();
+        jButton7 = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -95,8 +124,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
         CuadroEntrada.setAlignmentX(200.0F);
         CuadroEntrada.setAlignmentY(200.0F);
 
-        Iconoderecha1.setIcon(new javax.swing.ImageIcon("D:\\Usuarios\\Dam121\\Desktop\\Proyecto\\DAM1_EQUIPO3_2425\\Reto_equipo3\\src\\Imagenes\\Imagen-logo-equipo5050.png")); // NOI18N
-
         BotonEntrada.setBackground(new java.awt.Color(51, 255, 51));
         BotonEntrada.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         BotonEntrada.setForeground(new java.awt.Color(0, 102, 0));
@@ -107,14 +134,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
-        FondoEntrada.setIcon(new javax.swing.ImageIcon("D:\\Usuarios\\Dam121\\Desktop\\Proyecto\\DAM1_EQUIPO3_2425\\Reto_equipo3\\src\\Imagenes\\ImagenfondoInicio.jpg")); // NOI18N
-
         javax.swing.GroupLayout PanelEntradaLayout = new javax.swing.GroupLayout(PanelEntrada);
         PanelEntrada.setLayout(PanelEntradaLayout);
         PanelEntradaLayout.setHorizontalGroup(
             PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEntradaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(221, Short.MAX_VALUE)
                 .addGroup(PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
                         .addComponent(CuadroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,8 +213,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Usuarios\\Dam121\\Desktop\\Proyecto\\DAM1_EQUIPO3_2425\\Reto_equipo3\\src\\Imagenes\\Imagen-logo-equipo5050.png")); // NOI18N
-
         javax.swing.GroupLayout PanelInicioLayout = new javax.swing.GroupLayout(PanelInicio);
         PanelInicio.setLayout(PanelInicioLayout);
         PanelInicioLayout.setHorizontalGroup(
@@ -256,12 +279,17 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Cuadroinfo.setForeground(new java.awt.Color(0, 0, 255));
         Cuadroinfo.setText("Opciones ");
 
-        Nombrecambia.setIcon(new javax.swing.ImageIcon("D:\\Usuarios\\Dam121\\Desktop\\Proyecto\\DAM1_EQUIPO3_2425\\Reto_equipo3\\src\\Imagenes\\Imagen-logo-equipo5050.png")); // NOI18N
-
         BotonVolver.setText("Volver");
         BotonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonVolverActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Calendario");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -270,7 +298,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         SeleccionLayout.setHorizontalGroup(
             SeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SeleccionLayout.createSequentialGroup()
-                .addContainerGap(262, Short.MAX_VALUE)
+                .addContainerGap(312, Short.MAX_VALUE)
                 .addGroup(SeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeleccionLayout.createSequentialGroup()
                         .addComponent(Cuadroinfo)
@@ -279,6 +307,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeleccionLayout.createSequentialGroup()
                         .addComponent(BotonVolver)
                         .addGap(24, 24, 24))))
+            .addGroup(SeleccionLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jButton3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         SeleccionLayout.setVerticalGroup(
             SeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,12 +318,199 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGroup(SeleccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Cuadroinfo)
                     .addComponent(Nombrecambia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(121, 121, 121)
                 .addComponent(BotonVolver)
                 .addGap(29, 29, 29))
         );
 
         getContentPane().add(Seleccion, "card4");
+
+        jButton4.setText("volver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Calendario");
+
+        tablacalendario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablacalendario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                tablacalendarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane1.setViewportView(tablacalendario);
+
+        jButton6.setText("Crear calendario");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Borrar calendario");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelCalendarioLayout = new javax.swing.GroupLayout(PanelCalendario);
+        PanelCalendario.setLayout(PanelCalendarioLayout);
+        PanelCalendarioLayout.setHorizontalGroup(
+            PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jLabel1))
+                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jButton6)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton5)
+                        .addGap(64, 64, 64)
+                        .addComponent(jButton4)))
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+        PanelCalendarioLayout.setVerticalGroup(
+            PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton6)
+                    .addComponent(jButton5))
+                .addGap(36, 36, 36))
+        );
+
+        getContentPane().add(PanelCalendario, "card5");
+
+        jLabel3.setText("FECHA");
+
+        jLabel4.setText("DETALLES");
+
+        jLabel5.setText("ID RUTA");
+
+        jLabel6.setText("ID USUARIO");
+
+        javax.swing.GroupLayout crearCalendarioLayout = new javax.swing.GroupLayout(crearCalendario);
+        crearCalendario.setLayout(crearCalendarioLayout);
+        crearCalendarioLayout.setHorizontalGroup(
+            crearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crearCalendarioLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(crearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(crearCalendarioLayout.createSequentialGroup()
+                        .addGroup(crearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(crearCalendarioLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(213, 213, 213))))
+        );
+        crearCalendarioLayout.setVerticalGroup(
+            crearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crearCalendarioLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(crearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
+                .addGap(84, 84, 84)
+                .addComponent(jLabel4)
+                .addGap(87, 87, 87)
+                .addComponent(jLabel5)
+                .addContainerGap(122, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(crearCalendario, "card6");
+
+        tablaBorrar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablaBorrar.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                tablaBorrarAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        tablaBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaBorrarMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablaBorrar);
+
+        jButton7.setText("Volver");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout borrarCalendarioLayout = new javax.swing.GroupLayout(borrarCalendario);
+        borrarCalendario.setLayout(borrarCalendarioLayout);
+        borrarCalendarioLayout.setHorizontalGroup(
+            borrarCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(borrarCalendarioLayout.createSequentialGroup()
+                .addGroup(borrarCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(borrarCalendarioLayout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(borrarCalendarioLayout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(jButton7)))
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+        borrarCalendarioLayout.setVerticalGroup(
+            borrarCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, borrarCalendarioLayout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton7)
+                .addGap(19, 19, 19))
+        );
+
+        getContentPane().add(borrarCalendario, "card7");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -318,16 +537,16 @@ public class SwingPrincipal extends javax.swing.JFrame {
         String password = new String(passwordChars);
         if (Teclado.validaemail(email) && Teclado.validapassword(password)) {
             DAOUsuario d = new DAOUsuario();
-            List<Usuario> usuarios =(List<Usuario>) d.listar();
+            List<Usuario> usuarios = (List<Usuario>) d.listar();
             boolean existe = false;
-            Iterator<Usuario> IT=usuarios.iterator();
-            while(IT.hasNext()&&!existe){
-                  Usuario U1 = IT.next();
-                if (d.encontrarUsuario(email, password)!=null) {
-                    existe=true;
+            Iterator<Usuario> IT = usuarios.iterator();
+            while (IT.hasNext() && !existe) {
+                Usuario U1 = IT.next();
+                if (d.encontrarUsuario(email, password) != null) {
+                    existe = true;
                     PanelInicio.setVisible(false);
                     Seleccion.setVisible(true);
-                    usuario=U1;
+                    usuario = U1;
                     cambiarTexto();
                 }
             }
@@ -335,7 +554,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se encontro a ningun usuario con ese email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
             }
         } else {
-         JOptionPane.showMessageDialog(null, "Formato mal introducido el email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -346,11 +565,90 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private void BotonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVolverActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a menu de inicio", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-        PanelInicio.setVisible(true);
-        Seleccion.setVisible(false); 
+            PanelInicio.setVisible(true);
+            Seleccion.setVisible(false);
         }
-        
+
     }//GEN-LAST:event_BotonVolverActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        PanelCalendario.setVisible(true);
+        Seleccion.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        Seleccion.setVisible(true);
+        PanelCalendario.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void tablacalendarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablacalendarioAncestorAdded
+        DAOCalendario daocal = new DAOCalendario();
+        List<Calendario> liscal = daocal.listar();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Calendario");
+        model.addColumn("Fecha");
+        model.addColumn("Detalles");
+        for (Calendario c : liscal) {
+            Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles()};
+            model.addRow(fila);
+        }
+        tablacalendario.setModel(model);
+    }//GEN-LAST:event_tablacalendarioAncestorAdded
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        crearCalendario.setVisible(true);
+        PanelCalendario.setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tablaBorrarAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablaBorrarAncestorAdded
+        DAOCalendario daocal = new DAOCalendario();
+        List<Calendario> liscal = daocal.listar();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Calendario");
+        model.addColumn("Fecha");
+        model.addColumn("Detalles");
+        for (Calendario c : liscal) {
+            Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles()};
+            model.addRow(fila);
+        }
+        tablaBorrar.setModel(model);
+    }//GEN-LAST:event_tablaBorrarAncestorAdded
+
+    private void tablaBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaBorrarMouseClicked
+        int row = tablaBorrar.rowAtPoint(evt.getPoint());
+        int column = 1;
+        int valor = 0;
+        if (row != 1) {
+            Object value = tablaBorrar.getValueAt(row, column);
+            valor = (int) value;
+            Object opcion = JOptionPane.showInputDialog(null, "Selecciona una opción: ", "Calendario", JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Crear", "Modificar", "Borrar"}, "Seleccione");
+            String caso = (String) opcion;
+            switch (caso) {
+                case "Crear" -> {
+                    
+                }
+                case "Modificar" -> {
+                    
+                }
+                case "Borrar" -> {
+                    DAOCalendario daocal = new DAOCalendario();
+                    daocal.eliminar(valor);
+                }
+            }
+        }
+
+
+    }//GEN-LAST:event_tablaBorrarMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        borrarCalendario.setVisible(true);
+        PanelCalendario.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        PanelCalendario.setVisible(true);
+        borrarCalendario.setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,6 +697,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel FondoEntrada;
     private javax.swing.JLabel Iconoderecha1;
     private javax.swing.JLabel Nombrecambia;
+    private javax.swing.JPanel PanelCalendario;
     private javax.swing.JPanel PanelEntrada;
     private javax.swing.JPanel PanelInicio;
     private javax.swing.JButton Rutas;
@@ -406,8 +705,24 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel Seleccion;
     private javax.swing.JLabel TextoInicio;
     private javax.swing.JButton Usuario;
+    private javax.swing.JPanel borrarCalendario;
+    private javax.swing.JPanel crearCalendario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaBorrar;
+    private javax.swing.JTable tablacalendario;
     // End of variables declaration//GEN-END:variables
 }
