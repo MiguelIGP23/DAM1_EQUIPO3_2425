@@ -42,13 +42,14 @@ public class Reto_equipo3 {
 //        System.out.println(daousu.listar());
 //        daousu.eliminar("pruebadao@gmail.com");
 //        System.out.println(daousu.listar());
-        Usuario usu3 = daousu.encontrarUsuario("miguel@gmail.com", "abcd1234");
-        System.out.println(usu3);
+//        Usuario usu3 = daousu.encontrarUsuario("miguel@gmail.com", "abcd1234");
+//        System.out.println(usu3);
 
         //Prueba DAO rutas                    ---- FUNCIONA
         DAORutas daoruta = new DAORutas();
-        Rutas ruta = daoruta.buscar("paseo por el bosque");
-        Rutas ruta2 = daoruta.buscar("Subida al everest");
+        Rutas ruta = daoruta.buscarTodaInfo("paseo por el bosque");
+        Rutas ruta2 = daoruta.buscarTodaInfo("Subida al everest");
+        System.out.println(ruta);
 //        System.out.println(ruta);
 //        System.out.println(ruta2);
 //        System.out.println(ruta);
@@ -133,24 +134,24 @@ public class Reto_equipo3 {
 //        System.out.println(daopp.listar(ruta2));
 //
         //Prueba de creacion de ficha de seguridad    ---- FUNCIONA
-//        if(FichaSeguridad.generarFicha(ruta)){
-//            System.out.println("Ficha creada");
-//        }else{
-//            System.out.println("ERROR: no creada");
-//        }
+        if(FichaSeguridad.generarFicha(ruta)){
+            System.out.println("Ficha creada");
+        }else{
+            System.out.println("ERROR: no creada");
+        }
 //        
-//        Prueba de creacion de ficha de usuario        ---- FUNCIONA
-//        if(FichaUsuario.generarFicha(ruta)){
-//            System.out.println("Ficha creada");
-//        }else{
-//            System.out.println("ERROR: no creada");
-//        }
-//        
-//        Prueba de creacion de ficha de organizacion   ----FUNCIONA
-//        if (FichaOrganizacion.generarFicha(ruta)) {
-//            System.out.println("Ficha creada");
-//        } else {
-//            System.out.println("ERROR: no creada");
-//        }
+        //Prueba de creacion de ficha de usuario        ---- FUNCIONA
+        if(FichaUsuario.generarFicha(ruta)){
+            System.out.println("Ficha creada");
+        }else{
+            System.out.println("ERROR: no creada");
+        }
+        
+        //Prueba de creacion de ficha de organizacion   ----FUNCIONA
+        if (FichaOrganizacion.generarFicha(ruta)) {
+            System.out.println("Ficha creada");
+        } else {
+            System.out.println("ERROR: no creada");
+        }
     }
 }

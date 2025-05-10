@@ -15,14 +15,14 @@ public class PuntosInteres {
     private String nombre;
     private double latitud;
     private double longitud;
+    private double elevacion;
     private String caracteristicas;
     private Tipo tipo;
     private String descripcion;
-    private double elevacion;
     private int timestamp;
     private int rutas_idRuta;
 
-    public PuntosInteres(int idPuntosInteres, String nombre, double latitud, double longitud, double elevacion, String caracteristicas, Tipo tipo, String descripcion, int timestamp, int rutas_idRuta) {
+    public PuntosInteres(int idPuntosInteres, String nombre, double latitud, double longitud, double elevacion, String caracteristicas, Tipo tipo, String descripcion, int timestamp) {
         this.idPuntosInteres = idPuntosInteres;
         this.nombre = nombre;
         this.latitud = latitud;
@@ -31,9 +31,7 @@ public class PuntosInteres {
         this.caracteristicas = caracteristicas;
         this.tipo = tipo;
         this.descripcion = descripcion;
-        this.elevacion = elevacion;
         this.timestamp = timestamp;
-        this.rutas_idRuta = rutas_idRuta;
     }
 
     public PuntosInteres(String nombre, double latitud, double longitud, double elevacion, String descripcion) {

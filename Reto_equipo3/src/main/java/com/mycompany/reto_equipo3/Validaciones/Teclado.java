@@ -293,7 +293,7 @@ public class Teclado {
         boolean valido = false;
         Tipo tipo=Tipo.valueOf(ti);
         if (tipo == Tipo.area_de_descanso || tipo == Tipo.botanico || tipo == Tipo.cultural || tipo == Tipo.fauna_especifica
-                || tipo == Tipo.geológico || tipo == Tipo.histórico_arqueologico || tipo == Tipo.mirador || tipo == Tipo.naturaleza
+                || tipo == Tipo.geologico || tipo == Tipo.historico_arqueologico || tipo == Tipo.mirador || tipo == Tipo.naturaleza
                 || tipo == Tipo.punto_de_agua || tipo == Tipo.refugio_o_alojamiento) {
             valido = true;
         }

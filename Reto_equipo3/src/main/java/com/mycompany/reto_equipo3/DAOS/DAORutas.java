@@ -1,9 +1,10 @@
 /*
 * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
-*/
+ */
 package com.mycompany.reto_equipo3.DAOS;
- 
+
+import com.mycompany.reto_equipo3.Enums.Clasificacion;
 import com.mycompany.reto_equipo3.Rutas;
 import com.mycompany.reto_equipo3.Usuario;
 import java.sql.Connection;
@@ -13,20 +14,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
- 
+import java.util.Set;
+
 /**
-*
-* @author MiguelIGP-1ºDAM
-*/
+ *
+ * @author MiguelIGP-1ºDAM
+ */
 public class DAORutas implements InterfazDAO<Rutas> {
+
     private Connection conn;
- 
+
     public DAORutas() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
- 
-    public void insertar(Rutas ruta,Usuario usu) {
+
+    public void insertar(Rutas ruta, Usuario usu) {
         String sql = "INSERT INTO rutas (nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion,usuario_idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, ruta.getNombre());
@@ -49,7 +53,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
             System.out.println(ex.getMessage());
         }
     }
- 
+
     @Override
     public void modificar(Rutas ruta) {
         String sql = "UPDATE rutas set nombre=?, nombre_inicioruta=?,nombre_finalruta=?,latitudInicial=?,latitudFinal=?,longitudInicial=?,longitudFinal=?,distancia=?,duracion=?,estadoRuta=? WHERE idRuta=?";
@@ -75,16 +79,16 @@ public class DAORutas implements InterfazDAO<Rutas> {
             System.out.println(ex.getMessage());
         }
     }
- 
+
     public boolean aprobarRuta(Rutas ruta) {
-        boolean aprobado=false;
+        boolean aprobado = false;
         String sql = "UPDATE rutas SET estadoRuta=1 WHERE idRuta=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, ruta.getIdRuta());
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se ha modificado el usuario");
             }
-            aprobado=true;
+            aprobado = true;
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
@@ -92,7 +96,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return aprobado;
     }
-    
+
     public List<Rutas> listarsinaprobar() {
         List<Rutas> lista = new ArrayList<>();
         Rutas R1 = null;
@@ -112,6 +116,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return lista;
     }
+
     public List<Rutas> listaraprobadas() {
         List<Rutas> lista = new ArrayList<>();
         Rutas R1;
@@ -131,33 +136,50 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return lista;
     }
+
     public Rutas crearRutas(final ResultSet rs) throws SQLException {
-        return new Rutas(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getTime(10).toLocalTime());
+        return new Rutas(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getTime(10).toLocalTime());
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        //Terminar de codificar esto
-//    public Rutas crearRutasTodaInfo(final ResultSet rs) throws SQLException {
-//        return new Rutas(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getTime(10).toLocalTime(),
-//        rs.getInt(11), rs.getInt(12), rs.getDouble(13),rs.getDouble(14), rs.getString(String.valueOf(15)), rs.getString(16), rs.getInt(17), rs.getInt(18),
-//        );
-//    }
- 
+
+    public Rutas crearRutasTodaInfo(final ResultSet rs) throws SQLException {
+        Set<String> temporada = new HashSet<>();
+        String tempstring = rs.getString("temporadas");
+        if (tempstring != null && !tempstring.isEmpty()) {
+            String[] valores = tempstring.split(",");
+            temporada.addAll(List.of(valores));
+        }
+        Clasificacion clasificacion = Clasificacion.valueOf(rs.getString("clasificacion").toUpperCase());
+        return new Rutas(
+                rs.getInt("idRuta"),
+                rs.getString("nombre"),
+                rs.getString("nombre_inicioruta"),
+                rs.getString("nombre_finalruta"),
+                rs.getDouble("latitudInicial"),
+                rs.getDouble("latitudFinal"),
+                rs.getDouble("longitudInicial"),
+                rs.getDouble("longitudFinal"),
+                rs.getDouble("distancia"),
+                rs.getTime("duracion").toLocalTime(),
+                rs.getInt("desnivelPositivo"),
+                rs.getInt("desnivelNegativo"),
+                rs.getDouble("altitudMax"),
+                rs.getDouble("altitudMin"),
+                clasificacion,
+                rs.getBoolean("estadoRuta"),
+                rs.getInt("tipoTerreno"),
+                rs.getInt("indicaciones"),
+                temporada,
+                rs.getBoolean("accesibilidad"),
+                rs.getBoolean("rutaFamiliar"),
+                rs.getString("archivoGPX"),
+                rs.getString("recomendacionesEquipo"),
+                rs.getString("zonaGeografica")
+        );
+    }
+
     @Override
-    public void eliminar(String nombre) {
+    public void eliminar(String nombre
+    ) {
         String sql = "DELETE FROM rutas WHERE nombre=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
@@ -171,38 +193,39 @@ public class DAORutas implements InterfazDAO<Rutas> {
             System.out.println(ex.getMessage());
         }
     }
- 
+
     @Override
-    public Rutas buscar(String nombre) {
+    public Rutas buscar(String nombre
+    ) {
         Rutas buscado = null;
         String sql = "Select idRuta, nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion from rutas where nombre=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
-            try(ResultSet rs = stmt.executeQuery();){
-              if (rs.next()) {
-              buscado = crearRutas(rs);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    buscado = crearRutas(rs);
+                }
             }
-           }
         } catch (SQLException e) {
-            System.out.println("SQLERROR: "+e.getMessage());
+            System.out.println("SQLERROR: " + e.getMessage());
         }
         return buscado;
     }
-    
+
     public Rutas buscarTodaInfo(String nombre) {
         Rutas buscado = null;
-        String sql = "Select idRuta, nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion,"
-                + "desnivelPositivo, desnivelNegativo, altitudMax, altitudMin, clasificacion, nivelEsfuerzo, nivelRiesgo, estadoRuta, tipoTerreno, indicaciones"
-                + "temporadas, accesibilidad, rutaFamiliar, recomendacionesEquipo from rutas where nombre=?";
+        String sql = "Select idRuta, nombre, nombre_inicioruta, nombre_finalruta, latitudInicial, latitudFinal, longitudInicial, longitudFinal, distancia, duracion,"
+                + "desnivelPositivo, desnivelNegativo, altitudMax, altitudMin, clasificacion, nivelEsfuerzo, nivelRiesgo, estadoRuta, tipoTerreno, indicaciones,"
+                + "temporadas, accesibilidad, rutaFamiliar, archivoGPX,recomendacionesEquipo, zonaGeografica, mediaEstrellas from rutas where nombre=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
-            try(ResultSet rs = stmt.executeQuery();){
-              if (rs.next()) {
-//              buscado = crearRutasTodaInfo(rs);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    buscado = crearRutasTodaInfo(rs);
+                }
             }
-           }
         } catch (SQLException e) {
-            System.out.println("SQLERROR: "+e.getMessage());
+            System.out.println("SQLERROR: " + e.getMessage());
         }
         return buscado;
     }

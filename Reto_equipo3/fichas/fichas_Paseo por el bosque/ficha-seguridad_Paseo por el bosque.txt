@@ -1,7 +1,7 @@
-	--FICHA DE SEGURIDAD--		09/05/2025 15:50:47
+	--FICHA DE SEGURIDAD--		10/05/2025 19:03:26
 
 -Nombre de la ruta: Paseo por el bosque
--Recomendaciones: ninguna recomendacion
+-Recomendaciones: Calzado comodo
 -Dificultad: 
 	-Nivel de riesgo: sin especificar
 	-Nivel de esfuerzo: sin especificar
@@ -18,17 +18,7 @@
 	-Descripcion: cuidado con las rocas
 	-Duracion estimada: 0 minutos
 
--Punto 2: ladrones
-	-Coordenadas: 
-		->Latitud: 0.4345
-		->Longitud: 1.2618
-
-	-Kilometro de ruta: sin especificar
-	-Nivel de gravedad [1-5]: sin especificar
-	-Descripcion: corre corre
-	-Duracion estimada: 0 minutos
-
--Punto 3: lobos
+-Punto 2: lobos
 	-Coordenadas: 
 		->Latitud: 0.3451
 		->Longitud: 1.0234
@@ -36,5 +26,15 @@
 	-Kilometro de ruta: sin especificar
 	-Nivel de gravedad [1-5]: sin especificar
 	-Descripcion: hay lobos
+	-Duracion estimada: 0 minutos
+
+-Punto 3: hielo
+	-Coordenadas: 
+		->Latitud: 3.6543
+		->Longitud: 1.2564
+
+	-Kilometro de ruta: sin especificar
+	-Nivel de gravedad [1-5]: sin especificar
+	-Descripcion: cuidado con resbalones
 	-Duracion estimada: 0 minutos
 

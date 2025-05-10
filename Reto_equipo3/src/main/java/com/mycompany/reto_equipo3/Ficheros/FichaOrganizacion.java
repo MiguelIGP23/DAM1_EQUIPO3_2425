@@ -4,8 +4,6 @@
  */
 package com.mycompany.reto_equipo3.Ficheros;
 
-import com.mycompany.reto_equipo3.DAOS.DAOPuntospeligro;
-import com.mycompany.reto_equipo3.PuntosPeligro;
 import com.mycompany.reto_equipo3.Rutas;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,8 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  *
@@ -29,10 +25,11 @@ public class FichaOrganizacion {
     public static boolean generarFicha(Rutas ruta) {
         boolean generada = false;
         //Creamos la carpeta de fichas en el proyecto si no existe
-        File carpeta = new File("fichas/fichas_"+ruta.getNombre());
+        String nombreRuta = ruta.getNombre().replaceAll("[^a-zA-Z0-9_\\- ]", "_");
+        File carpeta = new File("fichas/fichas_"+nombreRuta);
         carpeta.mkdirs();
         //Guarda la ficha en un archivo con el nombre de la ruta
-        File ficha = new File("fichas/fichas_"+ruta.getNombre()+"/ficha-organizacion_" + ruta.getNombre() + ".txt");
+        File ficha = new File("fichas/fichas_"+nombreRuta+"/ficha-organizacion_" + nombreRuta + ".txt");
         try (BufferedWriter bf = new BufferedWriter(new FileWriter(ficha));) {
             bf.write("\t--FICHA DE ORGANIZACION--");
             //Escribimos fecha y hora de generacion de la ficha

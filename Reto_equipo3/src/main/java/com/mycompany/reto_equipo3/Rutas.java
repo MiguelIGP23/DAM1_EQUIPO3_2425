@@ -40,7 +40,7 @@ public class Rutas {
     private Set<String> temporada;
     private boolean accesibilidad;
     private boolean rutaFamiliar;
-    private String text;
+    private String archivoGPX;
     private String recomendaciones;
     private String zonaGeografica;
     private double mediaEstrellas;
@@ -103,7 +103,7 @@ public class Rutas {
         this.temporada = temporada;
         this.accesibilidad = accesibilidad;
         this.rutaFamiliar = rutaFamiliar;
-        this.text = text;
+        this.archivoGPX = text;
         this.recomendaciones = recomendaciones;
         this.zonaGeografica = zonaGeografica;
     }
@@ -244,7 +244,7 @@ public class Rutas {
     }
 
     public String getText() {
-        return text;
+        return archivoGPX;
     }
 
     public String getRecomendaciones() {
@@ -361,7 +361,7 @@ public class Rutas {
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.archivoGPX = text;
     }
 
     public void setRecomendaciones(String recomendaciones) {
