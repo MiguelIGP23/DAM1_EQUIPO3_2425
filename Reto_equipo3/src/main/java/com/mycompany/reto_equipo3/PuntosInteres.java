@@ -1,0 +1,164 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.reto_equipo3;
+
+import com.mycompany.reto_equipo3.Enums.Tipo;
+
+/**
+ *
+ * @author DAM122
+ */
+public class PuntosInteres {
+    private int idPuntosInteres;
+    private String nombre;
+    private double latitud;
+    private double longitud;
+    private double elevacion;
+    private String caracteristicas;
+    private Tipo tipo;
+    private String descripcion;
+    private int timestamp;
+    private int rutas_idRuta;
+
+    public PuntosInteres(int idPuntosInteres, String nombre, double latitud, double longitud, double elevacion, String caracteristicas, Tipo tipo, String descripcion, int timestamp) {
+        this.idPuntosInteres = idPuntosInteres;
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.elevacion=elevacion;
+        this.caracteristicas = caracteristicas;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+        this.timestamp = timestamp;
+    }
+
+    public PuntosInteres(String nombre, double latitud, double longitud, double elevacion, String descripcion) {
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.elevacion=elevacion;
+        this.descripcion = descripcion;
+    }
+    
+    public PuntosInteres(int id, String nombre, double latitud, double longitud, double elevacion, String descripcion) {
+        this.idPuntosInteres=id;
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.elevacion=elevacion;
+        this.descripcion = descripcion;
+    }
+    
+   
+
+    public void setIdPuntosInteres(int idPuntosInteres) {
+        this.idPuntosInteres = idPuntosInteres;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
+
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setElevacion(double elevacion) {
+        this.elevacion = elevacion;
+    }
+
+    public void setTimestamp(int timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setRutas_idRuta(int rutas_idRuta) {
+        this.rutas_idRuta = rutas_idRuta;
+    }
+
+    public int getIdPuntosInteres() {
+        return idPuntosInteres;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public double getElevacion() {
+        return elevacion;
+    }
+
+    public int getTimestamp() {
+        return timestamp;
+    }
+
+    public int getRutas_idRuta() {
+        return rutas_idRuta;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + this.idPuntosInteres;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PuntosInteres other = (PuntosInteres) obj;
+        return this.idPuntosInteres == other.idPuntosInteres;
+    }
+
+    @Override
+    public String toString() {
+        return "PuntosInteres{" + "nombre=" + nombre + ", latitud=" + latitud + ", longitud=" + longitud + ", caracteristicas=" + caracteristicas + ", tipo=" + tipo + ", descripcion=" + descripcion + ", elevacion=" + elevacion + ", timestamp=" + timestamp + "}\n";
+    }
+    
+    
+}

@@ -1,0 +1,32 @@
+	--FICHA DE USUARIO--		12/05/2025 18:54:52
+
+-Nombre de ruta: Subida al everest
+-Inicio de la ruta: salida del bosque
+-Fin de la ruta: pico mas alto
+-Coordenadas iniciales: 
+	-Latitud: 4.2356
+	-Longitud: 4.2476
+-Coordenadas finales: 
+	-Latitud: 8.3625
+	-Longitud: 9.6345
+-Duracion estimada: 23 h, 15 min
+-Distancia : 120.0 km
+-Temporadas: invierno
+-Accesible: si
+-Familiar: si
+-Recomendaciones: Suerte o muerte
+
+-- PUNTOS DE INTERES --
+
+
+-- PUNTOS DE PELIGRO --
+
+-Punto 1: aaaaaa
+	-Coordenadas: 
+		->Latitud: 0.4455
+		->Longitud: 1.1223
+
+	-Longitud de la ruta: 2.0 km
+	-Nivel de gravedad [1-5]: 5
+	-Descripcion: no se
+	-Duracion estimada: 3 minutos

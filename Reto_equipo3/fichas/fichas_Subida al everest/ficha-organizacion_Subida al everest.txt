@@ -1,0 +1,14 @@
+	--FICHA DE ORGANIZACION--		12/05/2025 18:54:52
+
+-Nombre de la ruta: Subida al everest
+-Coordenadas iniciales: 
+	-Latitud: 4.2356
+	-Longitud: 4.2476
+-Coordenadas finales: 
+	-Latitud: 8.3625
+	-Longitud: 9.6345
+-Dificultad: 
+	-Nivel de riesgo: 5
+	-Nivel de esfuerzo: 5
+-Inicio de la ruta: salida del bosque
+-Fin de la ruta: pico mas alto
