@@ -37,7 +37,7 @@
 ````
 Servidor de la aplicación
 
-Servidor de la página web
+Servidor de la base de datos
 ````
 
 
