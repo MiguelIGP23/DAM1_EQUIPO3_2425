@@ -5,6 +5,7 @@
 package com.mycompany.reto_equipo3.DAOS;
 
 import com.mycompany.reto_equipo3.ImagenesInteres;
+import com.mycompany.reto_equipo3.ImagenesPeligro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,25 +15,25 @@ import java.util.List;
 
 /**
  *
- * @author DAM122
+ * @author salsa
  */
-public class DAOImagenesInteres {
-  private Connection conn;
+public class DAOImagenesPeligro {
+    private Connection conn;
 
-    public DAOImagenesInteres() {
+    public DAOImagenesPeligro() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-    public List<ImagenesInteres> listar(int idPuntoInteres){
-        List<ImagenesInteres> lista=new ArrayList<>();
-        ImagenesInteres ii=null;
-        String sql="select idimagenesinteres,url,descripcion  from imagenesinteres where puntosinteres_idPuntosinteres=?";
+     public List<ImagenesPeligro> listar(int idPuntoPeligro){
+        List<ImagenesPeligro> lista=new ArrayList<>();
+        ImagenesPeligro ip=null;
+        String sql="select idimagenespeligro,url,descripcion  from imagenespeligro where puntospeligro_idPuntosinteres=?";
         try(PreparedStatement pstm=conn.prepareStatement(sql)){
-           pstm.setInt(1, idPuntoInteres);
+           pstm.setInt(1, idPuntoPeligro);
            try(ResultSet rs=pstm.executeQuery()){
               while(rs.next()){
-                  ii=crearImagenesInteres(rs);
-                  if (!lista.add(ii)) {
-                      throw new Exception("ERROR: la imagen  de interes no se anadio");
+                  ip=crearImagenesPeligro(rs);
+                  if (!lista.add(ip)) {
+                      throw new Exception("ERROR: la imagen  de peligro no se anadio");
                   }
               } 
            }
@@ -43,9 +44,7 @@ public class DAOImagenesInteres {
         }
       return lista;
     }
-    public ImagenesInteres crearImagenesInteres(final ResultSet rs)throws SQLException{
-        return new ImagenesInteres(rs.getInt(1),rs.getString(2),rs.getString(3));
+    public ImagenesPeligro crearImagenesPeligro(final ResultSet rs)throws SQLException{
+        return new ImagenesPeligro(rs.getInt(1),rs.getString(2),rs.getString(3));
     }
 }
-
-

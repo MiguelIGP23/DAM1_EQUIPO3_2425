@@ -30,7 +30,8 @@ public class DAORutas implements InterfazDAO<Rutas> {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
 
-    public void insertar(Rutas ruta, Usuario usu) {
+    public boolean insertar(Rutas ruta, Usuario usu) {
+        boolean valida=false;
         String sql = "INSERT INTO rutas (nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion,usuario_idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, ruta.getNombre());
@@ -47,11 +48,13 @@ public class DAORutas implements InterfazDAO<Rutas> {
                 throw new Exception("ERROR: no se creo la ruta");
             }
             System.out.println("Se creo correctamente");
+            valida=true;
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valida;
     }
 
     @Override

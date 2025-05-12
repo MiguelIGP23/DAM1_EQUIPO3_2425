@@ -14,11 +14,11 @@ public class ImagenesInteres {
     private String descripcion;
     private int puntosinteres_idPuntosinteres;
 
-    public ImagenesInteres(int idimagenesinteres, String url, String descripcion, int puntosinteres_idPuntosinteres) {
+    public ImagenesInteres(int idimagenesinteres, String url, String descripcion) {
         this.idimagenesinteres = idimagenesinteres;
         this.url = url;
         this.descripcion = descripcion;
-        this.puntosinteres_idPuntosinteres = puntosinteres_idPuntosinteres;
+
     }
     
     //Metodos get
