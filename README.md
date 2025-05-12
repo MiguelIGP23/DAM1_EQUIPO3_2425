@@ -33,7 +33,7 @@
 
  Diagrama de casos de uso
 ````
-##### *[Maquinas Virtuales]()*
+##### *[Maquinas Virtuales](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/604387f7c28abd791357ceec6308c64f7b14b402/equipo3/Sistemas%20Inform%C3%A1ticos/README.md)*
 ````
 
 ````
