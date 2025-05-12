@@ -33,9 +33,9 @@
 
  Diagrama de casos de uso
 ````
-##### *[Maquinas Virtuales](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/604387f7c28abd791357ceec6308c64f7b14b402/equipo3/Sistemas%20Inform%C3%A1ticos/README.md)*
+##### *[Maquinas Virtuales](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/1549c61138a77f85a4ca4eab6540d5ee33d0869f/equipo3/Sistemas%20Inform%C3%A1ticos/README.md)*
 ````
-Servidor de la aplicación
+Servidor de la base de datos
 
 Servidor de la página web
 ````
