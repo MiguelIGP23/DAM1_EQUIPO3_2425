@@ -35,7 +35,7 @@ public class FichaUsuario {
      * @param ruta objeto ruta sobre la que se genera la ficha
      * @return true/false indicando si se genero la ficha o no
      */
-    public static boolean generarFicha(Rutas ruta) {
+    public  boolean generarFicha(Rutas ruta) {
         boolean generada = false;
         //Creamos la carpeta de fichas en el proyecto si no existe
         String nombreRuta = ruta.getNombre().replaceAll("[^a-zA-Z0-9_\\- ]", "_");
@@ -197,7 +197,7 @@ public class FichaUsuario {
     }
 
     //Metodo privado para convertir booleanos a texto si o no para codigo mas limpio
-    private static String convierteBoolean(boolean b) {
+    private  String convierteBoolean(boolean b) {
         String st = "";
         if (b) {
             st = "si";

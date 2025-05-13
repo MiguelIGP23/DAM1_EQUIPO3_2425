@@ -144,20 +144,23 @@ public class DAORutas implements InterfazDAO<Rutas> {
         return new Rutas(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getTime(10).toLocalTime());
     }
 
-    @Override
-    public void eliminar(String nombre) {
-        String sql = "DELETE FROM rutas WHERE nombre=?";
+   // @Override
+    public boolean eliminar(int idRuta) {
+        boolean valida=false;
+        String sql = "DELETE FROM rutas WHERE idRuta=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nombre);
+            stmt.setInt(1, idRuta);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("No se borrado la ruta");
             }
             System.out.println("Se borro la ruta");
+            valida=true;
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valida;
     }
 
     @Override
@@ -342,5 +345,27 @@ public class DAORutas implements InterfazDAO<Rutas> {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public boolean modificarporid(int idRutanovalida) {
+        boolean valido=false;
+        String sql = "UPDATE rutas set estadoRuta=true WHERE idRuta=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idRutanovalida);
+            if (stmt.executeUpdate() != 1) {
+                throw new Exception("ERROR: no se ha modificado el usuario");
+            }
+            System.out.println("Se modifico el usuario");
+            valido=true;
+        } catch (SQLException e) {
+            System.out.println("SQL ERROR: " + e.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return valido;
+    }
+    @Override
+    public void eliminar(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -5,6 +5,7 @@
 package com.mycompany.reto_equipo3.DAOS;
 
 import com.mycompany.reto_equipo3.ImagenesInteres;
+import com.mycompany.reto_equipo3.PuntosInteres;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +46,40 @@ public class DAOImagenesInteres {
     }
     public ImagenesInteres crearImagenesInteres(final ResultSet rs)throws SQLException{
         return new ImagenesInteres(rs.getInt(1),rs.getString(2),rs.getString(3));
+    }
+    public boolean insertar(ImagenesInteres imi, PuntosInteres pi) {
+        boolean insertado = false;
+        String sql = "insert into imagenesinteres (url, descripcion, puntosinteres_idPuntosinteres) values (?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, imi.getDescripcion());
+            pstmt.setString(2, imi.getUrl());
+            pstmt.setInt(3, pi.getIdPuntosInteres());
+            if (pstmt.executeUpdate() != 1) {
+                throw new Exception("Error: la imagen de interes no se ha insertado.");
+            }
+            insertado = true;
+        } catch (SQLException e) {
+            System.out.println("SQLError: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return insertado;
+    }
+    public boolean eliminar(int idImi) {
+        boolean eliminado = false;
+        String sql = "delete into imagenesinteres where idimagenesinteres = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idImi);
+            if (pstmt.executeUpdate() != 1) {
+                throw new Exception("Error: la imagen de interes no se ha eliminado.");
+            }
+            eliminado = true;
+        } catch (SQLException e) {
+            System.out.println("SQLError: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return eliminado;
     }
 }
 

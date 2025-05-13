@@ -6,6 +6,7 @@ package com.mycompany.reto_equipo3.DAOS;
 
 import com.mycompany.reto_equipo3.ImagenesInteres;
 import com.mycompany.reto_equipo3.ImagenesPeligro;
+import com.mycompany.reto_equipo3.PuntosPeligro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,5 +47,39 @@ public class DAOImagenesPeligro {
     }
     public ImagenesPeligro crearImagenesPeligro(final ResultSet rs)throws SQLException{
         return new ImagenesPeligro(rs.getInt(1),rs.getString(2),rs.getString(3));
+    }
+    public boolean insertar(ImagenesPeligro imp, PuntosPeligro pp) {
+        boolean insertado = false;
+        String sql = "insert into imagenespeligro (url, descripcion, puntospeligro_idPuntospeligro) values (?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, imp.getUrl());
+            pstmt.setString(2, imp.getDescripcion());
+            pstmt.setInt(3, pp.getIdPuntospeligro());
+            if (pstmt.executeUpdate() != 1) {
+                throw new Exception("Error: la imagen de peligro no se ha insertado.");
+            }
+            insertado = true;
+        } catch (SQLException e) {
+            System.out.println("SQLError: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return insertado;
+    }
+    public boolean eliminar(int idImp) {
+        boolean eliminado = false;
+        String sql = "delete from imagenespeligro where idimagenespeligro = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idImp);
+            if (pstmt.executeUpdate() != 1) {
+                throw new Exception("Error: la imagen de peligro no se ha eliminado");
+            }
+            eliminado = true;
+        } catch (SQLException e) {
+            System.out.println("SQLError: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return eliminado;
     }
 }

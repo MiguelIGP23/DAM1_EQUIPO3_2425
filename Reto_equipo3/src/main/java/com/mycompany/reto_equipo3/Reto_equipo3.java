@@ -128,7 +128,7 @@ public class Reto_equipo3 {
 //        System.out.println(daopp.listar(ruta2));
 //
         //Prueba de creacion de fichas    ---- FUNCIONA
-        ControlFichas.generarFichas(ruta);
-        ControlFichas.generarFichas(ruta2);
+       // ControlFichas.generarFichas(ruta);
+       // ControlFichas.generarFichas(ruta2);
     }
 }

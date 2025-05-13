@@ -22,7 +22,7 @@ public class FichaOrganizacion {
      * Metodo estatico que genera un archivo llamado ficha-organizacion.txt el
      * cual contiene informacion sobre
      */
-    public static boolean generarFicha(Rutas ruta) {
+    public  boolean generarFicha(Rutas ruta) {
         boolean generada = false;
         //Creamos la carpeta de fichas en el proyecto si no existe
         String nombreRuta = ruta.getNombre().replaceAll("[^a-zA-Z0-9_\\- ]", "_");

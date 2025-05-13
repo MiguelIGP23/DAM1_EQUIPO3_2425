@@ -14,6 +14,9 @@ import com.mycompany.reto_equipo3.DAOS.DAORutas;
 import com.mycompany.reto_equipo3.DAOS.DAOUsuario;
 import com.mycompany.reto_equipo3.DAOS.DAOValora;
 import com.mycompany.reto_equipo3.Enums.Roles;
+import com.mycompany.reto_equipo3.Ficheros.FichaOrganizacion;
+import com.mycompany.reto_equipo3.Ficheros.FichaSeguridad;
+import com.mycompany.reto_equipo3.Ficheros.FichaUsuario;
 import com.mycompany.reto_equipo3.ImagenesInteres;
 import com.mycompany.reto_equipo3.ImagenesPeligro;
 import com.mycompany.reto_equipo3.PuntosInteres;
@@ -143,6 +146,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablaValoraciones = new javax.swing.JTable();
+        botoncrearvaloracion = new javax.swing.JButton();
         Actividades = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -185,6 +189,25 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         duracion = new javax.swing.JTextField();
         Botonparacrearruta = new javax.swing.JButton();
+        CatalogodeRutas = new javax.swing.JPanel();
+        Nombrerutasinavlidas = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        Tabladerutasnovalidas = new javax.swing.JTable();
+        volverarutasdesdeno = new javax.swing.JButton();
+        Panelparacrearvaloracion = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        Volveraverlasvaloraciones = new javax.swing.JButton();
+        Botondificul = new javax.swing.JTextField();
+        Botonestre = new javax.swing.JTextField();
+        BotonIntere = new javax.swing.JTextField();
+        Botonbelle = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        Botonrese = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        Botonparacrearvaloracion = new javax.swing.JButton();
 
         jTextField7.setText("jTextField7");
 
@@ -731,20 +754,30 @@ public class SwingPrincipal extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(TablaValoraciones);
 
+        botoncrearvaloracion.setText("Crear Valoracion");
+        botoncrearvaloracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoncrearvaloracionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ValoracionesdeRutaLayout = new javax.swing.GroupLayout(ValoracionesdeRuta);
         ValoracionesdeRuta.setLayout(ValoracionesdeRutaLayout);
         ValoracionesdeRutaLayout.setHorizontalGroup(
             ValoracionesdeRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValoracionesdeRutaLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(19, 19, 19)
                 .addGroup(ValoracionesdeRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValoracionesdeRutaLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(227, 227, 227))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValoracionesdeRutaLayout.createSequentialGroup()
                         .addGroup(ValoracionesdeRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-                            .addComponent(jButton2))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                            .addGroup(ValoracionesdeRutaLayout.createSequentialGroup()
+                                .addComponent(botoncrearvaloracion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2)))
                         .addGap(18, 18, 18))))
         );
         ValoracionesdeRutaLayout.setVerticalGroup(
@@ -752,10 +785,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValoracionesdeRutaLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addGap(27, 27, 27)
-                .addComponent(jButton2)
+                .addGroup(ValoracionesdeRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(botoncrearvaloracion))
                 .addContainerGap())
         );
 
@@ -1163,9 +1198,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(CrearRutasde0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(li, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(CrearRutasde0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(li, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(CrearRutasde0Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel8)))
@@ -1176,15 +1211,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(jLabel13)
                     .addComponent(duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(CrearRutasde0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CrearRutasde0Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ldf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(volverdecrearruta)
                         .addGap(16, 16, 16))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearRutasde0Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ldi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(Botonparacrearruta)
@@ -1192,6 +1226,193 @@ public class SwingPrincipal extends javax.swing.JFrame {
         );
 
         getContentPane().add(CrearRutasde0, "card12");
+
+        CatalogodeRutas.setBackground(new java.awt.Color(153, 255, 153));
+        CatalogodeRutas.setMaximumSize(new java.awt.Dimension(600, 400));
+        CatalogodeRutas.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        Nombrerutasinavlidas.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        Nombrerutasinavlidas.setForeground(new java.awt.Color(0, 0, 204));
+        Nombrerutasinavlidas.setText("Rutas no validadas");
+
+        Tabladerutasnovalidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        Tabladerutasnovalidas.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TabladerutasnovalidasAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        Tabladerutasnovalidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabladerutasnovalidasMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(Tabladerutasnovalidas);
+
+        volverarutasdesdeno.setText("Volver");
+        volverarutasdesdeno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverarutasdesdenoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CatalogodeRutasLayout = new javax.swing.GroupLayout(CatalogodeRutas);
+        CatalogodeRutas.setLayout(CatalogodeRutasLayout);
+        CatalogodeRutasLayout.setHorizontalGroup(
+            CatalogodeRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CatalogodeRutasLayout.createSequentialGroup()
+                .addGap(196, 196, 196)
+                .addComponent(Nombrerutasinavlidas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CatalogodeRutasLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(CatalogodeRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(volverarutasdesdeno)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
+        );
+        CatalogodeRutasLayout.setVerticalGroup(
+            CatalogodeRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CatalogodeRutasLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(Nombrerutasinavlidas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(volverarutasdesdeno)
+                .addContainerGap())
+        );
+
+        getContentPane().add(CatalogodeRutas, "card13");
+
+        Panelparacrearvaloracion.setBackground(new java.awt.Color(153, 255, 153));
+        Panelparacrearvaloracion.setMaximumSize(new java.awt.Dimension(600, 400));
+        Panelparacrearvaloracion.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        jLabel16.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel16.setText("Crear Valoracion");
+
+        Volveraverlasvaloraciones.setText("Volver");
+        Volveraverlasvaloraciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolveraverlasvaloracionesActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Dificultad");
+
+        jLabel18.setText("Estrellas");
+
+        jLabel19.setText("Interes Cultural");
+
+        jLabel20.setText("Belleza");
+
+        jLabel21.setText("Crear Reseña");
+
+        Botonparacrearvaloracion.setText("Crear Valoracion");
+        Botonparacrearvaloracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonparacrearvaloracionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelparacrearvaloracionLayout = new javax.swing.GroupLayout(Panelparacrearvaloracion);
+        Panelparacrearvaloracion.setLayout(PanelparacrearvaloracionLayout);
+        PanelparacrearvaloracionLayout.setHorizontalGroup(
+            PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
+                .addContainerGap(216, Short.MAX_VALUE)
+                .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelparacrearvaloracionLayout.createSequentialGroup()
+                        .addComponent(Volveraverlasvaloraciones)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelparacrearvaloracionLayout.createSequentialGroup()
+                        .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16)
+                            .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
+                                .addComponent(Botonparacrearvaloracion)
+                                .addGap(30, 30, 30)))
+                        .addGap(209, 209, 209))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelparacrearvaloracionLayout.createSequentialGroup()
+                .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jLabel19))
+                    .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Botonbelle, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(Botondificul)
+                            .addComponent(BotonIntere))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelparacrearvaloracionLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(75, 75, 75))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelparacrearvaloracionLayout.createSequentialGroup()
+                        .addComponent(Botonestre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))
+                    .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
+                        .addComponent(Botonrese, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(jLabel20)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(90, 90, 90))
+        );
+        PanelparacrearvaloracionLayout.setVerticalGroup(
+            PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel16)
+                .addGap(25, 25, 25)
+                .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Botonestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Botondificul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel21))
+                .addGap(18, 18, 18)
+                .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonIntere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Botonrese, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel20)
+                .addGap(18, 18, 18)
+                .addComponent(Botonbelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(Botonparacrearvaloracion)
+                .addGap(2, 2, 2)
+                .addComponent(Volveraverlasvaloraciones)
+                .addGap(20, 20, 20))
+        );
+
+        getContentPane().add(Panelparacrearvaloracion, "card14");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1229,7 +1450,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 VolverInicio.setVisible(true);
                 jScrollPane1.setVisible(true);
                 usuario = U1;
-                Botonparacrearrutas.setVisible(true);
+                if (usuario.getRol()==Roles.administrador||usuario.getRol()==Roles.diseñador||usuario.getRol()==Roles.profesor) {
+                  Botonparacrearrutas.setVisible(true);  
+                }  
             }
             if (U1 == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro a ningun usuario con ese email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
@@ -1294,6 +1517,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TableRutasValidas.setVisible(false);
         VolverInicio.setVisible(false);
         jScrollPane1.setVisible(false);
+        Botonparacrearrutas.setVisible(false);
     }//GEN-LAST:event_VolverInicioActionPerformed
     // Metodo para modificar la tabla de Rutas aprobadas
     private void TableRutasValidasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TableRutasValidasAncestorAdded
@@ -1344,7 +1568,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 O1=new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro","Detalles de la ruta", "Valoraciones y mas", "Actividades","Ver catalogo de rutas y mas ","Descargar Ficha informativa","Borrar ruta","Modificar Ruta"};
             }  
            }
-            
+            DAORutas daor=new DAORutas();
             //Para elegir entre diferentes opciones
             Object opcion = JOptionPane.showInputDialog(null, "Seleccione una opcion",
                     "Opcion de ruta", JOptionPane.QUESTION_MESSAGE, null,
@@ -1373,6 +1597,31 @@ public class SwingPrincipal extends javax.swing.JFrame {
                     RutasValidas.setVisible(false);
                     Actividades.setVisible(true);
                 }
+                case "Ver catalogo de rutas"->{
+                    RutasValidas.setVisible(false);
+                    CatalogodeRutas.setVisible(true);
+                }
+                case "Descargar Ficha de rutas validas"->{
+                    FichaUsuario f1=new FichaUsuario();
+                    Rutas ruta=daor.buscarTodaInfo(idrutaapipp);
+                    if (f1.generarFicha(ruta)) {
+                         JOptionPane.showMessageDialog(null, "Se descargo la ficha en la carpeta fichas del proyecto", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+                case "Descargar Ficha informativa"->{
+                    FichaUsuario f1=new FichaUsuario();
+                    FichaSeguridad f2=new FichaSeguridad();
+                    FichaOrganizacion f3=new FichaOrganizacion();
+                    Rutas ruta=daor.buscarTodaInfo(idrutaapipp);
+                    if (f1.generarFicha(ruta)&&f2.generarFicha(ruta)&&f3.generarFicha(ruta)) {
+                            JOptionPane.showMessageDialog(null, "Se descargaron las fichas en la carpeta fichas del proyecto", "Bien", JOptionPane.INFORMATION_MESSAGE);  
+                    }
+                }
+                case "Borrar ruta"->{
+                    if (daor.eliminar(idrutaapipp)) {
+                     JOptionPane.showMessageDialog(null, "Se elimino la ruta numero: "+this.idrutaapipp, "Bien", JOptionPane.INFORMATION_MESSAGE);  
+                    }
+                }     
             }
         }
     }//GEN-LAST:event_TableRutasValidasMouseClicked
@@ -1548,7 +1797,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
                }                                                   
         }
         TablaimagenesInteres.setModel(model);
-
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1615,6 +1863,69 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonparacrearrutaActionPerformed
+
+    private void volverarutasdesdenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverarutasdesdenoActionPerformed
+      int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas validas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+        RutasValidas.setVisible(false);
+        CatalogodeRutas.setVisible(true);  
+        }
+    }//GEN-LAST:event_volverarutasdesdenoActionPerformed
+
+    private void TabladerutasnovalidasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasAncestorAdded
+    DAORutas daoruta = new DAORutas();
+        List<Rutas> lisruta = daoruta.listarsinaprobar();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        for (Rutas r : lisruta) {
+            Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
+            model.addRow(fila);
+        }
+        TableRutasValidas.setModel(model);
+        tamañocolumnasRutaValidas();
+    }//GEN-LAST:event_TabladerutasnovalidasAncestorAdded
+
+    private void TabladerutasnovalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasMouseClicked
+       int fila = TableRutasValidas.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TableRutasValidas.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+             int respuesta = JOptionPane.showConfirmDialog(null, "Desea pasar una de estas rutas a ser valida", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+             if (respuesta == 0) {
+             DAORutas daor=new DAORutas();
+              if (daor.modificarporid(resultado)) {
+                     JOptionPane.showMessageDialog(null, "La ruta paso a ser valida", "Bien", JOptionPane.INFORMATION_MESSAGE);
+              }
+          }
+        }
+    }//GEN-LAST:event_TabladerutasnovalidasMouseClicked
+
+    private void botoncrearvaloracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearvaloracionActionPerformed
+       ValoracionesdeRuta.setVisible(false);
+       Panelparacrearvaloracion.setVisible(true);
+    }//GEN-LAST:event_botoncrearvaloracionActionPerformed
+
+    private void VolveraverlasvaloracionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraverlasvaloracionesActionPerformed
+       int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las valoraciones", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+         ValoracionesdeRuta.setVisible(true);
+       Panelparacrearvaloracion.setVisible(false);
+        }
+    }//GEN-LAST:event_VolveraverlasvaloracionesActionPerformed
+
+    private void BotonparacrearvaloracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearvaloracionActionPerformed
+        
+    }//GEN-LAST:event_BotonparacrearvaloracionActionPerformed
 
     private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) { 
      DAOImagenesInteres daoimg = new DAOImagenesInteres();
@@ -1684,8 +1995,15 @@ public class SwingPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Actividades;
     private javax.swing.JButton BotonEntrada;
+    private javax.swing.JTextField BotonIntere;
+    private javax.swing.JTextField Botonbelle;
+    private javax.swing.JTextField Botondificul;
+    private javax.swing.JTextField Botonestre;
     private javax.swing.JButton Botonparacrearruta;
     private javax.swing.JButton Botonparacrearrutas;
+    private javax.swing.JButton Botonparacrearvaloracion;
+    private javax.swing.JTextField Botonrese;
+    private javax.swing.JPanel CatalogodeRutas;
     private javax.swing.JPasswordField Contraseña;
     private javax.swing.JPanel CrearRutasde0;
     private javax.swing.JPanel CrearUsuarios;
@@ -1705,8 +2023,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel NombreImagenesInteres;
     private javax.swing.JLabel NombreRutas;
+    private javax.swing.JLabel Nombrerutasinavlidas;
     private javax.swing.JPanel PanelEntrada;
     private javax.swing.JPanel PanelInicio;
+    private javax.swing.JPanel Panelparacrearvaloracion;
     private javax.swing.JPanel PuntosdeRuta;
     private javax.swing.JButton Rutas;
     private javax.swing.JPanel RutasValidas;
@@ -1715,6 +2035,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable TablaDetallesruta;
     private javax.swing.JTable TablaImagenesPeligro;
     private javax.swing.JTable TablaValoraciones;
+    private javax.swing.JTable Tabladerutasnovalidas;
     private javax.swing.JTable TablaimagenesInteres;
     private javax.swing.JTable TablePuntosInteres;
     private javax.swing.JTable TablePuntosPeligro;
@@ -1725,7 +2046,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel ValoracionesdeRuta;
     private javax.swing.JButton VolverInicio;
     private javax.swing.JButton VolverUsuarios;
+    private javax.swing.JButton Volveraverlasvaloraciones;
     private javax.swing.JLabel apellido;
+    private javax.swing.JButton botoncrearvaloracion;
     private javax.swing.JLabel contraseña;
     private javax.swing.JButton darbotonUsuario;
     private javax.swing.JTextField distancia;
@@ -1748,7 +2071,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1764,6 +2093,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField ldf;
     private javax.swing.JTextField ldi;
@@ -1773,6 +2103,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField nombreinicio;
     private javax.swing.JTextField nombreruta;
     private javax.swing.JLabel rol;
+    private javax.swing.JButton volverarutasdesdeno;
     private javax.swing.JButton volverdecrearruta;
     private javax.swing.JButton votonimagenvolverpeligro;
     // End of variables declaration//GEN-END:variables

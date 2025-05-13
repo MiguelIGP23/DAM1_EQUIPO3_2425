@@ -32,7 +32,7 @@ public class FichaSeguridad{
      * @param ruta
      * @return
      */
-    public static boolean generarFicha(Rutas ruta) {
+    public  boolean generarFicha(Rutas ruta) {
         boolean generada = false; //Creamos la carpeta de fichas en el proyecto si no existe
         String nombreRuta = ruta.getNombre().replaceAll("[^a-zA-Z0-9_\\- ]", "_");
         File carpeta = new File("fichas/fichas_" + nombreRuta);
