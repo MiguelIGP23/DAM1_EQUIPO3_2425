@@ -69,7 +69,7 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     public List<PuntosPeligro> listar(int id) {
         List<PuntosPeligro> lista = new ArrayList<>();
         PuntosPeligro P1;
-        String sql = "SELECT idPuntospeligro, nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro where rutas_idRuta=?";
+        String sql = "SELECT idPuntospeligro, nombre, latitud, longitud, elevacion, descripcion FROM puntospeligro where rutas_idRuta=? ";
         try (PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()){

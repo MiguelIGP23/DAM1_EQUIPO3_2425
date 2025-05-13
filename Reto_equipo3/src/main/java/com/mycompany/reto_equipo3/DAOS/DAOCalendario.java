@@ -26,22 +26,25 @@ public class DAOCalendario implements InterfazDAO<Calendario>{
     public DAOCalendario() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-    public void insertar(Calendario calendario,Usuario usu,Rutas ruta){
+    public boolean insertar(Calendario calendario,Usuario usu,int idRuta){
+        boolean valido=false;
         String sql="insert into calendario (fecha, detalles, recomendaciones, rutas_idRuta, usuario_idUsuario) values (?, ?, ?, ?, ?)";
         try(PreparedStatement pstm=conn.prepareStatement(sql)){
             pstm.setTimestamp(1, Timestamp.valueOf(calendario.getFecha()));
             pstm.setString(2, calendario.getDetalles());
             pstm.setString(3, calendario.getRecomendaciones());
-            pstm.setInt(4, ruta.getIdRuta());
+            pstm.setInt(4, idRuta);
             pstm.setInt(5, usu.getIdUsuario());
             if (pstm.executeUpdate()!=1) {
                 throw new Exception("ERROR: no se creó la actividad");
             }
+            valido=true;
         }catch(SQLException ex){
             System.out.println("SQLError: " + ex.getMessage());
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+        return valido;
     }
     public void eliminar(Calendario cal) {
       String sql="delete from calendario where idCalendario=?";
@@ -59,15 +62,18 @@ public class DAOCalendario implements InterfazDAO<Calendario>{
      private Calendario crearCalendario(final ResultSet rs) throws SQLException {
         return new Calendario(rs.getInt(1),rs.getTimestamp(2).toLocalDateTime(),rs.getString(3), rs.getString(4));
     }  
-    public List<Calendario> listar(){
+    public List<Calendario> listar(int idRuta){
         List<Calendario>  calendario= new ArrayList<>();
-        String sql = "select idCalendario, fecha, detalles, recomendaciones from calendario ";
-        try (Statement stmt = conn.createStatement();ResultSet rs=stmt.executeQuery(sql)) {
+        String sql = "select idCalendario, fecha, detalles, recomendaciones from calendario where usuario_idUsuario=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idRuta);
+            try(ResultSet rs=stmt.executeQuery()){
             while (rs.next()) {
                 Calendario calenda = crearCalendario(rs);
                 if (!calendario.add(calenda)) {
                     throw new Exception("ERROR: el calendario no se ha añadido.");
                 }
+            }
             }
         } catch (SQLException e) {
             System.out.println("SQLError: " + e.getMessage());

@@ -63,7 +63,7 @@ public class DAOActividad implements InterfazDAO<Actividad> {
 
     public List<Actividad> listar(int id) {
         List<Actividad> actividades = new ArrayList<>();
-        String sql = "select idActividad, nombre from actividad where rutas_idRuta=?";
+        String sql = "select idActividad, nombre from actividad where rutas_idRuta=? ";
         try (PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {

@@ -28,7 +28,8 @@ public class DAOValora implements InterfazDAO<Valora> {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
 
-    public void insertar(Valora valora, Usuario usu, Rutas ruta) {
+    public boolean insertar(Valora valora, Usuario usu, int idRuta) {
+        boolean valido=false;
         String sql = "INSERT INTO valora (dificultad, fecha, estrellas, interesCultural, belleza, usuario_idUsuario, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, valora.getDificultad());
@@ -37,16 +38,18 @@ public class DAOValora implements InterfazDAO<Valora> {
             stmt.setInt(4, valora.getInteresCultural());
             stmt.setInt(5, valora.getBelleza());
             stmt.setInt(6, usu.getIdUsuario());
-            stmt.setInt(7, ruta.getIdRuta());
+            stmt.setInt(7, idRuta);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se creo la valoracion");
             }
             System.out.println("Se creo la valoracion");
+            valido=true;
         } catch (SQLException e) {
             System.out.println("SQL ERROR: ruta ya valorada por el usuario");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valido;
     }
 
     @Override
@@ -73,7 +76,7 @@ public class DAOValora implements InterfazDAO<Valora> {
     public List<Valora> listar(int id) {
         List<Valora> lista = new ArrayList<>();
         Valora v;
-        String sql = "SELECT idValora, dificultad, fecha, estrellas, interesCultural, belleza FROM valora where rutas_idRuta = ?";
+        String sql = "SELECT idValora, dificultad, fecha, estrellas, interesCultural, belleza FROM valora where rutas_idRuta = ? ";
         try (PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery();) {

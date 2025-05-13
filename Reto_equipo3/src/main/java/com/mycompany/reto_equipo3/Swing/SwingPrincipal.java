@@ -5,7 +5,9 @@
 package com.mycompany.reto_equipo3.Swing;
 
 import com.mycompany.reto_equipo3.Actividad;
+import com.mycompany.reto_equipo3.Calendario;
 import com.mycompany.reto_equipo3.DAOS.DAOActividad;
+import com.mycompany.reto_equipo3.DAOS.DAOCalendario;
 import com.mycompany.reto_equipo3.DAOS.DAOImagenesInteres;
 import com.mycompany.reto_equipo3.DAOS.DAOImagenesPeligro;
 import com.mycompany.reto_equipo3.DAOS.DAOPuntosinteres;
@@ -30,6 +32,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -70,11 +74,16 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         jScrollPane1.setPreferredSize(new Dimension(1600, 600));
         Botonparacrearrutas.setVisible(false);
+        botoncrearvaloracion.setVisible(false);
+        botoncrearcalendario.setVisible(false);
+        //  modelo.clearData(); añadir esto en un metodo con todas las tablas para que no consuma tanto
     }
 
     // Tamaño de lo que ocupa cada cuadrado de la tabla valida rutas
     public void tamañocolumnasRutaValidas() {
-        this.TableRutasValidas.getColumnModel().getColumn(0).setPreferredWidth(100);
+        this.TableRutasValidas.getColumnModel().getColumn(0).setMinWidth(0);
+         this.TableRutasValidas.getColumnModel().getColumn(0).setMaxWidth(0);
+          this.TableRutasValidas.getColumnModel().getColumn(0).setPreferredWidth(0);
         this.TableRutasValidas.getColumnModel().getColumn(1).setPreferredWidth(200);
         this.TableRutasValidas.getColumnModel().getColumn(2).setPreferredWidth(150);
         this.TableRutasValidas.getColumnModel().getColumn(3).setPreferredWidth(150);
@@ -98,9 +107,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         PanelEntrada = new javax.swing.JPanel();
         CuadroEntrada = new javax.swing.JLabel();
-        Iconoderecha1 = new javax.swing.JLabel();
         BotonEntrada = new javax.swing.JButton();
-        FondoEntrada = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
         TextoInicio = new javax.swing.JLabel();
         Salida = new javax.swing.JButton();
@@ -111,7 +118,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Cuadro1 = new javax.swing.JLabel();
         IniciarSesion = new javax.swing.JButton();
         Contraseña = new javax.swing.JPasswordField();
-        Logoderecha = new javax.swing.JLabel();
         CrearUsuarios = new javax.swing.JPanel();
         Texto = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -208,6 +214,22 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Botonrese = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         Botonparacrearvaloracion = new javax.swing.JButton();
+        PanelCalendario = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        TablaCalendarios = new javax.swing.JTable();
+        BotonarutasdesdeCatalogo = new javax.swing.JButton();
+        botoncrearcalendario = new javax.swing.JButton();
+        CrearCalendario = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        VolveraCalendario = new javax.swing.JButton();
+        Creardetall = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        CrearRecomen = new javax.swing.JTextField();
+        botoncrearcalendariode0 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        añadefech = new javax.swing.JTextField();
 
         jTextField7.setText("jTextField7");
 
@@ -246,24 +268,16 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
                         .addComponent(CuadroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(155, 155, 155)
-                        .addComponent(Iconoderecha1))
+                        .addGap(155, 155, 155))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
                         .addComponent(BotonEntrada)
-                        .addGap(215, 215, 215))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
-                        .addComponent(FondoEntrada)
-                        .addGap(51, 51, 51))))
+                        .addGap(215, 215, 215))))
         );
         PanelEntradaLayout.setVerticalGroup(
             PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEntradaLayout.createSequentialGroup()
-                .addGroup(PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Iconoderecha1)
-                    .addComponent(CuadroEntrada))
-                .addGap(18, 18, 18)
-                .addComponent(FondoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addComponent(CuadroEntrada)
+                .addGap(294, 294, 294)
                 .addComponent(BotonEntrada)
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -327,8 +341,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInicioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TextoInicio)
-                .addGap(105, 105, 105)
-                .addComponent(Logoderecha))
+                .addGap(105, 105, 105))
             .addGroup(PanelInicioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -359,9 +372,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         PanelInicioLayout.setVerticalGroup(
             PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelInicioLayout.createSequentialGroup()
-                .addGroup(PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Logoderecha)
-                    .addComponent(TextoInicio))
+                .addComponent(TextoInicio)
                 .addGap(49, 49, 49)
                 .addComponent(Cuadro2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1291,7 +1302,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(Nombrerutasinavlidas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(volverarutasdesdeno)
                 .addContainerGap())
         );
@@ -1313,13 +1324,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel17.setText("Dificultad");
+        jLabel17.setText("Dificultad 1-5");
 
-        jLabel18.setText("Estrellas");
+        jLabel18.setText("Estrellas 1-5");
 
-        jLabel19.setText("Interes Cultural");
+        jLabel19.setText("Interes Cultural 1-5");
 
-        jLabel20.setText("Belleza");
+        jLabel20.setText("Belleza 1-5");
 
         jLabel21.setText("Crear Reseña");
 
@@ -1405,7 +1416,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
                 .addComponent(Botonbelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(Botonparacrearvaloracion)
                 .addGap(2, 2, 2)
                 .addComponent(Volveraverlasvaloraciones)
@@ -1413,6 +1424,183 @@ public class SwingPrincipal extends javax.swing.JFrame {
         );
 
         getContentPane().add(Panelparacrearvaloracion, "card14");
+
+        PanelCalendario.setBackground(new java.awt.Color(153, 255, 153));
+        PanelCalendario.setMaximumSize(new java.awt.Dimension(600, 400));
+        PanelCalendario.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        jLabel22.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel22.setText("Calendarios");
+
+        TablaCalendarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TablaCalendarios.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TablaCalendariosAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane10.setViewportView(TablaCalendarios);
+
+        BotonarutasdesdeCatalogo.setText("Volver");
+        BotonarutasdesdeCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonarutasdesdeCatalogoActionPerformed(evt);
+            }
+        });
+
+        botoncrearcalendario.setText("Crear Calendario");
+        botoncrearcalendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoncrearcalendarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelCalendarioLayout = new javax.swing.GroupLayout(PanelCalendario);
+        PanelCalendario.setLayout(PanelCalendarioLayout);
+        PanelCalendarioLayout.setHorizontalGroup(
+            PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                .addGap(261, 261, 261)
+                .addComponent(jLabel22)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(botoncrearcalendario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(106, 106, 106))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
+                        .addComponent(BotonarutasdesdeCatalogo)
+                        .addContainerGap())))
+        );
+        PanelCalendarioLayout.setVerticalGroup(
+            PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BotonarutasdesdeCatalogo)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botoncrearcalendario)
+                        .addGap(16, 16, 16))))
+        );
+
+        getContentPane().add(PanelCalendario, "card15");
+
+        CrearCalendario.setBackground(new java.awt.Color(153, 255, 153));
+        CrearCalendario.setForeground(new java.awt.Color(255, 255, 255));
+        CrearCalendario.setMaximumSize(new java.awt.Dimension(600, 400));
+        CrearCalendario.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        jLabel23.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel23.setText("Crear Calendario para una ruta determinada");
+
+        jLabel24.setText("Detalles");
+
+        VolveraCalendario.setText("Volver");
+        VolveraCalendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolveraCalendarioActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setText("Recomendaciones");
+
+        botoncrearcalendariode0.setText("Crear Calendario");
+        botoncrearcalendariode0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoncrearcalendariode0ActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setText("Fecha yyyy-MM-dd HH:mm");
+
+        javax.swing.GroupLayout CrearCalendarioLayout = new javax.swing.GroupLayout(CrearCalendario);
+        CrearCalendario.setLayout(CrearCalendarioLayout);
+        CrearCalendarioLayout.setHorizontalGroup(
+            CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearCalendarioLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(VolveraCalendario)
+                .addGap(42, 42, 42))
+            .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(jLabel24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel25)
+                .addGap(87, 87, 87))
+            .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                .addGroup(CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(botoncrearcalendariode0))
+                    .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel26)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addGroup(CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                        .addComponent(añadefech, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                        .addGroup(CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                                .addComponent(Creardetall, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                                .addComponent(CrearRecomen, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel23))
+                        .addGap(59, 59, 59))))
+        );
+        CrearCalendarioLayout.setVerticalGroup(
+            CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearCalendarioLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel23)
+                .addGap(37, 37, 37)
+                .addGroup(CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25))
+                .addGap(18, 18, 18)
+                .addGroup(CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Creardetall, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CrearRecomen, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(añadefech, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(botoncrearcalendariode0)
+                .addGap(27, 27, 27)
+                .addComponent(VolveraCalendario)
+                .addGap(39, 39, 39))
+        );
+
+        getContentPane().add(CrearCalendario, "card16");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1447,12 +1635,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
             if (U1 != null) {
                 PanelInicio.setVisible(false);
                 RutasValidas.setVisible(true);
+                TableRutasValidas.setVisible(true);
                 VolverInicio.setVisible(true);
                 jScrollPane1.setVisible(true);
                 usuario = U1;
-                if (usuario.getRol()==Roles.administrador||usuario.getRol()==Roles.diseñador||usuario.getRol()==Roles.profesor) {
-                  Botonparacrearrutas.setVisible(true);  
-                }  
+                if (usuario.getRol() == Roles.administrador || usuario.getRol() == Roles.diseñador || usuario.getRol() == Roles.profesor) {
+                    Botonparacrearrutas.setVisible(true);
+                }
+                if (usuario.getRol() == Roles.administrador || usuario.getRol() == Roles.diseñador || usuario.getRol() == Roles.profesor || usuario.getRol() == Roles.alumno) {
+                    botoncrearvaloracion.setVisible(true);
+                }
+                if (usuario.getRol() == Roles.profesor || usuario.getRol() == Roles.administrador) {
+                    botoncrearcalendario.setVisible(true);
+                }
             }
             if (U1 == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro a ningun usuario con ese email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
@@ -1513,11 +1708,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private void VolverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverInicioActionPerformed
         CrearUsuarios.setVisible(false);
         PanelInicio.setVisible(true);
-        usuario=null;
+        usuario = null;
         TableRutasValidas.setVisible(false);
         VolverInicio.setVisible(false);
         jScrollPane1.setVisible(false);
         Botonparacrearrutas.setVisible(false);
+        botoncrearvaloracion.setVisible(false);
+        botoncrearcalendario.setVisible(false);
+        limpiartablasalvolver();
     }//GEN-LAST:event_VolverInicioActionPerformed
     // Metodo para modificar la tabla de Rutas aprobadas
     private void TableRutasValidasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TableRutasValidasAncestorAdded
@@ -1548,80 +1746,81 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object valorColumna0 = TableRutasValidas.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-           Object[] O1=null;
-            if (usuario==null) {
-             O1=new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro","Detalles de la ruta", "Valoraciones", "Actividades"};
-            }else{
-            if(usuario.getRol()==Roles.alumno){
-                O1=new Object[]{"Seleccione","Puntos Interes y Puntos Peligro","Detalles de la ruta", "Valoraciones y mas", "Actividades", "Ver catalogo de rutas"};
+            Object[] O1 = null;
+            if (usuario == null) {
+                O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados"};
+            } else {
+                if (usuario.getRol() == Roles.alumno) {
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas"};
+                }
+                if (usuario.getRol() == Roles.diseñador) {
+                    // crear rutas y valora todo y calendario todo
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Descargar Ficha de rutas validas"};
+                }
+                if (usuario.getRol() == Roles.profesor) {
+                    // crear ruta y valora todo y ca
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas ", "Descargar Ficha de rutas validas"};
+                }
+                if (usuario.getRol() == Roles.administrador) {
+                    // modifica ruta , todo ruta, todo valora y todo calendario
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Descargar Ficha informativa", "Borrar ruta", "Modificar Ruta"};
+                }
             }
-            if (usuario.getRol()==Roles.diseñador) {
-                // crear rutas y valora todo y calendario todo
-                O1=new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro","Detalles de la ruta", "Valoraciones y mas", "Actividades","Ver catalogo de rutas","Descargar Ficha de rutas validas"};
-            }
-            if (usuario.getRol()==Roles.profesor) {
-                // crear ruta y valora todo y ca
-                O1=new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro","Detalles de la ruta", "Valoraciones y mas", "Actividades","Ver catalogo de rutas y mas ","Descargar Ficha de rutas validas"};
-            }
-            if (usuario.getRol()==Roles.administrador) {
-                // modifica ruta , todo ruta, todo valora y todo calendario
-                O1=new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro","Detalles de la ruta", "Valoraciones y mas", "Actividades","Ver catalogo de rutas y mas ","Descargar Ficha informativa","Borrar ruta","Modificar Ruta"};
-            }  
-           }
-            DAORutas daor=new DAORutas();
+            DAORutas daor = new DAORutas();
+            idrutaapipp = resultado;
             //Para elegir entre diferentes opciones
             Object opcion = JOptionPane.showInputDialog(null, "Seleccione una opcion",
                     "Opcion de ruta", JOptionPane.QUESTION_MESSAGE, null,
                     O1, "Seleccione");
             switch (opcion.toString()) {
-                case "Seleccione"->{
+                case "Seleccione" -> {
                     JOptionPane.showMessageDialog(null, "No introdujiste ninguna opcion", "Volver", JOptionPane.PLAIN_MESSAGE);
                 }
                 case "Puntos Interes y Puntos Peligro" -> {
-                    idrutaapipp = resultado;
                     RutasValidas.setVisible(false);
                     PuntosdeRuta.setVisible(true);
                 }
-                 case "Detalles de la ruta"->{
-                    idrutaapipp = resultado;
+                case "Detalles de la ruta" -> {
                     RutasValidas.setVisible(false);
                     DetallesRuta.setVisible(true);
                 }
                 case "Valoraciones" -> {
-                    idrutaapipp = resultado;
                     RutasValidas.setVisible(false);
                     ValoracionesdeRuta.setVisible(true);
                 }
                 case "Actividades" -> {
-                    idrutaapipp = resultado;
                     RutasValidas.setVisible(false);
                     Actividades.setVisible(true);
                 }
-                case "Ver catalogo de rutas"->{
+                case "Calendarios asociados" -> {
+                    RutasValidas.setVisible(false);
+                    PanelCalendario.setVisible(true);
+                }
+                case "Ver catalogo de rutas" -> {
                     RutasValidas.setVisible(false);
                     CatalogodeRutas.setVisible(true);
                 }
-                case "Descargar Ficha de rutas validas"->{
-                    FichaUsuario f1=new FichaUsuario();
-                    Rutas ruta=daor.buscarTodaInfo(idrutaapipp);
+                case "Descargar Ficha de rutas validas" -> {
+                    FichaUsuario f1 = new FichaUsuario();
+                    Rutas ruta = daor.buscarTodaInfo(idrutaapipp);
                     if (f1.generarFicha(ruta)) {
-                         JOptionPane.showMessageDialog(null, "Se descargo la ficha en la carpeta fichas del proyecto", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Se descargo la ficha en la carpeta fichas del proyecto", "Bien", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
-                case "Descargar Ficha informativa"->{
-                    FichaUsuario f1=new FichaUsuario();
-                    FichaSeguridad f2=new FichaSeguridad();
-                    FichaOrganizacion f3=new FichaOrganizacion();
-                    Rutas ruta=daor.buscarTodaInfo(idrutaapipp);
-                    if (f1.generarFicha(ruta)&&f2.generarFicha(ruta)&&f3.generarFicha(ruta)) {
-                            JOptionPane.showMessageDialog(null, "Se descargaron las fichas en la carpeta fichas del proyecto", "Bien", JOptionPane.INFORMATION_MESSAGE);  
+                case "Descargar Ficha informativa" -> {
+                    FichaUsuario f1 = new FichaUsuario();
+                    FichaSeguridad f2 = new FichaSeguridad();
+                    FichaOrganizacion f3 = new FichaOrganizacion();
+                    Rutas ruta = daor.buscarTodaInfo(idrutaapipp);
+                    if (f1.generarFicha(ruta) && f2.generarFicha(ruta) && f3.generarFicha(ruta)) {
+                        JOptionPane.showMessageDialog(null, "Se descargaron las fichas en la carpeta fichas del proyecto", "Bien", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
-                case "Borrar ruta"->{
+                case "Borrar ruta" -> {
                     if (daor.eliminar(idrutaapipp)) {
-                     JOptionPane.showMessageDialog(null, "Se elimino la ruta numero: "+this.idrutaapipp, "Bien", JOptionPane.INFORMATION_MESSAGE);  
+                        JOptionPane.showMessageDialog(null, "Se elimino la ruta numero: " + this.idrutaapipp, "Bien", JOptionPane.INFORMATION_MESSAGE);
                     }
-                }     
+                }
             }
         }
     }//GEN-LAST:event_TableRutasValidasMouseClicked
@@ -1652,7 +1851,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablePuntosInteres.setModel(model);
 
     }//GEN-LAST:event_TablePuntosInteresAncestorAdded
-  // modica la tabla puntos peligro
+    // modica la tabla puntos peligro
     private void TablePuntosPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablePuntosPeligroAncestorAdded
         DAOPuntospeligro daopp = new DAOPuntospeligro();
         List<PuntosPeligro> lispp = daopp.listar(idrutaapipp);// cambiar el metodo listar de dao puntos peligro de Ruta ruta a int id 
@@ -1695,14 +1894,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("ID Actividad");
         model.addColumn("Nombre");
         for (Actividad a : lisa) {
-            Object[] fila = {a.getIdActividad(),a.getNombre()};
+            Object[] fila = {a.getIdActividad(), a.getNombre()};
             model.addRow(fila);
         }
         TablaActividades.setModel(model);
     }//GEN-LAST:event_TablaActividadesAncestorAdded
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
             idrutaapipp = 1;
             RutasValidas.setVisible(true);
@@ -1712,7 +1911,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
 // Tabla con los detalles "no funciona mirar"
     private void TablaDetallesrutaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaDetallesrutaAncestorAdded
         DAORutas daor = new DAORutas();
-        Rutas ruta = null;// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
+        Rutas ruta =daor.buscarTodaInfo(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Ruta");
         model.addColumn("Clasificacion");
@@ -1723,9 +1922,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("Indicaciones");
         model.addColumn("Ruta Familiar");
         model.addColumn("Media Estrellas");
-            Object[] fila = {ruta.getIdRuta(),ruta.getClasificacion(),ruta.getNivelEsfuerzo(),ruta.getNivelriesgo(),ruta.getEstadoRuta(),ruta.getTipoterreno(),ruta.getIndicaciones(),ruta.isRutaFamiliar(),ruta.getMediaEstrellas()};
-            model.addRow(fila);
-        TablaValoraciones.setModel(model);
+        Object[] fila = {ruta.getIdRuta(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
+        model.addRow(fila);
+        TablaDetallesruta.setModel(model);
     }//GEN-LAST:event_TablaDetallesrutaAncestorAdded
 
     // Tabla rellena con las valoraciones de un usuario
@@ -1747,7 +1946,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaValoracionesAncestorAdded
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-      int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
             idrutaapipp = 1;
             PuntosdeRuta.setVisible(true);
@@ -1759,10 +1958,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
         int fila = TablePuntosInteres.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TablePuntosInteres.getValueAt(fila, 0); // pillo la columna 0 
-        int resultado = (int) valorColumna0;// valor recogido
-        idpi=resultado;
-        PuntosdeRuta.setVisible(false);
-        ImagenesInteres.setVisible(true);
+            int resultado = (int) valorColumna0;// valor recogido
+            idpi = resultado;
+            PuntosdeRuta.setVisible(false);
+            ImagenesInteres.setVisible(true);
         }
     }//GEN-LAST:event_TablePuntosInteresMouseClicked
 
@@ -1776,7 +1975,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_votonimagenvolverpeligroActionPerformed
 
     private void TablaImagenesPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroAncestorAdded
-         DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
+        DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
         List<ImagenesPeligro> lisimg = daoimg.listar(idpp);
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID PuntosPeligro");
@@ -1794,7 +1993,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
 
             } catch (Exception ex) {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
-               }                                                   
+            }
         }
         TablaimagenesInteres.setModel(model);
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
@@ -1815,65 +2014,65 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaImagenesPeligroAncestorAdded
 
     private void TablePuntosPeligroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePuntosPeligroMouseClicked
-         int fila = TablePuntosPeligro.getSelectedRow(); // Fila que has clicado 
+        int fila = TablePuntosPeligro.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TablePuntosPeligro.getValueAt(fila, 0); // pillo la columna 0 
-        int resultado = (int) valorColumna0;// valor recogido
-        idpp=resultado;
-        PuntosdeRuta.setVisible(false);
-        ImagenesPeligro.setVisible(true);
+            int resultado = (int) valorColumna0;// valor recogido
+            idpp = resultado;
+            PuntosdeRuta.setVisible(false);
+            ImagenesPeligro.setVisible(true);
         }
     }//GEN-LAST:event_TablePuntosPeligroMouseClicked
 
     private void BotonparacrearrutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearrutasActionPerformed
-          RutasValidas.setVisible(false);
-          CrearRutasde0.setVisible(true);
+        RutasValidas.setVisible(false);
+        CrearRutasde0.setVisible(true);
     }//GEN-LAST:event_BotonparacrearrutasActionPerformed
 
     private void volverdecrearrutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverdecrearrutaActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-        RutasValidas.setVisible(true);
-        CrearRutasde0.setVisible(false);
+            RutasValidas.setVisible(true);
+            CrearRutasde0.setVisible(false);
         }
     }//GEN-LAST:event_volverdecrearrutaActionPerformed
 
     private void BotonparacrearrutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearrutaActionPerformed
-      String nombre = nombreruta.getText();
-      String nombreini = nombreinicio.getText();
-      String nombrefin = nombrefini.getText();
-      String latitudini = li.getText();
-      String longitudini = ldi.getText();
-      String latitudfin = lf.getText();
-      String longitudfin = ldf.getText();
-      String distanci =distancia.getText();
-      String duracio =duracion.getText(); 
-        if (Teclado.validanombre(nombre)&&Teclado.validaInicioFinalRuta(nombreini)&&Teclado.validaInicioFinalRuta(nombrefin)&&Teclado.validaCoordenadas(latitudini)&&Teclado.validaCoordenadas(latitudfin)&&Teclado.validaCoordenadas(longitudini)&&Teclado.validaCoordenadas(longitudfin)&&Teclado.validaDistancia(distanci)&&Teclado.validaDuracion(duracio)) {
+        String nombre = nombreruta.getText();
+        String nombreini = nombreinicio.getText();
+        String nombrefin = nombrefini.getText();
+        String latitudini = li.getText();
+        String longitudini = ldi.getText();
+        String latitudfin = lf.getText();
+        String longitudfin = ldf.getText();
+        String distanci = distancia.getText();
+        String duracio = duracion.getText();
+        if (Teclado.validanombre(nombre) && Teclado.validaInicioFinalRuta(nombreini) && Teclado.validaInicioFinalRuta(nombrefin) && Teclado.validaCoordenadas(latitudini) && Teclado.validaCoordenadas(latitudfin) && Teclado.validaCoordenadas(longitudini) && Teclado.validaCoordenadas(longitudfin) && Teclado.validaDistancia(distanci) && Teclado.validaDuracion(duracio)) {
             LocalTime duracion;
             DateTimeFormatter f = DateTimeFormatter.ofPattern("HH:mm:ss");
             duracion = LocalTime.parse(duracio, f);
-            Rutas R1=new Rutas(nombre,nombreini,nombrefin,Double.parseDouble(latitudini),Double.parseDouble(latitudfin),Double.parseDouble(longitudini),Double.parseDouble(longitudfin),Double.parseDouble(distanci),duracion);
-         DAORutas u1 = new DAORutas();
-            if (u1.insertar(R1,usuario)) {
+            Rutas R1 = new Rutas(nombre, nombreini, nombrefin, Double.parseDouble(latitudini), Double.parseDouble(latitudfin), Double.parseDouble(longitudini), Double.parseDouble(longitudfin), Double.parseDouble(distanci), duracion);
+            DAORutas u1 = new DAORutas();
+            if (u1.insertar(R1, usuario)) {
                 JOptionPane.showMessageDialog(null, "Se creo la ruta correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "No se guardo la ruta en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonparacrearrutaActionPerformed
 
     private void volverarutasdesdenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverarutasdesdenoActionPerformed
-      int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas validas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas validas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-        RutasValidas.setVisible(false);
-        CatalogodeRutas.setVisible(true);  
+            RutasValidas.setVisible(false);
+            CatalogodeRutas.setVisible(true);
         }
     }//GEN-LAST:event_volverarutasdesdenoActionPerformed
 
     private void TabladerutasnovalidasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasAncestorAdded
-    DAORutas daoruta = new DAORutas();
+        DAORutas daoruta = new DAORutas();
         List<Rutas> lisruta = daoruta.listarsinaprobar();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Ruta");
@@ -1895,39 +2094,110 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TabladerutasnovalidasAncestorAdded
 
     private void TabladerutasnovalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasMouseClicked
-       int fila = TableRutasValidas.getSelectedRow(); // Fila que has clicado 
+        int fila = TableRutasValidas.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TableRutasValidas.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-             int respuesta = JOptionPane.showConfirmDialog(null, "Desea pasar una de estas rutas a ser valida", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-             if (respuesta == 0) {
-             DAORutas daor=new DAORutas();
-              if (daor.modificarporid(resultado)) {
-                     JOptionPane.showMessageDialog(null, "La ruta paso a ser valida", "Bien", JOptionPane.INFORMATION_MESSAGE);
-              }
-          }
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea pasar una de estas rutas a ser valida", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAORutas daor = new DAORutas();
+                if (daor.modificarporid(resultado)) {
+                    JOptionPane.showMessageDialog(null, "La ruta paso a ser valida", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_TabladerutasnovalidasMouseClicked
 
     private void botoncrearvaloracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearvaloracionActionPerformed
-       ValoracionesdeRuta.setVisible(false);
-       Panelparacrearvaloracion.setVisible(true);
+        ValoracionesdeRuta.setVisible(false);
+        Panelparacrearvaloracion.setVisible(true);
     }//GEN-LAST:event_botoncrearvaloracionActionPerformed
 
     private void VolveraverlasvaloracionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraverlasvaloracionesActionPerformed
-       int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las valoraciones", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las valoraciones", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-         ValoracionesdeRuta.setVisible(true);
-       Panelparacrearvaloracion.setVisible(false);
+            ValoracionesdeRuta.setVisible(true);
+            Panelparacrearvaloracion.setVisible(false);
         }
     }//GEN-LAST:event_VolveraverlasvaloracionesActionPerformed
 
     private void BotonparacrearvaloracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearvaloracionActionPerformed
-        
+        String dificultad = Botondificul.getText();
+        String interes = BotonIntere.getText();
+        String belleza = Botonbelle.getText();
+        String estrellas = Botonestre.getText();
+        String reseña = Botonrese.getText();
+        LocalDate fecha = LocalDate.now();
+        if (Teclado.validaRango1a5(dificultad) && Teclado.validaRango1a5(interes) && Teclado.validaRango1a5(belleza) && Teclado.validaRango1a5(estrellas)) {
+            DAOValora daov = new DAOValora();
+            Valora V1 = new Valora(Integer.parseInt(dificultad), fecha, Integer.parseInt(interes), Integer.parseInt(belleza), Integer.parseInt(estrellas));
+            if (daov.insertar(V1, usuario, this.idrutaapipp)) {
+                JOptionPane.showMessageDialog(null, "Se creo la valoracion correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se guardo la valoracion en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_BotonparacrearvaloracionActionPerformed
 
-    private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) { 
+    private void BotonarutasdesdeCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonarutasdesdeCatalogoActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+            RutasValidas.setVisible(true);
+            PanelCalendario.setVisible(false);
+        }
+    }//GEN-LAST:event_BotonarutasdesdeCatalogoActionPerformed
+
+    private void TablaCalendariosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaCalendariosAncestorAdded
+        DAOCalendario daoc = new DAOCalendario();
+        List<Calendario> liscal = daoc.listar(idrutaapipp);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Calendario");
+        model.addColumn("Fecha");
+        model.addColumn("Detalles");
+        model.addColumn("Recomendaciones");
+        for (Calendario c : liscal) {
+            Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles(), c.getRecomendaciones()};
+            model.addRow(fila);
+        }
+        TablaCalendarios.setModel(model);
+    }//GEN-LAST:event_TablaCalendariosAncestorAdded
+
+    private void botoncrearcalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearcalendarioActionPerformed
+        CrearCalendario.setVisible(true);
+        PanelCalendario.setVisible(false);
+    }//GEN-LAST:event_botoncrearcalendarioActionPerformed
+
+    private void VolveraCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraCalendarioActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los calendarios", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+            CrearCalendario.setVisible(false);
+            PanelCalendario.setVisible(true);
+        }
+    }//GEN-LAST:event_VolveraCalendarioActionPerformed
+
+    private void botoncrearcalendariode0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearcalendariode0ActionPerformed
+        String detalles = Creardetall.getText();
+        String recomendaciones = CrearRecomen.getText();
+        String fecha = añadefech.getText();
+        if (Teclado.validafechayhora(fecha)) {
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime aux = LocalDateTime.parse(fecha, f);
+            Calendario C1 = new Calendario(aux, detalles, recomendaciones);
+            DAOCalendario daoc = new DAOCalendario();
+            if (daoc.insertar(C1, usuario, idrutaapipp)) {
+                JOptionPane.showMessageDialog(null, "Se creo un calendario correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se guardo el calendario en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botoncrearcalendariode0ActionPerformed
+
+private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) { 
      DAOImagenesInteres daoimg = new DAOImagenesInteres();
         List<ImagenesInteres> lisimg = daoimg.listar(idpi);
         DefaultTableModel model = new DefaultTableModel();
@@ -1952,7 +2222,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
 
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+         public void mouseClicked(MouseEvent e) {
                 int fila = TablaimagenesInteres.rowAtPoint(e.getPoint());
                 int columna = TablaimagenesInteres.columnAtPoint(e.getPoint());
                 if (columna == 1) {
@@ -1980,6 +2250,22 @@ public class SwingPrincipal extends javax.swing.JFrame {
         ventanaVistaPrevia.setLocationRelativeTo(null); 
         ventanaVistaPrevia.setVisible(true);
     }
+     
+    public void limpiartablasalvolver(){
+        TableRutasValidas.setModel(new DefaultTableModel());
+        TablePuntosInteres.setModel(new DefaultTableModel());
+        TablePuntosPeligro.setModel(new DefaultTableModel());
+        TablaValoraciones.setModel(new DefaultTableModel());
+        TablaActividades.setModel(new DefaultTableModel());
+        TablaDetallesruta.setModel(new DefaultTableModel());
+        TablaimagenesInteres.setModel(new DefaultTableModel());
+        TablaImagenesPeligro.setModel(new DefaultTableModel());
+        Tabladerutasnovalidas.setModel(new DefaultTableModel());
+        TablaCalendarios.setModel(new DefaultTableModel());
+    }
+     
+     
+     
     /**
      * @param args the command line arguments
      */
@@ -1996,6 +2282,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel Actividades;
     private javax.swing.JButton BotonEntrada;
     private javax.swing.JTextField BotonIntere;
+    private javax.swing.JButton BotonarutasdesdeCatalogo;
     private javax.swing.JTextField Botonbelle;
     private javax.swing.JTextField Botondificul;
     private javax.swing.JTextField Botonestre;
@@ -2005,8 +2292,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField Botonrese;
     private javax.swing.JPanel CatalogodeRutas;
     private javax.swing.JPasswordField Contraseña;
+    private javax.swing.JPanel CrearCalendario;
+    private javax.swing.JTextField CrearRecomen;
     private javax.swing.JPanel CrearRutasde0;
     private javax.swing.JPanel CrearUsuarios;
+    private javax.swing.JTextField Creardetall;
     private javax.swing.JLabel Cuadro1;
     private javax.swing.JLabel Cuadro2;
     private javax.swing.JLabel CuadroEntrada;
@@ -2014,16 +2304,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel Cuadroimagenespeligro;
     private javax.swing.JPanel DetallesRuta;
     private javax.swing.JTextField Email;
-    private javax.swing.JLabel FondoEntrada;
-    private javax.swing.JLabel Iconoderecha1;
     private javax.swing.JPanel ImagenesInteres;
     private javax.swing.JPanel ImagenesPeligro;
     private javax.swing.JButton IniciarSesion;
-    private javax.swing.JLabel Logoderecha;
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel NombreImagenesInteres;
     private javax.swing.JLabel NombreRutas;
     private javax.swing.JLabel Nombrerutasinavlidas;
+    private javax.swing.JPanel PanelCalendario;
     private javax.swing.JPanel PanelEntrada;
     private javax.swing.JPanel PanelInicio;
     private javax.swing.JPanel Panelparacrearvaloracion;
@@ -2032,6 +2320,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel RutasValidas;
     private javax.swing.JButton Salida;
     private javax.swing.JTable TablaActividades;
+    private javax.swing.JTable TablaCalendarios;
     private javax.swing.JTable TablaDetallesruta;
     private javax.swing.JTable TablaImagenesPeligro;
     private javax.swing.JTable TablaValoraciones;
@@ -2046,8 +2335,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel ValoracionesdeRuta;
     private javax.swing.JButton VolverInicio;
     private javax.swing.JButton VolverUsuarios;
+    private javax.swing.JButton VolveraCalendario;
     private javax.swing.JButton Volveraverlasvaloraciones;
     private javax.swing.JLabel apellido;
+    private javax.swing.JTextField añadefech;
+    private javax.swing.JButton botoncrearcalendario;
+    private javax.swing.JButton botoncrearcalendariode0;
     private javax.swing.JButton botoncrearvaloracion;
     private javax.swing.JLabel contraseña;
     private javax.swing.JButton darbotonUsuario;
@@ -2078,6 +2371,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2086,6 +2384,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

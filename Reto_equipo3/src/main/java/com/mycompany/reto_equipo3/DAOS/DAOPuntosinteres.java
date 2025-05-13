@@ -72,7 +72,7 @@ public class DAOPuntosinteres {
     public List<PuntosInteres> listar(int idRuta) {
         List<PuntosInteres> lista = new ArrayList<>();
         PuntosInteres P1 = null;
-        String sql = "SELECT idPuntosinteres, nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres where rutas_idRuta=?";
+        String sql = "SELECT idPuntosinteres, nombre, latitud, longitud, elevacion, descripcion FROM puntosinteres where rutas_idRuta=? ";
         try (PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setInt(1, idRuta);
             try (ResultSet rs = stmt.executeQuery()) {

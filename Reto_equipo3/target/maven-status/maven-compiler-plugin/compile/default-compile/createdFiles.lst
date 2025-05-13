@@ -1,9 +1,11 @@
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$2.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$34.class
 com\mycompany\reto_equipo3\Enums\Clasificacion.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$24.class
 com\mycompany\reto_equipo3\DAOS\DAOCalendario.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$9.class
 com\mycompany\reto_equipo3\Ficheros\ControlFichas.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$37.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$5.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$27.class
 com\mycompany\reto_equipo3\Ficheros\FichaUsuario.class
@@ -11,8 +13,10 @@ com\mycompany\reto_equipo3\Swing\SwingPrincipal$11.class
 com\mycompany\reto_equipo3\DAOS\DAOPuntospeligro.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$21.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$31.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$41.class
 com\mycompany\reto_equipo3\DAOS\DAOImagenesInteres.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$14.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$44.class
 com\mycompany\reto_equipo3\Reto_equipo3.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$25.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$3.class
@@ -35,8 +39,10 @@ com\mycompany\reto_equipo3\Swing\SwingPrincipal$10.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$30.class
 com\mycompany\reto_equipo3\DAOS\DAOPuntosinteres.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$7.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$42.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$16.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$26.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$36.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$22.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$12.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$32.class
@@ -48,9 +54,11 @@ com\mycompany\reto_equipo3\Validaciones\Teclado.class
 com\mycompany\reto_equipo3\PuntosInteres.class
 com\mycompany\reto_equipo3\ImagenesInteres.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$19.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$39.class
 com\mycompany\reto_equipo3\Ficheros\FichaSeguridad.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$8.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$15.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$43.class
 com\mycompany\reto_equipo3\DAOS\AccesoABaseDatos$AccesoABaseDatosHolder.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$23.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$1.class
@@ -58,7 +66,10 @@ com\mycompany\reto_equipo3\DAOS\DAOUsuario.class
 com\mycompany\reto_equipo3\Rutas.class
 com\mycompany\reto_equipo3\PuntosPeligro.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$18.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$38.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$35.class
 com\mycompany\reto_equipo3\Actividad.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$4.class
+com\mycompany\reto_equipo3\Swing\SwingPrincipal$40.class
 com\mycompany\reto_equipo3\Enums\Roles.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$20.class
