@@ -349,7 +349,7 @@ public class DAORutas implements InterfazDAO<Rutas> {
 
     public boolean modificarporid(int idRutanovalida) {
         boolean valido=false;
-        String sql = "UPDATE rutas set estadoRuta=true WHERE idRuta=?";
+        String sql = "UPDATE rutas set estadoRuta=1 WHERE idRuta=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idRutanovalida);
             if (stmt.executeUpdate() != 1) {

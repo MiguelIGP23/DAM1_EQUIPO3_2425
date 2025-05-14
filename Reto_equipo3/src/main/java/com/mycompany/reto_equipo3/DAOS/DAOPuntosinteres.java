@@ -95,19 +95,22 @@ public class DAOPuntosinteres {
         return new PuntosInteres(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6));
     }
 
-    public void eliminar(String nombre) {
-        String sql = "DELETE FROM puntosinteres WHERE nombre=?";
+    public boolean eliminar(int idPI) {
+        boolean valido=false;
+        String sql = "DELETE FROM puntosinteres WHERE idPuntosinteres=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nombre);
+            stmt.setInt(1, idPI);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("No se borro el punto de interes");
             }
+            valido=true;
             System.out.println("Se borro el punto de interes");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valido;
     }
 
     public PuntosInteres buscar(String nombre) {

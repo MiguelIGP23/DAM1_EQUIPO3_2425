@@ -69,30 +69,56 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
         // Reajustar Tamaño de rutas validas tabla
-        this.TableRutasValidas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableRutasValidas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        jScrollPane1.setPreferredSize(new Dimension(1600, 600));
+        jScrollPane1.setPreferredSize(new Dimension(1500, 600));
         Botonparacrearrutas.setVisible(false);
         botoncrearvaloracion.setVisible(false);
         botoncrearcalendario.setVisible(false);
-        //  modelo.clearData(); añadir esto en un metodo con todas las tablas para que no consuma tanto
+        TablaDetallesruta.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane7.setPreferredSize(new Dimension(2800, 400));
     }
 
-    // Tamaño de lo que ocupa cada cuadrado de la tabla valida rutas
+    // Tamaño de lo que ocupa cada cuadrado de la tabla valida rutas y los detalles de la ruta
     public void tamañocolumnasRutaValidas() {
-        this.TableRutasValidas.getColumnModel().getColumn(0).setMinWidth(0);
-         this.TableRutasValidas.getColumnModel().getColumn(0).setMaxWidth(0);
-          this.TableRutasValidas.getColumnModel().getColumn(0).setPreferredWidth(0);
-        this.TableRutasValidas.getColumnModel().getColumn(1).setPreferredWidth(200);
-        this.TableRutasValidas.getColumnModel().getColumn(2).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(3).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(4).setPreferredWidth(200);
-        this.TableRutasValidas.getColumnModel().getColumn(5).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(6).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(7).setPreferredWidth(200);
-        this.TableRutasValidas.getColumnModel().getColumn(8).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(9).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(0).setMinWidth(0);
+        TableRutasValidas.getColumnModel().getColumn(0).setMaxWidth(0);
+        TableRutasValidas.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TableRutasValidas.getColumnModel().getColumn(1).setPreferredWidth(200);
+        TableRutasValidas.getColumnModel().getColumn(2).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(3).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(4).setPreferredWidth(200);
+        TableRutasValidas.getColumnModel().getColumn(5).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(6).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(7).setPreferredWidth(200);
+        TableRutasValidas.getColumnModel().getColumn(8).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(9).setPreferredWidth(150);
+    }
+
+    public void tamañocolumnasDetalles() {
+        TablaDetallesruta.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaDetallesruta.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaDetallesruta.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaDetallesruta.getColumnModel().getColumn(1).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(2).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(3).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(4).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(5).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(6).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(7).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(8).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(9).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(10).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(11).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(12).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(13).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(14).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(15).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(16).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(17).setPreferredWidth(150);
     }
 
     /**
@@ -139,6 +165,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableRutasValidas = new javax.swing.JTable();
         Botonparacrearrutas = new javax.swing.JButton();
+        Botonpararefrecartablas = new javax.swing.JButton();
         PuntosdeRuta = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -160,9 +187,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         DetallesRuta = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         TablaDetallesruta = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         ImagenesInteres = new javax.swing.JPanel();
         NombreImagenesInteres = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -577,6 +604,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
+        Botonpararefrecartablas.setText("Refrescar pagina");
+        Botonpararefrecartablas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonpararefrecartablasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout RutasValidasLayout = new javax.swing.GroupLayout(RutasValidas);
         RutasValidas.setLayout(RutasValidasLayout);
         RutasValidasLayout.setHorizontalGroup(
@@ -584,13 +618,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
             .addGroup(RutasValidasLayout.createSequentialGroup()
                 .addGroup(RutasValidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RutasValidasLayout.createSequentialGroup()
-                        .addGroup(RutasValidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(RutasValidasLayout.createSequentialGroup()
-                                .addGap(230, 230, 230)
-                                .addComponent(NombreRutas))
-                            .addGroup(RutasValidasLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 28, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RutasValidasLayout.createSequentialGroup()
                         .addContainerGap()
@@ -598,12 +627,20 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(VolverInicio)))
                 .addContainerGap())
+            .addGroup(RutasValidasLayout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(NombreRutas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Botonpararefrecartablas)
+                .addGap(20, 20, 20))
         );
         RutasValidasLayout.setVerticalGroup(
             RutasValidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RutasValidasLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(NombreRutas)
+                .addGroup(RutasValidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NombreRutas)
+                    .addComponent(Botonpararefrecartablas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -701,9 +738,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PuntosdeRutaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PuntosdeRutaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -761,6 +798,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        TablaValoraciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaValoracionesMouseClicked(evt);
             }
         });
         jScrollPane5.setViewportView(TablaValoraciones);
@@ -835,6 +877,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        TablaActividades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaActividadesMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(TablaActividades);
 
         jButton3.setText("Volver");
@@ -883,6 +930,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(51, 51, 255));
         jLabel6.setText("Detalles");
 
+        jButton4.setText("Volver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         TablaDetallesruta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -905,40 +959,31 @@ public class SwingPrincipal extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(TablaDetallesruta);
 
-        jButton4.setText("Volver");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout DetallesRutaLayout = new javax.swing.GroupLayout(DetallesRuta);
         DetallesRuta.setLayout(DetallesRutaLayout);
         DetallesRutaLayout.setHorizontalGroup(
             DetallesRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetallesRutaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(256, 256, 256))
             .addGroup(DetallesRutaLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(DetallesRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetallesRutaLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(255, 255, 255))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetallesRutaLayout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(44, 44, 44))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetallesRutaLayout.createSequentialGroup()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
+                .addGap(28, 28, 28)
+                .addGroup(DetallesRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton4)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         DetallesRutaLayout.setVerticalGroup(
             DetallesRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DetallesRutaLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(jButton4)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(DetallesRuta, "card10");
@@ -967,6 +1012,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        TablaimagenesInteres.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaimagenesInteresMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(TablaimagenesInteres);
@@ -1038,6 +1088,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        TablaImagenesPeligro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaImagenesPeligroMouseClicked(evt);
+            }
+        });
         jScrollPane8.setViewportView(TablaImagenesPeligro);
 
         votonimagenvolverpeligro.setText("Volver");
@@ -1051,6 +1106,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
         ImagenesPeligro.setLayout(ImagenesPeligroLayout);
         ImagenesPeligroLayout.setHorizontalGroup(
             ImagenesPeligroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesPeligroLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(votonimagenvolverpeligro)
+                .addGap(40, 40, 40))
             .addGroup(ImagenesPeligroLayout.createSequentialGroup()
                 .addGroup(ImagenesPeligroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ImagenesPeligroLayout.createSequentialGroup()
@@ -1058,12 +1117,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         .addComponent(Cuadroimagenespeligro))
                     .addGroup(ImagenesPeligroLayout.createSequentialGroup()
                         .addGap(124, 124, 124)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(134, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesPeligroLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(votonimagenvolverpeligro)
-                .addGap(40, 40, 40))
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         ImagenesPeligroLayout.setVerticalGroup(
             ImagenesPeligroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1071,8 +1126,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(Cuadroimagenespeligro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(votonimagenvolverpeligro)
                 .addGap(26, 26, 26))
         );
@@ -1453,6 +1508,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        TablaCalendarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaCalendariosMouseClicked(evt);
+            }
+        });
         jScrollPane10.setViewportView(TablaCalendarios);
 
         BotonarutasdesdeCatalogo.setText("Volver");
@@ -1474,37 +1534,33 @@ public class SwingPrincipal extends javax.swing.JFrame {
         PanelCalendarioLayout.setHorizontalGroup(
             PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelCalendarioLayout.createSequentialGroup()
-                .addGap(261, 261, 261)
-                .addComponent(jLabel22)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
+                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                        .addGap(261, 261, 261)
+                        .addComponent(jLabel22))
+                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(76, Short.MAX_VALUE))
+            .addGroup(PanelCalendarioLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(botoncrearcalendario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(106, 106, 106))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
-                        .addComponent(BotonarutasdesdeCatalogo)
-                        .addContainerGap())))
+                .addComponent(BotonarutasdesdeCatalogo)
+                .addGap(25, 25, 25))
         );
         PanelCalendarioLayout.setVerticalGroup(
             PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelCalendarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel22)
-                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BotonarutasdesdeCatalogo)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botoncrearcalendario)
-                        .addGap(16, 16, 16))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botoncrearcalendario)
+                    .addComponent(BotonarutasdesdeCatalogo))
+                .addGap(16, 16, 16))
         );
 
         getContentPane().add(PanelCalendario, "card15");
@@ -1571,7 +1627,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         .addGroup(CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(CrearCalendarioLayout.createSequentialGroup()
                                 .addComponent(Creardetall, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
                                 .addComponent(CrearRecomen, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel23))
                         .addGap(59, 59, 59))))
@@ -1623,6 +1679,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TableRutasValidas.setVisible(true);
         VolverInicio.setVisible(true);
         jScrollPane1.setVisible(true);
+        Botonpararefrecartablas.setVisible(true);
+
     }//GEN-LAST:event_RutasActionPerformed
 
     private void IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSesionActionPerformed
@@ -1638,6 +1696,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 TableRutasValidas.setVisible(true);
                 VolverInicio.setVisible(true);
                 jScrollPane1.setVisible(true);
+                Botonpararefrecartablas.setVisible(true);
                 usuario = U1;
                 if (usuario.getRol() == Roles.administrador || usuario.getRol() == Roles.diseñador || usuario.getRol() == Roles.profesor) {
                     Botonparacrearrutas.setVisible(true);
@@ -1715,6 +1774,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Botonparacrearrutas.setVisible(false);
         botoncrearvaloracion.setVisible(false);
         botoncrearcalendario.setVisible(false);
+        CatalogodeRutas.setVisible(true);
+        volverarutasdesdeno.setVisible(false);
+        jScrollPane9.setVisible(false);
+        Tabladerutasnovalidas.setVisible(false);
+        Botonpararefrecartablas.setVisible(false);
         limpiartablasalvolver();
     }//GEN-LAST:event_VolverInicioActionPerformed
     // Metodo para modificar la tabla de Rutas aprobadas
@@ -1737,6 +1801,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             model.addRow(fila);
         }
         TableRutasValidas.setModel(model);
+        TableRutasValidas.setAutoCreateRowSorter(true);
         tamañocolumnasRutaValidas();
     }//GEN-LAST:event_TableRutasValidasAncestorAdded
     //Al hacer click en una fila de la tabla RutasValidas
@@ -1795,10 +1860,17 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 case "Calendarios asociados" -> {
                     RutasValidas.setVisible(false);
                     PanelCalendario.setVisible(true);
+                    Nombrerutasinavlidas.setVisible(false);
+                    jLabel22.setVisible(true);
+                    this.botoncrearcalendario.setVisible(true);
                 }
                 case "Ver catalogo de rutas" -> {
                     RutasValidas.setVisible(false);
                     CatalogodeRutas.setVisible(true);
+                    volverarutasdesdeno.setVisible(true);
+                    Tabladerutasnovalidas.setVisible(true);
+                    jScrollPane9.setVisible(true);
+                    Nombrerutasinavlidas.setVisible(true);
                 }
                 case "Descargar Ficha de rutas validas" -> {
                     FichaUsuario f1 = new FichaUsuario();
@@ -1849,7 +1921,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
             model.addRow(fila);
         }
         TablePuntosInteres.setModel(model);
-
+        TablePuntosInteres.setAutoCreateRowSorter(true);
+        TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
     }//GEN-LAST:event_TablePuntosInteresAncestorAdded
     // modica la tabla puntos peligro
     private void TablePuntosPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablePuntosPeligroAncestorAdded
@@ -1866,7 +1941,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntospeligro(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
+        TablePuntosPeligro.setAutoCreateRowSorter(true);
         TablePuntosPeligro.setModel(model);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
     }//GEN-LAST:event_TablePuntosPeligroAncestorAdded
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1897,6 +1976,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {a.getIdActividad(), a.getNombre()};
             model.addRow(fila);
         }
+        TablaActividades.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaActividades.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaActividades.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaActividades.setAutoCreateRowSorter(true);
         TablaActividades.setModel(model);
     }//GEN-LAST:event_TablaActividadesAncestorAdded
 
@@ -1908,12 +1991,21 @@ public class SwingPrincipal extends javax.swing.JFrame {
             DetallesRuta.setVisible(false);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-// Tabla con los detalles "no funciona mirar"
+// Tabla con los detalles 
     private void TablaDetallesrutaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaDetallesrutaAncestorAdded
         DAORutas daor = new DAORutas();
-        Rutas ruta =daor.buscarTodaInfo(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
+        Rutas ruta = daor.buscarTodaInfo(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
         model.addColumn("Clasificacion");
         model.addColumn("Nivel Esfuerzo");
         model.addColumn("Nivel Riesgo");
@@ -1922,9 +2014,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("Indicaciones");
         model.addColumn("Ruta Familiar");
         model.addColumn("Media Estrellas");
-        Object[] fila = {ruta.getIdRuta(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
+        Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
         model.addRow(fila);
         TablaDetallesruta.setModel(model);
+        tamañocolumnasDetalles();
     }//GEN-LAST:event_TablaDetallesrutaAncestorAdded
 
     // Tabla rellena con las valoraciones de un usuario
@@ -1942,6 +2035,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {v.getIdValora(), v.getDificultad(), v.getFecha(), v.getEstrellas(), v.getInteresCultural(), v.getBelleza()};
             model.addRow(fila);
         }
+        TablaValoraciones.setAutoCreateRowSorter(true);
+        TablaValoraciones.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaValoraciones.setModel(model);
     }//GEN-LAST:event_TablaValoracionesAncestorAdded
 
@@ -1959,9 +2056,17 @@ public class SwingPrincipal extends javax.swing.JFrame {
         if (fila != -1) {
             Object valorColumna0 = TablePuntosInteres.getValueAt(fila, 0); // pillo la columna 0 
             int resultado = (int) valorColumna0;// valor recogido
-            idpi = resultado;
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea ver las imagenes o borrar los puntos Si-Pasar No-Borrar Punto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                idpi = resultado;
             PuntosdeRuta.setVisible(false);
             ImagenesInteres.setVisible(true);
+            }else if (respuesta==1){
+               DAOPuntosinteres daor = new DAOPuntosinteres();
+                if (daor.eliminar(resultado)) {
+                     JOptionPane.showMessageDialog(null, "Se elimino el punto de interes", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }   
         }
     }//GEN-LAST:event_TablePuntosInteresMouseClicked
 
@@ -1975,7 +2080,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_votonimagenvolverpeligroActionPerformed
 
     private void TablaImagenesPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroAncestorAdded
-        DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
+      DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
         List<ImagenesPeligro> lisimg = daoimg.listar(idpp);
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID PuntosPeligro");
@@ -1995,15 +2100,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
-        TablaimagenesInteres.setModel(model);
-        TablaimagenesInteres.addMouseListener(new MouseAdapter() {
+        TablaImagenesPeligro.setModel(model);
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+       TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+       TablaImagenesPeligro.setAutoCreateRowSorter(true);
+      TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int fila = TablaimagenesInteres.rowAtPoint(e.getPoint());
-                int columna = TablaimagenesInteres.columnAtPoint(e.getPoint());
+                int fila = TablaImagenesPeligro.rowAtPoint(e.getPoint());
+                int columna = TablaImagenesPeligro.columnAtPoint(e.getPoint());
                 if (columna == 1) {
-                    ImageIcon icono = (ImageIcon) TablaimagenesInteres.getValueAt(fila, columna);
-                    String descripcion = (String) TablaimagenesInteres.getValueAt(fila, 2);
+                    ImageIcon icono = (ImageIcon) TablaImagenesPeligro.getValueAt(fila, columna);
+                    String descripcion = (String) TablaImagenesPeligro.getValueAt(fila, 2);
                     if (icono != null) {
                         mostrarImagenYDescripcionEnPanel(icono, descripcion);
                     }
@@ -2017,11 +2126,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
         int fila = TablePuntosPeligro.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TablePuntosPeligro.getValueAt(fila, 0); // pillo la columna 0 
-            int resultado = (int) valorColumna0;// valor recogido
-            idpp = resultado;
+            int resultado = (int) valorColumna0;// valor recogido 
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea ver las imagenes o borrar los puntos Si-Pasar No-Borrar Punto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+            idpi = resultado;
             PuntosdeRuta.setVisible(false);
             ImagenesPeligro.setVisible(true);
+            }else if (respuesta==1){
+               DAOPuntospeligro daor = new DAOPuntospeligro();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se elimino el punto de interes", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
         }
+      }
     }//GEN-LAST:event_TablePuntosPeligroMouseClicked
 
     private void BotonparacrearrutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearrutasActionPerformed
@@ -2066,11 +2183,15 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private void volverarutasdesdenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverarutasdesdenoActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas validas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-            RutasValidas.setVisible(false);
-            CatalogodeRutas.setVisible(true);
+            RutasValidas.setVisible(true);
+            CatalogodeRutas.setVisible(false);
+            Tabladerutasnovalidas.setVisible(false);
+            volverarutasdesdeno.setVisible(false);
+            jScrollPane9.setVisible(false);
+            Tabladerutasnovalidas.setVisible(false);
         }
     }//GEN-LAST:event_volverarutasdesdenoActionPerformed
-
+// Tabla con las rutas no validas
     private void TabladerutasnovalidasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasAncestorAdded
         DAORutas daoruta = new DAORutas();
         List<Rutas> lisruta = daoruta.listarsinaprobar();
@@ -2089,21 +2210,29 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-        TableRutasValidas.setModel(model);
-        tamañocolumnasRutaValidas();
+        Tabladerutasnovalidas.setModel(model);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setMinWidth(0);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
+        Tabladerutasnovalidas.setAutoCreateRowSorter(true);
     }//GEN-LAST:event_TabladerutasnovalidasAncestorAdded
 
     private void TabladerutasnovalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasMouseClicked
-        int fila = TableRutasValidas.getSelectedRow(); // Fila que has clicado 
+        int fila = Tabladerutasnovalidas.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
-            Object valorColumna0 = TableRutasValidas.getValueAt(fila, 0); // pillo la columna 0 
+            Object valorColumna0 = Tabladerutasnovalidas.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-            int respuesta = JOptionPane.showConfirmDialog(null, "Desea pasar una de estas rutas a ser valida", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea pasar una de estas rutas a ser valida o desea borrarla ->no", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
                 DAORutas daor = new DAORutas();
                 if (daor.modificarporid(resultado)) {
                     JOptionPane.showMessageDialog(null, "La ruta paso a ser valida", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else if(respuesta==1){
+                DAORutas daor = new DAORutas();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "La ruta se elimino", "Bien", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
@@ -2149,7 +2278,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             PanelCalendario.setVisible(false);
         }
     }//GEN-LAST:event_BotonarutasdesdeCatalogoActionPerformed
-
+// Tabla con el calendarios
     private void TablaCalendariosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaCalendariosAncestorAdded
         DAOCalendario daoc = new DAOCalendario();
         List<Calendario> liscal = daoc.listar(idrutaapipp);
@@ -2162,6 +2291,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles(), c.getRecomendaciones()};
             model.addRow(fila);
         }
+        TablaCalendarios.setAutoCreateRowSorter(true);
+        TablaCalendarios.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaCalendarios.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaCalendarios.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaCalendarios.setModel(model);
     }//GEN-LAST:event_TablaCalendariosAncestorAdded
 
@@ -2196,9 +2329,278 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botoncrearcalendariode0ActionPerformed
+    //Boton en refrecar rutas con metodos de todas las tablas que reinican las rutas de la base de datos
+    private void BotonpararefrecartablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonpararefrecartablasActionPerformed
+        cargarTablarutasvalidas();
+        cargarTablarutasnovalidas();
+        cargarTablapuntosinteres();
+        cargarTablapuntospeligro();
+        cargarTablavaloraciones();
+        cargarTablaactividades();
+        caragarTabladetalles();
+        cargarTablaimagenesInteres();
+        cargarTablaimagenesPeligro();
+        cargarTablacalendario();
+        tamañocolumnasRutaValidas();
+    }//GEN-LAST:event_BotonpararefrecartablasActionPerformed
 
-private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) { 
-     DAOImagenesInteres daoimg = new DAOImagenesInteres();
+    private void TablaActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaActividadesMouseClicked
+      int fila = TablaActividades.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaActividades.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta actividad", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOActividad daor = new DAOActividad();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro la actividad", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaActividadesMouseClicked
+
+    private void TablaValoracionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaValoracionesMouseClicked
+        int fila = TablaValoraciones.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaValoraciones.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta valoracion", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOValora daor = new DAOValora();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro la valoracion", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaValoracionesMouseClicked
+
+    private void TablaimagenesInteresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaimagenesInteresMouseClicked
+        int fila = TablaimagenesInteres.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaimagenesInteres.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta imagen", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOImagenesInteres daor = new DAOImagenesInteres();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro la imagen", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaimagenesInteresMouseClicked
+
+    private void TablaImagenesPeligroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroMouseClicked
+          int fila = TablaImagenesPeligro.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaImagenesPeligro.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta imagen", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOImagenesPeligro daor = new DAOImagenesPeligro();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro la imagen", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaImagenesPeligroMouseClicked
+
+    private void TablaCalendariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalendariosMouseClicked
+        int fila =TablaCalendarios.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaCalendarios.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar este calendario", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOCalendario daor = new DAOCalendario();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro el calendario", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaCalendariosMouseClicked
+    
+    private void cargarTablarutasvalidas(){
+        DAORutas daoruta = new DAORutas();
+        List<Rutas> lisruta = daoruta.listaraprobadas();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        for (Rutas r : lisruta) {
+            Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
+            model.addRow(fila);
+        }
+        TableRutasValidas.setModel(model);
+        TableRutasValidas.setAutoCreateRowSorter(true);
+        tamañocolumnasRutaValidas();
+    }
+
+    private void cargarTablarutasnovalidas() {
+        DAORutas daoruta = new DAORutas();
+        List<Rutas> lisruta = daoruta.listarsinaprobar();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        for (Rutas r : lisruta) {
+            Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
+            model.addRow(fila);
+        }
+        Tabladerutasnovalidas.setModel(model);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setMinWidth(0);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
+        Tabladerutasnovalidas.setAutoCreateRowSorter(true);
+    }
+
+    private void cargarTablapuntosinteres() {
+      DAOPuntosinteres daopi = new DAOPuntosinteres();
+        List<PuntosInteres> lispi = daopi.listar(idrutaapipp);// cambiar el metodo listar de dao puntos interes de Ruta ruta a int id 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID PuntosInteres");
+        model.addColumn("Nombre");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        model.addColumn("Elevacion");
+        model.addColumn("Descripcion");
+        for (PuntosInteres pp : lispi) {
+            Object[] fila = {pp.getIdPuntosInteres(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
+            model.addRow(fila);
+        }
+        TablePuntosInteres.setModel(model);
+        TablePuntosInteres.setAutoCreateRowSorter(true);
+        TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+    }
+
+    private void cargarTablapuntospeligro() {
+         DAOPuntospeligro daopp = new DAOPuntospeligro();
+        List<PuntosPeligro> lispp = daopp.listar(idrutaapipp);// cambiar el metodo listar de dao puntos peligro de Ruta ruta a int id 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID PuntosPeligro");
+        model.addColumn("Nombre");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        model.addColumn("Elevacion");
+        model.addColumn("Descripcion");
+        for (PuntosPeligro pp : lispp) {
+            Object[] fila = {pp.getIdPuntospeligro(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
+            model.addRow(fila);
+        }
+        TablePuntosPeligro.setAutoCreateRowSorter(true);
+        TablePuntosPeligro.setModel(model);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+    }
+
+    private void cargarTablavaloraciones() {
+        DAOValora daov = new DAOValora();
+        List<Valora> lisv = daov.listar(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Valora");
+        model.addColumn("Dificultad");
+        model.addColumn("Fecha");
+        model.addColumn("Estrellas");
+        model.addColumn("Interes Cultural");
+        model.addColumn("Belleza");
+        for (Valora v : lisv) {
+            Object[] fila = {v.getIdValora(), v.getDificultad(), v.getFecha(), v.getEstrellas(), v.getInteresCultural(), v.getBelleza()};
+            model.addRow(fila);
+        }
+        TablaValoraciones.setAutoCreateRowSorter(true);
+       TablaValoraciones.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaValoraciones.setModel(model);
+    }
+
+    private void cargarTablaactividades() {
+        DAOActividad daoa = new DAOActividad();
+        List<Actividad> lisa = daoa.listar(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Actividad");
+        model.addColumn("Nombre");
+        for (Actividad a : lisa) {
+            Object[] fila = {a.getIdActividad(), a.getNombre()};
+            model.addRow(fila);
+        }
+        TablaActividades.setAutoCreateRowSorter(true);
+        TablaActividades.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaActividades.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaActividades.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaActividades.setModel(model);
+    }
+
+    private void caragarTabladetalles() {
+        DAORutas daor = new DAORutas();
+        Rutas ruta = daor.buscarTodaInfo(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
+        model.addColumn("Clasificacion");
+        model.addColumn("Nivel Esfuerzo");
+        model.addColumn("Nivel Riesgo");
+        model.addColumn("Estado Ruta");
+        model.addColumn("Tipo Terreno");
+        model.addColumn("Indicaciones");
+        model.addColumn("Ruta Familiar");
+        model.addColumn("Media Estrellas");
+        Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
+        model.addRow(fila);
+        TablaDetallesruta.setModel(model);
+        tamañocolumnasDetalles();
+    }
+
+    private void cargarTablacalendario() {
+        DAOCalendario daoc = new DAOCalendario();
+        List<Calendario> liscal = daoc.listar(idrutaapipp);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Calendario");
+        model.addColumn("Fecha");
+        model.addColumn("Detalles");
+        model.addColumn("Recomendaciones");
+        for (Calendario c : liscal) {
+            Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles(), c.getRecomendaciones()};
+            model.addRow(fila);
+        }
+        TablaCalendarios.setAutoCreateRowSorter(true);
+        TablaCalendarios.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaCalendarios.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaCalendarios.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaCalendarios.setModel(model);
+    }
+
+    private void cargarTablaimagenesInteres() {
+        DAOImagenesInteres daoimg = new DAOImagenesInteres();
         List<ImagenesInteres> lisimg = daoimg.listar(idpi);
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID PuntosInteres");
@@ -2216,13 +2618,16 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
 
             } catch (Exception ex) {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
-               }                                                   
+            }
         }
         TablaimagenesInteres.setModel(model);
-
+        TablaimagenesInteres.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
+       TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaimagenesInteres.setAutoCreateRowSorter(true);
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
-         public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 int fila = TablaimagenesInteres.rowAtPoint(e.getPoint());
                 int columna = TablaimagenesInteres.columnAtPoint(e.getPoint());
                 if (columna == 1) {
@@ -2236,7 +2641,96 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
         }
         );
     }
-     private void mostrarImagenYDescripcionEnPanel(ImageIcon icono, String descripcion) {
+
+    private void cargarTablaimagenesPeligro() {
+        DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
+        List<ImagenesPeligro> lisimg = daoimg.listar(idpp);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID PuntosPeligro");
+        model.addColumn("URL");
+        model.addColumn("Descripcion");
+
+        for (ImagenesPeligro pi : lisimg) {
+            try {
+                System.out.println("Cargando imagen" + pi.getUrl());
+                URL url = new URL(pi.getUrl());
+                ImageIcon icono = new ImageIcon(ImageIO.read(url));
+
+                Object[] fila = {pi.getIdimagenespeligro(), icono, pi.getDescripcion()};
+                model.addRow(fila);
+
+            } catch (Exception ex) {
+                model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
+            }
+        }
+        TablaImagenesPeligro.setModel(model);
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+       TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+       TablaImagenesPeligro.setAutoCreateRowSorter(true);
+      TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = TablaImagenesPeligro.rowAtPoint(e.getPoint());
+                int columna = TablaImagenesPeligro.columnAtPoint(e.getPoint());
+                if (columna == 1) {
+                    ImageIcon icono = (ImageIcon) TablaImagenesPeligro.getValueAt(fila, columna);
+                    String descripcion = (String) TablaImagenesPeligro.getValueAt(fila, 2);
+                    if (icono != null) {
+                        mostrarImagenYDescripcionEnPanel(icono, descripcion);
+                    }
+                }
+            }
+        }
+        );
+    }
+    // fin del boton de actualizar todas las tablas 
+    //Crea tabla imagenes interes y genera la imagen
+
+    private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) {
+        DAOImagenesInteres daoimg = new DAOImagenesInteres();
+        List<ImagenesInteres> lisimg = daoimg.listar(idpi);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID PuntosInteres");
+        model.addColumn("URL");
+        model.addColumn("Descripcion");
+
+        for (ImagenesInteres pi : lisimg) {
+            try {
+                System.out.println("Cargando imagen" + pi.getUrl());
+                URL url = new URL(pi.getUrl());
+                ImageIcon icono = new ImageIcon(ImageIO.read(url));
+
+                Object[] fila = {pi.getIdimagenesinteres(), icono, pi.getDescripcion()};
+                model.addRow(fila);
+
+            } catch (Exception ex) {
+                model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
+            }
+        }
+        TablaimagenesInteres.setModel(model);
+        TablaimagenesInteres.setAutoCreateRowSorter(true);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaimagenesInteres.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = TablaimagenesInteres.rowAtPoint(e.getPoint());
+                int columna = TablaimagenesInteres.columnAtPoint(e.getPoint());
+                if (columna == 1) {
+                    ImageIcon icono = (ImageIcon) TablaimagenesInteres.getValueAt(fila, columna);
+                    String descripcion = (String) TablaimagenesInteres.getValueAt(fila, 2);
+                    if (icono != null) {
+                        mostrarImagenYDescripcionEnPanel(icono, descripcion);
+                    }
+                }
+            }
+        }
+        );
+    }
+
+    private void mostrarImagenYDescripcionEnPanel(ImageIcon icono, String descripcion) {
         JPanel panelVistaPrevia = new JPanel();
         panelVistaPrevia.setLayout(new BoxLayout(panelVistaPrevia, BoxLayout.Y_AXIS));
         JLabel labelImagen = new JLabel(icono);
@@ -2246,12 +2740,12 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
         JFrame ventanaVistaPrevia = new JFrame("Vista Previa");
         ventanaVistaPrevia.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventanaVistaPrevia.add(panelVistaPrevia);
-        ventanaVistaPrevia.pack(); 
-        ventanaVistaPrevia.setLocationRelativeTo(null); 
+        ventanaVistaPrevia.pack();
+        ventanaVistaPrevia.setLocationRelativeTo(null);
         ventanaVistaPrevia.setVisible(true);
     }
-     
-    public void limpiartablasalvolver(){
+
+    public void limpiartablasalvolver() {
         TableRutasValidas.setModel(new DefaultTableModel());
         TablePuntosInteres.setModel(new DefaultTableModel());
         TablePuntosPeligro.setModel(new DefaultTableModel());
@@ -2263,9 +2757,7 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
         Tabladerutasnovalidas.setModel(new DefaultTableModel());
         TablaCalendarios.setModel(new DefaultTableModel());
     }
-     
-     
-     
+
     /**
      * @param args the command line arguments
      */
@@ -2289,6 +2781,7 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
     private javax.swing.JButton Botonparacrearruta;
     private javax.swing.JButton Botonparacrearrutas;
     private javax.swing.JButton Botonparacrearvaloracion;
+    private javax.swing.JButton Botonpararefrecartablas;
     private javax.swing.JTextField Botonrese;
     private javax.swing.JPanel CatalogodeRutas;
     private javax.swing.JPasswordField Contraseña;

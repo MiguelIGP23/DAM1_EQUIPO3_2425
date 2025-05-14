@@ -92,20 +92,23 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
         return new PuntosPeligro(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6));
     }
 
-    @Override
-    public void eliminar(String nombre) {
-        String sql = "DELETE FROM puntospeligro WHERE nombre=?";
+
+    public boolean eliminar(int idpp) {
+        boolean valido=false;
+        String sql = "DELETE FROM puntospeligro WHERE idPuntospeligro=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nombre);
+            stmt.setInt(1, idpp);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("No se borro el punto de peligro");
             }
             System.out.println("Se borro el punto de peligro");
+            valido=true;
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valido;
     }
 
     @Override
@@ -230,5 +233,10 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @Override
+    public void eliminar(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

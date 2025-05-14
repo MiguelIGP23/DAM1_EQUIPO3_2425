@@ -100,20 +100,22 @@ public class DAOValora implements InterfazDAO<Valora> {
         return new Valora(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getInt(4), rs.getInt(5), rs.getInt(6));
     }
 
-    public void eliminar(Usuario usu, Rutas ruta) {
-        String sql = "DELETE FROM valora WHERE usuario_idUsuario=? and rutas_idRuta=?";
+    public boolean  eliminar(int idValora) {
+        boolean valido=false;
+        String sql = "DELETE FROM valora WHERE idValora=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, usu.getIdUsuario());
-            stmt.setInt(2, ruta.getIdRuta());
+            stmt.setInt(1, idValora);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: la valoracion no existe");
             }
+            valido=true;
             System.out.println("Se elimino la valoracion");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valido;
     }
 
     public Valora buscar(int id) {

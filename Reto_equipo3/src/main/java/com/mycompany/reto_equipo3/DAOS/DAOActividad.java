@@ -84,19 +84,22 @@ public class DAOActividad implements InterfazDAO<Actividad> {
         return actividades;
     }
 
-    @Override
-    public void eliminar(String nombre) {
-        String sql = "delete from actividad where nombre = ?";
+
+    public boolean eliminar(int idActividad) {
+        boolean valido=false;
+        String sql = "delete from actividad where idActividad = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, nombre);
+            pstmt.setInt(1, idActividad);
             if (pstmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se ha eliminado la actividad.");
             }
+            valido=true;
         } catch (SQLException e) {
             System.out.println("SQLError: " + e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return valido;
     }
 
     @Override
@@ -118,6 +121,11 @@ public class DAOActividad implements InterfazDAO<Actividad> {
 
     private Actividad crearActividades(final ResultSet rs) throws SQLException {
         return new Actividad(rs.getInt(1), rs.getString(2));
+    }
+
+    @Override
+    public void eliminar(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

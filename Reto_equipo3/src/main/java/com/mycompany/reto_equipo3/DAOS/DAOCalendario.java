@@ -46,18 +46,21 @@ public class DAOCalendario implements InterfazDAO<Calendario>{
         }
         return valido;
     }
-    public void eliminar(Calendario cal) {
+    public boolean eliminar(int idCal) {
+        boolean valida=false;
       String sql="delete from calendario where idCalendario=?";
       try(PreparedStatement pstm=conn.prepareStatement(sql)){
-          pstm.setInt(1, cal.getIdCalendario());
+          pstm.setInt(1, idCal);
           if(pstm.executeUpdate()!=1){
                throw new Exception("ERROR: no se elimino el calendario");
           }
+          valida=true;
         }catch(SQLException ex){
             System.out.println("SQLError: " + ex.getMessage());
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+        return valida;
     }
      private Calendario crearCalendario(final ResultSet rs) throws SQLException {
         return new Calendario(rs.getInt(1),rs.getTimestamp(2).toLocalDateTime(),rs.getString(3), rs.getString(4));
