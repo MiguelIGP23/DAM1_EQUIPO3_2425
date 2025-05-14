@@ -5,54 +5,80 @@
 package com.mycompany.reto_equipo3;
 
 /**
- *
- * @author DAM122
+ * Clase que representa las imágenes de interés de los puntos de interés de una ruta
+ * @author Saúl García, JavaDoc por Hugo Fernández    
  */
 public class ImagenesInteres {
     private int idimagenesinteres;
     private String url;
     private String descripcion;
     private int puntosinteres_idPuntosinteres;
-
+    /**
+     * Constructor por parámetros, sin incluir la id de los puntos de interés
+     * @param idimagenesinteres para darle valor como parámetro al atributo "idimagenesinteres"
+     * @param url para darle valor como parámetro al atributo "url"
+     * @param descripcion para darle valor como parámetro al atributo "descripcion"
+     */
     public ImagenesInteres(int idimagenesinteres, String url, String descripcion) {
         this.idimagenesinteres = idimagenesinteres;
         this.url = url;
         this.descripcion = descripcion;
 
     }
-    
-    //Metodos get
+    /**
+     * Getter del atributo "idimagenesinteres"
+     * @return el valor actual del atributo "idimagenesinteres"
+     */
     public int getIdimagenesinteres() {
         return idimagenesinteres;
     }
-
+    /**
+     * Getter del atributo "url"
+     * @return el valor actual del atributo "url"
+     */
     public String getUrl() {
         return url;
     }
-
+    /**
+     * Getter del atributo "descripcion"
+     * @return el valor actual del atributo "descripcion"
+     */
     public String getDescripcion() {
         return descripcion;
     }
-
+    /**
+     * Getter del atributo "puntosinteres_idPuntosinteres"
+     * @return el valor actual del atributo "puntosinteres_idPuntosinteres"
+     */
     public int getPuntosinteres_idPuntosinteres() {
         return puntosinteres_idPuntosinteres;
     }
-    
-    //Metodos set
+    /**
+     * Setter del atributo "idimagenesinteres"
+     * @param idimagenesinteres que sirve para igualarse al atributo "idimagenesinteres" y cambiarle el valor
+     */
     public void setIdimagenesinteres(int idimagenesinteres) {
         this.idimagenesinteres = idimagenesinteres;
     }
-
+    /**
+     * Setter del atributo "url"
+     * @param url que sirve para igualarse al atributo "url" y cambiarle el valor
+     */
     public void setUrl(String url) {
         this.url = url;
     }
-
+    /**
+     * Setter del atributo "descripcion"
+     * @param descripcion que sirve para igualarse al atributo "descripcion" y cambiarle el valor
+     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+    /**
+     * Setter del atributo "puntosinteres_idPuntosinteres"
+     * @param puntosinteres_idPuntosinteres que sirve para igualarse al atributo "puntosinteres_idPuntosinteres" y cambiarle el valor
+     */
     public void setPuntosinteres_idPuntosinteres(int puntosinteres_idPuntosinteres) {
         this.puntosinteres_idPuntosinteres = puntosinteres_idPuntosinteres;
-    }
-    
+    } 
 }
