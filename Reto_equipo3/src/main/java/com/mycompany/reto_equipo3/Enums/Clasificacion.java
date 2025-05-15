@@ -5,8 +5,8 @@
 package com.mycompany.reto_equipo3.Enums;
 
 /**
- *
- * @author DAM123
+ * Clase Enum de Clasificacion para la clase Rutas
+ * @author DAM123, JavaDoc por Hugo Fernández
  */
 public enum Clasificacion {
     CIRCULAR,LINEAL;

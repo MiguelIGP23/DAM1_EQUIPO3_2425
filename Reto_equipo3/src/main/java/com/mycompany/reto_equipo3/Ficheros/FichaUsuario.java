@@ -21,19 +21,16 @@ import java.util.List;
 import java.util.Iterator;
 
 /**
- *
- * @author MiguelIGP-1ºDAM
+ * Clase que crea un fichero con datos de la ruta para ver los datos de usuario
+ * @author Miguel Inglés, JavaDoc por Hugo Fernández 
  */
 
 public class FichaUsuario {
 
     /**
-     * Metodo estatico que genera un archivo llamado
-     * ficha-usuario_nombre_apellido.txt el cual contiene informacion sobre la
-     * dificultad, los puntos de peligro y las recomendaciones de una ruta
-     *
-     * @param ruta objeto ruta sobre la que se genera la ficha
-     * @return true/false indicando si se genero la ficha o no
+     * Método que genera un archivo llamado ficha-usuario_nombre_apellido.txt el cual contiene la información de los datos de usuario de la ruta
+     * @param ruta parámetro que se utiliza para llamar métodos de la clase Rutas
+     * @return boolean si el fichero ha sido generado o no
      */
     public  boolean generarFicha(Rutas ruta) {
         boolean generada = false;
@@ -195,9 +192,12 @@ public class FichaUsuario {
         }
         return generada;
     }
-
-    //Metodo privado para convertir booleanos a texto si o no para codigo mas limpio
-    private  String convierteBoolean(boolean b) {
+    /**
+     * Metodo privado para convertir booleanos a texto si o no para código mas limpio
+     * @param b parámetro booleano a transformar
+     * @return String, un "si" o un "no"
+     */
+    private String convierteBoolean(boolean b) {
         String st = "";
         if (b) {
             st = "si";
@@ -206,5 +206,4 @@ public class FichaUsuario {
         }
         return st;
     }
-
 }

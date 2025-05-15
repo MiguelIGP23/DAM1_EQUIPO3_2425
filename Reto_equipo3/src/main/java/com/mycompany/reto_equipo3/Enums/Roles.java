@@ -5,8 +5,8 @@
 package com.mycompany.reto_equipo3.Enums;
 
 /**
- *
- * @author DAM121
+ * Clase Enum de Roles para la clase Usuario
+ * @author Saúl García, JavaDoc por Hugo Fernández  
  */
 public enum Roles {
     administrador,diseñador,profesor,alumno

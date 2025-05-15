@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- *
- * @author MiguelIGP-1ºDAM
+ * Clase que crea un fichero con datos de la ruta para ver la organización
+ * @author Miguel Inglés, JavaDoc por Hugo Fernández  
  */
 public class FichaOrganizacion {
 
@@ -22,7 +22,12 @@ public class FichaOrganizacion {
      * Metodo estatico que genera un archivo llamado ficha-organizacion.txt el
      * cual contiene informacion sobre
      */
-    public  boolean generarFicha(Rutas ruta) {
+    /**
+     * Método que genera un archivo llamado ficha-organizacion.txt el cual contiene la información de los datos de organización de la ruta
+     * @param ruta parámetro que se utiliza para llamar métodos de la clase Rutas
+     * @return boolean si el fichero ha sido generado o no
+     */
+    public boolean generarFicha(Rutas ruta) {
         boolean generada = false;
         //Creamos la carpeta de fichas en el proyecto si no existe
         String nombreRuta = ruta.getNombre().replaceAll("[^a-zA-Z0-9_\\- ]", "_");

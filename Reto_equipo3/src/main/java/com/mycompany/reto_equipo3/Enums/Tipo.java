@@ -5,8 +5,8 @@
 package com.mycompany.reto_equipo3.Enums;
 
 /**
- *
- * @author DAM122
+ * Clase Enum de Tipo para la clase de PuntoInteres
+ * @author Manuel Mediavilla, JavaDoc por Hugo Fernández
  */
 public enum Tipo {
     historico, mirador, area_de_descanso,

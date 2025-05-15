@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- *
- * @author DAM123
+ * Clase con la función de dar acceso a la base de datos a otras clases y sólo crear una sesión
+ * @author Miguel Inglés, JavaDoc por Hugo Fernández  
  */
 public class AccesoABaseDatos {
     
@@ -23,7 +23,9 @@ public class AccesoABaseDatos {
     private static final String USUARIO = "root";                               //"equipo3"
     private static final String CLAVE = "mysql";                                //"Mysql2024!"
     private static final String URL = "jdbc:mysql://localhost:3307/" + BD;      //"jdbc:mysql://10.0.16.39:3306/" + BD
-
+    /**
+     * Constructor por defecto el cuál define las propiedades de la base de datos desde los atributos, el user, password y establece con el DriverManager, da un mensaje si la conexión fue establecida correctamente
+     */
     public AccesoABaseDatos() {
         try {
             Properties properties = new Properties();
@@ -42,17 +44,25 @@ public class AccesoABaseDatos {
         }
     }
 
-    //Metodo y clase que crea la unica instancia de AccesoABaseDatos
+    /**
+     * Método estático y clase que devuelve la única instancia de AccesoABaseDatos
+     * @return de tipo AccesoABaseDatos, la clase AccesoABaseDatosHolder con la instancia
+     */
     public static AccesoABaseDatos getInstance() {
         return AccesoABaseDatosHolder.INSTANCE;
     }
-
+    /**
+     * Clase estática privada la cuál crea la única instancia de AccesoABaseDatos
+     */
     private static class AccesoABaseDatosHolder {
-
+        
         private static final AccesoABaseDatos INSTANCE = new AccesoABaseDatos();
     }
 
-    //Metodo que cierra la conexion
+    /**
+     * Método públic que cierra la conexión
+     * @return boolean si la conexión fue cerrada o no
+     */
     public boolean cerrar() {
         boolean cerrada = false;
         try {
@@ -67,6 +77,10 @@ public class AccesoABaseDatos {
     }
 
     //Metodo que devuelve la conexion
+    /**
+     * Método público que devuelve la conexión para usarla en demás clases
+     * @return el atributo "conn", el cuál representa la conexión actual de la base de datos
+     */
     public Connection getConnexion() {
         return conn;
     }

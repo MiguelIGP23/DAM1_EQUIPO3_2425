@@ -19,20 +19,16 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- *
- * @author MiguelIGP-1ºDAM
+ * Clase que crea un fichero con datos de la ruta para ver la seguridad
+ * @author Miguel Inglés, JavaDoc por Hugo Fernández 
  */
-public class FichaSeguridad{
-
+public class FichaSeguridad{   
     /**
-     * Metodo estatico que genera un archivo llamado
-     * ficha-seguridad_nombreRuta.txt el cual contiene informacion sobre la
-     * dificultad, los puntos de peligro y las recomendaciones de una ruta
-     *
-     * @param ruta
-     * @return
+     * Método que genera un archivo llamado ficha-seguridad_nombreRuta.txt el cual contiene la información de los datos de seguridad de la ruta
+     * @param ruta parámetro que se utiliza para llamar métodos de la clase Rutas
+     * @return boolean si el fichero ha sido generado o no
      */
-    public  boolean generarFicha(Rutas ruta) {
+    public boolean generarFicha(Rutas ruta) {
         boolean generada = false; //Creamos la carpeta de fichas en el proyecto si no existe
         String nombreRuta = ruta.getNombre().replaceAll("[^a-zA-Z0-9_\\- ]", "_");
         File carpeta = new File("fichas/fichas_" + nombreRuta);

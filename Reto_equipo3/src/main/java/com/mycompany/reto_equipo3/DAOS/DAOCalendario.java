@@ -17,15 +17,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
  
-/**
-*
-* @author DAM121
+/**Calendario para las consultas/modificaciones simples de la base de datos
+* @author Saúl García y Miguel Inglés, JavaDoc por Hugo Fernández  
 */
 public class DAOCalendario implements InterfazDAO<Calendario>{
     private Connection conn;
+    /**
+     * Constructor por defecto, devuelve la conexión de la base de datos desde el atributo "conn" con los métodos de acceso de la clase
+     */
     public DAOCalendario() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
+    /**
+     * Método insertar para insertar a la base de datos un calendario
+     * @param calendario parámetro que sirve para llamar a dichos getters de la clase Calendario
+     * @param usu parámetro que sirve para llamar a dichos getters de la clase Usuario
+     * @param idRuta parámetro que identifica el id de la ruta
+     * @return boolean si el calendario ha sido insertado o no
+     */
     public boolean insertar(Calendario calendario,Usuario usu,int idRuta){
         boolean valido=false;
         String sql="insert into calendario (fecha, detalles, recomendaciones, rutas_idRuta, usuario_idUsuario) values (?, ?, ?, ?, ?)";
@@ -46,6 +55,10 @@ public class DAOCalendario implements InterfazDAO<Calendario>{
         }
         return valido;
     }
+    /**
+     * 
+     * @param cal 
+     */
     public void eliminar(Calendario cal) {
       String sql="delete from calendario where idCalendario=?";
       try(PreparedStatement pstm=conn.prepareStatement(sql)){
