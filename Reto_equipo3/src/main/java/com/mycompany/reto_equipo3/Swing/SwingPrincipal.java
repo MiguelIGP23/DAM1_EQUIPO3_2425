@@ -2532,15 +2532,15 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados"};
             } else {
                 if (usuario.getRol() == Roles.alumno) {
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas","Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.diseñador) {
                     // crear rutas y valora todo y calendario todo
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Descargar Ficha de rutas validas"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Descargar Ficha de rutas validas","Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.profesor) {
                     // crear ruta y valora todo y ca
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas ", "Descargar Ficha de rutas validas"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas ", "Descargar Ficha de rutas validas","Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.administrador) {
                     // modifica ruta , todo ruta, todo valora y todo calendario
