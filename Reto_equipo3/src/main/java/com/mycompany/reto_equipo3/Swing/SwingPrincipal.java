@@ -25,6 +25,7 @@ import com.mycompany.reto_equipo3.ImagenesInteres;
 import com.mycompany.reto_equipo3.ImagenesPeligro;
 import com.mycompany.reto_equipo3.PuntosInteres;
 import com.mycompany.reto_equipo3.PuntosPeligro;
+import com.mycompany.reto_equipo3.Reto_equipo3;
 import com.mycompany.reto_equipo3.Rutas;
 import com.mycompany.reto_equipo3.Usuario;
 import com.mycompany.reto_equipo3.Validaciones.Teclado;
@@ -65,6 +66,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
 
     public SwingPrincipal() {
         initComponents();
+        //No deja salir ni con x ni con alt + f4
         setResizable(false);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -73,7 +75,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 System.out.println("Cierre deshabilitado.");
             }
         });
-        // Reajustar Tamaño de rutas validas tabla
+        // Botones por defecto desactivados hasta que ponga su rol y tamaño de tablas
         TableRutasValidas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -86,13 +88,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
         CrearImagenesPeligro.setVisible(false);
         BotoncrearActividad.setVisible(false);
         botoncrearcalendario.setVisible(false);
+        Botonvalidarutasir.setVisible(false);
         TablaDetallesruta.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         jScrollPane7.setPreferredSize(new Dimension(2800, 400));
     }
 
-    // Tamaño de lo que ocupa cada cuadrado de la tabla valida rutas y los detalles de la ruta
+    // Tamaño de lo que ocupa cada cuadrado de la tabla valida rutas y los detalles de la ruta valida
     public void tamañocolumnasRutaValidas() {
         TableRutasValidas.getColumnModel().getColumn(0).setMinWidth(0);
         TableRutasValidas.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -107,7 +110,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TableRutasValidas.getColumnModel().getColumn(8).setPreferredWidth(150);
         TableRutasValidas.getColumnModel().getColumn(9).setPreferredWidth(150);
     }
-
+//Metodo que da formato a la tabla de detalles
     public void tamañocolumnasDetalles() {
         TablaDetallesruta.getColumnModel().getColumn(0).setMinWidth(0);
         TablaDetallesruta.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -235,6 +238,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         duracion = new javax.swing.JTextField();
         Botonparacrearruta = new javax.swing.JButton();
+        Botonvalidarutasir = new javax.swing.JButton();
         CatalogodeRutas = new javax.swing.JPanel();
         Nombrerutasinavlidas = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -583,14 +587,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
                                 .addContainerGap())))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearUsuariosLayout.createSequentialGroup()
                 .addContainerGap(243, Short.MAX_VALUE)
-                .addGroup(CrearUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearUsuariosLayout.createSequentialGroup()
-                        .addComponent(Texto)
-                        .addGap(214, 214, 214)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearUsuariosLayout.createSequentialGroup()
-                        .addComponent(VolverUsuarios)
-                        .addContainerGap())))
+                .addComponent(Texto)
+                .addGap(214, 214, 214)
+                .addComponent(jLabel1))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearUsuariosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(VolverUsuarios)
+                .addContainerGap())
         );
         CrearUsuariosLayout.setVerticalGroup(
             CrearUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1305,6 +1308,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
+        Botonvalidarutasir.setText("Ver rutas no validas");
+        Botonvalidarutasir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonvalidarutasirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CrearRutasde0Layout = new javax.swing.GroupLayout(CrearRutasde0);
         CrearRutasde0.setLayout(CrearRutasde0Layout);
         CrearRutasde0Layout.setHorizontalGroup(
@@ -1332,7 +1342,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
                                         .addGroup(CrearRutasde0Layout.createSequentialGroup()
                                             .addGap(8, 8, 8)
                                             .addComponent(jLabel10))
-                                        .addComponent(jLabel8))
+                                        .addComponent(jLabel8)
+                                        .addComponent(Botonvalidarutasir))
                                     .addGap(200, 200, 200))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE))
                     .addGroup(CrearRutasde0Layout.createSequentialGroup()
@@ -1418,7 +1429,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearRutasde0Layout.createSequentialGroup()
                         .addComponent(ldi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                        .addComponent(Botonparacrearruta)
+                        .addGroup(CrearRutasde0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Botonparacrearruta)
+                            .addComponent(Botonvalidarutasir))
                         .addGap(35, 35, 35))))
         );
 
@@ -2119,8 +2132,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel33)
                 .addGap(33, 33, 33)
-                .addGroup(CrearImagenPeligropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel34)
+                .addGroup(CrearImagenPeligropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(descripcionpl))
                 .addGap(18, 18, 18)
                 .addGroup(CrearImagenPeligropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2267,7 +2280,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
                                     .addComponent(clasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(28, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel47)
                                     .addComponent(recomen, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -2308,12 +2320,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
                     .addGroup(ValidaRutasLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jLabel37))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel43)
-                            .addComponent(jLabel40)
-                            .addComponent(jLabel47))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel43)
+                        .addComponent(jLabel40)
+                        .addComponent(jLabel47)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ValidaRutasLayout.createSequentialGroup()
@@ -2350,19 +2360,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//Metodo de volver
     private void BotonEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEntradaActionPerformed
         PanelEntrada.setVisible(false);
         PanelInicio.setVisible(true);
     }//GEN-LAST:event_BotonEntradaActionPerformed
-
+//Metodo de volver
     private void SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalidaActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea salir de la aplicacion", "Salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_SalidaActionPerformed
-
+//Metodo de volver
     private void RutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RutasActionPerformed
         PanelInicio.setVisible(false);
         RutasValidas.setVisible(true);
@@ -2372,7 +2382,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Botonpararefrecartablas.setVisible(true);
 
     }//GEN-LAST:event_RutasActionPerformed
-
+//Metodo que inicia sesion con email y contraseña validos
     private void IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSesionActionPerformed
         String email = Email.getText();
         char[] passwordChars = Contraseña.getPassword();
@@ -2403,6 +2413,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 }
                 if (usuario.getRol() == Roles.profesor || usuario.getRol() == Roles.administrador) {
                     botoncrearcalendario.setVisible(true);
+                    Botonvalidarutasir.setVisible(true);
                 }
             }
             if (U1 == null) {
@@ -2412,7 +2423,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_IniciarSesionActionPerformed
-
+//Metodo de volver
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         CrearUsuarios.setVisible(true);
         PanelInicio.setVisible(false);
@@ -2421,7 +2432,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private void eligerolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eligerolActionPerformed
 
     }//GEN-LAST:event_eligerolActionPerformed
-
+//Metodo de volver
     private void VolverUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverUsuariosActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a menu de inicio", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2429,7 +2440,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             PanelInicio.setVisible(true);
         }
     }//GEN-LAST:event_VolverUsuariosActionPerformed
-
+//metodo que crea el usuario
     private void darbotonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darbotonUsuarioActionPerformed
         char[] passwordChars = introcontraseña.getPassword();
         String password = new String(passwordChars);
@@ -2460,7 +2471,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_darbotonUsuarioActionPerformed
-
+//Metodo de volver al main
     private void VolverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverInicioActionPerformed
         CrearUsuarios.setVisible(false);
         PanelInicio.setVisible(true);
@@ -2480,9 +2491,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
         BotoncrearActividad.setVisible(false);
         CrearImagenes.setVisible(false);
         BotonCrearPunto.setVisible(false);
-         CrearImagenes.setVisible(false);
-         CrearImagenesPeligro.setVisible(false);
-         BotoncrearActividad.setVisible(false);
+        CrearImagenes.setVisible(false);
+        CrearImagenesPeligro.setVisible(false);
+        BotoncrearActividad.setVisible(false);
+        Botonvalidarutasir.setVisible(false);
         limpiartablasalvolver();
     }//GEN-LAST:event_VolverInicioActionPerformed
     // Metodo para modificar la tabla de Rutas aprobadas
@@ -2504,11 +2516,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-        TableRutasValidas.setModel(model);
-        TableRutasValidas.setAutoCreateRowSorter(true);
+          TableRutasValidas.setAutoCreateRowSorter(true);
         tamañocolumnasRutaValidas();
+        TableRutasValidas.setModel(model);
     }//GEN-LAST:event_TableRutasValidasAncestorAdded
-    //Al hacer click en una fila de la tabla RutasValidas
+    //Al hacer click en una fila de la tabla RutasValidas te permite ver lo que puede hacer cada tipo de usuario
     private void TableRutasValidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableRutasValidasMouseClicked
         int fila = TableRutasValidas.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -2603,7 +2615,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TableRutasValidasMouseClicked
-
+//Metodo de volver
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a  ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2627,11 +2639,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntosInteres(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
-        TablePuntosInteres.setModel(model);
         TablePuntosInteres.setAutoCreateRowSorter(true);
         TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablePuntosInteres.setModel(model);
     }//GEN-LAST:event_TablePuntosInteresAncestorAdded
     // modica la tabla puntos peligro
     private void TablePuntosPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablePuntosPeligroAncestorAdded
@@ -2648,13 +2660,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntospeligro(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
-        TablePuntosPeligro.setAutoCreateRowSorter(true);
-        TablePuntosPeligro.setModel(model);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablePuntosPeligro.setAutoCreateRowSorter(true);
+        TablePuntosPeligro.setModel(model);
     }//GEN-LAST:event_TablePuntosPeligroAncestorAdded
-
+//Metodo de volver
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2663,7 +2675,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             ValoracionesdeRuta.setVisible(false);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+//Metodo de volver
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2689,7 +2701,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablaActividades.setAutoCreateRowSorter(true);
         TablaActividades.setModel(model);
     }//GEN-LAST:event_TablaActividadesAncestorAdded
-
+//Metodo de volver
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2723,8 +2735,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("Media Estrellas");
         Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
         model.addRow(fila);
-        TablaDetallesruta.setModel(model);
         tamañocolumnasDetalles();
+        TablaDetallesruta.setModel(model);
     }//GEN-LAST:event_TablaDetallesrutaAncestorAdded
 
     // Tabla rellena con las valoraciones de un usuario
@@ -2748,7 +2760,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablaValoraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaValoraciones.setModel(model);
     }//GEN-LAST:event_TablaValoracionesAncestorAdded
-
+//Metodo de volver
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2757,7 +2769,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             ImagenesInteres.setVisible(false);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-
+//Metodo queve las imagenes de un punto de interes y ademas podria eliminar este
     private void TablePuntosInteresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePuntosInteresMouseClicked
         int fila = TablePuntosInteres.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -2768,17 +2780,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 idpi = resultado;
                 PuntosdeRuta.setVisible(false);
                 ImagenesInteres.setVisible(true);
-            }
-             int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            }else{
+           int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                if (resp == 0) {
               DAOPuntosinteres daor = new DAOPuntosinteres();
                 if (daor.eliminar(resultado)) {
                      JOptionPane.showMessageDialog(null, "Se elimino el punto ", "Bien", JOptionPane.INFORMATION_MESSAGE);
                 }
+            } 
             }
+
         }
     }//GEN-LAST:event_TablePuntosInteresMouseClicked
-
+//Metodo de volver
     private void votonimagenvolverpeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_votonimagenvolverpeligroActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2787,7 +2801,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             ImagenesPeligro.setVisible(false);
         }
     }//GEN-LAST:event_votonimagenvolverpeligroActionPerformed
-
+//Metodo que hace la tabla de imagenes de peligro
     private void TablaImagenesPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroAncestorAdded
       DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
         List<ImagenesPeligro> lisimg = daoimg.listar(idpp);
@@ -2809,11 +2823,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
-        TablaImagenesPeligro.setModel(model);
         TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
         TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
        TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
        TablaImagenesPeligro.setAutoCreateRowSorter(true);
+        TablaImagenesPeligro.setModel(model);
       TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -2830,7 +2844,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         }
         );
     }//GEN-LAST:event_TablaImagenesPeligroAncestorAdded
-
+//Metodo para eliminar un punto de peligro al clicar
     private void TablePuntosPeligroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePuntosPeligroMouseClicked
         int fila = TablePuntosPeligro.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -2841,22 +2855,24 @@ public class SwingPrincipal extends javax.swing.JFrame {
             idpi = resultado;
             PuntosdeRuta.setVisible(false);
             ImagenesPeligro.setVisible(true);
-            }
-            int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punnto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            }else{
+              int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punnto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
              if (resp==0){
                DAOPuntospeligro daor = new DAOPuntospeligro();
                 if (daor.eliminar(resultado)) {
                     JOptionPane.showMessageDialog(null, "Se elimino el punto de interes", "Bien", JOptionPane.INFORMATION_MESSAGE);
                 }
-        }
+        } 
+      }
+        
       }
     }//GEN-LAST:event_TablePuntosPeligroMouseClicked
-
+//Metodo de volver
     private void BotonparacrearrutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearrutasActionPerformed
         RutasValidas.setVisible(false);
         CrearRutasde0.setVisible(true);
     }//GEN-LAST:event_BotonparacrearrutasActionPerformed
-
+//Metodo de volver
     private void volverdecrearrutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverdecrearrutaActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2864,7 +2880,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             CrearRutasde0.setVisible(false);
         }
     }//GEN-LAST:event_volverdecrearrutaActionPerformed
-
+// Metodo que crea una ruta
     private void BotonparacrearrutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearrutaActionPerformed
         String nombre = nombreruta.getText();
         String nombreini = nombreinicio.getText();
@@ -2890,7 +2906,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonparacrearrutaActionPerformed
-
+//Metodo de volver
     private void volverarutasdesdenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverarutasdesdenoActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas validas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2921,13 +2937,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-        Tabladerutasnovalidas.setModel(model);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMinWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
         Tabladerutasnovalidas.setAutoCreateRowSorter(true);
+        Tabladerutasnovalidas.setModel(model);
+      
     }//GEN-LAST:event_TabladerutasnovalidasAncestorAdded
-
+//Metodo que valida la ruta y puede eliminar si quiere
     private void TabladerutasnovalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasMouseClicked
         int fila = Tabladerutasnovalidas.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -2940,23 +2957,25 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 if (daor.modificarporid(resultado)) {
                     JOptionPane.showMessageDialog(null, "La ruta paso a ser valida", "Bien", JOptionPane.INFORMATION_MESSAGE);
                 }
-            }
-            
-            int res = JOptionPane.showConfirmDialog(null, "Desea eliminar una de estas rutas no validas", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            }else{
+             int res = JOptionPane.showConfirmDialog(null, "Desea eliminar una de estas rutas no validas", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (res == 0) {
                 DAORutas daor = new DAORutas();
                 if (daor.eliminar(resultado)) {
                     JOptionPane.showMessageDialog(null, "La ruta se elimino", "Bien", JOptionPane.INFORMATION_MESSAGE);
                 }
+            } 
             }
+            
+          
         }
     }//GEN-LAST:event_TabladerutasnovalidasMouseClicked
-
+//Metodo de volver
     private void botoncrearvaloracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearvaloracionActionPerformed
         ValoracionesdeRuta.setVisible(false);
         Panelparacrearvaloracion.setVisible(true);
     }//GEN-LAST:event_botoncrearvaloracionActionPerformed
-
+//Metodo de volver
     private void VolveraverlasvaloracionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraverlasvaloracionesActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las valoraciones", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2964,7 +2983,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Panelparacrearvaloracion.setVisible(false);
         }
     }//GEN-LAST:event_VolveraverlasvaloracionesActionPerformed
-
+// Netodo que crea una valoracion
     private void BotonparacrearvaloracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearvaloracionActionPerformed
         String dificultad = Botondificul.getText();
         String interes = BotonIntere.getText();
@@ -2984,7 +3003,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonparacrearvaloracionActionPerformed
-
+//Metodo de volver
     private void BotonarutasdesdeCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonarutasdesdeCatalogoActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -3011,12 +3030,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablaCalendarios.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaCalendarios.setModel(model);
     }//GEN-LAST:event_TablaCalendariosAncestorAdded
-
+//Metodo de volver
     private void botoncrearcalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearcalendarioActionPerformed
         CrearCalendario.setVisible(true);
         PanelCalendario.setVisible(false);
     }//GEN-LAST:event_botoncrearcalendarioActionPerformed
-
+//Metodo de volver
     private void VolveraCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraCalendarioActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los calendarios", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -3024,7 +3043,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             PanelCalendario.setVisible(true);
         }
     }//GEN-LAST:event_VolveraCalendarioActionPerformed
-
+// boton que crea un calendario
     private void botoncrearcalendariode0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearcalendariode0ActionPerformed
         String detalles = Creardetall.getText();
         String recomendaciones = CrearRecomen.getText();
@@ -3045,6 +3064,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botoncrearcalendariode0ActionPerformed
     //Boton en refrecar rutas con metodos de todas las tablas que reinican las rutas de la base de datos
     private void BotonpararefrecartablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonpararefrecartablasActionPerformed
+        if (idrutaapipp>=0) {
         cargarTablarutasvalidas();
         cargarTablarutasnovalidas();
         cargarTablapuntosinteres();
@@ -3056,8 +3076,16 @@ public class SwingPrincipal extends javax.swing.JFrame {
         cargarTablaimagenesPeligro();
         cargarTablacalendario();
         tamañocolumnasRutaValidas();
+         JOptionPane.showMessageDialog(null, "Se actualizaron las tablas de la ruta: "+ idrutaapipp, "Bien", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+          JOptionPane.showMessageDialog(null, "Selecciona unicamente 1 y no varias o ninguna rutas", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+       // otra forma de refrecar es asi
+       //this.dispose();
+       //Reto_equipo3.main(new String[0]);
     }//GEN-LAST:event_BotonpararefrecartablasActionPerformed
-
+//Metodo que borra una actividad al clicar en ella
     private void TablaActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaActividadesMouseClicked
       int fila = TablaActividades.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -3073,7 +3101,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TablaActividadesMouseClicked
-
+// Borra una valoracion al clicar
     private void TablaValoracionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaValoracionesMouseClicked
         int fila = TablaValoraciones.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -3089,7 +3117,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TablaValoracionesMouseClicked
-
+//Metodo que borra una imagen al clicar en ella
     private void TablaimagenesInteresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaimagenesInteresMouseClicked
         int fila = TablaimagenesInteres.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -3105,7 +3133,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TablaimagenesInteresMouseClicked
-
+//Metodo que borra una imagen al clicar en ella
     private void TablaImagenesPeligroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroMouseClicked
           int fila = TablaImagenesPeligro.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -3121,7 +3149,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TablaImagenesPeligroMouseClicked
-
+//Metodo para borrar un calendario al clicar sobre este
     private void TablaCalendariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalendariosMouseClicked
         int fila =TablaCalendarios.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -3137,12 +3165,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TablaCalendariosMouseClicked
-
+//Metodo de volver
     private void BotonCrearPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCrearPuntoActionPerformed
        this.PuntosdeRuta.setVisible(false);
        this.CrearPuntosRutap.setVisible(true);
     }//GEN-LAST:event_BotonCrearPuntoActionPerformed
-
+//Metodo de volver
     private void BotonvolverPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvolverPuntoActionPerformed
        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -3150,7 +3178,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
        this.CrearPuntosRutap.setVisible(false);
         }
     }//GEN-LAST:event_BotonvolverPuntoActionPerformed
-
+// Metodo que crea un punto de interes o peligro depende de lo elija el usuario
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String nombrepp=nombrePP.getText();
        String nombreLat1=nombreLatitud1.getText();
@@ -3186,12 +3214,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
        }
      }  
     }//GEN-LAST:event_jButton6ActionPerformed
-
+//Metodo de volver
     private void BotoncrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotoncrearActividadActionPerformed
        Actividades.setVisible(false);
        CrearActividades.setVisible(true);
     }//GEN-LAST:event_BotoncrearActividadActionPerformed
-
+//Metodo de volver
     private void volveraactividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volveraactividadActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las actividades", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -3199,7 +3227,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
        CrearActividades.setVisible(false);
         }
     }//GEN-LAST:event_volveraactividadActionPerformed
-
+//Metodo que crea una actividad para una ruta
     private void CrearActividadBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActividadBotonActionPerformed
         String nombre=this.NombreActi.getText();
         if (Teclado.validanombre(nombre)) {
@@ -3214,7 +3242,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_CrearActividadBotonActionPerformed
-
+//Metodo de volver
     private void VolverImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverImagenesActionPerformed
        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las imagenes", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -3222,12 +3250,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
         CrearImagen.setVisible(false);
         }
     }//GEN-LAST:event_VolverImagenesActionPerformed
-
+//Metodo de volver
     private void CrearImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearImagenesActionPerformed
         ImagenesInteres.setVisible(false);
         CrearImagen.setVisible(true);
     }//GEN-LAST:event_CrearImagenesActionPerformed
-
+//Metodo que crea una imagen de interes
     private void CrearImagenesnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearImagenesnuevoActionPerformed
         String URL=ValidaURL.getText();
         String descripcion=this.ValidaDescripcion.getText();
@@ -3243,12 +3271,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_CrearImagenesnuevoActionPerformed
-
+//Metodo de volver
     private void CrearImagenesPeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearImagenesPeligroActionPerformed
           ImagenesPeligro.setVisible(false);
         CrearImagenPeligrop.setVisible(true);
     }//GEN-LAST:event_CrearImagenesPeligroActionPerformed
-
+//Metodo de volver
     private void VolverImagnesPeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverImagnesPeligroActionPerformed
          int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las imagenes", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -3256,7 +3284,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         CrearImagenPeligrop.setVisible(false);
         }
     }//GEN-LAST:event_VolverImagnesPeligroActionPerformed
-
+//Metodo que crea una imagen de peligro
     private void crearimagenpeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearimagenpeligroActionPerformed
          String URL=CrearURLY.getText();
         String descripcion=this.CREARDESCRIPCION.getText();
@@ -3272,7 +3300,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_crearimagenpeligroActionPerformed
-
+//Metodo que modifica rutas
     private void BotonParamodificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonParamodificarUsuarioActionPerformed
         String desnivelpos=desnivelpositivo.getText();
         String desnivelneg=desnivelnegativo.getText();
@@ -3341,7 +3369,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, "No se guardo los cambios de la ruta en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
         } 
     }//GEN-LAST:event_BotonParamodificarUsuarioActionPerformed
-
+//Boton de volver
     private void BotonvolverRutassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvolverRutassActionPerformed
          int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -3351,13 +3379,18 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonvolverRutassActionPerformed
 
     private void recomenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recomenActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_recomenActionPerformed
 
     private void geoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_geoActionPerformed
-    
+//Metodo de volver
+    private void BotonvalidarutasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvalidarutasirActionPerformed
+        CatalogodeRutas.setVisible(true);
+        CrearRutasde0.setVisible(false);
+    }//GEN-LAST:event_BotonvalidarutasirActionPerformed
+    //Metodos del boton que modifican las tablas para actualizarlas
     private void cargarTablarutasvalidas(){
         DAORutas daoruta = new DAORutas();
         List<Rutas> lisruta = daoruta.listaraprobadas();
@@ -3376,9 +3409,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-        TableRutasValidas.setModel(model);
-        TableRutasValidas.setAutoCreateRowSorter(true);
+         TableRutasValidas.setAutoCreateRowSorter(true);
         tamañocolumnasRutaValidas();
+        TableRutasValidas.setModel(model);
     }
 
     private void cargarTablarutasnovalidas() {
@@ -3399,11 +3432,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-        Tabladerutasnovalidas.setModel(model);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMinWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
         Tabladerutasnovalidas.setAutoCreateRowSorter(true);
+        Tabladerutasnovalidas.setModel(model);
     }
 
     private void cargarTablapuntosinteres() {
@@ -3420,11 +3453,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntosInteres(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
-        TablePuntosInteres.setModel(model);
-        TablePuntosInteres.setAutoCreateRowSorter(true);
+         TablePuntosInteres.setAutoCreateRowSorter(true);
         TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablePuntosInteres.setModel(model);
     }
 
     private void cargarTablapuntospeligro() {
@@ -3442,10 +3475,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             model.addRow(fila);
         }
         TablePuntosPeligro.setAutoCreateRowSorter(true);
-        TablePuntosPeligro.setModel(model);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablePuntosPeligro.setModel(model);
+      
     }
 
     private void cargarTablavaloraciones() {
@@ -3463,7 +3497,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             model.addRow(fila);
         }
         TablaValoraciones.setAutoCreateRowSorter(true);
-       TablaValoraciones.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setMinWidth(0);
         TablaValoraciones.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaValoraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaValoraciones.setModel(model);
@@ -3510,8 +3544,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("Media Estrellas");
         Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
         model.addRow(fila);
-        TablaDetallesruta.setModel(model);
         tamañocolumnasDetalles();
+        TablaDetallesruta.setModel(model);
     }
 
     private void cargarTablacalendario() {
@@ -3554,11 +3588,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
-        TablaimagenesInteres.setModel(model);
         TablaimagenesInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
-       TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaimagenesInteres.setAutoCreateRowSorter(true);
+        TablaimagenesInteres.setModel(model);
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -3597,11 +3631,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
-        TablaImagenesPeligro.setModel(model);
-        TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
-        TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+       TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+       TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
        TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
        TablaImagenesPeligro.setAutoCreateRowSorter(true);
+       TablaImagenesPeligro.setModel(model);
       TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -3620,7 +3654,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }
     // fin del boton de actualizar todas las tablas 
     //Crea tabla imagenes interes y genera la imagen
-
     private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) {
         DAOImagenesInteres daoimg = new DAOImagenesInteres();
         List<ImagenesInteres> lisimg = daoimg.listar(idpi);
@@ -3642,11 +3675,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
-        TablaimagenesInteres.setModel(model);
-        TablaimagenesInteres.setAutoCreateRowSorter(true);
         TablaimagenesInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaimagenesInteres.setAutoCreateRowSorter(true);
+        TablaimagenesInteres.setModel(model);
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -3663,7 +3696,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         }
         );
     }
-
+// Metodo de imagenes de peligro y interes que muestra en panatalla la imagen seleccionada
     private void mostrarImagenYDescripcionEnPanel(ImageIcon icono, String descripcion) {
         JPanel panelVistaPrevia = new JPanel();
         panelVistaPrevia.setLayout(new BoxLayout(panelVistaPrevia, BoxLayout.Y_AXIS));
@@ -3678,7 +3711,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         ventanaVistaPrevia.setLocationRelativeTo(null);
         ventanaVistaPrevia.setVisible(true);
     }
-
+//Metodo que limpiar todas las tablas(contenido)
     public void limpiartablasalvolver() {
         TableRutasValidas.setModel(new DefaultTableModel());
         TablePuntosInteres.setModel(new DefaultTableModel());
@@ -3720,6 +3753,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton Botonparacrearvaloracion;
     private javax.swing.JButton Botonpararefrecartablas;
     private javax.swing.JTextField Botonrese;
+    private javax.swing.JButton Botonvalidarutasir;
     private javax.swing.JButton BotonvolverPunto;
     private javax.swing.JButton BotonvolverRutass;
     private javax.swing.JTextField CREARDESCRIPCION;
