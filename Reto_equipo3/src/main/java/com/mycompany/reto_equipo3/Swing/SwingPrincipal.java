@@ -80,8 +80,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jScrollPane1.setPreferredSize(new Dimension(1500, 600));
         Botonparacrearrutas.setVisible(false);
         botoncrearvaloracion.setVisible(false);
-        botoncrearcalendario.setVisible(false);
         Botonpararefrecartablas.setVisible(false);
+        BotonCrearPunto.setVisible(false);
+        CrearImagenes.setVisible(false);
+        CrearImagenesPeligro.setVisible(false);
+        BotoncrearActividad.setVisible(false);
+        botoncrearcalendario.setVisible(false);
         TablaDetallesruta.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -459,7 +463,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInicioLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(Usuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addGroup(PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(IniciarSesion)
                     .addGroup(PanelInicioLayout.createSequentialGroup()
@@ -483,7 +487,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(IniciarSesion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Salida)
                     .addComponent(Rutas)
@@ -2249,7 +2253,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
                                             .addGroup(ValidaRutasLayout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
                                                 .addComponent(jLabel43)))
-                                        .addGap(0, 9, Short.MAX_VALUE))))
+                                        .addGap(0, 9, Short.MAX_VALUE))
+                                    .addComponent(temp)))
                             .addGroup(ValidaRutasLayout.createSequentialGroup()
                                 .addGap(174, 174, 174)
                                 .addComponent(jLabel35)))
@@ -2270,16 +2275,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
                                     .addComponent(geo))
                                 .addGap(13, 13, 13))))
                     .addGroup(ValidaRutasLayout.createSequentialGroup()
-                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(ValidaRutasLayout.createSequentialGroup()
-                                    .addComponent(jLabel38)
-                                    .addGap(139, 139, 139)
-                                    .addComponent(jLabel41)
-                                    .addGap(77, 77, 77)
-                                    .addComponent(jLabel45))
-                                .addComponent(jLabel36)))
+                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                .addComponent(jLabel38)
+                                .addGap(139, 139, 139)
+                                .addComponent(jLabel41)
+                                .addGap(77, 77, 77)
+                                .addComponent(jLabel45))
+                            .addComponent(jLabel36))
                         .addContainerGap())))
         );
         ValidaRutasLayout.setVerticalGroup(
@@ -2387,6 +2390,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 BotonCrearPunto.setVisible(true);
                 BotoncrearActividad.setVisible(true);
                 CrearImagenes.setVisible(true);
+                BotonCrearPunto.setVisible(true);
+                CrearImagenes.setVisible(true);
+                CrearImagenesPeligro.setVisible(true);
+                BotoncrearActividad.setVisible(true);
                 usuario = U1;
                 if (usuario.getRol() == Roles.administrador || usuario.getRol() == Roles.diseñador || usuario.getRol() == Roles.profesor) {
                     Botonparacrearrutas.setVisible(true);
@@ -2472,6 +2479,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
         BotonCrearPunto.setVisible(false);
         BotoncrearActividad.setVisible(false);
         CrearImagenes.setVisible(false);
+        BotonCrearPunto.setVisible(false);
+         CrearImagenes.setVisible(false);
+         CrearImagenesPeligro.setVisible(false);
+         BotoncrearActividad.setVisible(false);
         limpiartablasalvolver();
     }//GEN-LAST:event_VolverInicioActionPerformed
     // Metodo para modificar la tabla de Rutas aprobadas
@@ -2555,7 +2566,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
                     PanelCalendario.setVisible(true);
                     Nombrerutasinavlidas.setVisible(false);
                     jLabel22.setVisible(true);
-                    this.botoncrearcalendario.setVisible(true);
                 }
                 case "Ver catalogo de rutas" -> {
                     RutasValidas.setVisible(false);

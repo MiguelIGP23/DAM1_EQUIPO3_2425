@@ -165,7 +165,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="Usuario" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="161" max="32767" attributes="0"/>
+                  <EmptySpace pref="160" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="IniciarSesion" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
@@ -193,7 +193,7 @@
                   <Component id="Contraseña" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="IniciarSesion" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="101" max="32767" attributes="0"/>
+                  <EmptySpace pref="52" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Salida" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="Rutas" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2858,6 +2858,7 @@
                                           </Group>
                                           <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                                       </Group>
+                                      <Component id="temp" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -2888,18 +2889,15 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="temp" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
-                                      <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                      <Component id="jLabel45" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel36" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                                  <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                  <Component id="jLabel45" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="jLabel36" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
