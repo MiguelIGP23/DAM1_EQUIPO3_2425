@@ -2548,6 +2548,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 }
             }
             DAORutas daor = new DAORutas();
+            
             idrutaapipp = resultado;
             //Para elegir entre diferentes opciones
             Object opcion = JOptionPane.showInputDialog(null, "Seleccione una opcion",
