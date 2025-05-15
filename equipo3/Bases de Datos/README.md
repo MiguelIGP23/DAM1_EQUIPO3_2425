@@ -16,11 +16,11 @@
 
 CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mydb`;
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version	8.4.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -46,7 +46,7 @@ CREATE TABLE `actividad` (
   `rutas_idRuta` int NOT NULL,
   PRIMARY KEY (`idActividad`),
   KEY `fk_actividad_rutas1_idx` (`rutas_idRuta`),
-  CONSTRAINT `fk_actividad_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`) on delete cascade
+  CONSTRAINT `fk_actividad_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -78,7 +78,7 @@ CREATE TABLE `calendario` (
   KEY `fk_calendario_rutas1_idx` (`rutas_idRuta`),
   KEY `fk_calendario_usuario1_idx` (`usuario_idUsuario`),
   CONSTRAINT `fk_calendario_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`),
-  CONSTRAINT `fk_calendario_usuario1` FOREIGN KEY (`usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) on delete cascade
+  CONSTRAINT `fk_calendario_usuario1` FOREIGN KEY (`usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -106,7 +106,7 @@ CREATE TABLE `imagenesinteres` (
   `puntosinteres_idPuntosinteres` int NOT NULL,
   PRIMARY KEY (`idimagenesinteres`),
   KEY `fk_imagenesinteres_puntosinteres1_idx` (`puntosinteres_idPuntosinteres`),
-  CONSTRAINT `fk_imagenesinteres_puntosinteres1` FOREIGN KEY (`puntosinteres_idPuntosinteres`) REFERENCES `puntosinteres` (`idPuntosinteres`) on delete cascade
+  CONSTRAINT `fk_imagenesinteres_puntosinteres1` FOREIGN KEY (`puntosinteres_idPuntosinteres`) REFERENCES `puntosinteres` (`idPuntosinteres`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,7 +134,7 @@ CREATE TABLE `imagenespeligro` (
   `puntospeligro_idPuntosinteres` int NOT NULL,
   PRIMARY KEY (`idimagenespeligro`),
   KEY `fk_imagenespeligro_puntospeligro1_idx` (`puntospeligro_idPuntosinteres`),
-  CONSTRAINT `fk_imagenespeligro_puntospeligro1` FOREIGN KEY (`puntospeligro_idPuntosinteres`) REFERENCES `puntospeligro` (`idPuntospeligro`) on delete cascade
+  CONSTRAINT `fk_imagenespeligro_puntospeligro1` FOREIGN KEY (`puntospeligro_idPuntosinteres`) REFERENCES `puntospeligro` (`idPuntospeligro`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -162,13 +162,13 @@ CREATE TABLE `puntosinteres` (
   `longitud` double NOT NULL,
   `elevacion` double NOT NULL,
   `caracteristicas` text,
-  `tipo` enum('historico','mirador','area_de_descanso','punto_de_agua','alojamiento','cultural',' geologico','fauna','botanico') DEFAULT 'mirador',
+  `tipo` enum('histórico-arqueológico',' naturaleza','mirador',' área de descanso','punto de agua','refugio/alojamiento',' cultural',' geológico','fauna específica','botánico') DEFAULT NULL,
   `descripcion` text,
   `timestamp` int DEFAULT NULL,
   `rutas_idRuta` int NOT NULL,
   PRIMARY KEY (`idPuntosinteres`),
   KEY `fk_puntosinteres_rutas1_idx` (`rutas_idRuta`),
-  CONSTRAINT `fk_puntosinteres_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`) on delete cascade
+  CONSTRAINT `fk_puntosinteres_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -203,7 +203,7 @@ CREATE TABLE `puntospeligro` (
   `rutas_idRuta` int NOT NULL,
   PRIMARY KEY (`idPuntospeligro`),
   KEY `fk_puntospeligro_rutas1_idx` (`rutas_idRuta`),
-  CONSTRAINT `fk_puntospeligro_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`) on delete cascade
+  CONSTRAINT `fk_puntospeligro_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -323,7 +323,7 @@ CREATE TABLE `rutas` (
   `desnivelNegativo` int DEFAULT NULL,
   `altitudMax` double DEFAULT NULL,
   `altitudMin` double DEFAULT NULL,
-  `clasificacion` enum('circular','lineal') DEFAULT 'lineal',
+  `clasificacion` enum('circular','lineal') DEFAULT NULL,
   `nivelEsfuerzo` tinyint DEFAULT NULL,
   `nivelRiesgo` tinyint DEFAULT NULL,
   `estadoRuta` tinyint DEFAULT '0',
@@ -339,8 +339,7 @@ CREATE TABLE `rutas` (
   `usuario_idUsuario` int NOT NULL,
   PRIMARY KEY (`idRuta`),
   KEY `fk_rutas_usuario1_idx` (`usuario_idUsuario`),
-  UNIQUE (`nombre`),
-  CONSTRAINT `fk_rutas_usuario1` FOREIGN KEY (`usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) on delete cascade
+  CONSTRAINT `fk_rutas_usuario1` FOREIGN KEY (`usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -350,7 +349,7 @@ CREATE TABLE `rutas` (
 
 LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
-INSERT INTO `rutas` VALUES (1,'Paseo por el bosque','Bar manolo','Fuente del rio',0.2345,2.3625,0.2536,2.2345,23,'00:15:00',90,20,1300,1150,NULL,4,3,0,NULL,NULL,'verano,primavera',1,1,NULL,'Lleva cervecitas',NULL,4,1),(2,'Subida al everest','salida del bosque','pico mas alto',4.2356,8.3625,4.2476,9.6345,120,'23:15:00',4532,600,8400,1340,NULL,5,5,0,NULL,NULL,'invierno',1,1,NULL,'Suerte o muerte',NULL,3,1);
+INSERT INTO `rutas` VALUES (1,'Paseo por el bosque','Bar manolo','Fuente del rio',0.2345,2.3625,0.2536,2.2345,23,'00:15:00',90,20,1300,1150,'lineal',4,3,0,2,4,'verano,primavera',1,1,'http://','Lleva cervecitas','norte',4,1),(2,'Subida al everest','salida del bosque','pico mas alto',4.2356,8.3625,4.2476,9.6345,120,'30:15:00',4532,600,8400,1340,'lineal',5,5,0,3,3,'invierno',1,1,'http://','Suerte o muerte','sur',3,1);
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -483,8 +482,7 @@ CREATE TABLE `usuario` (
   `email` varchar(30) NOT NULL,
   `password` varchar(32) NOT NULL,
   `rol` enum('administrador','diseñador','profesor','alumno') DEFAULT NULL,
-  PRIMARY KEY (`idUsuario`),
-  UNIQUE (`email`)
+  PRIMARY KEY (`idUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -520,8 +518,8 @@ CREATE TABLE `valora` (
   UNIQUE KEY `conexionunique_paraquelosdosnoseaniguales` (`usuario_idUsuario`,`rutas_idRuta`),
   KEY `fk_valora_usuario1_idx` (`usuario_idUsuario`),
   KEY `fk_valora_rutas1_idx` (`rutas_idRuta`),
-  CONSTRAINT `fk_valora_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`) on delete cascade,
-  CONSTRAINT `fk_valora_usuario1` FOREIGN KEY (`usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) on delete cascade
+  CONSTRAINT `fk_valora_rutas1` FOREIGN KEY (`rutas_idRuta`) REFERENCES `rutas` (`idRuta`),
+  CONSTRAINT `fk_valora_usuario1` FOREIGN KEY (`usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -632,7 +630,8 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-07 23:31:54
+-- Dump completed on 2025-05-15 17:00:33
+
 
 
 ````
