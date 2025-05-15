@@ -48,13 +48,13 @@ public class DAOImagenesPeligro {
     public ImagenesPeligro crearImagenesPeligro(final ResultSet rs)throws SQLException{
         return new ImagenesPeligro(rs.getInt(1),rs.getString(2),rs.getString(3));
     }
-    public boolean insertar(ImagenesPeligro imp, PuntosPeligro pp) {
+    public boolean insertar(ImagenesPeligro imp, int pp) {
         boolean insertado = false;
         String sql = "insert into imagenespeligro (url, descripcion, puntospeligro_idPuntospeligro) values (?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, imp.getUrl());
             pstmt.setString(2, imp.getDescripcion());
-            pstmt.setInt(3, pp.getIdPuntospeligro());
+            pstmt.setInt(3, pp);
             if (pstmt.executeUpdate() != 1) {
                 throw new Exception("Error: la imagen de peligro no se ha insertado.");
             }

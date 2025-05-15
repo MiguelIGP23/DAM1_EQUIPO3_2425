@@ -20,6 +20,11 @@ public class ImagenesInteres {
         this.descripcion = descripcion;
 
     }
+
+    public ImagenesInteres(String url, String descripcion) {
+        this.url = url;
+        this.descripcion = descripcion;
+    }
     
     //Metodos get
     public int getIdimagenesinteres() {

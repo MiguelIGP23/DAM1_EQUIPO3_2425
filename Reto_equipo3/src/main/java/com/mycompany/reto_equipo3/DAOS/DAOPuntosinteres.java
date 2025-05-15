@@ -29,7 +29,8 @@ public class DAOPuntosinteres {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
 
-    public void insertar(PuntosInteres puntointeres, Rutas ruta) {
+    public boolean insertar(PuntosInteres puntointeres, int ruta) {
+        boolean valida=false;
         String sql = "INSERT INTO puntosinteres (nombre, latitud, longitud, elevacion, descripcion, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, puntointeres.getNombre());
@@ -37,16 +38,18 @@ public class DAOPuntosinteres {
             stmt.setDouble(3, puntointeres.getLongitud());
             stmt.setDouble(4, puntointeres.getElevacion()); // Elevación ahora en el orden correcto
             stmt.setString(5, puntointeres.getDescripcion());
-            stmt.setInt(6, ruta.getIdRuta());
+            stmt.setInt(6, ruta);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: No se creo el punto de interes");
             }
+            valida=true;
             System.out.println("El punto se creo correctamente");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valida;
     }
 
     public void modificar(PuntosInteres puntointeres) {

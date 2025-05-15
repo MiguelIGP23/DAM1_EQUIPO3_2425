@@ -299,4 +299,11 @@ public class Teclado {
         }
         return valido;
     }
+    public static boolean validaURL(String url){
+        boolean valido = false;
+        if (url.matches(".*\\.(jpg|png)")) {
+            valido = true;
+        }
+        return valido;
+    }
 }

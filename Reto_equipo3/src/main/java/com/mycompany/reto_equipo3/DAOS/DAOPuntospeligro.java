@@ -25,7 +25,8 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
 
-    public void insertar(PuntosPeligro puntopeligro, Rutas ruta) {
+    public boolean insertar(PuntosPeligro puntopeligro,int ruta) {
+        boolean valida=false;
         String sql = "INSERT INTO puntospeligro (nombre, latitud, longitud, elevacion, descripcion, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, puntopeligro.getNombre());
@@ -33,16 +34,18 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
             stmt.setDouble(3, puntopeligro.getLongitud());
             stmt.setDouble(4, puntopeligro.getElevacion());
             stmt.setString(5, puntopeligro.getDescripcion());
-            stmt.setInt(6, ruta.getIdRuta());
+            stmt.setInt(6, ruta);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se creo el punto de peligro");
             }
+            valida=true;
             System.out.println("El punto se ceo correctamente");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valida;
     }
 
     @Override

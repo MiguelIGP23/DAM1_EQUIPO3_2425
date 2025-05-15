@@ -19,6 +19,11 @@ public class ImagenesPeligro {
         this.descripcion = descripcion;
     }
 
+    public ImagenesPeligro(String url, String descripcion) {
+        this.url = url;
+        this.descripcion = descripcion;
+    }
+    
     //Metodos get
     public int getIdimagenespeligro() {
         return idimagenespeligro;

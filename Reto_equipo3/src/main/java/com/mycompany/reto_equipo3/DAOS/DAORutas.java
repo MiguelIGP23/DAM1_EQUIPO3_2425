@@ -57,8 +57,9 @@ public class DAORutas implements InterfazDAO<Rutas> {
         return valida;
     }
 
-    @Override
-    public void modificar(Rutas ruta) {
+
+    public boolean modificarr(Rutas ruta) {
+        boolean valida=false;
         String sql = "UPDATE rutas set nombre=?, nombre_inicioruta=?,nombre_finalruta=?,latitudInicial=?,latitudFinal=?,longitudInicial=?,longitudFinal=?,distancia=?,duracion=?,estadoRuta=? WHERE idRuta=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, ruta.getNombre());
@@ -75,12 +76,14 @@ public class DAORutas implements InterfazDAO<Rutas> {
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se ha modificado el usuario");
             }
+            valida=true;
             System.out.println("Se modifico el usuario");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valida;
     }
 
     public boolean aprobarRuta(Rutas ruta) {
@@ -366,6 +369,11 @@ public class DAORutas implements InterfazDAO<Rutas> {
     }
     @Override
     public void eliminar(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void modificar(Rutas obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -30,19 +30,22 @@ public class DAOActividad implements InterfazDAO<Actividad> {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
 
-    public void insertar(Actividad actividad, Rutas ruta) {
+    public boolean insertar(Actividad actividad, int idRuta) {
+        boolean valida=false;
         String sql = "insert into actividad (nombre, rutas_idRuta) values (?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, actividad.getNombre());
-            pstmt.setInt(2, ruta.getIdRuta());
+            pstmt.setInt(2, idRuta);
             if (pstmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se creó la actividad");
             }
+            valida=true;
         } catch (SQLException e) {
             System.out.println("SQLError: " + e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return valida;
     }
 
     @Override

@@ -47,13 +47,13 @@ public class DAOImagenesInteres {
     public ImagenesInteres crearImagenesInteres(final ResultSet rs)throws SQLException{
         return new ImagenesInteres(rs.getInt(1),rs.getString(2),rs.getString(3));
     }
-    public boolean insertar(ImagenesInteres imi, PuntosInteres pi) {
+    public boolean insertar(ImagenesInteres imi, int pi) {
         boolean insertado = false;
         String sql = "insert into imagenesinteres (url, descripcion, puntosinteres_idPuntosinteres) values (?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, imi.getDescripcion());
-            pstmt.setString(2, imi.getUrl());
-            pstmt.setInt(3, pi.getIdPuntosInteres());
+            pstmt.setString(1, imi.getUrl());
+            pstmt.setString(2, imi.getDescripcion());
+            pstmt.setInt(3, pi);
             if (pstmt.executeUpdate() != 1) {
                 throw new Exception("Error: la imagen de interes no se ha insertado.");
             }
