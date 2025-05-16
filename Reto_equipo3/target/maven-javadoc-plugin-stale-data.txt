@@ -1,0 +1,50 @@
+@options
+@packages
+-classpath
+'D:/Usuarios/DAM119/.m2/repository/mysql/mysql-connector-java/8.0.27/mysql-connector-java-8.0.27.jar;D:/Usuarios/DAM119/.m2/repository/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'20'
+-sourcepath
+'D:/Usuarios/DAM119/Desktop/Nueva carpeta/DAM1_EQUIPO3_2425/Reto_equipo3/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/Usuarios/DAM119/Desktop/Nueva carpeta/DAM1_EQUIPO3_2425/Reto_equipo3/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Reto_equipo3 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'Reto_equipo3 1.0-SNAPSHOT API'
+com.mycompany.reto_equipo3
+com.mycompany.reto_equipo3.DAOS
+com.mycompany.reto_equipo3.Enums
+com.mycompany.reto_equipo3.Ficheros
+com.mycompany.reto_equipo3.Swing
+com.mycompany.reto_equipo3.Validaciones
+D:\Usuarios\DAM119\.m2\repository\mysql\mysql-connector-java\8.0.27\mysql-connector-java-8.0.27.jar = 1746720414469
+D:\Usuarios\DAM119\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar = 1746720414586
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\src\main\java = 1747313602616
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\allclasses-index.html = 1747412842425
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\allpackages-index.html = 1747412842446
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\element-list = 1747412841717
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\help-doc.html = 1747412842557
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\index-all.html = 1747412842520
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\index.html = 1747412842390
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\member-search-index.js = 1747412842459
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\module-search-index.js = 1747412842453
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\overview-summary.html = 1747412842527
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\overview-tree.html = 1747412842384
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\package-search-index.js = 1747412842454
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\search.html = 1747412842524
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\serialized-form.html = 1747412841978
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\tag-search-index.js = 1747412842460
+D:\Usuarios\DAM119\Desktop\Nueva carpeta\DAM1_EQUIPO3_2425\Reto_equipo3\target\site\apidocs\type-search-index.js = 1747412842457
