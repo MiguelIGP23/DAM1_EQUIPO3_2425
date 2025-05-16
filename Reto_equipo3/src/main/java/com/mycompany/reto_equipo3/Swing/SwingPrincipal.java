@@ -2517,8 +2517,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
             model.addRow(fila);
         }
           TableRutasValidas.setAutoCreateRowSorter(true);
-        tamañocolumnasRutaValidas();
         TableRutasValidas.setModel(model);
+        tamañocolumnasRutaValidas();
     }//GEN-LAST:event_TableRutasValidasAncestorAdded
     //Al hacer click en una fila de la tabla RutasValidas te permite ver lo que puede hacer cada tipo de usuario
     private void TableRutasValidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableRutasValidasMouseClicked
@@ -2640,11 +2640,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntosInteres(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
-        TablePuntosInteres.setAutoCreateRowSorter(true);
+        TablePuntosInteres.setModel(model);
         TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
-        TablePuntosInteres.setModel(model);
+        TablePuntosInteres.setAutoCreateRowSorter(true);
     }//GEN-LAST:event_TablePuntosInteresAncestorAdded
     // modica la tabla puntos peligro
     private void TablePuntosPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablePuntosPeligroAncestorAdded
@@ -2661,11 +2661,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntospeligro(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
+        TablePuntosPeligro.setModel(model);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablePuntosPeligro.setAutoCreateRowSorter(true);
-        TablePuntosPeligro.setModel(model);
     }//GEN-LAST:event_TablePuntosPeligroAncestorAdded
 //Metodo de volver
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -2696,11 +2696,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {a.getIdActividad(), a.getNombre()};
             model.addRow(fila);
         }
+        TablaActividades.setModel(model);
         TablaActividades.getColumnModel().getColumn(0).setMinWidth(0);
         TablaActividades.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaActividades.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaActividades.setAutoCreateRowSorter(true);
-        TablaActividades.setModel(model);
     }//GEN-LAST:event_TablaActividadesAncestorAdded
 //Metodo de volver
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -2736,8 +2736,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("Media Estrellas");
         Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
         model.addRow(fila);
-        tamañocolumnasDetalles();
         TablaDetallesruta.setModel(model);
+        tamañocolumnasDetalles();
     }//GEN-LAST:event_TablaDetallesrutaAncestorAdded
 
     // Tabla rellena con las valoraciones de un usuario
@@ -2755,11 +2755,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {v.getIdValora(), v.getDificultad(), v.getFecha(), v.getEstrellas(), v.getInteresCultural(), v.getBelleza()};
             model.addRow(fila);
         }
+        TablaValoraciones.setModel(model);
         TablaValoraciones.setAutoCreateRowSorter(true);
         TablaValoraciones.getColumnModel().getColumn(0).setMinWidth(0);
         TablaValoraciones.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaValoraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
-        TablaValoraciones.setModel(model);
     }//GEN-LAST:event_TablaValoracionesAncestorAdded
 //Metodo de volver
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -2824,11 +2824,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
+        TablaImagenesPeligro.setModel(model);
         TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
         TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
        TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
        TablaImagenesPeligro.setAutoCreateRowSorter(true);
-        TablaImagenesPeligro.setModel(model);
       TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -2938,12 +2938,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
+
+        Tabladerutasnovalidas.setModel(model);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMinWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
         Tabladerutasnovalidas.setAutoCreateRowSorter(true);
-        Tabladerutasnovalidas.setModel(model);
-      
     }//GEN-LAST:event_TabladerutasnovalidasAncestorAdded
 //Metodo que valida la ruta y puede eliminar si quiere
     private void TabladerutasnovalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasMouseClicked
@@ -3025,11 +3025,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles(), c.getRecomendaciones()};
             model.addRow(fila);
         }
+        TablaCalendarios.setModel(model);
         TablaCalendarios.setAutoCreateRowSorter(true);
         TablaCalendarios.getColumnModel().getColumn(0).setMinWidth(0);
         TablaCalendarios.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaCalendarios.getColumnModel().getColumn(0).setPreferredWidth(0);
-        TablaCalendarios.setModel(model);
     }//GEN-LAST:event_TablaCalendariosAncestorAdded
 //Metodo de volver
     private void botoncrearcalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearcalendarioActionPerformed
@@ -3388,8 +3388,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_geoActionPerformed
 //Metodo de volver
     private void BotonvalidarutasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvalidarutasirActionPerformed
-        CatalogodeRutas.setVisible(true);
-        CrearRutasde0.setVisible(false);
+       RutasValidas.setVisible(false);
+       CatalogodeRutas.setVisible(true);
+       volverarutasdesdeno.setVisible(true);
+       Tabladerutasnovalidas.setVisible(true);
+       jScrollPane9.setVisible(true);
+       Nombrerutasinavlidas.setVisible(true);
     }//GEN-LAST:event_BotonvalidarutasirActionPerformed
     //Metodos del boton que modifican las tablas para actualizarlas
     private void cargarTablarutasvalidas(){
@@ -3410,9 +3414,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
+         TableRutasValidas.setModel(model);
          TableRutasValidas.setAutoCreateRowSorter(true);
         tamañocolumnasRutaValidas();
-        TableRutasValidas.setModel(model);
+       
     }
 
     private void cargarTablarutasnovalidas() {
@@ -3433,11 +3438,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
+        Tabladerutasnovalidas.setModel(model);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMinWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
         Tabladerutasnovalidas.setAutoCreateRowSorter(true);
-        Tabladerutasnovalidas.setModel(model);
+        
     }
 
     private void cargarTablapuntosinteres() {
@@ -3454,11 +3460,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntosInteres(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
-         TablePuntosInteres.setAutoCreateRowSorter(true);
+        TablePuntosInteres.setModel(model);
+        TablePuntosInteres.setAutoCreateRowSorter(true);
         TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
-        TablePuntosInteres.setModel(model);
+       
     }
 
     private void cargarTablapuntospeligro() {
@@ -3475,11 +3482,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntospeligro(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
+        TablePuntosPeligro.setModel(model);
         TablePuntosPeligro.setAutoCreateRowSorter(true);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
-        TablePuntosPeligro.setModel(model);
       
     }
 
@@ -3497,11 +3504,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {v.getIdValora(), v.getDificultad(), v.getFecha(), v.getEstrellas(), v.getInteresCultural(), v.getBelleza()};
             model.addRow(fila);
         }
+        TablaValoraciones.setModel(model);
         TablaValoraciones.setAutoCreateRowSorter(true);
         TablaValoraciones.getColumnModel().getColumn(0).setMinWidth(0);
         TablaValoraciones.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaValoraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
-        TablaValoraciones.setModel(model);
     }
 
     private void cargarTablaactividades() {
@@ -3514,11 +3521,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {a.getIdActividad(), a.getNombre()};
             model.addRow(fila);
         }
+        TablaActividades.setModel(model);
         TablaActividades.setAutoCreateRowSorter(true);
         TablaActividades.getColumnModel().getColumn(0).setMinWidth(0);
         TablaActividades.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaActividades.getColumnModel().getColumn(0).setPreferredWidth(0);
-        TablaActividades.setModel(model);
     }
 
     private void caragarTabladetalles() {
@@ -3545,8 +3552,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("Media Estrellas");
         Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
         model.addRow(fila);
-        tamañocolumnasDetalles();
         TablaDetallesruta.setModel(model);
+        tamañocolumnasDetalles();
     }
 
     private void cargarTablacalendario() {
@@ -3561,11 +3568,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles(), c.getRecomendaciones()};
             model.addRow(fila);
         }
+        TablaCalendarios.setModel(model);
         TablaCalendarios.setAutoCreateRowSorter(true);
         TablaCalendarios.getColumnModel().getColumn(0).setMinWidth(0);
         TablaCalendarios.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaCalendarios.getColumnModel().getColumn(0).setPreferredWidth(0);
-        TablaCalendarios.setModel(model);
+
     }
 
     private void cargarTablaimagenesInteres() {
@@ -3589,11 +3597,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
+        TablaimagenesInteres.setModel(model);
         TablaimagenesInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaimagenesInteres.setAutoCreateRowSorter(true);
-        TablaimagenesInteres.setModel(model);
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -3632,11 +3640,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
+       TablaImagenesPeligro.setModel(model);
        TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
        TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
        TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
        TablaImagenesPeligro.setAutoCreateRowSorter(true);
-       TablaImagenesPeligro.setModel(model);
+
       TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -3676,11 +3685,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
+        TablaimagenesInteres.setModel(model);
         TablaimagenesInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaimagenesInteres.setAutoCreateRowSorter(true);
-        TablaimagenesInteres.setModel(model);
+       
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
