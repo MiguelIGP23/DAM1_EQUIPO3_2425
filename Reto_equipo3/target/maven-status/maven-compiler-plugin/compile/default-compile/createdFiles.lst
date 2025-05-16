@@ -30,7 +30,6 @@ com\mycompany\reto_equipo3\DAOS\DAOActividad.class
 com\mycompany\reto_equipo3\Calendario.class
 com\mycompany\reto_equipo3\DAOS\DAOImagenesPeligro.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$59.class
-com\mycompany\reto_equipo3\Swing\SwingPrincipal$69.class
 com\mycompany\reto_equipo3\DAOS\DAOPuntosinteres.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$36.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$22.class
@@ -61,7 +60,6 @@ com\mycompany\reto_equipo3\DAOS\DAOPuntospeligro.class
 com\mycompany\reto_equipo3\DAOS\DAOImagenesInteres.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$53.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$25.class
-com\mycompany\reto_equipo3\Swing\SwingPrincipal$68.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$33.class
 com\mycompany\reto_equipo3\Swing\SwingPrincipal$13.class
 com\mycompany\reto_equipo3\DAOS\DAOValora.class

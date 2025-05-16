@@ -33,6 +33,7 @@ import com.mycompany.reto_equipo3.Valora;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -111,6 +112,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TableRutasValidas.getColumnModel().getColumn(9).setPreferredWidth(150);
     }
 //Metodo que da formato a la tabla de detalles
+
     public void tamañocolumnasDetalles() {
         TablaDetallesruta.getColumnModel().getColumn(0).setMinWidth(0);
         TablaDetallesruta.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -2516,7 +2518,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-          TableRutasValidas.setAutoCreateRowSorter(true);
+        TableRutasValidas.setAutoCreateRowSorter(true);
         TableRutasValidas.setModel(model);
         tamañocolumnasRutaValidas();
     }//GEN-LAST:event_TableRutasValidasAncestorAdded
@@ -2532,15 +2534,15 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados"};
             } else {
                 if (usuario.getRol() == Roles.alumno) {
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas","Modificar Ruta"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.diseñador) {
                     // crear rutas y valora todo y calendario todo
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Descargar Ficha de rutas validas","Modificar Ruta"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Descargar Ficha de rutas validas", "Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.profesor) {
                     // crear ruta y valora todo y ca
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas ", "Descargar Ficha de rutas validas","Modificar Ruta"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas ", "Descargar Ficha de rutas validas", "Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.administrador) {
                     // modifica ruta , todo ruta, todo valora y todo calendario
@@ -2548,7 +2550,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 }
             }
             DAORutas daor = new DAORutas();
-            
+
             idrutaapipp = resultado;
             //Para elegir entre diferentes opciones
             Object opcion = JOptionPane.showInputDialog(null, "Seleccione una opcion",
@@ -2604,7 +2606,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Se descargaron las fichas en la carpeta fichas del proyecto", "Bien", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
-                case "Modificar Ruta"->{
+                case "Modificar Ruta" -> {
                     RutasValidas.setVisible(false);
                     ValidaRutas.setVisible(true);
                 }
@@ -2781,14 +2783,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 idpi = resultado;
                 PuntosdeRuta.setVisible(false);
                 ImagenesInteres.setVisible(true);
-            }else{
-           int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-               if (resp == 0) {
-              DAOPuntosinteres daor = new DAOPuntosinteres();
-                if (daor.eliminar(resultado)) {
-                     JOptionPane.showMessageDialog(null, "Se elimino el punto ", "Bien", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (resp == 0) {
+                    DAOPuntosinteres daor = new DAOPuntosinteres();
+                    if (daor.eliminar(resultado)) {
+                        JOptionPane.showMessageDialog(null, "Se elimino el punto ", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-            } 
             }
 
         }
@@ -2804,7 +2806,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_votonimagenvolverpeligroActionPerformed
 //Metodo que hace la tabla de imagenes de peligro
     private void TablaImagenesPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroAncestorAdded
-      DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
+        DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
         List<ImagenesPeligro> lisimg = daoimg.listar(idpp);
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID PuntosPeligro");
@@ -2827,23 +2829,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablaImagenesPeligro.setModel(model);
         TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
         TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
-       TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
-       TablaImagenesPeligro.setAutoCreateRowSorter(true);
-      TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int fila = TablaImagenesPeligro.rowAtPoint(e.getPoint());
-                int columna = TablaImagenesPeligro.columnAtPoint(e.getPoint());
-                if (columna == 1) {
-                    ImageIcon icono = (ImageIcon) TablaImagenesPeligro.getValueAt(fila, columna);
-                    String descripcion = (String) TablaImagenesPeligro.getValueAt(fila, 2);
-                    if (icono != null) {
-                        mostrarImagenYDescripcionEnPanel(icono, descripcion);
-                    }
-                }
-            }
-        }
-        );
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaImagenesPeligro.setAutoCreateRowSorter(true);
+        
     }//GEN-LAST:event_TablaImagenesPeligroAncestorAdded
 //Metodo para eliminar un punto de peligro al clicar
     private void TablePuntosPeligroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePuntosPeligroMouseClicked
@@ -2853,20 +2841,20 @@ public class SwingPrincipal extends javax.swing.JFrame {
             int resultado = (int) valorColumna0;// valor recogido 
             int respuesta = JOptionPane.showConfirmDialog(null, "Desea ver las imagenes ", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
-            idpi = resultado;
-            PuntosdeRuta.setVisible(false);
-            ImagenesPeligro.setVisible(true);
-            }else{
-              int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punnto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-             if (resp==0){
-               DAOPuntospeligro daor = new DAOPuntospeligro();
-                if (daor.eliminar(resultado)) {
-                    JOptionPane.showMessageDialog(null, "Se elimino el punto de interes", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                idpp = resultado;
+                PuntosdeRuta.setVisible(false);
+                ImagenesPeligro.setVisible(true);
+            } else {
+                int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punnto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (resp == 0) {
+                    DAOPuntospeligro daor = new DAOPuntospeligro();
+                    if (daor.eliminar(resultado)) {
+                        JOptionPane.showMessageDialog(null, "Se elimino el punto de interes", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-        } 
-      }
-        
-      }
+            }
+
+        }
     }//GEN-LAST:event_TablePuntosPeligroMouseClicked
 //Metodo de volver
     private void BotonparacrearrutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearrutasActionPerformed
@@ -2958,17 +2946,16 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 if (daor.modificarporid(resultado)) {
                     JOptionPane.showMessageDialog(null, "La ruta paso a ser valida", "Bien", JOptionPane.INFORMATION_MESSAGE);
                 }
-            }else{
-             int res = JOptionPane.showConfirmDialog(null, "Desea eliminar una de estas rutas no validas", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (res == 0) {
-                DAORutas daor = new DAORutas();
-                if (daor.eliminar(resultado)) {
-                    JOptionPane.showMessageDialog(null, "La ruta se elimino", "Bien", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                int res = JOptionPane.showConfirmDialog(null, "Desea eliminar una de estas rutas no validas", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (res == 0) {
+                    DAORutas daor = new DAORutas();
+                    if (daor.eliminar(resultado)) {
+                        JOptionPane.showMessageDialog(null, "La ruta se elimino", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
-            } 
             }
-            
-          
+
         }
     }//GEN-LAST:event_TabladerutasnovalidasMouseClicked
 //Metodo de volver
@@ -3065,35 +3052,35 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botoncrearcalendariode0ActionPerformed
     //Boton en refrecar rutas con metodos de todas las tablas que reinican las rutas de la base de datos
     private void BotonpararefrecartablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonpararefrecartablasActionPerformed
-        if (idrutaapipp>=0) {
-        cargarTablarutasvalidas();
-        cargarTablarutasnovalidas();
-        cargarTablapuntosinteres();
-        cargarTablapuntospeligro();
-        cargarTablavaloraciones();
-        cargarTablaactividades();
-        caragarTabladetalles();
-        cargarTablaimagenesInteres();
-        cargarTablaimagenesPeligro();
-        cargarTablacalendario();
-        tamañocolumnasRutaValidas();
-         JOptionPane.showMessageDialog(null, "Se actualizaron las tablas de la ruta: "+ idrutaapipp, "Bien", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-          JOptionPane.showMessageDialog(null, "Selecciona unicamente 1 y no varias o ninguna rutas", "Error", JOptionPane.ERROR_MESSAGE);
+        if (idrutaapipp >= 0) {
+            cargarTablarutasvalidas();
+            cargarTablarutasnovalidas();
+            cargarTablapuntosinteres();
+            cargarTablapuntospeligro();
+            cargarTablavaloraciones();
+            cargarTablaactividades();
+            caragarTabladetalles();
+            cargarTablaimagenesInteres();
+            cargarTablaimagenesPeligro();
+            cargarTablacalendario();
+            tamañocolumnasRutaValidas();
+            JOptionPane.showMessageDialog(null, "Se actualizaron las tablas de la ruta: " + idrutaapipp, "Bien", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona unicamente 1 y no varias o ninguna rutas", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-       // otra forma de refrecar es asi
-       //this.dispose();
-       //Reto_equipo3.main(new String[0]);
+
+        // otra forma de refrecar es asi
+        //this.dispose();
+        //Reto_equipo3.main(new String[0]);
     }//GEN-LAST:event_BotonpararefrecartablasActionPerformed
 //Metodo que borra una actividad al clicar en ella
     private void TablaActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaActividadesMouseClicked
-      int fila = TablaActividades.getSelectedRow(); // Fila que has clicado 
+        int fila = TablaActividades.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TablaActividades.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta actividad", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta actividad", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
                 DAOActividad daor = new DAOActividad();
                 if (daor.eliminar(resultado)) {
@@ -3109,7 +3096,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object valorColumna0 = TablaValoraciones.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta valoracion", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta valoracion", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
                 DAOValora daor = new DAOValora();
                 if (daor.eliminar(resultado)) {
@@ -3125,7 +3112,16 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object valorColumna0 = TablaimagenesInteres.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta imagen", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int filas = TablaimagenesInteres.rowAtPoint(evt.getPoint());
+                int columna = TablaimagenesInteres.columnAtPoint(evt.getPoint());
+                if (columna == 1) {
+                    ImageIcon icono = (ImageIcon) TablaimagenesInteres.getValueAt(filas, columna);
+                    String descripcion = (String) TablaimagenesInteres.getValueAt(filas, 2);
+                    if (icono != null) {
+                        mostrarImagenYDescripcionEnPanel(icono, descripcion);
+                    }
+                }
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta imagen", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
                 DAOImagenesInteres daor = new DAOImagenesInteres();
                 if (daor.eliminar(resultado)) {
@@ -3136,12 +3132,21 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaimagenesInteresMouseClicked
 //Metodo que borra una imagen al clicar en ella
     private void TablaImagenesPeligroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroMouseClicked
-          int fila = TablaImagenesPeligro.getSelectedRow(); // Fila que has clicado 
+        int fila = TablaImagenesPeligro.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TablaImagenesPeligro.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta imagen", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int filas = TablaImagenesPeligro.rowAtPoint(evt.getPoint());
+                int columna = TablaImagenesPeligro.columnAtPoint(evt.getPoint());
+                if (columna == 1) {
+                    ImageIcon icono = (ImageIcon) TablaImagenesPeligro.getValueAt(filas, columna);
+                    String descripcion = (String) TablaImagenesPeligro.getValueAt(filas, 2);
+                    if (icono != null) {
+                        mostrarImagenYDescripcionEnPanel(icono, descripcion);
+                    }
+                }
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta imagen", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
                 DAOImagenesPeligro daor = new DAOImagenesPeligro();
                 if (daor.eliminar(resultado)) {
@@ -3152,12 +3157,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaImagenesPeligroMouseClicked
 //Metodo para borrar un calendario al clicar sobre este
     private void TablaCalendariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalendariosMouseClicked
-        int fila =TablaCalendarios.getSelectedRow(); // Fila que has clicado 
+        int fila = TablaCalendarios.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TablaCalendarios.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar este calendario", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar este calendario", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
                 DAOCalendario daor = new DAOCalendario();
                 if (daor.eliminar(resultado)) {
@@ -3168,87 +3173,87 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaCalendariosMouseClicked
 //Metodo de volver
     private void BotonCrearPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCrearPuntoActionPerformed
-       this.PuntosdeRuta.setVisible(false);
-       this.CrearPuntosRutap.setVisible(true);
+        this.PuntosdeRuta.setVisible(false);
+        this.CrearPuntosRutap.setVisible(true);
     }//GEN-LAST:event_BotonCrearPuntoActionPerformed
 //Metodo de volver
     private void BotonvolverPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvolverPuntoActionPerformed
-       int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-        this.PuntosdeRuta.setVisible(true);
-       this.CrearPuntosRutap.setVisible(false);
+            this.PuntosdeRuta.setVisible(true);
+            this.CrearPuntosRutap.setVisible(false);
         }
     }//GEN-LAST:event_BotonvolverPuntoActionPerformed
 // Metodo que crea un punto de interes o peligro depende de lo elija el usuario
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String nombrepp=nombrePP.getText();
-       String nombreLat1=nombreLatitud1.getText();
-       String elevacion1=nombreElevacion1.getText();
-       String descripcion1=nombreDescripcion1.getText();
-       String longitud1=nombreLongitud1.getText();
-         String seleccion = EligePunto.getSelectedItem().toString();
+        String nombrepp = nombrePP.getText();
+        String nombreLat1 = nombreLatitud1.getText();
+        String elevacion1 = nombreElevacion1.getText();
+        String descripcion1 = nombreDescripcion1.getText();
+        String longitud1 = nombreLongitud1.getText();
+        String seleccion = EligePunto.getSelectedItem().toString();
         if (seleccion.equals("Punto Interes")) {
-             if (Teclado.validanombre(nombrepp) && Teclado.validaCoordenadas(nombreLat1)
-            && Teclado.validaCoordenadas(longitud1) && Teclado.validanombre(descripcion1) && Teclado.validaDesnivel(elevacion1)) {
-           PuntosInteres pp=new PuntosInteres(nombrepp,Integer.parseInt(nombreLat1),Integer.parseInt(longitud1),Integer.parseInt(elevacion1),descripcion1);
-           DAOPuntosinteres daopp=new DAOPuntosinteres();
-           if (daopp.insertar(pp, idrutaapipp)) {
-               JOptionPane.showMessageDialog(null, "Se creo un punto de interes correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
-           } else {
-               JOptionPane.showMessageDialog(null, "No se guardo el punto de interes en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
-           }
-           }else{
-            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
-       }
-        }else{
             if (Teclado.validanombre(nombrepp) && Teclado.validaCoordenadas(nombreLat1)
-            && Teclado.validaCoordenadas(longitud1) && Teclado.validanombre(descripcion1) && Teclado.validaDesnivel(elevacion1)) {
-           PuntosPeligro pp=new PuntosPeligro(nombrepp,Integer.parseInt(nombreLat1),Integer.parseInt(longitud1),Integer.parseInt(elevacion1),descripcion1);
-           DAOPuntospeligro daopp=new DAOPuntospeligro();
-           if (daopp.insertar(pp, idrutaapipp)) {
-               JOptionPane.showMessageDialog(null, "Se creo un punto de peligro correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
-           } else {
-               JOptionPane.showMessageDialog(null, "No se guardo el punto de peligro en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
-           }
-           }else{
-            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
-       }
-     }  
+                    && Teclado.validaCoordenadas(longitud1) && Teclado.validanombre(descripcion1) && Teclado.validaDesnivel(elevacion1)) {
+                PuntosInteres pp = new PuntosInteres(nombrepp, Integer.parseInt(nombreLat1), Integer.parseInt(longitud1), Integer.parseInt(elevacion1), descripcion1);
+                DAOPuntosinteres daopp = new DAOPuntosinteres();
+                if (daopp.insertar(pp, idrutaapipp)) {
+                    JOptionPane.showMessageDialog(null, "Se creo un punto de interes correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se guardo el punto de interes en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if (Teclado.validanombre(nombrepp) && Teclado.validaCoordenadas(nombreLat1)
+                    && Teclado.validaCoordenadas(longitud1) && Teclado.validanombre(descripcion1) && Teclado.validaDesnivel(elevacion1)) {
+                PuntosPeligro pp = new PuntosPeligro(nombrepp, Integer.parseInt(nombreLat1), Integer.parseInt(longitud1), Integer.parseInt(elevacion1), descripcion1);
+                DAOPuntospeligro daopp = new DAOPuntospeligro();
+                if (daopp.insertar(pp, idrutaapipp)) {
+                    JOptionPane.showMessageDialog(null, "Se creo un punto de peligro correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se guardo el punto de peligro en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 //Metodo de volver
     private void BotoncrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotoncrearActividadActionPerformed
-       Actividades.setVisible(false);
-       CrearActividades.setVisible(true);
+        Actividades.setVisible(false);
+        CrearActividades.setVisible(true);
     }//GEN-LAST:event_BotoncrearActividadActionPerformed
 //Metodo de volver
     private void volveraactividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volveraactividadActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las actividades", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-        Actividades.setVisible(true);
-       CrearActividades.setVisible(false);
+            Actividades.setVisible(true);
+            CrearActividades.setVisible(false);
         }
     }//GEN-LAST:event_volveraactividadActionPerformed
 //Metodo que crea una actividad para una ruta
     private void CrearActividadBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActividadBotonActionPerformed
-        String nombre=this.NombreActi.getText();
+        String nombre = this.NombreActi.getText();
         if (Teclado.validanombre(nombre)) {
-            Actividad A1=new Actividad(nombre);
-            DAOActividad daoa=new DAOActividad();
+            Actividad A1 = new Actividad(nombre);
+            DAOActividad daoa = new DAOActividad();
             if (daoa.insertar(A1, idrutaapipp)) {
-                 JOptionPane.showMessageDialog(null, "Se creo una actividad correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
-           } else {
-               JOptionPane.showMessageDialog(null, "No se guardo la actividad en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
-           }
-           }else{
-            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se creo una actividad correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se guardo la actividad en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_CrearActividadBotonActionPerformed
 //Metodo de volver
     private void VolverImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverImagenesActionPerformed
-       int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las imagenes", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las imagenes", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-        ImagenesInteres.setVisible(true);
-        CrearImagen.setVisible(false);
+            ImagenesInteres.setVisible(true);
+            CrearImagen.setVisible(false);
         }
     }//GEN-LAST:event_VolverImagenesActionPerformed
 //Metodo de volver
@@ -3258,103 +3263,104 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearImagenesActionPerformed
 //Metodo que crea una imagen de interes
     private void CrearImagenesnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearImagenesnuevoActionPerformed
-        String URL=ValidaURL.getText();
-        String descripcion=this.ValidaDescripcion.getText();
-        if (Teclado.validaURL(URL)&&Teclado.validanombre(descripcion)) {
-            ImagenesInteres A1=new ImagenesInteres(URL,descripcion);
-            DAOImagenesInteres daoa=new DAOImagenesInteres();
+        String URL = ValidaURL.getText();
+        String descripcion = this.ValidaDescripcion.getText();
+        if (Teclado.validaURL(URL) && Teclado.validanombre(descripcion)) {
+            ImagenesInteres A1 = new ImagenesInteres(URL, descripcion);
+            DAOImagenesInteres daoa = new DAOImagenesInteres();
             if (daoa.insertar(A1, idpi)) {
-                 JOptionPane.showMessageDialog(null, "Se creo una imagen correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
-           } else {
-               JOptionPane.showMessageDialog(null, "No se guardo una imagen en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
-           }
-           }else{
-            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se creo una imagen correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se guardo una imagen en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_CrearImagenesnuevoActionPerformed
 //Metodo de volver
     private void CrearImagenesPeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearImagenesPeligroActionPerformed
-          ImagenesPeligro.setVisible(false);
+        ImagenesPeligro.setVisible(false);
         CrearImagenPeligrop.setVisible(true);
     }//GEN-LAST:event_CrearImagenesPeligroActionPerformed
 //Metodo de volver
     private void VolverImagnesPeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverImagnesPeligroActionPerformed
-         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las imagenes", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las imagenes", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-        ImagenesPeligro.setVisible(true);
-        CrearImagenPeligrop.setVisible(false);
+            ImagenesPeligro.setVisible(true);
+            CrearImagenPeligrop.setVisible(false);
         }
     }//GEN-LAST:event_VolverImagnesPeligroActionPerformed
 //Metodo que crea una imagen de peligro
     private void crearimagenpeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearimagenpeligroActionPerformed
-         String URL=CrearURLY.getText();
-        String descripcion=this.CREARDESCRIPCION.getText();
-        if (Teclado.validaURL(URL)&&Teclado.validanombre(descripcion)) {
-            ImagenesPeligro A1=new ImagenesPeligro(URL,descripcion);
-            DAOImagenesPeligro daoa=new DAOImagenesPeligro();
+        String URL = CrearURLY.getText();
+        String descripcion = this.CREARDESCRIPCION.getText();
+        if (Teclado.validaURL(URL) && Teclado.validanombre(descripcion)) {
+            ImagenesPeligro A1 = new ImagenesPeligro(URL, descripcion);
+            DAOImagenesPeligro daoa = new DAOImagenesPeligro();
+            System.out.println("id punto peligro:" + idpp);
             if (daoa.insertar(A1, idpp)) {
-                 JOptionPane.showMessageDialog(null, "Se creo una imagen correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
-           } else {
-               JOptionPane.showMessageDialog(null, "No se guardo la imagen en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
-           }
-           }else{
-            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se creo una imagen correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se guardo la imagen en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_crearimagenpeligroActionPerformed
 //Metodo que modifica rutas
     private void BotonParamodificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonParamodificarUsuarioActionPerformed
-        String desnivelpos=desnivelpositivo.getText();
-        String desnivelneg=desnivelnegativo.getText();
-        String altitudmax=altmaxima.getText();
-        String altitudmin=altminima.getText();
-        String tipoTer=tipoterreno.getText();
-        String indica=indicaciones.getText();
+        String desnivelpos = desnivelpositivo.getText();
+        String desnivelneg = desnivelnegativo.getText();
+        String altitudmax = altmaxima.getText();
+        String altitudmin = altminima.getText();
+        String tipoTer = tipoterreno.getText();
+        String indica = indicaciones.getText();
         String rutafamiliar = rutafam.getSelectedItem().toString();
-        boolean rutafamiliarvalida=false;
+        boolean rutafamiliarvalida = false;
         if (rutafamiliar.equals("si")) {
-            rutafamiliarvalida=true;
+            rutafamiliarvalida = true;
         }
-        String acesibilidad=this.accesibilidad.getSelectedItem().toString();
-        boolean rutaacceso=false;
+        String acesibilidad = this.accesibilidad.getSelectedItem().toString();
+        boolean rutaacceso = false;
         if (acesibilidad.equals("si")) {
-            rutaacceso=true;
+            rutaacceso = true;
         }
-        String temporadas=temp.getText();
-        String clasificacion=clasi.getSelectedItem().toString();
-        String zonaGeografica=geo.getText();
-        String recomendaciones=recomen.getText();
-       DAORutas daor=new DAORutas();
-       Rutas R1=daor.buscarTodaInfo(idrutaapipp);
-        if (Teclado.validaDesnivel(desnivelpos)&&!desnivelpos.isEmpty()) {
+        String temporadas = temp.getText();
+        String clasificacion = clasi.getSelectedItem().toString();
+        String zonaGeografica = geo.getText();
+        String recomendaciones = recomen.getText();
+        DAORutas daor = new DAORutas();
+        Rutas R1 = daor.buscarTodaInfo(idrutaapipp);
+        if (Teclado.validaDesnivel(desnivelpos) && !desnivelpos.isEmpty()) {
             R1.setDesnivelPositivo(Integer.parseInt(desnivelpos));
         }
-        if (Teclado.validaDesnivel(desnivelneg)&&!desnivelneg.isEmpty()) {
-             R1.setDesnivelNegativo(Integer.parseInt(desnivelneg));
+        if (Teclado.validaDesnivel(desnivelneg) && !desnivelneg.isEmpty()) {
+            R1.setDesnivelNegativo(Integer.parseInt(desnivelneg));
         }
-        if (Teclado.validaCoordenadas(altitudmax)&&!altitudmax.isEmpty()) {
+        if (Teclado.validaCoordenadas(altitudmax) && !altitudmax.isEmpty()) {
             R1.setAltitudMax(Double.parseDouble(altitudmax));
         }
-         if (Teclado.validaCoordenadas(altitudmin)&&!altitudmin.isEmpty()) {
+        if (Teclado.validaCoordenadas(altitudmin) && !altitudmin.isEmpty()) {
             R1.setAltitudMin(Double.parseDouble(altitudmin));
         }
-        if (Teclado.validaRango1a5(tipoTer)&&!tipoTer.isEmpty()) {
+        if (Teclado.validaRango1a5(tipoTer) && !tipoTer.isEmpty()) {
             R1.setTipoterreno(Integer.parseInt(tipoTer));
         }
-        if (Teclado.validaRango1a5(indica)&&!indica.isEmpty()) {
+        if (Teclado.validaRango1a5(indica) && !indica.isEmpty()) {
             R1.setIndicaciones(Integer.parseInt(indica));
         }
         R1.setRutaFamiliar(rutafamiliarvalida);
         R1.setAccesibilidad(rutaacceso);
-        Set<String> temp=new HashSet<>(Arrays.asList(temporadas.split(",")));
-        if (Teclado.validaTemporada(temp)&&!temporadas.isEmpty()) {
-          R1.setTemporada(temp);
+        Set<String> temp = new HashSet<>(Arrays.asList(temporadas.split(",")));
+        if (Teclado.validaTemporada(temp) && !temporadas.isEmpty()) {
+            R1.setTemporada(temp);
         }
-        Clasificacion C1=null;
-        if (Teclado.validaClasificacion(clasificacion)&&!clasificacion.isEmpty()) {
+        Clasificacion C1 = null;
+        if (Teclado.validaClasificacion(clasificacion) && !clasificacion.isEmpty()) {
             if (clasificacion.equals("circular")) {
-                C1=Clasificacion.CIRCULAR;
-            }else{
-                 C1=Clasificacion.LINEAL;
+                C1 = Clasificacion.CIRCULAR;
+            } else {
+                C1 = Clasificacion.LINEAL;
             }
             R1.setClasificacion(C1);
         }
@@ -3365,17 +3371,17 @@ public class SwingPrincipal extends javax.swing.JFrame {
             R1.setRecomendaciones(recomendaciones);
         }
         if (daor.modificarr(R1)) {
-             JOptionPane.showMessageDialog(null, "Se modifico la ruta", "Bien", JOptionPane.INFORMATION_MESSAGE);
-           } else {
-               JOptionPane.showMessageDialog(null, "No se guardo los cambios de la ruta en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
-        } 
+            JOptionPane.showMessageDialog(null, "Se modifico la ruta", "Bien", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se guardo los cambios de la ruta en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_BotonParamodificarUsuarioActionPerformed
 //Boton de volver
     private void BotonvolverRutassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvolverRutassActionPerformed
-         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-        RutasValidas.setVisible(true);
-        ValidaRutas.setVisible(false);
+            RutasValidas.setVisible(true);
+            ValidaRutas.setVisible(false);
         }
     }//GEN-LAST:event_BotonvolverRutassActionPerformed
 
@@ -3388,15 +3394,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_geoActionPerformed
 //Metodo de volver
     private void BotonvalidarutasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvalidarutasirActionPerformed
-       RutasValidas.setVisible(false);
-       CatalogodeRutas.setVisible(true);
-       volverarutasdesdeno.setVisible(true);
-       Tabladerutasnovalidas.setVisible(true);
-       jScrollPane9.setVisible(true);
-       Nombrerutasinavlidas.setVisible(true);
+        CrearRutasde0.setVisible(false);
+        volverarutasdesdeno.setVisible(true);
+        Tabladerutasnovalidas.setVisible(true);
+        jScrollPane9.setVisible(true);
+        Nombrerutasinavlidas.setVisible(true);
     }//GEN-LAST:event_BotonvalidarutasirActionPerformed
     //Metodos del boton que modifican las tablas para actualizarlas
-    private void cargarTablarutasvalidas(){
+    private void cargarTablarutasvalidas() {
         DAORutas daoruta = new DAORutas();
         List<Rutas> lisruta = daoruta.listaraprobadas();
         DefaultTableModel model = new DefaultTableModel();
@@ -3414,10 +3419,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-         TableRutasValidas.setModel(model);
-         TableRutasValidas.setAutoCreateRowSorter(true);
+        TableRutasValidas.setModel(model);
+        TableRutasValidas.setAutoCreateRowSorter(true);
         tamañocolumnasRutaValidas();
-       
+
     }
 
     private void cargarTablarutasnovalidas() {
@@ -3443,11 +3448,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
         Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
         Tabladerutasnovalidas.setAutoCreateRowSorter(true);
-        
+
     }
 
     private void cargarTablapuntosinteres() {
-      DAOPuntosinteres daopi = new DAOPuntosinteres();
+        DAOPuntosinteres daopi = new DAOPuntosinteres();
         List<PuntosInteres> lispi = daopi.listar(idrutaapipp);// cambiar el metodo listar de dao puntos interes de Ruta ruta a int id 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID PuntosInteres");
@@ -3465,11 +3470,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
-       
+
     }
 
     private void cargarTablapuntospeligro() {
-         DAOPuntospeligro daopp = new DAOPuntospeligro();
+        DAOPuntospeligro daopp = new DAOPuntospeligro();
         List<PuntosPeligro> lispp = daopp.listar(idrutaapipp);// cambiar el metodo listar de dao puntos peligro de Ruta ruta a int id 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID PuntosPeligro");
@@ -3487,7 +3492,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
         TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
-      
+
     }
 
     private void cargarTablavaloraciones() {
@@ -3552,8 +3557,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("Media Estrellas");
         Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
         model.addRow(fila);
-        TablaDetallesruta.setModel(model);
         tamañocolumnasDetalles();
+        TablaDetallesruta.setModel(model);
     }
 
     private void cargarTablacalendario() {
@@ -3602,6 +3607,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaimagenesInteres.setAutoCreateRowSorter(true);
+
+        for (MouseListener ml : TablaImagenesPeligro.getMouseListeners()) {
+            TablaImagenesPeligro.removeMouseListener(ml);
+        }
+
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -3640,13 +3650,17 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
-       TablaImagenesPeligro.setModel(model);
-       TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
-       TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
-       TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
-       TablaImagenesPeligro.setAutoCreateRowSorter(true);
+        TablaImagenesPeligro.setModel(model);
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaImagenesPeligro.setAutoCreateRowSorter(true);
 
-      TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
+        for (MouseListener ml : TablaImagenesPeligro.getMouseListeners()) {
+            TablaImagenesPeligro.removeMouseListener(ml);
+        }
+
+        TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int fila = TablaImagenesPeligro.rowAtPoint(e.getPoint());
@@ -3662,7 +3676,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
         }
         );
     }
+
     // fin del boton de actualizar todas las tablas 
+    
     //Crea tabla imagenes interes y genera la imagen
     private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) {
         DAOImagenesInteres daoimg = new DAOImagenesInteres();
@@ -3690,24 +3706,12 @@ public class SwingPrincipal extends javax.swing.JFrame {
         TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
         TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaimagenesInteres.setAutoCreateRowSorter(true);
-       
-        TablaimagenesInteres.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int fila = TablaimagenesInteres.rowAtPoint(e.getPoint());
-                int columna = TablaimagenesInteres.columnAtPoint(e.getPoint());
-                if (columna == 1) {
-                    ImageIcon icono = (ImageIcon) TablaimagenesInteres.getValueAt(fila, columna);
-                    String descripcion = (String) TablaimagenesInteres.getValueAt(fila, 2);
-                    if (icono != null) {
-                        mostrarImagenYDescripcionEnPanel(icono, descripcion);
-                    }
-                }
-            }
-        }
-        );
+
+        
+        
     }
 // Metodo de imagenes de peligro y interes que muestra en panatalla la imagen seleccionada
+
     private void mostrarImagenYDescripcionEnPanel(ImageIcon icono, String descripcion) {
         JPanel panelVistaPrevia = new JPanel();
         panelVistaPrevia.setLayout(new BoxLayout(panelVistaPrevia, BoxLayout.Y_AXIS));
@@ -3723,6 +3727,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         ventanaVistaPrevia.setVisible(true);
     }
 //Metodo que limpiar todas las tablas(contenido)
+
     public void limpiartablasalvolver() {
         TableRutasValidas.setModel(new DefaultTableModel());
         TablePuntosInteres.setModel(new DefaultTableModel());
@@ -3735,7 +3740,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Tabladerutasnovalidas.setModel(new DefaultTableModel());
         TablaCalendarios.setModel(new DefaultTableModel());
     }
-    
+
     /**
      * @param args the command line arguments
      */

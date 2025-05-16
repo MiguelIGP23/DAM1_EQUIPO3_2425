@@ -27,7 +27,7 @@ public class DAOImagenesPeligro {
      public List<ImagenesPeligro> listar(int idPuntoPeligro){
         List<ImagenesPeligro> lista=new ArrayList<>();
         ImagenesPeligro ip=null;
-        String sql="select idimagenespeligro,url,descripcion  from imagenespeligro where puntospeligro_idPuntosinteres=?";
+        String sql="select idimagenespeligro,url,descripcion  from imagenespeligro where puntospeligro_idPuntospeligro=?";
         try(PreparedStatement pstm=conn.prepareStatement(sql)){
            pstm.setInt(1, idPuntoPeligro);
            try(ResultSet rs=pstm.executeQuery()){
