@@ -24,6 +24,15 @@ public class ImagenesPeligro {
         this.descripcion = descripcion;
     }
     /**
+     * Constructor por parámetros, sin incluir la id de los puntos de peligro
+     * @param url para darle valor como parámetro al atributo "url"
+     * @param descripcion para darle valor como parámetro al atributo "descripcion"
+     */
+    public ImagenesPeligro(String url, String descripcion) {
+        this.url = url;
+        this.descripcion = descripcion;
+    }
+    /**
      * Getter del atributo "idimagenespeligro"
      * @return el valor actual del atributo "idimagenespeligro"
      */

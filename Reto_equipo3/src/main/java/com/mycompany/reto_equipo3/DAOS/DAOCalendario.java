@@ -56,25 +56,40 @@ public class DAOCalendario implements InterfazDAO<Calendario>{
         return valido;
     }
     /**
-     * 
-     * @param cal 
+     * Método eliminar para eliminar a la base de datos un calendario
+     * @param idCal parámetro que identificará la id del calendario para buscar dicho calendario a borrar
+     * @return boolean si el calendario se ha eliminado correctamente
      */
-    public void eliminar(Calendario cal) {
+    public boolean eliminar(int idCal) {
+        boolean valida=false;
       String sql="delete from calendario where idCalendario=?";
       try(PreparedStatement pstm=conn.prepareStatement(sql)){
-          pstm.setInt(1, cal.getIdCalendario());
+          pstm.setInt(1, idCal);
           if(pstm.executeUpdate()!=1){
                throw new Exception("ERROR: no se elimino el calendario");
           }
+          valida=true;
         }catch(SQLException ex){
             System.out.println("SQLError: " + ex.getMessage());
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+        return valida;
     }
+    /**
+     * Método privado crearCalendario, donde irá creando calendarios recogiéndolos desde la base de datos y luego listarlos en el método de listar
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @return cada objeto Calendario encontrado desde el método listar
+     * @throws SQLException SQLException podría ocurrir un error en el SQL al realizar el rs
+     */
      private Calendario crearCalendario(final ResultSet rs) throws SQLException {
         return new Calendario(rs.getInt(1),rs.getTimestamp(2).toLocalDateTime(),rs.getString(3), rs.getString(4));
-    }  
+    }
+    /**
+     * Método listar para listar en una colección de List de Calendario todos los calendarios de la base de datos
+     * @param idRuta parámetro que identifica la id de la ruta
+     * @return la colección listada en List
+     */
     public List<Calendario> listar(int idRuta){
         List<Calendario>  calendario= new ArrayList<>();
         String sql = "select idCalendario, fecha, detalles, recomendaciones from calendario where usuario_idUsuario=?";
@@ -95,8 +110,11 @@ public class DAOCalendario implements InterfazDAO<Calendario>{
         }
         return calendario;
     }   
- 
-    
+    /**
+     * Método buscar para buscar un calendario de manera rápida
+     * @param cal parámetro para llamar al getter de fecha para encontrar el calendario por su fecha
+     * @return un objeto Calendario, es decir, el calendario encontrado
+     */
     public Calendario buscar(Calendario cal) {
         Calendario buscado = null;
         LocalDate fec=cal.getFecha().toLocalDate();

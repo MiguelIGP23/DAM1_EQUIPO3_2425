@@ -15,15 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author salsa
+ * Clase DAO de ImagenesPeligro para las consultas/modificaciones simples de la base de datos
+ * @author Manuel Mediavilla y Hugo Fernández, JavaDoc por Hugo Fernández
  */
 public class DAOImagenesPeligro {
     private Connection conn;
-
+    /**
+     * Constructor por defecto, devuelve la conexión de la base de datos desde el atributo "conn" con los métodos de acceso de la clase
+     */
     public DAOImagenesPeligro() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
+    /**
+     * Método listar para listar en una colección de List de ImagenesPeligro todas las imágenes de peligro de la base de datos
+     * @param idPuntoPeligro parámetro que identifica el punto de peligro
+     * @return la colección listada en List
+     */
      public List<ImagenesPeligro> listar(int idPuntoPeligro){
         List<ImagenesPeligro> lista=new ArrayList<>();
         ImagenesPeligro ip=null;
@@ -45,16 +52,28 @@ public class DAOImagenesPeligro {
         }
       return lista;
     }
-    public ImagenesPeligro crearImagenesPeligro(final ResultSet rs)throws SQLException{
+    /**
+     * Método privado crearImagenesPeligro, donde irá creando imágenes de peligro recogiéndolas desde la base de datos y luego listarlas en el método de listar
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @return cada objeto ImagenesPeligro encontrado desde el método listar
+     * @throws SQLException podría ocurrir un error en el SQL al realizar el rs
+     */
+    private ImagenesPeligro crearImagenesPeligro(final ResultSet rs)throws SQLException{
         return new ImagenesPeligro(rs.getInt(1),rs.getString(2),rs.getString(3));
     }
-    public boolean insertar(ImagenesPeligro imp, PuntosPeligro pp) {
+    /**
+     * Método insertar para insertar a la base de datos una imagen de peligro
+     * @param imp parámetro que sirve para llamar a dichos getters de la clase ImagenesPeligro
+     * @param pp parámetro que identificarála id del punto de peligro a insertar
+     * @return boolean si la imagen de peligro fue insertada correctamente
+     */
+    public boolean insertar(ImagenesPeligro imp, int pp) {
         boolean insertado = false;
         String sql = "insert into imagenespeligro (url, descripcion, puntospeligro_idPuntospeligro) values (?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, imp.getUrl());
             pstmt.setString(2, imp.getDescripcion());
-            pstmt.setInt(3, pp.getIdPuntospeligro());
+            pstmt.setInt(3, pp);
             if (pstmt.executeUpdate() != 1) {
                 throw new Exception("Error: la imagen de peligro no se ha insertado.");
             }
@@ -66,6 +85,11 @@ public class DAOImagenesPeligro {
         }
         return insertado;
     }
+    /**
+     * Método eliminar para eliminar una imagen de peligro de la base de datos
+     * @param idImp parámetro que identificará la id de la imagen de peligro para buscar dicha imagen de peligro a borrar
+     * @return boolean si la imagen de peligro se ha eliminado correctamente
+     */
     public boolean eliminar(int idImp) {
         boolean eliminado = false;
         String sql = "delete from imagenespeligro where idimagenespeligro = ?";

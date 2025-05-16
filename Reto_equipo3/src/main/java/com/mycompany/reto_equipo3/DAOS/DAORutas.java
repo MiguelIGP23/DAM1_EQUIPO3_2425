@@ -19,17 +19,24 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
- * @author MiguelIGP-1ºDAM
+ * Clase DAO de Rutas para las consultas/modificaciones simples de la base de datos
+ * @author Miguel Inglés y Saúl García, JavaDoc por Hugo Fernández
  */
 public class DAORutas implements InterfazDAO<Rutas> {
 
     private Connection conn;
-
+    /**
+     * Constructor por defecto, devuelve la conexión de la base de datos desde el atributo "conn" con los métodos de acceso de la clase
+     */
     public DAORutas() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-
+    /**
+     * Método insertar para insertar a la base de datos una ruta
+     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     * @param usu parámetro que sirve para llamar a dichos getters de la clase Usuario
+     * @return boolean si la ruta fue insertada correctamente
+     */
     public boolean insertar(Rutas ruta, Usuario usu) {
         boolean valida=false;
         String sql = "INSERT INTO rutas (nombre, nombre_inicioruta,nombre_finalruta,latitudInicial,latitudFinal,longitudInicial,longitudFinal,distancia,duracion,usuario_idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -56,9 +63,13 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return valida;
     }
-
-    @Override
-    public void modificar(Rutas ruta) {
+    /**
+     * Método modificar para actualizar una ruta de la base de datos
+     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     * @return boolean si la ruta fue modificada correctamente
+     */
+    public boolean modificarr(Rutas ruta) {
+        boolean valida=false;
         String sql = "UPDATE rutas set nombre=?, nombre_inicioruta=?,nombre_finalruta=?,latitudInicial=?,latitudFinal=?,longitudInicial=?,longitudFinal=?,distancia=?,duracion=?,estadoRuta=? WHERE idRuta=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, ruta.getNombre());
@@ -75,14 +86,20 @@ public class DAORutas implements InterfazDAO<Rutas> {
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se ha modificado el usuario");
             }
+            valida=true;
             System.out.println("Se modifico el usuario");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valida;
     }
-
+    /**
+     * Método para aprobar si una ruta es válida o no
+     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     * @return boolean si la ruta fue aprobada o no
+     */
     public boolean aprobarRuta(Rutas ruta) {
         boolean aprobado = false;
         String sql = "UPDATE rutas SET estadoRuta=1 WHERE idRuta=?";
@@ -99,7 +116,10 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return aprobado;
     }
-
+    /**
+     * Método listar para listar en una colección de List de Actividad las rutas no aprobadas
+     * @return la colección listada en List
+     */
     public List<Rutas> listarsinaprobar() {
         List<Rutas> lista = new ArrayList<>();
         Rutas R1 = null;
@@ -119,7 +139,10 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return lista;
     }
-
+    /**
+     * Método listar para listar en una colección de List de Actividad las rutas aprobadas
+     * @return la colección listada en List
+     */
     public List<Rutas> listaraprobadas() {
         List<Rutas> lista = new ArrayList<>();
         Rutas R1;
@@ -139,12 +162,22 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return lista;
     }
-
-    public Rutas crearRutas(final ResultSet rs) throws SQLException {
+    /**
+     * Método privado crearRutas, donde irá creando rutas recogiéndolas desde la base de datos y luego listarlas en los métodos dichos
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @return cada objeto Rutas encontrado desde los métodos de listar aprobadas y no aprobadas
+     * @throws SQLException podría ocurrir un error en el SQL al realizar el rs
+     */
+    private Rutas crearRutas(final ResultSet rs) throws SQLException {
         return new Rutas(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getTime(10).toLocalTime());
     }
 
    // @Override
+    /**
+     * Método eliminar para eliminar una ruta de la base de datos
+     * @param idRuta parámetro que identificará la id de la ruta para buscar dicha ruta a borrar
+     * @return boolean si la ruta se ha eliminado correctamente
+     */
     public boolean eliminar(int idRuta) {
         boolean valida=false;
         String sql = "DELETE FROM rutas WHERE idRuta=?";
@@ -162,7 +195,11 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return valida;
     }
-
+    /**
+     * Método buscar para buscar una ruta de manera rápida
+     * @param nombre parámetro por el que se encontrará desde la consulta select, es decir, con el nombre
+     * @return un objeto Rutas, es decir, la ruta encontrada
+     */
     @Override
     public Rutas buscar(String nombre) {
         Rutas buscado = null;
@@ -183,6 +220,11 @@ public class DAORutas implements InterfazDAO<Rutas> {
     //Metodos DAO completos
     
     //Metpdp listar completo
+    /**
+     * Método buscar para buscar una actividad de manera rápida, a excepción de que recogerá toda la información con el nombre
+     * @param nombre parámetro por el que se encontrará desde la consulta select, es decir, con el nombre
+     * @return un objeto Rutas, es decir, la ruta encontrada
+     */
     public Rutas buscarTodaInfo(String nombre) {
         Rutas buscado = null;
         String sql = "Select idRuta, nombre, nombre_inicioruta, nombre_finalruta, latitudInicial, latitudFinal, longitudInicial, longitudFinal, distancia, duracion,"
@@ -200,6 +242,11 @@ public class DAORutas implements InterfazDAO<Rutas> {
         }
         return buscado;
     }
+    /**
+     * Método buscar para buscar una actividad de manera rápida, a excepción de que recogerá toda la información con la id
+     * @param id parámetro por el que se encontrará desde la consulta select, es decir, con la id
+     * @return un objeto Rutas, es decir, la ruta encontrada
+     */
     public Rutas buscarTodaInfo(int id) {
         Rutas buscado = null;
         String sql = "Select idRuta, nombre, nombre_inicioruta, nombre_finalruta, latitudInicial, latitudFinal, longitudInicial, longitudFinal, distancia, duracion,"
@@ -219,7 +266,13 @@ public class DAORutas implements InterfazDAO<Rutas> {
     }
 
     //Crear ruta
-    public Rutas crearRutasTodaInfo(final ResultSet rs) throws SQLException {
+    /**
+     * Método privado crearRutasTodaInfo, donde irá creando rutas recogiéndolas desde la base de datos y luego listarlas en el método de crearPuntosInteresTodaInfo, a excepción de que es en una colección Set
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @return cada objeto Rutas encontrado desde los métodos exclusivos de este método
+     * @throws SQLException podría ocurrir un error en el SQL al realizar el rs
+     */
+    private Rutas crearRutasTodaInfo(final ResultSet rs) throws SQLException {
         Set<String> temporada = new HashSet<>();
         String tempstring = rs.getString("temporadas");
         if (tempstring != null && !tempstring.isEmpty()) {
@@ -259,6 +312,11 @@ public class DAORutas implements InterfazDAO<Rutas> {
     }
 
     //Insertar completo
+    /**
+     * Método insertar para insertar a la base de datos una ruta, a excepción de que es toda su información
+     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     * @param usu parámetro que sirve para llamar a dichos getters de la clase Usuario
+     */
     public void insertarTodaInfo(Rutas ruta, Usuario usu) {
         String sql = "INSERT INTO rutas (nombre, nombre_inicioruta, nombre_finalruta, latitudInicial, latitudFinal, longitudInicial, longitudFinal, distancia, duracion,"
                 + "desnivelPositivo, desnivelNegativo, altitudMax, altitudMin, clasificacion, tipoTerreno, indicaciones,"
@@ -303,6 +361,10 @@ public class DAORutas implements InterfazDAO<Rutas> {
     }
 
     //Modificar completo
+    /**
+     * Método modificar para actualizar una ruta de la base de datos, a exceepción de que recogerá toda su información
+     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     */
     public void modificarTodaInfo(Rutas ruta) {
         String sql = "UPDATE rutas set nombre=?, nombre_inicioruta=?,nombre_finalruta=?,"
                 + "latitudInicial=?,latitudFinal=?,longitudInicial=?,longitudFinal=?,distancia=?,duracion=?,"
@@ -346,7 +408,11 @@ public class DAORutas implements InterfazDAO<Rutas> {
             System.out.println(ex.getMessage());
         }
     }
-
+    /**
+     * Método modificar para actualizar una ruta de la base de datos, guiándose de la id
+     * @param idRutanovalida parámetro que identifica la id de la Ruta a modificar
+     * @return boolean si la ruta fue modificada correctamente
+     */
     public boolean modificarporid(int idRutanovalida) {
         boolean valido=false;
         String sql = "UPDATE rutas set estadoRuta=true WHERE idRuta=?";
@@ -366,6 +432,11 @@ public class DAORutas implements InterfazDAO<Rutas> {
     }
     @Override
     public void eliminar(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void modificar(Rutas obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

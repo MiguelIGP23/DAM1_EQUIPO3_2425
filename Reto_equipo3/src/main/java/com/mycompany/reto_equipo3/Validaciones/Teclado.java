@@ -279,4 +279,16 @@ public class Teclado {
         }
         return valido;
     }
+    /**
+     * Método estático de validación de una url, debe tener una dirección con "." y "\\", acabado en jpg o png
+     * @param url parámetro que identificará la url introducido en la aplicación
+     * @return boolean si la url es válida o no
+     */
+    public static boolean validaURL(String url){
+        boolean valido = false;
+        if (url.matches(".*\\.(jpg|png)")) {
+            valido = true;
+        }
+        return valido;
+    }
 }

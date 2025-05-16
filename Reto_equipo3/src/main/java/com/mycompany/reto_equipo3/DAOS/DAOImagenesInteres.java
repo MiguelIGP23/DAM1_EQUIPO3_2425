@@ -14,15 +14,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author DAM122
+ * Clase DAO de ImagenesInteres para las consultas/modificaciones simples de la base de datos
+ * @author Manuel Mediavilla y Hugo Fernández, JavaDoc por Hugo Fernández
  */
 public class DAOImagenesInteres {
   private Connection conn;
-
+  /**
+   * Constructor por defecto, devuelve la conexión de la base de datos desde el atributo "conn" con los métodos de acceso de la clase
+   */
     public DAOImagenesInteres() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
+    /**
+     * Método listar para listar en una colección de List de ImagenesInteres todas las imágenes de interés de la base de datos
+     * @param idPuntoInteres parámetro que identifica el punto de interés
+     * @return la colección listada en List
+     */
     public List<ImagenesInteres> listar(int idPuntoInteres){
         List<ImagenesInteres> lista=new ArrayList<>();
         ImagenesInteres ii=null;
@@ -44,16 +51,28 @@ public class DAOImagenesInteres {
         }
       return lista;
     }
-    public ImagenesInteres crearImagenesInteres(final ResultSet rs)throws SQLException{
+    /**
+     * Método privado crearImagenesInteres, donde irá creando imágenes de interés recogiéndolas desde la base de datos y luego listarlas en el método de listar
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @return cada objeto ImagenesInteres encontrado desde el método listar
+     * @throws SQLException podría ocurrir un error en el SQL al realizar el rs
+     */
+    private ImagenesInteres crearImagenesInteres(final ResultSet rs)throws SQLException{
         return new ImagenesInteres(rs.getInt(1),rs.getString(2),rs.getString(3));
     }
-    public boolean insertar(ImagenesInteres imi, PuntosInteres pi) {
+    /**
+     * Método insertar para insertar a la base de datos una imagen de interés
+     * @param imi parámetro que sirve para llamar a dichos getters de la clase ImagenesInteres
+     * @param pi parámetro que identificarála id del punto de interés a insertar
+     * @return boolean si la imagen de interés fue insertada correctamente
+     */
+    public boolean insertar(ImagenesInteres imi, int pi) {
         boolean insertado = false;
         String sql = "insert into imagenesinteres (url, descripcion, puntosinteres_idPuntosinteres) values (?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, imi.getDescripcion());
-            pstmt.setString(2, imi.getUrl());
-            pstmt.setInt(3, pi.getIdPuntosInteres());
+            pstmt.setString(1, imi.getUrl());
+            pstmt.setString(2, imi.getDescripcion());
+            pstmt.setInt(3, pi);
             if (pstmt.executeUpdate() != 1) {
                 throw new Exception("Error: la imagen de interes no se ha insertado.");
             }
@@ -65,6 +84,11 @@ public class DAOImagenesInteres {
         }
         return insertado;
     }
+    /**
+     * Método eliminar para eliminar una imagen de interés de la base de datos
+     * @param idImi parámetro que identificará la id de la imagen de interés para buscar dicha imagen de interés a borrar
+     * @return boolean si la imagen de interés se ha eliminado correctamente
+     */
     public boolean eliminar(int idImi) {
         boolean eliminado = false;
         String sql = "delete into imagenesinteres where idimagenesinteres = ?";

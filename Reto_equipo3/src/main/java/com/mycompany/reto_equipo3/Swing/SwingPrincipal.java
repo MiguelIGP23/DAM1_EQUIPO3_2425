@@ -15,7 +15,9 @@ import com.mycompany.reto_equipo3.DAOS.DAOPuntospeligro;
 import com.mycompany.reto_equipo3.DAOS.DAORutas;
 import com.mycompany.reto_equipo3.DAOS.DAOUsuario;
 import com.mycompany.reto_equipo3.DAOS.DAOValora;
+import com.mycompany.reto_equipo3.Enums.Clasificacion;
 import com.mycompany.reto_equipo3.Enums.Roles;
+import com.mycompany.reto_equipo3.Enums.Tipo;
 import com.mycompany.reto_equipo3.Ficheros.FichaOrganizacion;
 import com.mycompany.reto_equipo3.Ficheros.FichaSeguridad;
 import com.mycompany.reto_equipo3.Ficheros.FichaUsuario;
@@ -23,6 +25,7 @@ import com.mycompany.reto_equipo3.ImagenesInteres;
 import com.mycompany.reto_equipo3.ImagenesPeligro;
 import com.mycompany.reto_equipo3.PuntosInteres;
 import com.mycompany.reto_equipo3.PuntosPeligro;
+import com.mycompany.reto_equipo3.Reto_equipo3;
 import com.mycompany.reto_equipo3.Rutas;
 import com.mycompany.reto_equipo3.Usuario;
 import com.mycompany.reto_equipo3.Validaciones.Teclado;
@@ -36,7 +39,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -48,8 +54,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author salsa
+ * Clase Swing donde se ejecutará la interfaz gráfica
+ * @author Saúl García, Miguel Inglés, Hugo Fernández y Manuel Mediavilla, JavaDoc por Hugo Fernández
  */
 public class SwingPrincipal extends javax.swing.JFrame {
 
@@ -60,6 +66,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
 
     public SwingPrincipal() {
         initComponents();
+        //No deja salir ni con x ni con alt + f4
         setResizable(false);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -68,31 +75,63 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 System.out.println("Cierre deshabilitado.");
             }
         });
-        // Reajustar Tamaño de rutas validas tabla
-        this.TableRutasValidas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        // Botones por defecto desactivados hasta que ponga su rol y tamaño de tablas
+        TableRutasValidas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        jScrollPane1.setPreferredSize(new Dimension(1600, 600));
+        jScrollPane1.setPreferredSize(new Dimension(1500, 600));
         Botonparacrearrutas.setVisible(false);
         botoncrearvaloracion.setVisible(false);
+        Botonpararefrecartablas.setVisible(false);
+        BotonCrearPunto.setVisible(false);
+        CrearImagenes.setVisible(false);
+        CrearImagenesPeligro.setVisible(false);
+        BotoncrearActividad.setVisible(false);
         botoncrearcalendario.setVisible(false);
-        //  modelo.clearData(); añadir esto en un metodo con todas las tablas para que no consuma tanto
+        Botonvalidarutasir.setVisible(false);
+        TablaDetallesruta.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane7.setPreferredSize(new Dimension(2800, 400));
     }
 
-    // Tamaño de lo que ocupa cada cuadrado de la tabla valida rutas
+    // Tamaño de lo que ocupa cada cuadrado de la tabla valida rutas y los detalles de la ruta valida
     public void tamañocolumnasRutaValidas() {
-        this.TableRutasValidas.getColumnModel().getColumn(0).setMinWidth(0);
-         this.TableRutasValidas.getColumnModel().getColumn(0).setMaxWidth(0);
-          this.TableRutasValidas.getColumnModel().getColumn(0).setPreferredWidth(0);
-        this.TableRutasValidas.getColumnModel().getColumn(1).setPreferredWidth(200);
-        this.TableRutasValidas.getColumnModel().getColumn(2).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(3).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(4).setPreferredWidth(200);
-        this.TableRutasValidas.getColumnModel().getColumn(5).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(6).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(7).setPreferredWidth(200);
-        this.TableRutasValidas.getColumnModel().getColumn(8).setPreferredWidth(150);
-        this.TableRutasValidas.getColumnModel().getColumn(9).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(0).setMinWidth(0);
+        TableRutasValidas.getColumnModel().getColumn(0).setMaxWidth(0);
+        TableRutasValidas.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TableRutasValidas.getColumnModel().getColumn(1).setPreferredWidth(200);
+        TableRutasValidas.getColumnModel().getColumn(2).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(3).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(4).setPreferredWidth(200);
+        TableRutasValidas.getColumnModel().getColumn(5).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(6).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(7).setPreferredWidth(200);
+        TableRutasValidas.getColumnModel().getColumn(8).setPreferredWidth(150);
+        TableRutasValidas.getColumnModel().getColumn(9).setPreferredWidth(150);
+    }
+//Metodo que da formato a la tabla de detalles
+    public void tamañocolumnasDetalles() {
+        TablaDetallesruta.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaDetallesruta.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaDetallesruta.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaDetallesruta.getColumnModel().getColumn(1).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(2).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(3).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(4).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(5).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(6).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(7).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(8).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(9).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(10).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(11).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(12).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(13).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(14).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(15).setPreferredWidth(150);
+        TablaDetallesruta.getColumnModel().getColumn(16).setPreferredWidth(200);
+        TablaDetallesruta.getColumnModel().getColumn(17).setPreferredWidth(150);
     }
 
     /**
@@ -104,7 +143,6 @@ public class SwingPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField7 = new javax.swing.JTextField();
         PanelEntrada = new javax.swing.JPanel();
         CuadroEntrada = new javax.swing.JLabel();
         BotonEntrada = new javax.swing.JButton();
@@ -139,6 +177,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableRutasValidas = new javax.swing.JTable();
         Botonparacrearrutas = new javax.swing.JButton();
+        Botonpararefrecartablas = new javax.swing.JButton();
         PuntosdeRuta = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -147,6 +186,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablePuntosPeligro = new javax.swing.JTable();
+        BotonCrearPunto = new javax.swing.JButton();
         ValoracionesdeRuta = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -158,21 +198,24 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         TablaActividades = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        BotoncrearActividad = new javax.swing.JButton();
         DetallesRuta = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         TablaDetallesruta = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         ImagenesInteres = new javax.swing.JPanel();
         NombreImagenesInteres = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaimagenesInteres = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+        CrearImagenes = new javax.swing.JButton();
         ImagenesPeligro = new javax.swing.JPanel();
         Cuadroimagenespeligro = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         TablaImagenesPeligro = new javax.swing.JTable();
         votonimagenvolverpeligro = new javax.swing.JButton();
+        CrearImagenesPeligro = new javax.swing.JButton();
         CrearRutasde0 = new javax.swing.JPanel();
         Cuadrodecrearrutas = new javax.swing.JLabel();
         volverdecrearruta = new javax.swing.JButton();
@@ -195,6 +238,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         duracion = new javax.swing.JTextField();
         Botonparacrearruta = new javax.swing.JButton();
+        Botonvalidarutasir = new javax.swing.JButton();
         CatalogodeRutas = new javax.swing.JPanel();
         Nombrerutasinavlidas = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -230,8 +274,72 @@ public class SwingPrincipal extends javax.swing.JFrame {
         botoncrearcalendariode0 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         añadefech = new javax.swing.JTextField();
-
-        jTextField7.setText("jTextField7");
+        CrearPuntosRutap = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        Nombrep = new javax.swing.JLabel();
+        nombrePP = new javax.swing.JTextField();
+        Latitudp = new javax.swing.JLabel();
+        nombreLatitud1 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        BotonvolverPunto = new javax.swing.JButton();
+        Longitudp = new javax.swing.JLabel();
+        nombreLongitud1 = new javax.swing.JTextField();
+        Elevacionp = new javax.swing.JLabel();
+        nombreElevacion1 = new javax.swing.JTextField();
+        EligePunto = new javax.swing.JComboBox<>();
+        Descripcionp = new javax.swing.JLabel();
+        nombreDescripcion1 = new javax.swing.JTextField();
+        CrearActividades = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        NombreActi = new javax.swing.JTextField();
+        volveraactividad = new javax.swing.JButton();
+        CrearActividadBoton = new javax.swing.JButton();
+        CrearImagen = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        ValidaURL = new javax.swing.JTextField();
+        ValidaDescripcion = new javax.swing.JTextField();
+        CrearImagenesnuevo = new javax.swing.JButton();
+        VolverImagenes = new javax.swing.JButton();
+        CrearImagenPeligrop = new javax.swing.JPanel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        CrearURLY = new javax.swing.JTextField();
+        descripcionpl = new javax.swing.JLabel();
+        CREARDESCRIPCION = new javax.swing.JTextField();
+        crearimagenpeligro = new javax.swing.JButton();
+        VolverImagnesPeligro = new javax.swing.JButton();
+        ValidaRutas = new javax.swing.JPanel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        desnivelpositivo = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        desnivelnegativo = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        tipoterreno = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        altmaxima = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
+        altminima = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        indicaciones = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        recomen = new javax.swing.JTextField();
+        BotonvolverRutass = new javax.swing.JButton();
+        BotonParamodificarUsuario = new javax.swing.JButton();
+        jLabel44 = new javax.swing.JLabel();
+        clasi = new javax.swing.JComboBox<>();
+        rutafam = new javax.swing.JComboBox<>();
+        jLabel47 = new javax.swing.JLabel();
+        geo = new javax.swing.JTextField();
+        accesibilidad = new javax.swing.JComboBox<>();
+        temp = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -264,7 +372,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         PanelEntradaLayout.setHorizontalGroup(
             PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEntradaLayout.createSequentialGroup()
-                .addContainerGap(210, Short.MAX_VALUE)
+                .addContainerGap(211, Short.MAX_VALUE)
                 .addGroup(PanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEntradaLayout.createSequentialGroup()
                         .addComponent(CuadroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,7 +387,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(CuadroEntrada)
                 .addGap(294, 294, 294)
                 .addComponent(BotonEntrada)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         getContentPane().add(PanelEntrada, "card2");
@@ -454,7 +562,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         .addGroup(CrearUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Nombre)
                             .addGroup(CrearUsuariosLayout.createSequentialGroup()
-                                .addComponent(intronombre, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                .addComponent(intronombre, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                                 .addGap(164, 164, 164)))
                         .addGap(84, 84, 84)
                         .addGroup(CrearUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -478,15 +586,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
                                 .addComponent(darbotonUsuario)
                                 .addContainerGap())))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearUsuariosLayout.createSequentialGroup()
-                .addContainerGap(242, Short.MAX_VALUE)
-                .addGroup(CrearUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearUsuariosLayout.createSequentialGroup()
-                        .addComponent(Texto)
-                        .addGap(214, 214, 214)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearUsuariosLayout.createSequentialGroup()
-                        .addComponent(VolverUsuarios)
-                        .addContainerGap())))
+                .addContainerGap(243, Short.MAX_VALUE)
+                .addComponent(Texto)
+                .addGap(214, 214, 214)
+                .addComponent(jLabel1))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearUsuariosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(VolverUsuarios)
+                .addContainerGap())
         );
         CrearUsuariosLayout.setVerticalGroup(
             CrearUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,7 +627,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGroup(CrearUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(introemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(darbotonUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(VolverUsuarios)
                 .addGap(15, 15, 15))
         );
@@ -577,6 +684,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
+        Botonpararefrecartablas.setText("Refrescar pagina");
+        Botonpararefrecartablas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonpararefrecartablasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout RutasValidasLayout = new javax.swing.GroupLayout(RutasValidas);
         RutasValidas.setLayout(RutasValidasLayout);
         RutasValidasLayout.setHorizontalGroup(
@@ -584,26 +698,29 @@ public class SwingPrincipal extends javax.swing.JFrame {
             .addGroup(RutasValidasLayout.createSequentialGroup()
                 .addGroup(RutasValidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RutasValidasLayout.createSequentialGroup()
-                        .addGroup(RutasValidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(RutasValidasLayout.createSequentialGroup()
-                                .addGap(230, 230, 230)
-                                .addComponent(NombreRutas))
-                            .addGroup(RutasValidasLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 28, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 29, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RutasValidasLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Botonparacrearrutas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(VolverInicio)))
                 .addContainerGap())
+            .addGroup(RutasValidasLayout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(NombreRutas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Botonpararefrecartablas)
+                .addGap(20, 20, 20))
         );
         RutasValidasLayout.setVerticalGroup(
             RutasValidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RutasValidasLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(NombreRutas)
+                .addGroup(RutasValidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NombreRutas)
+                    .addComponent(Botonpararefrecartablas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -688,6 +805,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(TablePuntosPeligro);
 
+        BotonCrearPunto.setText("Crear Punto");
+        BotonCrearPunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCrearPuntoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PuntosdeRutaLayout = new javax.swing.GroupLayout(PuntosdeRuta);
         PuntosdeRuta.setLayout(PuntosdeRutaLayout);
         PuntosdeRutaLayout.setHorizontalGroup(
@@ -701,11 +825,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PuntosdeRutaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PuntosdeRutaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addComponent(BotonCrearPunto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(23, 23, 23))
         );
@@ -720,8 +846,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGroup(PuntosdeRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addGroup(PuntosdeRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(BotonCrearPunto))
                 .addGap(27, 27, 27))
         );
 
@@ -763,6 +891,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        TablaValoraciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaValoracionesMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(TablaValoraciones);
 
         botoncrearvaloracion.setText("Crear Valoracion");
@@ -784,7 +917,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         .addGap(227, 227, 227))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValoracionesdeRutaLayout.createSequentialGroup()
                         .addGroup(ValoracionesdeRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                             .addGroup(ValoracionesdeRutaLayout.createSequentialGroup()
                                 .addComponent(botoncrearvaloracion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -797,7 +930,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addGap(27, 27, 27)
                 .addGroup(ValoracionesdeRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -835,6 +968,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        TablaActividades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaActividadesMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(TablaActividades);
 
         jButton3.setText("Volver");
@@ -844,22 +982,32 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
+        BotoncrearActividad.setText("Crear Actividad");
+        BotoncrearActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotoncrearActividadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ActividadesLayout = new javax.swing.GroupLayout(Actividades);
         Actividades.setLayout(ActividadesLayout);
         ActividadesLayout.setHorizontalGroup(
             ActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ActividadesLayout.createSequentialGroup()
-                .addContainerGap(127, Short.MAX_VALUE)
+                .addContainerGap(128, Short.MAX_VALUE)
                 .addGroup(ActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ActividadesLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(238, 238, 238))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ActividadesLayout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ActividadesLayout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(20, 20, 20))))
+                        .addGap(107, 107, 107))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ActividadesLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(BotoncrearActividad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(20, 20, 20))
         );
         ActividadesLayout.setVerticalGroup(
             ActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -868,9 +1016,15 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGroup(ActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ActividadesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addContainerGap(63, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ActividadesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BotoncrearActividad)
+                        .addGap(48, 48, 48))))
         );
 
         getContentPane().add(Actividades, "card9");
@@ -882,6 +1036,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 255));
         jLabel6.setText("Detalles");
+
+        jButton4.setText("Volver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         TablaDetallesruta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -905,40 +1066,31 @@ public class SwingPrincipal extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(TablaDetallesruta);
 
-        jButton4.setText("Volver");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout DetallesRutaLayout = new javax.swing.GroupLayout(DetallesRuta);
         DetallesRuta.setLayout(DetallesRutaLayout);
         DetallesRutaLayout.setHorizontalGroup(
             DetallesRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetallesRutaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(256, 256, 256))
             .addGroup(DetallesRutaLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(DetallesRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetallesRutaLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(255, 255, 255))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetallesRutaLayout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(44, 44, 44))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetallesRutaLayout.createSequentialGroup()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
+                .addGap(28, 28, 28)
+                .addGroup(DetallesRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton4)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
         DetallesRutaLayout.setVerticalGroup(
             DetallesRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DetallesRutaLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(jButton4)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(DetallesRuta, "card10");
@@ -969,6 +1121,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        TablaimagenesInteres.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaimagenesInteresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TablaimagenesInteres);
 
         jButton5.setText("Volver");
@@ -978,23 +1135,31 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
+        CrearImagenes.setText("Crear Imagenes");
+        CrearImagenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearImagenesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ImagenesInteresLayout = new javax.swing.GroupLayout(ImagenesInteres);
         ImagenesInteres.setLayout(ImagenesInteresLayout);
         ImagenesInteresLayout.setHorizontalGroup(
             ImagenesInteresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ImagenesInteresLayout.createSequentialGroup()
-                .addContainerGap(128, Short.MAX_VALUE)
-                .addGroup(ImagenesInteresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesInteresLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesInteresLayout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(26, 26, 26))))
+                .addContainerGap(129, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
             .addGroup(ImagenesInteresLayout.createSequentialGroup()
                 .addGap(217, 217, 217)
                 .addComponent(NombreImagenesInteres)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesInteresLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(CrearImagenes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(26, 26, 26))
         );
         ImagenesInteresLayout.setVerticalGroup(
             ImagenesInteresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1003,9 +1168,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(NombreImagenesInteres)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(32, 32, 32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(ImagenesInteresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesInteresLayout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesInteresLayout.createSequentialGroup()
+                        .addComponent(CrearImagenes)
+                        .addGap(46, 46, 46))))
         );
 
         getContentPane().add(ImagenesInteres, "card11");
@@ -1038,6 +1208,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        TablaImagenesPeligro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaImagenesPeligroMouseClicked(evt);
+            }
+        });
         jScrollPane8.setViewportView(TablaImagenesPeligro);
 
         votonimagenvolverpeligro.setText("Volver");
@@ -1047,10 +1222,23 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
+        CrearImagenesPeligro.setText("Crear Imagenes");
+        CrearImagenesPeligro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearImagenesPeligroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ImagenesPeligroLayout = new javax.swing.GroupLayout(ImagenesPeligro);
         ImagenesPeligro.setLayout(ImagenesPeligroLayout);
         ImagenesPeligroLayout.setHorizontalGroup(
             ImagenesPeligroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesPeligroLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(CrearImagenesPeligro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(votonimagenvolverpeligro)
+                .addGap(40, 40, 40))
             .addGroup(ImagenesPeligroLayout.createSequentialGroup()
                 .addGroup(ImagenesPeligroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ImagenesPeligroLayout.createSequentialGroup()
@@ -1058,12 +1246,8 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         .addComponent(Cuadroimagenespeligro))
                     .addGroup(ImagenesPeligroLayout.createSequentialGroup()
                         .addGap(124, 124, 124)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(134, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesPeligroLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(votonimagenvolverpeligro)
-                .addGap(40, 40, 40))
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         ImagenesPeligroLayout.setVerticalGroup(
             ImagenesPeligroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1071,10 +1255,15 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(Cuadroimagenespeligro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(votonimagenvolverpeligro)
-                .addGap(26, 26, 26))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(ImagenesPeligroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesPeligroLayout.createSequentialGroup()
+                        .addComponent(votonimagenvolverpeligro)
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImagenesPeligroLayout.createSequentialGroup()
+                        .addComponent(CrearImagenesPeligro)
+                        .addGap(39, 39, 39))))
         );
 
         getContentPane().add(ImagenesPeligro, "card11");
@@ -1119,6 +1308,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         });
 
+        Botonvalidarutasir.setText("Ver rutas no validas");
+        Botonvalidarutasir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonvalidarutasirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CrearRutasde0Layout = new javax.swing.GroupLayout(CrearRutasde0);
         CrearRutasde0.setLayout(CrearRutasde0Layout);
         CrearRutasde0Layout.setHorizontalGroup(
@@ -1146,9 +1342,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
                                         .addGroup(CrearRutasde0Layout.createSequentialGroup()
                                             .addGap(8, 8, 8)
                                             .addComponent(jLabel10))
-                                        .addComponent(jLabel8))
+                                        .addComponent(jLabel8)
+                                        .addComponent(Botonvalidarutasir))
                                     .addGap(200, 200, 200))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE))
                     .addGroup(CrearRutasde0Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jLabel9)
@@ -1231,8 +1428,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         .addGap(16, 16, 16))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearRutasde0Layout.createSequentialGroup()
                         .addComponent(ldi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(Botonparacrearruta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addGroup(CrearRutasde0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Botonparacrearruta)
+                            .addComponent(Botonvalidarutasir))
                         .addGap(35, 35, 35))))
         );
 
@@ -1289,7 +1488,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(Nombrerutasinavlidas)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CatalogodeRutasLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(CatalogodeRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(volverarutasdesdeno)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1302,7 +1501,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(Nombrerutasinavlidas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(volverarutasdesdeno)
                 .addContainerGap())
         );
@@ -1346,7 +1545,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         PanelparacrearvaloracionLayout.setHorizontalGroup(
             PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelparacrearvaloracionLayout.createSequentialGroup()
-                .addContainerGap(216, Short.MAX_VALUE)
+                .addContainerGap(217, Short.MAX_VALUE)
                 .addGroup(PanelparacrearvaloracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelparacrearvaloracionLayout.createSequentialGroup()
                         .addComponent(Volveraverlasvaloraciones)
@@ -1416,7 +1615,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
                 .addComponent(Botonbelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(Botonparacrearvaloracion)
                 .addGap(2, 2, 2)
                 .addComponent(Volveraverlasvaloraciones)
@@ -1453,6 +1652,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        TablaCalendarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaCalendariosMouseClicked(evt);
+            }
+        });
         jScrollPane10.setViewportView(TablaCalendarios);
 
         BotonarutasdesdeCatalogo.setText("Volver");
@@ -1474,37 +1678,33 @@ public class SwingPrincipal extends javax.swing.JFrame {
         PanelCalendarioLayout.setHorizontalGroup(
             PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelCalendarioLayout.createSequentialGroup()
-                .addGap(261, 261, 261)
-                .addComponent(jLabel22)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
+                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                        .addGap(261, 261, 261)
+                        .addComponent(jLabel22))
+                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(77, Short.MAX_VALUE))
+            .addGroup(PanelCalendarioLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(botoncrearcalendario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(106, 106, 106))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
-                        .addComponent(BotonarutasdesdeCatalogo)
-                        .addContainerGap())))
+                .addComponent(BotonarutasdesdeCatalogo)
+                .addGap(25, 25, 25))
         );
         PanelCalendarioLayout.setVerticalGroup(
             PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelCalendarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel22)
-                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelCalendarioLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BotonarutasdesdeCatalogo)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCalendarioLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botoncrearcalendario)
-                        .addGap(16, 16, 16))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(PanelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botoncrearcalendario)
+                    .addComponent(BotonarutasdesdeCatalogo))
+                .addGap(16, 16, 16))
         );
 
         getContentPane().add(PanelCalendario, "card15");
@@ -1571,7 +1771,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         .addGroup(CrearCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(CrearCalendarioLayout.createSequentialGroup()
                                 .addComponent(Creardetall, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                                 .addComponent(CrearRecomen, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel23))
                         .addGap(59, 59, 59))))
@@ -1593,7 +1793,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(añadefech, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(botoncrearcalendariode0)
                 .addGap(27, 27, 27)
                 .addComponent(VolveraCalendario)
@@ -1602,29 +1802,587 @@ public class SwingPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(CrearCalendario, "card16");
 
+        CrearPuntosRutap.setBackground(new java.awt.Color(153, 255, 153));
+        CrearPuntosRutap.setMaximumSize(new java.awt.Dimension(600, 400));
+        CrearPuntosRutap.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        jLabel27.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel27.setText("Crear Puntos");
+
+        Nombrep.setText("Nombre");
+
+        Latitudp.setText("Latitud");
+
+        jButton6.setText("Crear Punto");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        BotonvolverPunto.setText("Volver");
+        BotonvolverPunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonvolverPuntoActionPerformed(evt);
+            }
+        });
+
+        Longitudp.setText("Longitud");
+
+        Elevacionp.setText("Elevacion");
+
+        EligePunto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Punto Interes", "Punto Peligro" }));
+
+        Descripcionp.setText("Descripcion");
+
+        javax.swing.GroupLayout CrearPuntosRutapLayout = new javax.swing.GroupLayout(CrearPuntosRutap);
+        CrearPuntosRutap.setLayout(CrearPuntosRutapLayout);
+        CrearPuntosRutapLayout.setHorizontalGroup(
+            CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearPuntosRutapLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BotonvolverPunto))
+                    .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                        .addComponent(nombreLongitud1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                        .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CrearPuntosRutapLayout.createSequentialGroup()
+                                    .addGap(29, 29, 29)
+                                    .addComponent(Nombrep)
+                                    .addGap(9, 9, 9))
+                                .addComponent(nombreLatitud1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addComponent(nombrePP))
+                            .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(jLabel27))
+                            .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Latitudp)
+                                    .addComponent(Longitudp)))
+                            .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(EligePunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton6))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearPuntosRutapLayout.createSequentialGroup()
+                                .addComponent(Descripcionp)
+                                .addGap(155, 155, 155))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearPuntosRutapLayout.createSequentialGroup()
+                                .addComponent(Elevacionp)
+                                .addGap(168, 168, 168))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearPuntosRutapLayout.createSequentialGroup()
+                                .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(nombreDescripcion1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(nombreElevacion1))
+                                .addGap(88, 88, 88)))))
+                .addContainerGap())
+        );
+        CrearPuntosRutapLayout.setVerticalGroup(
+            CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18)
+                .addComponent(EligePunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Elevacionp)
+                    .addComponent(Nombrep))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreElevacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombrePP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(Latitudp)
+                .addGroup(CrearPuntosRutapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(nombreLatitud1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Longitudp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreLongitud1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addComponent(jButton6)
+                        .addGap(55, 55, 55)
+                        .addComponent(BotonvolverPunto)
+                        .addGap(18, 18, 18))
+                    .addGroup(CrearPuntosRutapLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(Descripcionp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nombreDescripcion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        getContentPane().add(CrearPuntosRutap, "card17");
+
+        CrearActividades.setBackground(new java.awt.Color(153, 255, 153));
+        CrearActividades.setForeground(new java.awt.Color(153, 255, 153));
+        CrearActividades.setMaximumSize(new java.awt.Dimension(600, 400));
+        CrearActividades.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        jLabel28.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(51, 0, 255));
+        jLabel28.setText("Crear Actividad");
+
+        jLabel29.setText("Nombre");
+
+        volveraactividad.setText("Volver");
+        volveraactividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volveraactividadActionPerformed(evt);
+            }
+        });
+
+        CrearActividadBoton.setText("Crear Actividad");
+        CrearActividadBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearActividadBotonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CrearActividadesLayout = new javax.swing.GroupLayout(CrearActividades);
+        CrearActividades.setLayout(CrearActividadesLayout);
+        CrearActividadesLayout.setHorizontalGroup(
+            CrearActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearActividadesLayout.createSequentialGroup()
+                .addContainerGap(222, Short.MAX_VALUE)
+                .addGroup(CrearActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CrearActividadesLayout.createSequentialGroup()
+                        .addGroup(CrearActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearActividadesLayout.createSequentialGroup()
+                                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(209, 209, 209))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearActividadesLayout.createSequentialGroup()
+                                .addComponent(volveraactividad)
+                                .addGap(33, 33, 33)))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearActividadesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(NombreActi, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(221, 221, 221))))
+            .addGroup(CrearActividadesLayout.createSequentialGroup()
+                .addGap(278, 278, 278)
+                .addComponent(jLabel29)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearActividadesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CrearActividadBoton)
+                .addGap(230, 230, 230))
+        );
+        CrearActividadesLayout.setVerticalGroup(
+            CrearActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearActividadesLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel28)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NombreActi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(CrearActividadBoton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(volveraactividad)
+                .addGap(37, 37, 37))
+        );
+
+        getContentPane().add(CrearActividades, "card18");
+
+        CrearImagen.setBackground(new java.awt.Color(153, 255, 153));
+        CrearImagen.setMaximumSize(new java.awt.Dimension(600, 400));
+        CrearImagen.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        jLabel30.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel30.setText("Crear Imagen");
+
+        jLabel31.setText("URL:  .jpg o .png");
+
+        jLabel32.setText("Descripcion");
+
+        CrearImagenesnuevo.setText("Crear Imagen");
+        CrearImagenesnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearImagenesnuevoActionPerformed(evt);
+            }
+        });
+
+        VolverImagenes.setText("Volver");
+        VolverImagenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverImagenesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CrearImagenLayout = new javax.swing.GroupLayout(CrearImagen);
+        CrearImagen.setLayout(CrearImagenLayout);
+        CrearImagenLayout.setHorizontalGroup(
+            CrearImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearImagenLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel32)
+                .addGap(98, 98, 98))
+            .addGroup(CrearImagenLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(ValidaURL, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
+                .addComponent(ValidaDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearImagenLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(VolverImagenes)
+                .addGap(22, 22, 22))
+            .addGroup(CrearImagenLayout.createSequentialGroup()
+                .addGap(225, 225, 225)
+                .addGroup(CrearImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CrearImagenesnuevo)
+                    .addComponent(jLabel30))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        CrearImagenLayout.setVerticalGroup(
+            CrearImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearImagenLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel30)
+                .addGap(30, 30, 30)
+                .addGroup(CrearImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CrearImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ValidaURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ValidaDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addComponent(CrearImagenesnuevo)
+                .addGap(141, 141, 141)
+                .addComponent(VolverImagenes)
+                .addGap(23, 23, 23))
+        );
+
+        getContentPane().add(CrearImagen, "card19");
+
+        CrearImagenPeligrop.setBackground(new java.awt.Color(153, 255, 153));
+        CrearImagenPeligrop.setMaximumSize(new java.awt.Dimension(600, 400));
+        CrearImagenPeligrop.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        jLabel33.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel33.setText("Crear Imagen");
+
+        jLabel34.setText("URL: .JPG O .PNG");
+
+        descripcionpl.setText("Descripcion");
+
+        crearimagenpeligro.setText("Crear Imagen");
+        crearimagenpeligro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearimagenpeligroActionPerformed(evt);
+            }
+        });
+
+        VolverImagnesPeligro.setText("Volver");
+        VolverImagnesPeligro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverImagnesPeligroActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CrearImagenPeligropLayout = new javax.swing.GroupLayout(CrearImagenPeligrop);
+        CrearImagenPeligrop.setLayout(CrearImagenPeligropLayout);
+        CrearImagenPeligropLayout.setHorizontalGroup(
+            CrearImagenPeligropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearImagenPeligropLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(VolverImagnesPeligro)
+                .addGap(26, 26, 26))
+            .addGroup(CrearImagenPeligropLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jLabel34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(descripcionpl)
+                .addGap(117, 117, 117))
+            .addGroup(CrearImagenPeligropLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(CrearURLY, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addComponent(CREARDESCRIPCION, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+            .addGroup(CrearImagenPeligropLayout.createSequentialGroup()
+                .addGap(212, 212, 212)
+                .addGroup(CrearImagenPeligropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel33)
+                    .addComponent(crearimagenpeligro, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        CrearImagenPeligropLayout.setVerticalGroup(
+            CrearImagenPeligropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearImagenPeligropLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel33)
+                .addGap(33, 33, 33)
+                .addGroup(CrearImagenPeligropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(descripcionpl))
+                .addGap(18, 18, 18)
+                .addGroup(CrearImagenPeligropLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CrearURLY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CREARDESCRIPCION, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addComponent(crearimagenpeligro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                .addComponent(VolverImagnesPeligro)
+                .addGap(24, 24, 24))
+        );
+
+        getContentPane().add(CrearImagenPeligrop, "card20");
+
+        ValidaRutas.setBackground(new java.awt.Color(153, 255, 153));
+        ValidaRutas.setMaximumSize(new java.awt.Dimension(600, 400));
+        ValidaRutas.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        jLabel35.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel35.setText("Modificar Rutas");
+
+        jLabel36.setText("Desnivel Positivo");
+
+        jLabel37.setText("Desnivel Negativo");
+
+        jLabel38.setText("Tipo Terreno");
+
+        jLabel39.setText("Altitud maxima");
+
+        jLabel40.setText("Altitud Minima");
+
+        jLabel41.setText("Indicaciones");
+
+        jLabel42.setText("Ruta Familiar");
+
+        jLabel43.setText("Accesibilidad");
+
+        jLabel45.setText("Temporadas");
+
+        jLabel46.setText("Clasificacion");
+
+        jLabel48.setText("Recomendaciones");
+
+        recomen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recomenActionPerformed(evt);
+            }
+        });
+
+        BotonvolverRutass.setText("Volver");
+        BotonvolverRutass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonvolverRutassActionPerformed(evt);
+            }
+        });
+
+        BotonParamodificarUsuario.setText("Modifica el usuario");
+        BotonParamodificarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonParamodificarUsuarioActionPerformed(evt);
+            }
+        });
+
+        jLabel44.setText("Solo se modificaran los campos que no esten en blanco");
+
+        clasi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "circular", "lineal" }));
+
+        rutafam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "si", "no" }));
+
+        jLabel47.setText("Zona Geografica");
+
+        geo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                geoActionPerformed(evt);
+            }
+        });
+
+        accesibilidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "si", "no" }));
+
+        javax.swing.GroupLayout ValidaRutasLayout = new javax.swing.GroupLayout(ValidaRutas);
+        ValidaRutas.setLayout(ValidaRutasLayout);
+        ValidaRutasLayout.setHorizontalGroup(
+            ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createSequentialGroup()
+                        .addComponent(BotonvolverRutass)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createSequentialGroup()
+                        .addComponent(jLabel44)
+                        .addGap(151, 151, 151))))
+            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ValidaRutasLayout.createSequentialGroup()
+                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel37)
+                                            .addComponent(desnivelnegativo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tipoterreno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                                    .addGap(105, 105, 105)
+                                                    .addComponent(jLabel39))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createSequentialGroup()
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(altmaxima, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(indicaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                                .addGap(102, 102, 102)
+                                                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel40)
+                                                    .addComponent(altminima, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(BotonParamodificarUsuario)))))
+                                    .addComponent(desnivelpositivo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(9, 9, 9)
+                                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rutafam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(accesibilidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel42)
+                                            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addComponent(jLabel43)))
+                                        .addGap(0, 9, Short.MAX_VALUE))
+                                    .addComponent(temp)))
+                            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                .addGap(174, 174, 174)
+                                .addComponent(jLabel35)))
+                        .addGap(4, 4, 4)
+                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel46)
+                                    .addComponent(clasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(28, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createSequentialGroup()
+                                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel47)
+                                    .addComponent(recomen, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(geo))
+                                .addGap(13, 13, 13))))
+                    .addGroup(ValidaRutasLayout.createSequentialGroup()
+                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                                .addComponent(jLabel38)
+                                .addGap(139, 139, 139)
+                                .addComponent(jLabel41)
+                                .addGap(77, 77, 77)
+                                .addComponent(jLabel45))
+                            .addComponent(jLabel36))
+                        .addContainerGap())))
+        );
+        ValidaRutasLayout.setVerticalGroup(
+            ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ValidaRutasLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel35)
+                .addGap(26, 26, 26)
+                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel39)
+                    .addComponent(jLabel46)
+                    .addComponent(jLabel42))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(altmaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(clasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rutafam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(desnivelpositivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ValidaRutasLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel43)
+                        .addComponent(jLabel40)
+                        .addComponent(jLabel47)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ValidaRutasLayout.createSequentialGroup()
+                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(desnivelnegativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(altminima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel41)
+                            .addComponent(jLabel45)
+                            .addComponent(jLabel48))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tipoterreno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(indicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(recomen, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(BotonParamodificarUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel44)
+                        .addGap(7, 7, 7)
+                        .addComponent(BotonvolverRutass)
+                        .addGap(17, 17, 17))
+                    .addGroup(ValidaRutasLayout.createSequentialGroup()
+                        .addGroup(ValidaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(geo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(accesibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))))
+        );
+
+        getContentPane().add(ValidaRutas, "card21");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//Metodo de volver
     private void BotonEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEntradaActionPerformed
         PanelEntrada.setVisible(false);
         PanelInicio.setVisible(true);
     }//GEN-LAST:event_BotonEntradaActionPerformed
-
+//Metodo de volver
     private void SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalidaActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea salir de la aplicacion", "Salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_SalidaActionPerformed
-
+//Metodo de volver
     private void RutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RutasActionPerformed
         PanelInicio.setVisible(false);
         RutasValidas.setVisible(true);
         TableRutasValidas.setVisible(true);
         VolverInicio.setVisible(true);
         jScrollPane1.setVisible(true);
-    }//GEN-LAST:event_RutasActionPerformed
+        Botonpararefrecartablas.setVisible(true);
 
+    }//GEN-LAST:event_RutasActionPerformed
+//Metodo que inicia sesion con email y contraseña validos
     private void IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSesionActionPerformed
         String email = Email.getText();
         char[] passwordChars = Contraseña.getPassword();
@@ -1638,6 +2396,14 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 TableRutasValidas.setVisible(true);
                 VolverInicio.setVisible(true);
                 jScrollPane1.setVisible(true);
+                Botonpararefrecartablas.setVisible(true);
+                BotonCrearPunto.setVisible(true);
+                BotoncrearActividad.setVisible(true);
+                CrearImagenes.setVisible(true);
+                BotonCrearPunto.setVisible(true);
+                CrearImagenes.setVisible(true);
+                CrearImagenesPeligro.setVisible(true);
+                BotoncrearActividad.setVisible(true);
                 usuario = U1;
                 if (usuario.getRol() == Roles.administrador || usuario.getRol() == Roles.diseñador || usuario.getRol() == Roles.profesor) {
                     Botonparacrearrutas.setVisible(true);
@@ -1647,6 +2413,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 }
                 if (usuario.getRol() == Roles.profesor || usuario.getRol() == Roles.administrador) {
                     botoncrearcalendario.setVisible(true);
+                    Botonvalidarutasir.setVisible(true);
                 }
             }
             if (U1 == null) {
@@ -1656,7 +2423,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el email o contraseña", "Volver", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_IniciarSesionActionPerformed
-
+//Metodo de volver
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         CrearUsuarios.setVisible(true);
         PanelInicio.setVisible(false);
@@ -1665,7 +2432,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
     private void eligerolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eligerolActionPerformed
 
     }//GEN-LAST:event_eligerolActionPerformed
-
+//Metodo de volver
     private void VolverUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverUsuariosActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a menu de inicio", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -1673,7 +2440,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             PanelInicio.setVisible(true);
         }
     }//GEN-LAST:event_VolverUsuariosActionPerformed
-
+//metodo que crea el usuario
     private void darbotonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darbotonUsuarioActionPerformed
         char[] passwordChars = introcontraseña.getPassword();
         String password = new String(passwordChars);
@@ -1704,7 +2471,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_darbotonUsuarioActionPerformed
-
+//Metodo de volver al main
     private void VolverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverInicioActionPerformed
         CrearUsuarios.setVisible(false);
         PanelInicio.setVisible(true);
@@ -1715,6 +2482,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
         Botonparacrearrutas.setVisible(false);
         botoncrearvaloracion.setVisible(false);
         botoncrearcalendario.setVisible(false);
+        CatalogodeRutas.setVisible(true);
+        volverarutasdesdeno.setVisible(false);
+        jScrollPane9.setVisible(false);
+        Tabladerutasnovalidas.setVisible(false);
+        Botonpararefrecartablas.setVisible(false);
+        BotonCrearPunto.setVisible(false);
+        BotoncrearActividad.setVisible(false);
+        CrearImagenes.setVisible(false);
+        BotonCrearPunto.setVisible(false);
+        CrearImagenes.setVisible(false);
+        CrearImagenesPeligro.setVisible(false);
+        BotoncrearActividad.setVisible(false);
+        Botonvalidarutasir.setVisible(false);
         limpiartablasalvolver();
     }//GEN-LAST:event_VolverInicioActionPerformed
     // Metodo para modificar la tabla de Rutas aprobadas
@@ -1736,10 +2516,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-        TableRutasValidas.setModel(model);
+          TableRutasValidas.setAutoCreateRowSorter(true);
         tamañocolumnasRutaValidas();
+        TableRutasValidas.setModel(model);
     }//GEN-LAST:event_TableRutasValidasAncestorAdded
-    //Al hacer click en una fila de la tabla RutasValidas
+    //Al hacer click en una fila de la tabla RutasValidas te permite ver lo que puede hacer cada tipo de usuario
     private void TableRutasValidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableRutasValidasMouseClicked
         int fila = TableRutasValidas.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
@@ -1751,15 +2532,15 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados"};
             } else {
                 if (usuario.getRol() == Roles.alumno) {
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas","Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.diseñador) {
                     // crear rutas y valora todo y calendario todo
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Descargar Ficha de rutas validas"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas", "Descargar Ficha de rutas validas","Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.profesor) {
                     // crear ruta y valora todo y ca
-                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas ", "Descargar Ficha de rutas validas"};
+                    O1 = new Object[]{"Seleccione", "Puntos Interes y Puntos Peligro", "Detalles de la ruta", "Valoraciones", "Actividades", "Calendarios asociados", "Ver catalogo de rutas ", "Descargar Ficha de rutas validas","Modificar Ruta"};
                 }
                 if (usuario.getRol() == Roles.administrador) {
                     // modifica ruta , todo ruta, todo valora y todo calendario
@@ -1767,6 +2548,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 }
             }
             DAORutas daor = new DAORutas();
+            
             idrutaapipp = resultado;
             //Para elegir entre diferentes opciones
             Object opcion = JOptionPane.showInputDialog(null, "Seleccione una opcion",
@@ -1795,10 +2577,16 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 case "Calendarios asociados" -> {
                     RutasValidas.setVisible(false);
                     PanelCalendario.setVisible(true);
+                    Nombrerutasinavlidas.setVisible(false);
+                    jLabel22.setVisible(true);
                 }
                 case "Ver catalogo de rutas" -> {
                     RutasValidas.setVisible(false);
                     CatalogodeRutas.setVisible(true);
+                    volverarutasdesdeno.setVisible(true);
+                    Tabladerutasnovalidas.setVisible(true);
+                    jScrollPane9.setVisible(true);
+                    Nombrerutasinavlidas.setVisible(true);
                 }
                 case "Descargar Ficha de rutas validas" -> {
                     FichaUsuario f1 = new FichaUsuario();
@@ -1816,6 +2604,10 @@ public class SwingPrincipal extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Se descargaron las fichas en la carpeta fichas del proyecto", "Bien", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
+                case "Modificar Ruta"->{
+                    RutasValidas.setVisible(false);
+                    ValidaRutas.setVisible(true);
+                }
                 case "Borrar ruta" -> {
                     if (daor.eliminar(idrutaapipp)) {
                         JOptionPane.showMessageDialog(null, "Se elimino la ruta numero: " + this.idrutaapipp, "Bien", JOptionPane.INFORMATION_MESSAGE);
@@ -1824,7 +2616,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TableRutasValidasMouseClicked
-
+//Metodo de volver
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a  ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -1848,8 +2640,11 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntosInteres(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
+        TablePuntosInteres.setAutoCreateRowSorter(true);
+        TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablePuntosInteres.setModel(model);
-
     }//GEN-LAST:event_TablePuntosInteresAncestorAdded
     // modica la tabla puntos peligro
     private void TablePuntosPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablePuntosPeligroAncestorAdded
@@ -1866,9 +2661,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {pp.getIdPuntospeligro(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
             model.addRow(fila);
         }
+        TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablePuntosPeligro.setAutoCreateRowSorter(true);
         TablePuntosPeligro.setModel(model);
     }//GEN-LAST:event_TablePuntosPeligroAncestorAdded
-
+//Metodo de volver
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -1877,7 +2676,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             ValoracionesdeRuta.setVisible(false);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+//Metodo de volver
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -1897,9 +2696,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {a.getIdActividad(), a.getNombre()};
             model.addRow(fila);
         }
+        TablaActividades.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaActividades.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaActividades.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaActividades.setAutoCreateRowSorter(true);
         TablaActividades.setModel(model);
     }//GEN-LAST:event_TablaActividadesAncestorAdded
-
+//Metodo de volver
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -1908,12 +2711,21 @@ public class SwingPrincipal extends javax.swing.JFrame {
             DetallesRuta.setVisible(false);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-// Tabla con los detalles "no funciona mirar"
+// Tabla con los detalles 
     private void TablaDetallesrutaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaDetallesrutaAncestorAdded
         DAORutas daor = new DAORutas();
-        Rutas ruta =daor.buscarTodaInfo(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
+        Rutas ruta = daor.buscarTodaInfo(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
         model.addColumn("Clasificacion");
         model.addColumn("Nivel Esfuerzo");
         model.addColumn("Nivel Riesgo");
@@ -1922,8 +2734,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
         model.addColumn("Indicaciones");
         model.addColumn("Ruta Familiar");
         model.addColumn("Media Estrellas");
-        Object[] fila = {ruta.getIdRuta(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
+        Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
         model.addRow(fila);
+        tamañocolumnasDetalles();
         TablaDetallesruta.setModel(model);
     }//GEN-LAST:event_TablaDetallesrutaAncestorAdded
 
@@ -1942,9 +2755,13 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {v.getIdValora(), v.getDificultad(), v.getFecha(), v.getEstrellas(), v.getInteresCultural(), v.getBelleza()};
             model.addRow(fila);
         }
+        TablaValoraciones.setAutoCreateRowSorter(true);
+        TablaValoraciones.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaValoraciones.setModel(model);
     }//GEN-LAST:event_TablaValoracionesAncestorAdded
-
+//Metodo de volver
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -1953,18 +2770,30 @@ public class SwingPrincipal extends javax.swing.JFrame {
             ImagenesInteres.setVisible(false);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-
+//Metodo queve las imagenes de un punto de interes y ademas podria eliminar este
     private void TablePuntosInteresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePuntosInteresMouseClicked
         int fila = TablePuntosInteres.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TablePuntosInteres.getValueAt(fila, 0); // pillo la columna 0 
             int resultado = (int) valorColumna0;// valor recogido
-            idpi = resultado;
-            PuntosdeRuta.setVisible(false);
-            ImagenesInteres.setVisible(true);
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea ver las imagenes o no ", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                idpi = resultado;
+                PuntosdeRuta.setVisible(false);
+                ImagenesInteres.setVisible(true);
+            }else{
+           int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+               if (resp == 0) {
+              DAOPuntosinteres daor = new DAOPuntosinteres();
+                if (daor.eliminar(resultado)) {
+                     JOptionPane.showMessageDialog(null, "Se elimino el punto ", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } 
+            }
+
         }
     }//GEN-LAST:event_TablePuntosInteresMouseClicked
-
+//Metodo de volver
     private void votonimagenvolverpeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_votonimagenvolverpeligroActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -1973,9 +2802,9 @@ public class SwingPrincipal extends javax.swing.JFrame {
             ImagenesPeligro.setVisible(false);
         }
     }//GEN-LAST:event_votonimagenvolverpeligroActionPerformed
-
+//Metodo que hace la tabla de imagenes de peligro
     private void TablaImagenesPeligroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroAncestorAdded
-        DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
+      DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
         List<ImagenesPeligro> lisimg = daoimg.listar(idpp);
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID PuntosPeligro");
@@ -1995,15 +2824,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
             }
         }
-        TablaimagenesInteres.setModel(model);
-        TablaimagenesInteres.addMouseListener(new MouseAdapter() {
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+       TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+       TablaImagenesPeligro.setAutoCreateRowSorter(true);
+        TablaImagenesPeligro.setModel(model);
+      TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int fila = TablaimagenesInteres.rowAtPoint(e.getPoint());
-                int columna = TablaimagenesInteres.columnAtPoint(e.getPoint());
+                int fila = TablaImagenesPeligro.rowAtPoint(e.getPoint());
+                int columna = TablaImagenesPeligro.columnAtPoint(e.getPoint());
                 if (columna == 1) {
-                    ImageIcon icono = (ImageIcon) TablaimagenesInteres.getValueAt(fila, columna);
-                    String descripcion = (String) TablaimagenesInteres.getValueAt(fila, 2);
+                    ImageIcon icono = (ImageIcon) TablaImagenesPeligro.getValueAt(fila, columna);
+                    String descripcion = (String) TablaImagenesPeligro.getValueAt(fila, 2);
                     if (icono != null) {
                         mostrarImagenYDescripcionEnPanel(icono, descripcion);
                     }
@@ -2012,23 +2845,35 @@ public class SwingPrincipal extends javax.swing.JFrame {
         }
         );
     }//GEN-LAST:event_TablaImagenesPeligroAncestorAdded
-
+//Metodo para eliminar un punto de peligro al clicar
     private void TablePuntosPeligroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePuntosPeligroMouseClicked
         int fila = TablePuntosPeligro.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
             Object valorColumna0 = TablePuntosPeligro.getValueAt(fila, 0); // pillo la columna 0 
-            int resultado = (int) valorColumna0;// valor recogido
-            idpp = resultado;
+            int resultado = (int) valorColumna0;// valor recogido 
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea ver las imagenes ", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+            idpi = resultado;
             PuntosdeRuta.setVisible(false);
             ImagenesPeligro.setVisible(true);
-        }
+            }else{
+              int resp = JOptionPane.showConfirmDialog(null, "Desea borrar el punnto", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+             if (resp==0){
+               DAOPuntospeligro daor = new DAOPuntospeligro();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se elimino el punto de interes", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+        } 
+      }
+        
+      }
     }//GEN-LAST:event_TablePuntosPeligroMouseClicked
-
+//Metodo de volver
     private void BotonparacrearrutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearrutasActionPerformed
         RutasValidas.setVisible(false);
         CrearRutasde0.setVisible(true);
     }//GEN-LAST:event_BotonparacrearrutasActionPerformed
-
+//Metodo de volver
     private void volverdecrearrutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverdecrearrutaActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2036,7 +2881,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             CrearRutasde0.setVisible(false);
         }
     }//GEN-LAST:event_volverdecrearrutaActionPerformed
-
+// Metodo que crea una ruta
     private void BotonparacrearrutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearrutaActionPerformed
         String nombre = nombreruta.getText();
         String nombreini = nombreinicio.getText();
@@ -2062,15 +2907,19 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonparacrearrutaActionPerformed
-
+//Metodo de volver
     private void volverarutasdesdenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverarutasdesdenoActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas validas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
-            RutasValidas.setVisible(false);
-            CatalogodeRutas.setVisible(true);
+            RutasValidas.setVisible(true);
+            CatalogodeRutas.setVisible(false);
+            Tabladerutasnovalidas.setVisible(false);
+            volverarutasdesdeno.setVisible(false);
+            jScrollPane9.setVisible(false);
+            Tabladerutasnovalidas.setVisible(false);
         }
     }//GEN-LAST:event_volverarutasdesdenoActionPerformed
-
+// Tabla con las rutas no validas
     private void TabladerutasnovalidasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasAncestorAdded
         DAORutas daoruta = new DAORutas();
         List<Rutas> lisruta = daoruta.listarsinaprobar();
@@ -2089,31 +2938,45 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
             model.addRow(fila);
         }
-        TableRutasValidas.setModel(model);
-        tamañocolumnasRutaValidas();
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setMinWidth(0);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
+        Tabladerutasnovalidas.setAutoCreateRowSorter(true);
+        Tabladerutasnovalidas.setModel(model);
+      
     }//GEN-LAST:event_TabladerutasnovalidasAncestorAdded
-
+//Metodo que valida la ruta y puede eliminar si quiere
     private void TabladerutasnovalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabladerutasnovalidasMouseClicked
-        int fila = TableRutasValidas.getSelectedRow(); // Fila que has clicado 
+        int fila = Tabladerutasnovalidas.getSelectedRow(); // Fila que has clicado 
         if (fila != -1) {
-            Object valorColumna0 = TableRutasValidas.getValueAt(fila, 0); // pillo la columna 0 
+            Object valorColumna0 = Tabladerutasnovalidas.getValueAt(fila, 0); // pillo la columna 0 
             // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
             int resultado = (int) valorColumna0;// valor recogido
-            int respuesta = JOptionPane.showConfirmDialog(null, "Desea pasar una de estas rutas a ser valida", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea pasar una de estas rutas a ser valida o no", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
                 DAORutas daor = new DAORutas();
                 if (daor.modificarporid(resultado)) {
                     JOptionPane.showMessageDialog(null, "La ruta paso a ser valida", "Bien", JOptionPane.INFORMATION_MESSAGE);
                 }
+            }else{
+             int res = JOptionPane.showConfirmDialog(null, "Desea eliminar una de estas rutas no validas", "Validar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (res == 0) {
+                DAORutas daor = new DAORutas();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "La ruta se elimino", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } 
             }
+            
+          
         }
     }//GEN-LAST:event_TabladerutasnovalidasMouseClicked
-
+//Metodo de volver
     private void botoncrearvaloracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearvaloracionActionPerformed
         ValoracionesdeRuta.setVisible(false);
         Panelparacrearvaloracion.setVisible(true);
     }//GEN-LAST:event_botoncrearvaloracionActionPerformed
-
+//Metodo de volver
     private void VolveraverlasvaloracionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraverlasvaloracionesActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las valoraciones", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2121,7 +2984,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Panelparacrearvaloracion.setVisible(false);
         }
     }//GEN-LAST:event_VolveraverlasvaloracionesActionPerformed
-
+// Netodo que crea una valoracion
     private void BotonparacrearvaloracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonparacrearvaloracionActionPerformed
         String dificultad = Botondificul.getText();
         String interes = BotonIntere.getText();
@@ -2141,7 +3004,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonparacrearvaloracionActionPerformed
-
+//Metodo de volver
     private void BotonarutasdesdeCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonarutasdesdeCatalogoActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2149,7 +3012,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             PanelCalendario.setVisible(false);
         }
     }//GEN-LAST:event_BotonarutasdesdeCatalogoActionPerformed
-
+// Tabla con el calendarios
     private void TablaCalendariosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaCalendariosAncestorAdded
         DAOCalendario daoc = new DAOCalendario();
         List<Calendario> liscal = daoc.listar(idrutaapipp);
@@ -2162,14 +3025,18 @@ public class SwingPrincipal extends javax.swing.JFrame {
             Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles(), c.getRecomendaciones()};
             model.addRow(fila);
         }
+        TablaCalendarios.setAutoCreateRowSorter(true);
+        TablaCalendarios.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaCalendarios.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaCalendarios.getColumnModel().getColumn(0).setPreferredWidth(0);
         TablaCalendarios.setModel(model);
     }//GEN-LAST:event_TablaCalendariosAncestorAdded
-
+//Metodo de volver
     private void botoncrearcalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearcalendarioActionPerformed
         CrearCalendario.setVisible(true);
         PanelCalendario.setVisible(false);
     }//GEN-LAST:event_botoncrearcalendarioActionPerformed
-
+//Metodo de volver
     private void VolveraCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraCalendarioActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los calendarios", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == 0) {
@@ -2177,7 +3044,7 @@ public class SwingPrincipal extends javax.swing.JFrame {
             PanelCalendario.setVisible(true);
         }
     }//GEN-LAST:event_VolveraCalendarioActionPerformed
-
+// boton que crea un calendario
     private void botoncrearcalendariode0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncrearcalendariode0ActionPerformed
         String detalles = Creardetall.getText();
         String recomendaciones = CrearRecomen.getText();
@@ -2196,9 +3063,513 @@ public class SwingPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botoncrearcalendariode0ActionPerformed
+    //Boton en refrecar rutas con metodos de todas las tablas que reinican las rutas de la base de datos
+    private void BotonpararefrecartablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonpararefrecartablasActionPerformed
+        if (idrutaapipp>=0) {
+        cargarTablarutasvalidas();
+        cargarTablarutasnovalidas();
+        cargarTablapuntosinteres();
+        cargarTablapuntospeligro();
+        cargarTablavaloraciones();
+        cargarTablaactividades();
+        caragarTabladetalles();
+        cargarTablaimagenesInteres();
+        cargarTablaimagenesPeligro();
+        cargarTablacalendario();
+        tamañocolumnasRutaValidas();
+         JOptionPane.showMessageDialog(null, "Se actualizaron las tablas de la ruta: "+ idrutaapipp, "Bien", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+          JOptionPane.showMessageDialog(null, "Selecciona unicamente 1 y no varias o ninguna rutas", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+       // otra forma de refrecar es asi
+       //this.dispose();
+       //Reto_equipo3.main(new String[0]);
+    }//GEN-LAST:event_BotonpararefrecartablasActionPerformed
+//Metodo que borra una actividad al clicar en ella
+    private void TablaActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaActividadesMouseClicked
+      int fila = TablaActividades.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaActividades.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta actividad", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOActividad daor = new DAOActividad();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro la actividad", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaActividadesMouseClicked
+// Borra una valoracion al clicar
+    private void TablaValoracionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaValoracionesMouseClicked
+        int fila = TablaValoraciones.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaValoraciones.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta valoracion", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOValora daor = new DAOValora();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro la valoracion", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaValoracionesMouseClicked
+//Metodo que borra una imagen al clicar en ella
+    private void TablaimagenesInteresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaimagenesInteresMouseClicked
+        int fila = TablaimagenesInteres.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaimagenesInteres.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta imagen", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOImagenesInteres daor = new DAOImagenesInteres();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro la imagen", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaimagenesInteresMouseClicked
+//Metodo que borra una imagen al clicar en ella
+    private void TablaImagenesPeligroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaImagenesPeligroMouseClicked
+          int fila = TablaImagenesPeligro.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaImagenesPeligro.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar esta imagen", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOImagenesPeligro daor = new DAOImagenesPeligro();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro la imagen", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaImagenesPeligroMouseClicked
+//Metodo para borrar un calendario al clicar sobre este
+    private void TablaCalendariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCalendariosMouseClicked
+        int fila =TablaCalendarios.getSelectedRow(); // Fila que has clicado 
+        if (fila != -1) {
+            Object valorColumna0 = TablaCalendarios.getValueAt(fila, 0); // pillo la columna 0 
+            // String resultado = valorColumna0.toString(); si hay que convertirla a toString 
+            int resultado = (int) valorColumna0;// valor recogido
+                int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar este calendario", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == 0) {
+                DAOCalendario daor = new DAOCalendario();
+                if (daor.eliminar(resultado)) {
+                    JOptionPane.showMessageDialog(null, "Se borro el calendario", "Bien", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_TablaCalendariosMouseClicked
+//Metodo de volver
+    private void BotonCrearPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCrearPuntoActionPerformed
+       this.PuntosdeRuta.setVisible(false);
+       this.CrearPuntosRutap.setVisible(true);
+    }//GEN-LAST:event_BotonCrearPuntoActionPerformed
+//Metodo de volver
+    private void BotonvolverPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvolverPuntoActionPerformed
+       int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver los puntos", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+        this.PuntosdeRuta.setVisible(true);
+       this.CrearPuntosRutap.setVisible(false);
+        }
+    }//GEN-LAST:event_BotonvolverPuntoActionPerformed
+// Metodo que crea un punto de interes o peligro depende de lo elija el usuario
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String nombrepp=nombrePP.getText();
+       String nombreLat1=nombreLatitud1.getText();
+       String elevacion1=nombreElevacion1.getText();
+       String descripcion1=nombreDescripcion1.getText();
+       String longitud1=nombreLongitud1.getText();
+         String seleccion = EligePunto.getSelectedItem().toString();
+        if (seleccion.equals("Punto Interes")) {
+             if (Teclado.validanombre(nombrepp) && Teclado.validaCoordenadas(nombreLat1)
+            && Teclado.validaCoordenadas(longitud1) && Teclado.validanombre(descripcion1) && Teclado.validaDesnivel(elevacion1)) {
+           PuntosInteres pp=new PuntosInteres(nombrepp,Integer.parseInt(nombreLat1),Integer.parseInt(longitud1),Integer.parseInt(elevacion1),descripcion1);
+           DAOPuntosinteres daopp=new DAOPuntosinteres();
+           if (daopp.insertar(pp, idrutaapipp)) {
+               JOptionPane.showMessageDialog(null, "Se creo un punto de interes correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+           } else {
+               JOptionPane.showMessageDialog(null, "No se guardo el punto de interes en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+           }
+           }else{
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+        }else{
+            if (Teclado.validanombre(nombrepp) && Teclado.validaCoordenadas(nombreLat1)
+            && Teclado.validaCoordenadas(longitud1) && Teclado.validanombre(descripcion1) && Teclado.validaDesnivel(elevacion1)) {
+           PuntosPeligro pp=new PuntosPeligro(nombrepp,Integer.parseInt(nombreLat1),Integer.parseInt(longitud1),Integer.parseInt(elevacion1),descripcion1);
+           DAOPuntospeligro daopp=new DAOPuntospeligro();
+           if (daopp.insertar(pp, idrutaapipp)) {
+               JOptionPane.showMessageDialog(null, "Se creo un punto de peligro correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+           } else {
+               JOptionPane.showMessageDialog(null, "No se guardo el punto de peligro en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+           }
+           }else{
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+     }  
+    }//GEN-LAST:event_jButton6ActionPerformed
+//Metodo de volver
+    private void BotoncrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotoncrearActividadActionPerformed
+       Actividades.setVisible(false);
+       CrearActividades.setVisible(true);
+    }//GEN-LAST:event_BotoncrearActividadActionPerformed
+//Metodo de volver
+    private void volveraactividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volveraactividadActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las actividades", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+        Actividades.setVisible(true);
+       CrearActividades.setVisible(false);
+        }
+    }//GEN-LAST:event_volveraactividadActionPerformed
+//Metodo que crea una actividad para una ruta
+    private void CrearActividadBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActividadBotonActionPerformed
+        String nombre=this.NombreActi.getText();
+        if (Teclado.validanombre(nombre)) {
+            Actividad A1=new Actividad(nombre);
+            DAOActividad daoa=new DAOActividad();
+            if (daoa.insertar(A1, idrutaapipp)) {
+                 JOptionPane.showMessageDialog(null, "Se creo una actividad correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+           } else {
+               JOptionPane.showMessageDialog(null, "No se guardo la actividad en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+           }
+           }else{
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_CrearActividadBotonActionPerformed
+//Metodo de volver
+    private void VolverImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverImagenesActionPerformed
+       int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las imagenes", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+        ImagenesInteres.setVisible(true);
+        CrearImagen.setVisible(false);
+        }
+    }//GEN-LAST:event_VolverImagenesActionPerformed
+//Metodo de volver
+    private void CrearImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearImagenesActionPerformed
+        ImagenesInteres.setVisible(false);
+        CrearImagen.setVisible(true);
+    }//GEN-LAST:event_CrearImagenesActionPerformed
+//Metodo que crea una imagen de interes
+    private void CrearImagenesnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearImagenesnuevoActionPerformed
+        String URL=ValidaURL.getText();
+        String descripcion=this.ValidaDescripcion.getText();
+        if (Teclado.validaURL(URL)&&Teclado.validanombre(descripcion)) {
+            ImagenesInteres A1=new ImagenesInteres(URL,descripcion);
+            DAOImagenesInteres daoa=new DAOImagenesInteres();
+            if (daoa.insertar(A1, idpi)) {
+                 JOptionPane.showMessageDialog(null, "Se creo una imagen correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+           } else {
+               JOptionPane.showMessageDialog(null, "No se guardo una imagen en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+           }
+           }else{
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_CrearImagenesnuevoActionPerformed
+//Metodo de volver
+    private void CrearImagenesPeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearImagenesPeligroActionPerformed
+          ImagenesPeligro.setVisible(false);
+        CrearImagenPeligrop.setVisible(true);
+    }//GEN-LAST:event_CrearImagenesPeligroActionPerformed
+//Metodo de volver
+    private void VolverImagnesPeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverImagnesPeligroActionPerformed
+         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las imagenes", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+        ImagenesPeligro.setVisible(true);
+        CrearImagenPeligrop.setVisible(false);
+        }
+    }//GEN-LAST:event_VolverImagnesPeligroActionPerformed
+//Metodo que crea una imagen de peligro
+    private void crearimagenpeligroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearimagenpeligroActionPerformed
+         String URL=CrearURLY.getText();
+        String descripcion=this.CREARDESCRIPCION.getText();
+        if (Teclado.validaURL(URL)&&Teclado.validanombre(descripcion)) {
+            ImagenesPeligro A1=new ImagenesPeligro(URL,descripcion);
+            DAOImagenesPeligro daoa=new DAOImagenesPeligro();
+            if (daoa.insertar(A1, idpp)) {
+                 JOptionPane.showMessageDialog(null, "Se creo una imagen correctamnete", "Bien", JOptionPane.INFORMATION_MESSAGE);
+           } else {
+               JOptionPane.showMessageDialog(null, "No se guardo la imagen en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+           }
+           }else{
+            JOptionPane.showMessageDialog(null, "Formato mal introducido el formato de uno de los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_crearimagenpeligroActionPerformed
+//Metodo que modifica rutas
+    private void BotonParamodificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonParamodificarUsuarioActionPerformed
+        String desnivelpos=desnivelpositivo.getText();
+        String desnivelneg=desnivelnegativo.getText();
+        String altitudmax=altmaxima.getText();
+        String altitudmin=altminima.getText();
+        String tipoTer=tipoterreno.getText();
+        String indica=indicaciones.getText();
+        String rutafamiliar = rutafam.getSelectedItem().toString();
+        boolean rutafamiliarvalida=false;
+        if (rutafamiliar.equals("si")) {
+            rutafamiliarvalida=true;
+        }
+        String acesibilidad=this.accesibilidad.getSelectedItem().toString();
+        boolean rutaacceso=false;
+        if (acesibilidad.equals("si")) {
+            rutaacceso=true;
+        }
+        String temporadas=temp.getText();
+        String clasificacion=clasi.getSelectedItem().toString();
+        String zonaGeografica=geo.getText();
+        String recomendaciones=recomen.getText();
+       DAORutas daor=new DAORutas();
+       Rutas R1=daor.buscarTodaInfo(idrutaapipp);
+        if (Teclado.validaDesnivel(desnivelpos)&&!desnivelpos.isEmpty()) {
+            R1.setDesnivelPositivo(Integer.parseInt(desnivelpos));
+        }
+        if (Teclado.validaDesnivel(desnivelneg)&&!desnivelneg.isEmpty()) {
+             R1.setDesnivelNegativo(Integer.parseInt(desnivelneg));
+        }
+        if (Teclado.validaCoordenadas(altitudmax)&&!altitudmax.isEmpty()) {
+            R1.setAltitudMax(Double.parseDouble(altitudmax));
+        }
+         if (Teclado.validaCoordenadas(altitudmin)&&!altitudmin.isEmpty()) {
+            R1.setAltitudMin(Double.parseDouble(altitudmin));
+        }
+        if (Teclado.validaRango1a5(tipoTer)&&!tipoTer.isEmpty()) {
+            R1.setTipoterreno(Integer.parseInt(tipoTer));
+        }
+        if (Teclado.validaRango1a5(indica)&&!indica.isEmpty()) {
+            R1.setIndicaciones(Integer.parseInt(indica));
+        }
+        R1.setRutaFamiliar(rutafamiliarvalida);
+        R1.setAccesibilidad(rutaacceso);
+        Set<String> temp=new HashSet<>(Arrays.asList(temporadas.split(",")));
+        if (Teclado.validaTemporada(temp)&&!temporadas.isEmpty()) {
+          R1.setTemporada(temp);
+        }
+        Clasificacion C1=null;
+        if (Teclado.validaClasificacion(clasificacion)&&!clasificacion.isEmpty()) {
+            if (clasificacion.equals("circular")) {
+                C1=Clasificacion.CIRCULAR;
+            }else{
+                 C1=Clasificacion.LINEAL;
+            }
+            R1.setClasificacion(C1);
+        }
+        if (!zonaGeografica.isEmpty()) {
+            R1.setZonaGeografica(zonaGeografica);
+        }
+        if (!recomendaciones.isEmpty()) {
+            R1.setRecomendaciones(recomendaciones);
+        }
+        if (daor.modificarr(R1)) {
+             JOptionPane.showMessageDialog(null, "Se modifico la ruta", "Bien", JOptionPane.INFORMATION_MESSAGE);
+           } else {
+               JOptionPane.showMessageDialog(null, "No se guardo los cambios de la ruta en la base de datos", "Error", JOptionPane.PLAIN_MESSAGE);
+        } 
+    }//GEN-LAST:event_BotonParamodificarUsuarioActionPerformed
+//Boton de volver
+    private void BotonvolverRutassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvolverRutassActionPerformed
+         int respuesta = JOptionPane.showConfirmDialog(null, "Desea volver a ver las rutas", "Volver", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == 0) {
+        RutasValidas.setVisible(true);
+        ValidaRutas.setVisible(false);
+        }
+    }//GEN-LAST:event_BotonvolverRutassActionPerformed
 
-private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) { 
-     DAOImagenesInteres daoimg = new DAOImagenesInteres();
+    private void recomenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recomenActionPerformed
+
+    }//GEN-LAST:event_recomenActionPerformed
+
+    private void geoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geoActionPerformed
+
+    }//GEN-LAST:event_geoActionPerformed
+//Metodo de volver
+    private void BotonvalidarutasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonvalidarutasirActionPerformed
+        CatalogodeRutas.setVisible(true);
+        CrearRutasde0.setVisible(false);
+    }//GEN-LAST:event_BotonvalidarutasirActionPerformed
+    //Metodos del boton que modifican las tablas para actualizarlas
+    private void cargarTablarutasvalidas(){
+        DAORutas daoruta = new DAORutas();
+        List<Rutas> lisruta = daoruta.listaraprobadas();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        for (Rutas r : lisruta) {
+            Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
+            model.addRow(fila);
+        }
+         TableRutasValidas.setAutoCreateRowSorter(true);
+        tamañocolumnasRutaValidas();
+        TableRutasValidas.setModel(model);
+    }
+
+    private void cargarTablarutasnovalidas() {
+        DAORutas daoruta = new DAORutas();
+        List<Rutas> lisruta = daoruta.listarsinaprobar();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        for (Rutas r : lisruta) {
+            Object[] fila = {r.getIdRuta(), r.getNombre(), r.getDuracion(), r.getDistancia(), r.getNombre_inicioruta(), r.getLatitudInicial(), r.getLongitudInicial(), r.getNombre_finalruta(), r.getLatitudFinal(), r.getLongitudFinal()};
+            model.addRow(fila);
+        }
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setMinWidth(0);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setMaxWidth(0);
+        Tabladerutasnovalidas.getColumnModel().getColumn(0).setPreferredWidth(0);
+        Tabladerutasnovalidas.setAutoCreateRowSorter(true);
+        Tabladerutasnovalidas.setModel(model);
+    }
+
+    private void cargarTablapuntosinteres() {
+      DAOPuntosinteres daopi = new DAOPuntosinteres();
+        List<PuntosInteres> lispi = daopi.listar(idrutaapipp);// cambiar el metodo listar de dao puntos interes de Ruta ruta a int id 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID PuntosInteres");
+        model.addColumn("Nombre");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        model.addColumn("Elevacion");
+        model.addColumn("Descripcion");
+        for (PuntosInteres pp : lispi) {
+            Object[] fila = {pp.getIdPuntosInteres(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
+            model.addRow(fila);
+        }
+         TablePuntosInteres.setAutoCreateRowSorter(true);
+        TablePuntosInteres.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePuntosInteres.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePuntosInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablePuntosInteres.setModel(model);
+    }
+
+    private void cargarTablapuntospeligro() {
+         DAOPuntospeligro daopp = new DAOPuntospeligro();
+        List<PuntosPeligro> lispp = daopp.listar(idrutaapipp);// cambiar el metodo listar de dao puntos peligro de Ruta ruta a int id 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID PuntosPeligro");
+        model.addColumn("Nombre");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        model.addColumn("Elevacion");
+        model.addColumn("Descripcion");
+        for (PuntosPeligro pp : lispp) {
+            Object[] fila = {pp.getIdPuntospeligro(), pp.getNombre(), pp.getLatitud(), pp.getLongitud(), pp.getElevacion(), pp.getDescripcion()};
+            model.addRow(fila);
+        }
+        TablePuntosPeligro.setAutoCreateRowSorter(true);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablePuntosPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablePuntosPeligro.setModel(model);
+      
+    }
+
+    private void cargarTablavaloraciones() {
+        DAOValora daov = new DAOValora();
+        List<Valora> lisv = daov.listar(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Valora");
+        model.addColumn("Dificultad");
+        model.addColumn("Fecha");
+        model.addColumn("Estrellas");
+        model.addColumn("Interes Cultural");
+        model.addColumn("Belleza");
+        for (Valora v : lisv) {
+            Object[] fila = {v.getIdValora(), v.getDificultad(), v.getFecha(), v.getEstrellas(), v.getInteresCultural(), v.getBelleza()};
+            model.addRow(fila);
+        }
+        TablaValoraciones.setAutoCreateRowSorter(true);
+        TablaValoraciones.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaValoraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaValoraciones.setModel(model);
+    }
+
+    private void cargarTablaactividades() {
+        DAOActividad daoa = new DAOActividad();
+        List<Actividad> lisa = daoa.listar(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Actividad");
+        model.addColumn("Nombre");
+        for (Actividad a : lisa) {
+            Object[] fila = {a.getIdActividad(), a.getNombre()};
+            model.addRow(fila);
+        }
+        TablaActividades.setAutoCreateRowSorter(true);
+        TablaActividades.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaActividades.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaActividades.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaActividades.setModel(model);
+    }
+
+    private void caragarTabladetalles() {
+        DAORutas daor = new DAORutas();
+        Rutas ruta = daor.buscarTodaInfo(idrutaapipp);// cambiar el metodo listar de dao valoraciones de Ruta ruta a int id
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Ruta");
+        model.addColumn("Nombre");
+        model.addColumn("Nombre del inicio de ruta");
+        model.addColumn("Latitud ");
+        model.addColumn("Longitud ");
+        model.addColumn("Nombre del final de ruta");
+        model.addColumn("Latitud");
+        model.addColumn("Longitud");
+        model.addColumn("Duracion");
+        model.addColumn("Distancia");
+        model.addColumn("Clasificacion");
+        model.addColumn("Nivel Esfuerzo");
+        model.addColumn("Nivel Riesgo");
+        model.addColumn("Estado Ruta");
+        model.addColumn("Tipo Terreno");
+        model.addColumn("Indicaciones");
+        model.addColumn("Ruta Familiar");
+        model.addColumn("Media Estrellas");
+        Object[] fila = {ruta.getIdRuta(), ruta.getNombre(), ruta.getNombre_inicioruta(), ruta.getLatitudInicial(), ruta.getLongitudInicial(), ruta.getNombre_finalruta(), ruta.getLatitudFinal(), ruta.getLongitudFinal(), ruta.getDuracion(), ruta.getDistancia(), ruta.getClasificacion(), ruta.getNivelEsfuerzo(), ruta.getNivelriesgo(), ruta.getEstadoRuta(), ruta.getTipoterreno(), ruta.getIndicaciones(), ruta.isRutaFamiliar(), ruta.getMediaEstrellas()};
+        model.addRow(fila);
+        tamañocolumnasDetalles();
+        TablaDetallesruta.setModel(model);
+    }
+
+    private void cargarTablacalendario() {
+        DAOCalendario daoc = new DAOCalendario();
+        List<Calendario> liscal = daoc.listar(idrutaapipp);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Calendario");
+        model.addColumn("Fecha");
+        model.addColumn("Detalles");
+        model.addColumn("Recomendaciones");
+        for (Calendario c : liscal) {
+            Object[] fila = {c.getIdCalendario(), c.getFecha(), c.getDetalles(), c.getRecomendaciones()};
+            model.addRow(fila);
+        }
+        TablaCalendarios.setAutoCreateRowSorter(true);
+        TablaCalendarios.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaCalendarios.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaCalendarios.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaCalendarios.setModel(model);
+    }
+
+    private void cargarTablaimagenesInteres() {
+        DAOImagenesInteres daoimg = new DAOImagenesInteres();
         List<ImagenesInteres> lisimg = daoimg.listar(idpi);
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID PuntosInteres");
@@ -2216,13 +3587,16 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
 
             } catch (Exception ex) {
                 model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
-               }                                                   
+            }
         }
+        TablaimagenesInteres.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaimagenesInteres.setAutoCreateRowSorter(true);
         TablaimagenesInteres.setModel(model);
-
         TablaimagenesInteres.addMouseListener(new MouseAdapter() {
             @Override
-         public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 int fila = TablaimagenesInteres.rowAtPoint(e.getPoint());
                 int columna = TablaimagenesInteres.columnAtPoint(e.getPoint());
                 if (columna == 1) {
@@ -2236,7 +3610,95 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
         }
         );
     }
-     private void mostrarImagenYDescripcionEnPanel(ImageIcon icono, String descripcion) {
+
+    private void cargarTablaimagenesPeligro() {
+        DAOImagenesPeligro daoimg = new DAOImagenesPeligro();
+        List<ImagenesPeligro> lisimg = daoimg.listar(idpp);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID PuntosPeligro");
+        model.addColumn("URL");
+        model.addColumn("Descripcion");
+
+        for (ImagenesPeligro pi : lisimg) {
+            try {
+                System.out.println("Cargando imagen" + pi.getUrl());
+                URL url = new URL(pi.getUrl());
+                ImageIcon icono = new ImageIcon(ImageIO.read(url));
+
+                Object[] fila = {pi.getIdimagenespeligro(), icono, pi.getDescripcion()};
+                model.addRow(fila);
+
+            } catch (Exception ex) {
+                model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
+            }
+        }
+       TablaImagenesPeligro.getColumnModel().getColumn(0).setMinWidth(0);
+       TablaImagenesPeligro.getColumnModel().getColumn(0).setMaxWidth(0);
+       TablaImagenesPeligro.getColumnModel().getColumn(0).setPreferredWidth(0);
+       TablaImagenesPeligro.setAutoCreateRowSorter(true);
+       TablaImagenesPeligro.setModel(model);
+      TablaImagenesPeligro.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = TablaImagenesPeligro.rowAtPoint(e.getPoint());
+                int columna = TablaImagenesPeligro.columnAtPoint(e.getPoint());
+                if (columna == 1) {
+                    ImageIcon icono = (ImageIcon) TablaImagenesPeligro.getValueAt(fila, columna);
+                    String descripcion = (String) TablaImagenesPeligro.getValueAt(fila, 2);
+                    if (icono != null) {
+                        mostrarImagenYDescripcionEnPanel(icono, descripcion);
+                    }
+                }
+            }
+        }
+        );
+    }
+    // fin del boton de actualizar todas las tablas 
+    //Crea tabla imagenes interes y genera la imagen
+    private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent evt) {
+        DAOImagenesInteres daoimg = new DAOImagenesInteres();
+        List<ImagenesInteres> lisimg = daoimg.listar(idpi);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID PuntosInteres");
+        model.addColumn("URL");
+        model.addColumn("Descripcion");
+
+        for (ImagenesInteres pi : lisimg) {
+            try {
+                System.out.println("Cargando imagen" + pi.getUrl());
+                URL url = new URL(pi.getUrl());
+                ImageIcon icono = new ImageIcon(ImageIO.read(url));
+
+                Object[] fila = {pi.getIdimagenesinteres(), icono, pi.getDescripcion()};
+                model.addRow(fila);
+
+            } catch (Exception ex) {
+                model.addRow(new Object[]{null, "Error al cargar imagen: " + pi.getDescripcion()});
+            }
+        }
+        TablaimagenesInteres.getColumnModel().getColumn(0).setMinWidth(0);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setMaxWidth(0);
+        TablaimagenesInteres.getColumnModel().getColumn(0).setPreferredWidth(0);
+        TablaimagenesInteres.setAutoCreateRowSorter(true);
+        TablaimagenesInteres.setModel(model);
+        TablaimagenesInteres.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = TablaimagenesInteres.rowAtPoint(e.getPoint());
+                int columna = TablaimagenesInteres.columnAtPoint(e.getPoint());
+                if (columna == 1) {
+                    ImageIcon icono = (ImageIcon) TablaimagenesInteres.getValueAt(fila, columna);
+                    String descripcion = (String) TablaimagenesInteres.getValueAt(fila, 2);
+                    if (icono != null) {
+                        mostrarImagenYDescripcionEnPanel(icono, descripcion);
+                    }
+                }
+            }
+        }
+        );
+    }
+// Metodo de imagenes de peligro y interes que muestra en panatalla la imagen seleccionada
+    private void mostrarImagenYDescripcionEnPanel(ImageIcon icono, String descripcion) {
         JPanel panelVistaPrevia = new JPanel();
         panelVistaPrevia.setLayout(new BoxLayout(panelVistaPrevia, BoxLayout.Y_AXIS));
         JLabel labelImagen = new JLabel(icono);
@@ -2246,12 +3708,12 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
         JFrame ventanaVistaPrevia = new JFrame("Vista Previa");
         ventanaVistaPrevia.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventanaVistaPrevia.add(panelVistaPrevia);
-        ventanaVistaPrevia.pack(); 
-        ventanaVistaPrevia.setLocationRelativeTo(null); 
+        ventanaVistaPrevia.pack();
+        ventanaVistaPrevia.setLocationRelativeTo(null);
         ventanaVistaPrevia.setVisible(true);
     }
-     
-    public void limpiartablasalvolver(){
+//Metodo que limpiar todas las tablas(contenido)
+    public void limpiartablasalvolver() {
         TableRutasValidas.setModel(new DefaultTableModel());
         TablePuntosInteres.setModel(new DefaultTableModel());
         TablePuntosPeligro.setModel(new DefaultTableModel());
@@ -2263,9 +3725,7 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
         Tabladerutasnovalidas.setModel(new DefaultTableModel());
         TablaCalendarios.setModel(new DefaultTableModel());
     }
-     
-     
-     
+    
     /**
      * @param args the command line arguments
      */
@@ -2280,21 +3740,38 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Actividades;
+    private javax.swing.JButton BotonCrearPunto;
     private javax.swing.JButton BotonEntrada;
     private javax.swing.JTextField BotonIntere;
+    private javax.swing.JButton BotonParamodificarUsuario;
     private javax.swing.JButton BotonarutasdesdeCatalogo;
     private javax.swing.JTextField Botonbelle;
+    private javax.swing.JButton BotoncrearActividad;
     private javax.swing.JTextField Botondificul;
     private javax.swing.JTextField Botonestre;
     private javax.swing.JButton Botonparacrearruta;
     private javax.swing.JButton Botonparacrearrutas;
     private javax.swing.JButton Botonparacrearvaloracion;
+    private javax.swing.JButton Botonpararefrecartablas;
     private javax.swing.JTextField Botonrese;
+    private javax.swing.JButton Botonvalidarutasir;
+    private javax.swing.JButton BotonvolverPunto;
+    private javax.swing.JButton BotonvolverRutass;
+    private javax.swing.JTextField CREARDESCRIPCION;
     private javax.swing.JPanel CatalogodeRutas;
     private javax.swing.JPasswordField Contraseña;
+    private javax.swing.JButton CrearActividadBoton;
+    private javax.swing.JPanel CrearActividades;
     private javax.swing.JPanel CrearCalendario;
+    private javax.swing.JPanel CrearImagen;
+    private javax.swing.JPanel CrearImagenPeligrop;
+    private javax.swing.JButton CrearImagenes;
+    private javax.swing.JButton CrearImagenesPeligro;
+    private javax.swing.JButton CrearImagenesnuevo;
+    private javax.swing.JPanel CrearPuntosRutap;
     private javax.swing.JTextField CrearRecomen;
     private javax.swing.JPanel CrearRutasde0;
+    private javax.swing.JTextField CrearURLY;
     private javax.swing.JPanel CrearUsuarios;
     private javax.swing.JTextField Creardetall;
     private javax.swing.JLabel Cuadro1;
@@ -2302,14 +3779,21 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
     private javax.swing.JLabel CuadroEntrada;
     private javax.swing.JLabel Cuadrodecrearrutas;
     private javax.swing.JLabel Cuadroimagenespeligro;
+    private javax.swing.JLabel Descripcionp;
     private javax.swing.JPanel DetallesRuta;
+    private javax.swing.JLabel Elevacionp;
+    private javax.swing.JComboBox<String> EligePunto;
     private javax.swing.JTextField Email;
     private javax.swing.JPanel ImagenesInteres;
     private javax.swing.JPanel ImagenesPeligro;
     private javax.swing.JButton IniciarSesion;
+    private javax.swing.JLabel Latitudp;
+    private javax.swing.JLabel Longitudp;
     private javax.swing.JLabel Nombre;
+    private javax.swing.JTextField NombreActi;
     private javax.swing.JLabel NombreImagenesInteres;
     private javax.swing.JLabel NombreRutas;
+    private javax.swing.JLabel Nombrep;
     private javax.swing.JLabel Nombrerutasinavlidas;
     private javax.swing.JPanel PanelCalendario;
     private javax.swing.JPanel PanelEntrada;
@@ -2332,22 +3816,37 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
     private javax.swing.JLabel Texto;
     private javax.swing.JLabel TextoInicio;
     private javax.swing.JButton Usuario;
+    private javax.swing.JTextField ValidaDescripcion;
+    private javax.swing.JPanel ValidaRutas;
+    private javax.swing.JTextField ValidaURL;
     private javax.swing.JPanel ValoracionesdeRuta;
+    private javax.swing.JButton VolverImagenes;
+    private javax.swing.JButton VolverImagnesPeligro;
     private javax.swing.JButton VolverInicio;
     private javax.swing.JButton VolverUsuarios;
     private javax.swing.JButton VolveraCalendario;
     private javax.swing.JButton Volveraverlasvaloraciones;
+    private javax.swing.JComboBox<String> accesibilidad;
+    private javax.swing.JTextField altmaxima;
+    private javax.swing.JTextField altminima;
     private javax.swing.JLabel apellido;
     private javax.swing.JTextField añadefech;
     private javax.swing.JButton botoncrearcalendario;
     private javax.swing.JButton botoncrearcalendariode0;
     private javax.swing.JButton botoncrearvaloracion;
+    private javax.swing.JComboBox<String> clasi;
     private javax.swing.JLabel contraseña;
+    private javax.swing.JButton crearimagenpeligro;
     private javax.swing.JButton darbotonUsuario;
+    private javax.swing.JLabel descripcionpl;
+    private javax.swing.JTextField desnivelnegativo;
+    private javax.swing.JTextField desnivelpositivo;
     private javax.swing.JTextField distancia;
     private javax.swing.JTextField duracion;
     private javax.swing.JComboBox<String> eligerol;
     private javax.swing.JLabel email;
+    private javax.swing.JTextField geo;
+    private javax.swing.JTextField indicaciones;
     private javax.swing.JTextField introapellido;
     private javax.swing.JPasswordField introcontraseña;
     private javax.swing.JTextField introemail;
@@ -2357,6 +3856,7 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2376,8 +3876,30 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2393,15 +3915,24 @@ private void TablaimagenesInteresAncestorAdded(javax.swing.event.AncestorEvent e
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField ldf;
     private javax.swing.JTextField ldi;
     private javax.swing.JTextField lf;
     private javax.swing.JTextField li;
+    private javax.swing.JTextField nombreDescripcion1;
+    private javax.swing.JTextField nombreElevacion1;
+    private javax.swing.JTextField nombreLatitud1;
+    private javax.swing.JTextField nombreLongitud1;
+    private javax.swing.JTextField nombrePP;
     private javax.swing.JTextField nombrefini;
     private javax.swing.JTextField nombreinicio;
     private javax.swing.JTextField nombreruta;
+    private javax.swing.JTextField recomen;
     private javax.swing.JLabel rol;
+    private javax.swing.JComboBox<String> rutafam;
+    private javax.swing.JTextField temp;
+    private javax.swing.JTextField tipoterreno;
+    private javax.swing.JButton volveraactividad;
     private javax.swing.JButton volverarutasdesdeno;
     private javax.swing.JButton volverdecrearruta;
     private javax.swing.JButton votonimagenvolverpeligro;

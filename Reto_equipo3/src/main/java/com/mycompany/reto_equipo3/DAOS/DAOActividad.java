@@ -31,23 +31,27 @@ public class DAOActividad implements InterfazDAO<Actividad> {
     /**
      * Método insertar para insertar a la base de datos una actividad
      * @param actividad parámetro que sirve para llamar a dichos getters de la clase Actividad
-     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     * @param idRuta parámetro que identificará la id de la ruta a insertar
+     * @return boolean si la actividad fue insertada correctamente
      * //@throws SQLException lanzará un mensaje de error en la insercción de una actividad en SQL
      * //@throws Exception Si el executeUpdate no es 1, no se creará la actividad
      */
-    public void insertar(Actividad actividad, Rutas ruta) {
+    public boolean insertar(Actividad actividad, int idRuta) {
+        boolean valida=false;
         String sql = "insert into actividad (nombre, rutas_idRuta) values (?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, actividad.getNombre());
-            pstmt.setInt(2, ruta.getIdRuta());
+            pstmt.setInt(2, idRuta);
             if (pstmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se creó la actividad");
             }
+            valida=true;
         } catch (SQLException e) {
             System.out.println("SQLError: " + e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return valida;
     }
     /**
      * Método modificar para actualizar una actividad de la base de datos
@@ -72,7 +76,7 @@ public class DAOActividad implements InterfazDAO<Actividad> {
     }
     /**
      * Método listar para listar en una colección de List de Actividad todas las actividades de la base de datos
-     * @param id parámetro para usar en el PreparedStatement con la ? y saber si hay o no elementos en la colección con un select. Comienza por 1 para saber si existe alguna actividad
+     * @param id parámetro que identifica la id de la ruta
      * @return la colección listada en List
      * //@throws SQLException lanzará un mensaje de error cuando se trató de listar una actividad del SQL
      * //@throws Exception Si el executeUpdate no es 1, no se listará la actividad
@@ -101,23 +105,26 @@ public class DAOActividad implements InterfazDAO<Actividad> {
     }
     /**
      * Método eliminar para eliminar una actividad de la base de datos
-     * @param nombre parámetro para encontrar la actividad deseada para borrar desde el delete
+     * @param idActividad parámetro que identificará la id de la actividad para buscar dicha actividad a borrar
+     * @return boolean si la actividad se ha eliminado correctamente
      * //@throws SQLException lanzará un mensaje de error en la eliminación de una actividad en SQL
      * //@throws Exception Si el executeUpdate no es 1, no se eliminará la actividad
      */
-    @Override
-    public void eliminar(String nombre) {
-        String sql = "delete from actividad where nombre = ?";
+    public boolean eliminar(int idActividad) {
+        boolean valido=false;
+        String sql = "delete from actividad where idActividad = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, nombre);
+            pstmt.setInt(1, idActividad);
             if (pstmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se ha eliminado la actividad.");
             }
+            valido=true;
         } catch (SQLException e) {
             System.out.println("SQLError: " + e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return valido;
     }
     /**
      * Método buscar para buscar una actividad de manera rápida
@@ -141,12 +148,17 @@ public class DAOActividad implements InterfazDAO<Actividad> {
         return actividad;
     }
     /**
-     * Método privado crearActividades, exclusivo para el método de listar, donde irá creando actividades recogiéndolas desde la base de datos y luego listarlas en el método de listar
+     * Método privado crearActividades, donde irá creando actividades recogiéndolas desde la base de datos y luego listarlas en el método de listar
      * @param rs parámetro de recogida por consulta en el método listar
      * @return cada objeto Actividad encontrado desde el método listar
      * @throws SQLException podría ocurrir un error en el SQL al realizar el rs
      */
     private Actividad crearActividades(final ResultSet rs) throws SQLException {
         return new Actividad(rs.getInt(1), rs.getString(2));
+    }
+
+    @Override
+    public void eliminar(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

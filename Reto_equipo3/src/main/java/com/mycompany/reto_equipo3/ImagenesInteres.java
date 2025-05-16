@@ -26,6 +26,15 @@ public class ImagenesInteres {
 
     }
     /**
+     * Constructor por parámetros, recibe la url y descripción de la imagen de interés
+     * @param url para darle valor como parámetro al atributo "url"
+     * @param descripcion para darle valor como parámetro al atributo "descripcion"
+     */
+    public ImagenesInteres(String url, String descripcion) {
+        this.url = url;
+        this.descripcion = descripcion;
+    }
+    /**
      * Getter del atributo "idimagenesinteres"
      * @return el valor actual del atributo "idimagenesinteres"
      */

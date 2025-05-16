@@ -19,8 +19,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 /**
- *
- * @author DAM123
+ * Clase principal la cuál ejecuta la aplicación
+ * @author Miguel Inglés, JavaDoc por Hugo Fernández
+ * @see <a href="https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425.git">Dirección de GitHub</a>
  */
 public class Reto_equipo3 {
 

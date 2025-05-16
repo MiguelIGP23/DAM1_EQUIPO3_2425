@@ -16,16 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author MiguelIGP-1ºDAM
+ * Clase DAO de Usuario para las consultas/modificaciones simples de la base de datos
+ * @author Miguel Inglés y Saúl García, JavaDoc por Hugo Fernández
  */
 public class DAOUsuario implements InterfazDAO<Usuario> {
     private Connection conn;
-
+    /**
+     * Constructor por defecto, devuelve la conexión de la base de datos desde el atributo "conn" con los métodos de acceso de la clase
+     */
     public DAOUsuario() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-
+    /**
+     * Método insertar para insertar a la base de datos un usuario
+     * @param usuario parámetro que sirve para llamar a dichos getters de la clase Usuario
+     * @return boolean si el usuario fue insertado correctamente
+     */
     public boolean insertar(Usuario usuario) {
         boolean exito=false;
         String sql = "INSERT INTO usuario (nombre, apellido, email, password, rol) VALUES (?, ?, ?, MD5(?), ?)";
@@ -47,7 +53,11 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
         }
         return exito;
     }
-
+    /**
+     * Método modificar para actualizar un usuario de la base de datos
+     * @param usuario parámetro que sirve para llamar a dichos getters de la clase Usuario
+     * @param id parámetro que identifica la id del usuario a modificar
+     */
     public void modificar(Usuario usuario, int id) {
         String sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, password = MD5(?), rol = ? WHERE idUsuario = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -67,8 +77,10 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
             System.out.println(ex.getMessage());
         }
     }
-
-    
+    /**
+     * Método listar para listar en una colección de List de Usuario todos los usuarios de la base de datos
+     * @return la colección listada en List
+     */
     public List<Usuario> listar() {
         List<Usuario> lista = new ArrayList<>();
         Usuario U1;
@@ -88,11 +100,19 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
         }
         return lista;
     }
-
-    public Usuario crearUsuario(final ResultSet rs) throws SQLException {
+    /**
+     * Método privado crearUsuario, donde irá creando usuarios recogiéndolos desde la base de datos y luego listarlos en el método de listar
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @return cada objeto Usuario encontrado desde el método listar
+     * @throws SQLException podría ocurrir un error en el SQL al realizar el rs
+     */
+    private Usuario crearUsuario(final ResultSet rs) throws SQLException {
         return new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), Roles.valueOf(rs.getString(6)));
     }
-
+    /**
+     * Método eliminar para eliminar un usuario de la base de datos
+     * @param email parámetro que se utilizará para encontrar el usuario a eliminar, es decir, con el email
+     */
     @Override
     public void eliminar(String email) {
         String sql = "DELETE FROM usuario WHERE email=?";
@@ -108,7 +128,11 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
             System.out.println(ex.getMessage());
         }
     }
-
+    /**
+     * Método buscar para buscar un usuario de manera rápida
+     * @param email parámetro que se utilizará para encontrar el usuario a buscar, es decir, con el email
+     * @return un objeto Usuario, es decir, el usuario encontrado
+     */
     @Override
     public Usuario buscar(String email) {
         Usuario buscado = null;
@@ -125,7 +149,12 @@ public class DAOUsuario implements InterfazDAO<Usuario> {
         }
         return buscado;
     }
-
+    /**
+     * Método que comprueba si un usuario existe en la base de datos con su email y la contraseña válidas
+     * @param email parámetro email
+     * @param password parámetro de la contraseña encriptada en MD5
+     * @return un objeto Usuario que si existe le devuelve y sino devuelve nulo
+     */
     public Usuario encontrarUsuario(String email, String password) {
         Usuario usu = null;
         String sql = "SELECT idUsuario, nombre, apellido, email, password, rol FROM usuario WHERE email=? and password=MD5(?)";

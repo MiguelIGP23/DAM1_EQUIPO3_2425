@@ -17,17 +17,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author MiguelIGP-1ºDAM
+ * Clase DAO de Valora para las consultas/modificaciones simples de la base de datos
+ * @author Miguel Inglés, JavaDoc por Hugo Fernández
  */
 public class DAOValora implements InterfazDAO<Valora> {
 
     private Connection conn;
-
+    /**
+     * Constructor por defecto, devuelve la conexión de la base de datos desde el atributo "conn" con los métodos de acceso de la clase
+     */
     public DAOValora() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-
+    /**
+     * Método insertar para insertar a la base de datos una valoración
+     * @param valora parámetro que sirve para llamar a dichos getters de la clase Valora
+     * @param usu parámetro que sirve para llamar a dichos getters de la clase Usuario
+     * @param idRuta parámetro que identifica la id de la ruta
+     * @return boolean si la valoración fue insertada correctamente
+     */
     public boolean insertar(Valora valora, Usuario usu, int idRuta) {
         boolean valido=false;
         String sql = "INSERT INTO valora (dificultad, fecha, estrellas, interesCultural, belleza, usuario_idUsuario, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -51,7 +59,10 @@ public class DAOValora implements InterfazDAO<Valora> {
         }
         return valido;
     }
-
+    /**
+     * Método modificar para actualizar una valoración de la base de datos
+     * @param valora parámetro que sirve para llamar a dichos getters de la clase Valora
+     */
     @Override
     public void modificar(Valora valora) {
         String sql = "UPDATE valora SET dificultad = ?, fecha = ?, estrellas = ?, interesCultural = ?, belleza = ? WHERE idValora = ?";
@@ -72,7 +83,11 @@ public class DAOValora implements InterfazDAO<Valora> {
             System.out.println(ex.getMessage());
         }
     }
-
+    /**
+     * Método listar para listar en una colección de List de Valora todas las valoraciones de la base de datos
+     * @param id parámetro que identifica la id de la ruta
+     * @return la colección listada en List
+     */
     public List<Valora> listar(int id) {
         List<Valora> lista = new ArrayList<>();
         Valora v;
@@ -95,27 +110,42 @@ public class DAOValora implements InterfazDAO<Valora> {
         }
         return lista;
     }
-
-    public Valora crearValoracion(final ResultSet rs) throws Exception {
+    /**
+     * Método privado crearValoracion, donde irá creando valoraciones recogiéndolas desde la base de datos y luego listarlas en el método de listar
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @return cada objeto Valora encontrado desde el método listar
+     * @throws Exception podría ocurrir un error en el SQL al realizar el rs
+     */
+    private Valora crearValoracion(final ResultSet rs) throws Exception {
         return new Valora(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getInt(4), rs.getInt(5), rs.getInt(6));
     }
-
-    public void eliminar(Usuario usu, Rutas ruta) {
-        String sql = "DELETE FROM valora WHERE usuario_idUsuario=? and rutas_idRuta=?";
+    /**
+     * Método eliminar para eliminar una valoración de la base de datos
+     * @param idValora parámetro que identificará la id de la valoración para buscar dicha valoración a borrar
+     * @return boolean si la valoración se ha eliminado correctamente
+     */
+    public boolean eliminar(int idValora) {
+        boolean valido=false;
+        String sql = "DELETE FROM valora WHERE idValora=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, usu.getIdUsuario());
-            stmt.setInt(2, ruta.getIdRuta());
+            stmt.setInt(1, idValora);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: la valoracion no existe");
             }
+            valido=true;
             System.out.println("Se elimino la valoracion");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valido;
     }
-
+    /**
+     * Método buscar para buscar una valoración de manera rápida
+     * @param id parámetro por el que se encontrará desde la consulta select, es decir, con la id de la valoración
+     * @return un objeto Valora, es decir, la valoración encontrada
+     */
     public Valora buscar(int id) {
         Valora buscado = null;
         String sql = "SELECT idValora, dificultad, fecha, estrellas, interesCultural, belleza FROM valora WHERE idValora = ?";

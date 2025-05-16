@@ -6,12 +6,25 @@ package com.mycompany.reto_equipo3.DAOS;
 
 
 /**
- *
- * @author DAM123
- * @param <T>
+ * Interfaz DAO para todas las clases con métodos comunes entre todas las clases DAO
+ * @author Miguel Inglés, JavaDoc por Hugo Fernández 
+ * @param <T> objeto por defecto genérico
  */
 public interface InterfazDAO<T> {
+    /**
+     * Método modificar genérico
+     * @param obj el objeto a modificar
+     */
     void modificar(T obj);
+    /**
+     * Método eliminar genérico
+     * @param email el email
+     */
     void eliminar(String email) ;
+    /**
+     * Método buscar genérico
+     * @param email el email
+     * @return el objeto genérico
+     */
     T buscar(String email);
 }

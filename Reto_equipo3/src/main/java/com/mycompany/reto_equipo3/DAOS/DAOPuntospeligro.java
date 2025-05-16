@@ -14,18 +14,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author DAM122
+ * Clase DAO de PuntosPeligro para las consultas/modificaciones simples de la base de datos
+ * @author Saúl García, JavaDoc por Hugo Fernández
  */
 public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
 
     private Connection conn;
-
+    /**
+     * Constructor por defecto, devuelve la conexión de la base de datos desde el atributo "conn" con los métodos de acceso de la clase
+     */
     public DAOPuntospeligro() {
         this.conn = AccesoABaseDatos.getInstance().getConnexion();
     }
-
-    public void insertar(PuntosPeligro puntopeligro, Rutas ruta) {
+    /**
+     * Método insertar para insertar a la base de datos un punto de peligro
+     * @param puntopeligro parámetro que sirve para llamar a dichos getters de la clase PuntosPeligro
+     * @param ruta parámetro que identificará la id de la ruta a insertar
+     * @return boolean si el punto de peligro fue insertado correctamente
+     */
+    public boolean insertar(PuntosPeligro puntopeligro,int ruta) {
+        boolean valida=false;
         String sql = "INSERT INTO puntospeligro (nombre, latitud, longitud, elevacion, descripcion, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, puntopeligro.getNombre());
@@ -33,18 +41,23 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
             stmt.setDouble(3, puntopeligro.getLongitud());
             stmt.setDouble(4, puntopeligro.getElevacion());
             stmt.setString(5, puntopeligro.getDescripcion());
-            stmt.setInt(6, ruta.getIdRuta());
+            stmt.setInt(6, ruta);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("ERROR: no se creo el punto de peligro");
             }
+            valida=true;
             System.out.println("El punto se ceo correctamente");
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valida;
     }
-
+    /**
+     * Método modificar para actualizar un punto de peligro de la base de datos
+     * @param puntopeligro parámetro que sirve para llamar a dichos getters de la clase PuntosPeligro 
+     */
     @Override
     public void modificar(PuntosPeligro puntopeligro) {
         String sql = "UPDATE puntospeligro SET nombre = ?, latitud = ?, longitud = ?, elevacion = ?, descripcion = ? WHERE idPuntospeligro = ?";
@@ -65,7 +78,11 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
             System.out.println(ex.getMessage());
         }
     }
-
+    /**
+     * Método listar para listar en una colección de List de PuntosPeligro todos los puntos de peligro de la base de datos
+     * @param id parámetro que identifica la id de la ruta
+     * @return la colección listada en List
+     */
     public List<PuntosPeligro> listar(int id) {
         List<PuntosPeligro> lista = new ArrayList<>();
         PuntosPeligro P1;
@@ -87,27 +104,42 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
         }
         return lista;
     }
-    
-    public PuntosPeligro crearPuntoPeligro(final ResultSet rs) throws SQLException {
+    /**
+     * Método privado crearPuntoPeligro, donde irá creando puntos de peligro recogiéndolos desde la base de datos y luego listarlos en el método de listar
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @return cada objeto PuntosPeligro encontrado desde el método listar
+     * @throws SQLException podría ocurrir un error en el SQL al realizar el rs
+     */
+    private PuntosPeligro crearPuntoPeligro(final ResultSet rs) throws SQLException {
         return new PuntosPeligro(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5), rs.getString(6));
     }
-
-    @Override
-    public void eliminar(String nombre) {
-        String sql = "DELETE FROM puntospeligro WHERE nombre=?";
+    /**
+     * Método eliminar para eliminar un punto de peligro de la base de datos
+     * @param idpp parámetro que identificará la id del punto de peligro para buscar dicho punto de peligro a borrar
+     * @return boolean si el punto de peligro se ha eliminado correctamente
+     */
+    public boolean eliminar(int idpp) {
+        boolean valido=false;
+        String sql = "DELETE FROM puntospeligro WHERE idPuntospeligro=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, nombre);
+            stmt.setInt(1, idpp);
             if (stmt.executeUpdate() != 1) {
                 throw new Exception("No se borro el punto de peligro");
             }
             System.out.println("Se borro el punto de peligro");
+            valido=true;
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e.getMessage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        return valido;
     }
-
+    /**
+     * Método buscar para buscar un punto de peligro de manera rápida
+     * @param nombre parámetro por el que se encontrará desde la consulta select, es decir, con el nombre
+     * @return un objeto PuntosPeligro, es decir, el punto de peligro encontrado
+     */
     @Override
     public PuntosPeligro buscar(String nombre) {
         PuntosPeligro buscado = null;
@@ -127,6 +159,11 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     
     //Metodo listar crear y buscar completos y funcionales usados en fichas
     //Devuelve lista con objetos completos
+    /**
+     * Método que saca toda la información en una List de PuntosPeligro de los puntos de peligro de la base de datos
+     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     * @return la colección listada en List
+     */
     public List<PuntosPeligro> listarTodaInfo(Rutas ruta) {
         List<PuntosPeligro> lista = new ArrayList<>();
         PuntosPeligro punto;
@@ -150,6 +187,13 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     }
     
     //Crea el objeto completo
+    /**
+     * Método privado crearPuntosPeligroTodaInfo, donde irá creando puntos de peligro recogiéndolos desde la base de datos y luego listarlos en el método de crearPuntosInteresTodaInfo
+     * @param rs parámetro de recogida por consulta en el método listar
+     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     * @return cada objeto PuntosPeligro encontrado desde el método listarTodaInfo
+     * @throws SQLException podría ocurrir un error en el SQL al realizar el rs
+     */
     private PuntosPeligro crearPuntosPeligroTodaInfo(final ResultSet rs, Rutas ruta) throws SQLException {
         return new PuntosPeligro(
                 rs.getInt(1),
@@ -167,6 +211,12 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     }
     
     //Busca por nombre y devuelve objeto completo
+    /**
+     * Método buscar para buscar un punto de peligro de manera rápida, a excepción de que es toda su información
+     * @param nombre parámetro por el que se encontrará desde la consulta select, es decir, con el nombre
+     * @param ruta parámetro que identifica el objeto ruta
+     * @return un objeto PuntosPeligro, es decir, el punto de peligro encontrado
+     */
     public PuntosPeligro buscarTodaInfo(String nombre, Rutas ruta) {
         PuntosPeligro buscado = null;
         String sql = "SELECT idPuntospeligro, nombre, latitud, longitud, elevacion, kilometros, gravedad, posicion, descripcion, timestamp FROM puntospeligro where nombre = ?";
@@ -184,6 +234,11 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     }
     
     //IInsertar completo
+    /**
+     * Método insertar para insertar a la base de datos un punto de peligro, a excepción de que es toda su información
+     * @param puntopeligro parámetro que sirve para llamar a dichos getters de la clase PuntosPeligro
+     * @param ruta parámetro que sirve para llamar a dichos getters de la clase Rutas
+     */
     public void insertarTodaInfo(PuntosPeligro puntopeligro, Rutas ruta) {
         String sql = "INSERT INTO puntospeligro (nombre, latitud, longitud, elevacion, kilometro, gravedad, posicion, descripcion, timestamp, rutas_idRuta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -209,6 +264,10 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
     }
     
     //Modificar completo
+    /**
+     * Método modificar para actualizar un punto de peligro de la base de datos, a excepción de que es toda su información
+     * @param puntopeligro parámetro que sirve para llamar a dichos getters de la clase PuntosPeligro
+     */
     public void modificarTodaInfo(PuntosPeligro puntopeligro) {
         String sql = "UPDATE puntospeligro SET nombre = ?, latitud = ?, longitud = ?, elevacion = ?, kilometro = ?, gravedad = ?, posicion = ?, descripcion = ?, timestamp = ? WHERE idPuntospeligro = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -230,5 +289,10 @@ public class DAOPuntospeligro implements InterfazDAO<PuntosPeligro> {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @Override
+    public void eliminar(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
