@@ -1,0 +1,60 @@
+	--FICHA DE USUARIO--		14/05/2025 15:11:23
+
+-Nombre de ruta: Paseo por el bosque
+-Inicio de la ruta: Bar manolo
+-Fin de la ruta: Fuente del rio
+-Coordenadas iniciales: 
+	-Latitud: 0.2345
+	-Longitud: 0.2536
+-Coordenadas finales: 
+	-Latitud: 2.3625
+	-Longitud: 2.2345
+-Duracion estimada: 15 min
+-Distancia : 23.0 km
+-Temporadas: primavera, verano
+-Accesible: si
+-Familiar: si
+-Recomendaciones: Lleva cervecitas
+
+-- PUNTOS DE INTERES --
+
+*Punto 1: mirador de patos
+	-Coordenadas: 
+		-Latitud: 3.1456
+		-Longitud: 1.254
+	-Caracteristicas: tranquilo y bonito
+	-Tipo: mirador
+	-Descripcion: como nadan los patos!
+	-Elevacion: 85.0 metros
+	-Llegada aproximada: 2 min
+
+
+-- PUNTOS DE PELIGRO --
+
+-Punto 1: barranco
+	-Coordenadas: 
+		->Latitud: 0.2345
+		->Longitud: 2.2514
+
+	-Longitud de la ruta: 1.0 km
+	-Nivel de gravedad [1-5]: 2
+	-Descripcion: cuidado con las rocas
+	-Duracion estimada: 4 minutos
+-Punto 2: ladrones
+	-Coordenadas: 
+		->Latitud: 0.4345
+		->Longitud: 1.2618
+
+	-Longitud de la ruta: 3.0 km
+	-Nivel de gravedad [1-5]: 4
+	-Descripcion: corre corre
+	-Duracion estimada: 11 minutos
+-Punto 3: lobos
+	-Coordenadas: 
+		->Latitud: 0.3451
+		->Longitud: 1.0234
+
+	-Longitud de la ruta: 4.0 km
+	-Nivel de gravedad [1-5]: 4
+	-Descripcion: hay lobos
+	-Duracion estimada: 15 minutos

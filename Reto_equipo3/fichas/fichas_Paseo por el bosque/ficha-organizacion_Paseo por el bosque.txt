@@ -1,0 +1,14 @@
+	--FICHA DE ORGANIZACION--		14/05/2025 15:11:23
+
+-Nombre de la ruta: Paseo por el bosque
+-Coordenadas iniciales: 
+	-Latitud: 0.2345
+	-Longitud: 0.2536
+-Coordenadas finales: 
+	-Latitud: 2.3625
+	-Longitud: 2.2345
+-Dificultad: 
+	-Nivel de riesgo: 3
+	-Nivel de esfuerzo: 4
+-Inicio de la ruta: Bar manolo
+-Fin de la ruta: Fuente del rio
