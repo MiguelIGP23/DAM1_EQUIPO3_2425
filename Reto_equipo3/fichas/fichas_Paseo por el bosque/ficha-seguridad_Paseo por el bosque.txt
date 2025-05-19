@@ -1,0 +1,40 @@
+	--FICHA DE SEGURIDAD--		14/05/2025 15:11:23
+
+-Nombre de la ruta: Paseo por el bosque
+-Recomendaciones: Lleva cervecitas
+-Dificultad: 
+	-Nivel de riesgo: 3
+	-Nivel de esfuerzo: 4
+
+-- PUNTOS DE PELIGRO --
+
+-Punto 1: barranco
+	-Coordenadas: 
+		->Latitud: 0.2345
+		->Longitud: 2.2514
+
+	-Kilometro de ruta: 1.0
+	-Nivel de gravedad [1-5]: 2
+	-Descripcion: cuidado con las rocas
+	-Duracion estimada: 4 minutos
+
+-Punto 2: ladrones
+	-Coordenadas: 
+		->Latitud: 0.4345
+		->Longitud: 1.2618
+
+	-Kilometro de ruta: 3.0
+	-Nivel de gravedad [1-5]: 4
+	-Descripcion: corre corre
+	-Duracion estimada: 11 minutos
+
+-Punto 3: lobos
+	-Coordenadas: 
+		->Latitud: 0.3451
+		->Longitud: 1.0234
+
+	-Kilometro de ruta: 4.0
+	-Nivel de gravedad [1-5]: 4
+	-Descripcion: hay lobos
+	-Duracion estimada: 15 minutos
+
