@@ -33,13 +33,13 @@
 ````
 ##### *[Aplicación Java](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/27b4bc6b6401da3fabda39f5764755096f52c3a5/equipo3/Entornos%20de%20Desarrollo/Readme.md)*
 ````
- Diagrama de clases
+   Diagrama de clases
 
- Diagrama de casos de uso
+   Diagrama de casos de uso
 ````
 ##### *[Maquinas Virtuales](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/604387f7c28abd791357ceec6308c64f7b14b402/equipo3/Sistemas%20Inform%C3%A1ticos/README.md)*
 ````
-Servidor de la aplicación
+  Servidor de la aplicación
 
-Servidor de la página web
+  Servidor de la página web
 ````
