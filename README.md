@@ -15,7 +15,7 @@
 
 ### *Trabajo realizado*
 
-##### *[Base datos](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/3b9201ac6d641e2f50e5fa8975bbe9cd21f94942/equipo3/Bases%20de%20Datos/README.md)*
+##### *[Base datos](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/7f5db4decd56c72513f4cdbaaa7c07ff0f7e4ede/equipo3/Bases%20de%20Datos/README.md)*
 ````
    Diagrama Entidad-Relación
 
@@ -31,7 +31,7 @@
 
    Plantilla XSLT
 ````
-##### *[Aplicación Java](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/27b4bc6b6401da3fabda39f5764755096f52c3a5/equipo3/Entornos%20de%20Desarrollo/Readme.md)*
+##### *[Aplicación Java](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/tree/37fc657fcb20714c1edc50bf8d29ee72030ab77d/equipo3/Entornos%20de%20Desarrollo)*
 ````
    Diagrama de clases
 
