@@ -1,1 +1,2 @@
-
+Buenas, para la parte del itenerario personal para la empleabilidad hemos realizado una evaluacion de los posibles riesgos que pueden tener las diferentes rutas a la que nuestros usuarios se van a someter.
+Hemos realizado una plantilla para que los usuarios rellenen en caso de necesitarla por situacion de emergencia, como a la vez le hemos enseñado a como darse de alta como empresa o como autonomo y las prestaciones por accidente laboral. Ya que en el caso de accidente por ruta, tiene que saber que hacer en ese caso.
