@@ -2,15 +2,21 @@
 
 ###### Diagrama entidad-relacion
 
+En este diagrama entidad-relacion esta reflejado como estan puestos tanto clases como atributos de la base de datos viendo como estan relacionados su cardinalidad y en si la relacion entre las distantas clases.
+
 ![diagrama-e/r](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/2ff84c4b6d9851bdd404d5ab7e7a641d1925552e/equipo3/Bases%20de%20Datos/Imagen%20entidad-relacion.PNG)
 
 
 ###### Diagrama Relacional
 
+Diagrama que muestra la base de datos de manera visual , ademas en este se ven las clves ajenas que representan en nuesytro proyecto.
+
 ![diagramarelacional](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/422c07123ecd38740a117b397bdb0c7edcba716a/equipo3/Bases%20de%20Datos/entidad-relacion-imagen-final.png)
 
 
 ###### Script de la base de datos
+
+Codigo de la base de datos que permite usarlo para la creacion de la base de datos.
 
 ````
 CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
