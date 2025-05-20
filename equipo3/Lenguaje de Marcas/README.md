@@ -5,7 +5,7 @@ En nuestra pagina web hemos querido mostrar una forma de como seria de manera se
 [Enlace a la WEB](http:10.0.16.250)
 
 
-### Plantilla SQLT
+### Plantilla XSLT
 
 Plantilla que recibe todo contenido de diversos csv y se usa para ordenar/ modificar funcional
 
