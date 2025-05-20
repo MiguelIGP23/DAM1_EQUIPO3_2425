@@ -20,9 +20,9 @@ public class AccesoABaseDatos {
 
     //Definimos las constantes
     private static final String BD = "mydb";                                    //"mydb"
-    private static final String USUARIO = "root";                               //"equipo3"
-    private static final String CLAVE = "mysql";                                //"Mysql2024!"
-    private static final String URL = "jdbc:mysql://localhost:3307/" + BD;      //"jdbc:mysql://10.0.16.39:3306/" + BD
+    private static final String USUARIO = "equipo3";                               //"equipo3"
+    private static final String CLAVE = "equipo3";                                //"Mysql2024!"
+    private static final String URL = "jdbc:mysql://10.0.16.251:3306/" + BD;      //"jdbc:mysql://10.0.16.39:3306/" + BD
     /**
      * Constructor por defecto el cuál define las propiedades de la base de datos desde los atributos, el user, password y establece con el DriverManager, da un mensaje si la conexión fue establecida correctamente
      */
