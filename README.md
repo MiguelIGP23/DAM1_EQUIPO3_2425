@@ -36,6 +36,10 @@
    Diagrama de clases
 
    Diagrama de casos de uso
+
+   Guia despliegue
+
+   Manual de usuario
 ````
 ##### *[Maquinas Virtuales](https://github.com/MiguelIGP23/DAM1_EQUIPO3_2425/blob/c4592e9d0836f6dbc36b1eda4f160b6bc08c4632/equipo3/Sistemas%20Inform%C3%A1ticos/README.md)*
 ````
