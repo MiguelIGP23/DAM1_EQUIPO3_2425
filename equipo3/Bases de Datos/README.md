@@ -19,6 +19,8 @@ Diagrama que muestra la base de datos de manera visual , ademas en este se ven l
 Codigo de la base de datos que permite usarlo para la creacion de la base de datos.
 
 ````
+
+
 CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mydb`;
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
@@ -121,7 +123,7 @@ CREATE TABLE `imagenesinteres` (
 
 LOCK TABLES `imagenesinteres` WRITE;
 /*!40000 ALTER TABLE `imagenesinteres` DISABLE KEYS */;
-INSERT INTO `imagenesinteres` VALUES (1,'https://sl.bing.net/kRnqU8lLdf2','foto muy bonita',1);
+INSERT INTO `imagenesinteres` VALUES (1,'https://porsolea.com/wp-content/uploads/2014/03/IMAG0190.jpg','mirador',1);
 /*!40000 ALTER TABLE `imagenesinteres` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +151,7 @@ CREATE TABLE `imagenespeligro` (
 
 LOCK TABLES `imagenespeligro` WRITE;
 /*!40000 ALTER TABLE `imagenespeligro` DISABLE KEYS */;
-INSERT INTO `imagenespeligro` VALUES (1,'https://sl.bing.net/dhpFQ3mPJS0','cuidado con el agujero',1);
+INSERT INTO `imagenespeligro` VALUES (1,'https://i.pinimg.com/originals/66/0e/bf/660ebf74a2de744ef4cd1b44e3cff38e.jpg','cuidado con el agujero',1);
 /*!40000 ALTER TABLE `imagenespeligro` ENABLE KEYS */;
 UNLOCK TABLES;
 
