@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Equipo 3</h1>
+<p>README del proyecto del equipo 3</p>
+</body>
+</html>
