@@ -1,7 +1,0 @@
--Conexion a la base de datos subida al servidor
-
--IP del servidor: 10.0.16.251
--Puerto 3306
--Usuario: equipo3
--Contraseña: equipo3
--Nombre base de datos: mydb
